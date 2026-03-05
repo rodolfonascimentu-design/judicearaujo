@@ -1,16 +1,16 @@
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight, Bed, Maximize, Car } from "lucide-react";
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
-import property4 from "@/assets/property-4.jpg";
+import farm1 from "@/assets/farm-1.jpg";
+import farm2 from "@/assets/farm-2.jpg";
+import farm3 from "@/assets/farm-3.jpg";
+import farm4 from "@/assets/farm-4.jpg";
 
 const farms = [
-  { image: property1, title: "Fazenda Colonial · Petrópolis", area: 12000, bedrooms: 8, parking: 6 },
-  { image: property2, title: "Haras de Luxo · Itaipava", area: 25000, bedrooms: 6, parking: 8 },
-  { image: property3, title: "Sítio Histórico · Teresópolis", area: 8500, bedrooms: 5, parking: 4 },
-  { image: property4, title: "Fazenda Contemporânea · Visconde de Mauá", area: 35000, bedrooms: 10, parking: 10 },
+  { image: farm1, title: "Fazenda Colonial · Petrópolis", area: 12000, bedrooms: 8, parking: 6 },
+  { image: farm2, title: "Haras de Luxo · Itaipava", area: 25000, bedrooms: 6, parking: 8 },
+  { image: farm3, title: "Sítio Histórico · Teresópolis", area: 8500, bedrooms: 5, parking: 4 },
+  { image: farm4, title: "Fazenda Contemporânea · Visconde de Mauá", area: 35000, bedrooms: 10, parking: 10 },
 ];
 
 const SWIPE_THRESHOLD = 50;
