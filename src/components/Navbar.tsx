@@ -56,17 +56,16 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
-            <div className="flex-1" />
-            {/* Co-branding logo centered in header */}
-            <a href="#" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3">
+            {/* Co-branding logo in top-left of header */}
+            <a href="#" className="flex-shrink-0 flex items-center gap-2">
               <motion.div
-                className="flex items-center gap-3"
+                className="flex items-center gap-2"
                 animate={{ opacity: pastHero ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
               >
                 <img src={jaLogoFull} alt="Judice & Araujo" className="h-4 lg:h-[18px] w-auto brightness-0 invert" />
-                <div className="w-px h-6 bg-primary-foreground/30" />
-                <img src={forbesLogo} alt="Forbes Global Properties" className="h-[18px] lg:h-5 w-auto brightness-0 invert" />
+                <div className="w-px h-5 bg-primary-foreground/30" />
+                <img src={forbesLogo} alt="Forbes Global Properties" className="h-[22px] lg:h-[26px] w-auto brightness-0 invert" />
               </motion.div>
             </a>
 
