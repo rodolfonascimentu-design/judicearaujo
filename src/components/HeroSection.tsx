@@ -1,34 +1,45 @@
 import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
-import heroImage from "@/assets/hero-luxury.jpg";
+
+const VIDEO_SRC = "https://videos.pexels.com/video-files/8435624/8435624-uhd_2560_1440_30fps.mp4";
+const POSTER_SRC = "https://images.pexels.com/videos/8435624/pexels-photo-8435624.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
 const HeroOverlayContent = () => (
-  <div className="flex flex-col items-center justify-center h-full text-center gap-6">
+  <div className="flex flex-col items-center justify-center h-full text-center gap-6 max-w-4xl mx-auto">
     <motion.p
       className="font-sans text-xs md:text-sm tracking-[0.3em] uppercase text-gold-light"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3, duration: 0.8 }}
+      transition={{ delay: 0.1, duration: 0.6 }}
     >
       Desde 1978 · Rio de Janeiro
     </motion.p>
 
-    <motion.p
-      className="font-sans text-base md:text-lg text-cream/70 max-w-xl"
+    <motion.h1
+      className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-cream leading-[1.1] tracking-[0.02em] italic"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.7, duration: 0.8 }}
+      transition={{ delay: 0.2, duration: 0.6 }}
+    >
+      Viver com exclusividade no Rio de Janeiro
+    </motion.h1>
+
+    <motion.p
+      className="font-sans text-sm md:text-base text-cream/60 max-w-lg"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3, duration: 0.6 }}
     >
       Imóveis únicos nos endereços mais prestigiados
     </motion.p>
 
     {/* Search bar */}
     <motion.div
-      className="w-full max-w-3xl bg-cream/10 backdrop-blur-md border border-cream/20 rounded-sm p-2"
+      className="w-full max-w-3xl bg-cream/10 backdrop-blur-md border border-cream/20 rounded-sm p-2 mt-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.9, duration: 0.8 }}
+      transition={{ delay: 0.4, duration: 0.6 }}
     >
       <div className="flex flex-col md:flex-row gap-2">
         <input
@@ -57,10 +68,10 @@ const HeroOverlayContent = () => (
 
     {/* CTAs */}
     <motion.div
-      className="flex gap-4"
+      className="flex gap-4 mt-2"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 1.1, duration: 0.8 }}
+      transition={{ delay: 0.5, duration: 0.6 }}
     >
       <a
         href="#imoveis"
@@ -82,11 +93,9 @@ const HeroSection = () => {
   return (
     <ScrollExpandMedia
       mediaType="video"
-      mediaSrc="https://videos.pexels.com/video-files/8435624/8435624-uhd_2560_1440_30fps.mp4"
-      posterSrc={heroImage}
-      bgImageSrc={heroImage}
+      mediaSrc={VIDEO_SRC}
+      posterSrc={POSTER_SRC}
       title="Viver com exclusividade no Rio"
-      subtitle="Desde 1978"
       scrollToExpand="↓ Role para explorar"
       overlayContent={<HeroOverlayContent />}
     />
