@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight, Bed, Maximize, Car } from "lucide-react";
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
-import property4 from "@/assets/property-4.jpg";
+import exclusive1 from "@/assets/exclusive-1.jpg";
+import exclusive2 from "@/assets/exclusive-2.jpg";
+import exclusive3 from "@/assets/exclusive-3.jpg";
+import exclusive4 from "@/assets/exclusive-4.jpg";
 
 const exclusiveProperties = [
   { image: property1, title: "Cobertura Duplex · Leblon", area: 480, bedrooms: 5, parking: 4 },
