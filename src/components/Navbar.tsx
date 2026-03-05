@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import logoJA from "@/assets/logo-ja.png";
 
 const navLinks = [
   { label: "Imóveis", href: "#imoveis" },
@@ -51,9 +52,11 @@ const Navbar = () => {
 
             {/* Logo */}
             <a href="#" className="flex-shrink-0">
-              <h1 className="font-serif text-xl lg:text-2xl font-semibold tracking-[0.15em] text-cream">
-                JUDICE & ARAUJO
-              </h1>
+              <img
+                src={logoJA}
+                alt="Judice & Araujo"
+                className="h-10 lg:h-12 w-auto brightness-0 invert"
+              />
             </a>
 
             {/* Right nav (desktop) */}
@@ -98,6 +101,11 @@ const Navbar = () => {
             >
               <X className="w-7 h-7" />
             </button>
+            <img
+              src={logoJA}
+              alt="Judice & Araujo"
+              className="h-12 w-auto brightness-0 invert mb-10"
+            />
             <div className="flex flex-col items-center gap-8">
               {navLinks.map((link, i) => (
                 <motion.a
