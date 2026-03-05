@@ -34,6 +34,8 @@ const categories = [
   },
 ];
 
+const SWIPE_THRESHOLD = 50;
+
 const LuxuryHighlights = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDesktop, setIsDesktop] = useState(true);
@@ -97,7 +99,7 @@ const LuxuryHighlights = () => {
             ))}
           </div>
         ) : (
-          /* Mobile/Tablet: Carousel */
+          /* Mobile/Tablet: Carousel with swipe */
           <div className="relative">
             <div className="relative overflow-hidden rounded-[4px] aspect-[3/4] sm:aspect-[4/3]">
               <AnimatePresence mode="wait">
@@ -109,11 +111,18 @@ const LuxuryHighlights = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.15}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -SWIPE_THRESHOLD) goTo("next");
+                    else if (info.offset.x > SWIPE_THRESHOLD) goTo("prev");
+                  }}
                 >
                   <img
                     src={current.image}
                     alt={current.title}
-                    className="w-full h-full object-cover rounded-[4px]"
+                    className="w-full h-full object-cover rounded-[4px] pointer-events-none"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent rounded-[4px]" />
 
@@ -127,36 +136,36 @@ const LuxuryHighlights = () => {
                   </div>
                 </motion.a>
               </AnimatePresence>
+            </div>
 
-              {/* Navigation arrows */}
+            {/* Dots + arrows below */}
+            <div className="flex items-center justify-center gap-3 mt-5">
               <button
                 onClick={() => goTo("prev")}
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-charcoal/40 backdrop-blur-md hover:bg-charcoal/60 rounded-full flex items-center justify-center text-cream transition-all duration-300 z-10"
+                className="w-8 h-8 bg-muted hover:bg-muted/80 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
                 aria-label="Anterior"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
+              <div className="flex gap-2">
+                {categories.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentIndex(i)}
+                    className={`h-1 rounded-full transition-all duration-300 ${
+                      i === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-border"
+                    }`}
+                    aria-label={`${categories[i].title}`}
+                  />
+                ))}
+              </div>
               <button
                 onClick={() => goTo("next")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-charcoal/40 backdrop-blur-md hover:bg-charcoal/60 rounded-full flex items-center justify-center text-cream transition-all duration-300 z-10"
+                className="w-8 h-8 bg-muted hover:bg-muted/80 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
                 aria-label="Próximo"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
-            </div>
-
-            {/* Dots */}
-            <div className="flex justify-center gap-2 mt-5">
-              {categories.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentIndex(i)}
-                  className={`h-1 rounded-full transition-all duration-300 ${
-                    i === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-border"
-                  }`}
-                  aria-label={`${categories[i].title}`}
-                />
-              ))}
             </div>
           </div>
         )}

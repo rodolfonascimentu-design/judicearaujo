@@ -64,8 +64,8 @@ const HeroOverlayContent = () => {
         >
           {/* Segmented tabs */}
           <div className="flex items-center gap-1 px-1.5 pt-1.5">
-            {searchTypes.map((type) => (
-              <button
+            {searchTypes.map((type, i) => (
+              <motion.button
                 key={type}
                 onClick={() => setActiveType(type)}
                 className="relative px-5 py-2 text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-colors duration-300"
@@ -75,6 +75,9 @@ const HeroOverlayContent = () => {
                       ? "hsl(var(--primary))"
                       : "rgba(0,0,0,0.32)",
                 }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 + i * 0.05, duration: 0.4 }}
               >
                 {activeType === type && (
                   <motion.div
@@ -84,18 +87,18 @@ const HeroOverlayContent = () => {
                   />
                 )}
                 <span className="relative z-10">{type}</span>
-              </button>
+              </motion.button>
             ))}
           </div>
 
-          {/* Search input row */}
-          <div className="relative flex items-center px-2 pb-2 pt-1.5">
+          {/* Search input row - desktop */}
+          <div className="hidden md:flex relative items-center px-2 pb-2 pt-1.5">
             <input
               type="text"
               placeholder="Busque por bairro, cidade, condomínio ou código"
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className="w-full bg-transparent px-4 py-3 text-[15px] md:text-base font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
+              className="w-full bg-transparent px-4 py-3 text-base font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
               style={{ color: "hsl(var(--charcoal))" }}
             />
             <motion.button
@@ -111,6 +114,38 @@ const HeroOverlayContent = () => {
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
               <Search className="w-[18px] h-[18px] text-primary-foreground" />
+            </motion.button>
+          </div>
+
+          {/* Search input + button - mobile (stacked) */}
+          <div className="md:hidden px-2 pb-2 pt-1.5 space-y-2">
+            <motion.input
+              type="text"
+              placeholder="Bairro, cidade ou código"
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              className="w-full bg-transparent px-4 py-3 text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
+              style={{ color: "hsl(var(--charcoal))" }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+            />
+            <motion.button
+              className="w-full flex items-center justify-center gap-2.5 bg-primary text-primary-foreground py-3.5 rounded-lg text-[12px] font-sans font-semibold tracking-[0.18em] uppercase"
+              style={{
+                boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
+              }}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: "0 6px 20px -2px hsl(var(--primary) / 0.55)",
+              }}
+              whileTap={{ scale: 0.97 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.4, ease: "easeOut" }}
+            >
+              <Search className="w-4 h-4" />
+              Buscar
             </motion.button>
           </div>
         </div>

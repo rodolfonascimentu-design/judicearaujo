@@ -47,9 +47,8 @@ const Navbar = () => {
     setFontSize((prev) => Math.min(130, Math.max(80, prev + delta)));
   };
 
-  // Header phases: transparent (initial) → transparent+white links (hero expanded) → green (past hero)
+  // Header phases: links always visible. White before fold, green after.
   const showGreen = pastHero;
-  const showNavLinks = pastHero || (heroExpanded && !pastHero);
 
   return (
     <>
@@ -69,11 +68,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-20">
             {/* Co-branding logo in top-left of header */}
             <a href="#" className="flex-shrink-0 flex items-center gap-2">
-              <motion.div
-                className="flex items-center gap-2"
-                animate={{ opacity: showNavLinks ? 1 : 0 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-              >
+              <div className="flex items-center gap-2">
                 {pastHero ? (
                   <>
                     <img src={logoJaGreen} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
@@ -87,19 +82,11 @@ const Navbar = () => {
                     <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
                   </>
                 )}
-              </motion.div>
+              </div>
             </a>
 
-            {/* Desktop nav - shows when hero expanded or past hero */}
-            <AnimatePresence>
-              {showNavLinks && (
-                <motion.div
-                  className="hidden lg:flex items-center gap-8"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                >
+            {/* Desktop nav - always visible */}
+            <div className="hidden lg:flex items-center gap-8">
                   {navLinks.map((link) => (
                     <a
                       key={link.label}
@@ -173,20 +160,16 @@ const Navbar = () => {
                       <Plus className="w-3 h-3" />
                     </button>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            </div>
 
             {/* Mobile menu button */}
-            {showNavLinks && (
-              <button
-                onClick={() => setMobileOpen(true)}
-                className={`lg:hidden ${pastHero ? "text-primary" : "text-cream"}`}
-                aria-label="Abrir menu"
-              >
-                <Menu className="w-6 h-6" />
-              </button>
-            )}
+            <button
+              onClick={() => setMobileOpen(true)}
+              className={`lg:hidden transition-colors duration-500 ${pastHero ? "text-primary" : "text-cream"}`}
+              aria-label="Abrir menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
           </div>
         </div>
       </motion.nav>
