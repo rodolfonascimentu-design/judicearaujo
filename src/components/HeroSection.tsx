@@ -9,9 +9,10 @@ const searchTypes = ["Venda", "Locação", "Temporada"] as const;
 
 const HeroOverlayContent = () => {
   const [activeType, setActiveType] = useState<string>("Venda");
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center gap-6 max-w-xl mx-auto">
+    <div className="flex flex-col items-center justify-center h-full text-center gap-8 w-full max-w-[1050px] mx-auto px-4">
       <motion.p
         className="font-sans text-[10px] md:text-xs tracking-[0.4em] uppercase text-cream/50 font-light"
         initial={{ opacity: 0, y: 16 }}
@@ -28,40 +29,72 @@ const HeroOverlayContent = () => {
         transition={{ delay: 0.2, duration: 0.7 }}
       />
 
-      {/* Search component */}
+      {/* Premium search component */}
       <motion.div
-        className="w-full mt-2"
-        initial={{ opacity: 0, y: 16 }}
+        className="w-full"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.7 }}
+        transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
       >
-        {/* Segmented control */}
-        <div className="flex items-center justify-center mb-0">
-          {searchTypes.map((type) => (
-            <button
-              key={type}
-              onClick={() => setActiveType(type)}
-              className={`px-6 py-2.5 text-xs font-sans font-medium tracking-[0.12em] uppercase transition-all duration-300 border border-cream/10 first:rounded-tl-[4px] last:rounded-tr-[4px] ${
-                activeType === type
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-cream/5 text-cream/50 hover:text-cream/80 hover:bg-cream/10"
-              }`}
-            >
-              {type}
-            </button>
-          ))}
-        </div>
+        <div
+          className="w-full rounded-[14px] overflow-hidden transition-shadow duration-500"
+          style={{
+            background: 'rgba(255, 255, 255, 0.92)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: '1px solid rgba(255, 255, 255, 0.25)',
+            boxShadow: isFocused
+              ? '0 25px 60px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 63, 54, 0.15)'
+              : '0 20px 50px -12px rgba(0, 0, 0, 0.25)',
+          }}
+        >
+          {/* Segmented tabs */}
+          <div className="flex items-center border-b border-charcoal/[0.06] px-2 pt-2">
+            {searchTypes.map((type) => (
+              <button
+                key={type}
+                onClick={() => setActiveType(type)}
+                className="relative px-7 py-3.5 text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-all duration-300 group"
+                style={{ color: activeType === type ? 'hsl(171, 100%, 12%)' : 'rgba(0, 0, 0, 0.35)' }}
+              >
+                {type}
+                {/* Active indicator */}
+                <motion.div
+                  className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full"
+                  style={{ backgroundColor: 'hsl(171, 100%, 12%)' }}
+                  initial={false}
+                  animate={{ opacity: activeType === type ? 1 : 0, scaleX: activeType === type ? 1 : 0 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                />
+                {/* Hover bg */}
+                <span className="absolute inset-1 rounded-lg bg-charcoal/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-200 -z-10" />
+              </button>
+            ))}
+          </div>
 
-        {/* Search input */}
-        <div className="relative flex items-center bg-cream/5 backdrop-blur-xl border border-cream/10 border-t-0 rounded-b-[4px]">
-          <input
-            type="text"
-            placeholder="Busque por bairro, cidade, condomínio ou código do imóvel"
-            className="w-full bg-transparent px-5 py-4 pr-14 text-sm text-cream placeholder:text-cream/30 focus:outline-none font-sans font-light tracking-wide"
-          />
-          <button className="absolute right-2.5 w-10 h-10 rounded-full bg-primary hover:bg-gold-light text-primary-foreground flex items-center justify-center transition-all duration-300">
-            <Search className="w-4 h-4" />
-          </button>
+          {/* Search input row */}
+          <div className="relative flex items-center px-3 py-1.5">
+            <Search className="ml-4 w-5 h-5 flex-shrink-0" style={{ color: 'rgba(0, 0, 0, 0.25)' }} />
+            <input
+              type="text"
+              placeholder="Busque por bairro, cidade, condomínio ou código do imóvel"
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              className="w-full bg-transparent px-4 py-5 text-[15px] md:text-base font-sans font-light tracking-wide focus:outline-none"
+              style={{ color: 'hsl(0, 0%, 7%)', }}
+            />
+            <motion.button
+              className="flex-shrink-0 mr-2 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
+              style={{
+                background: 'hsl(171, 100%, 12%)',
+                boxShadow: '0 4px 14px -2px rgba(0, 63, 54, 0.4)',
+              }}
+              whileHover={{ scale: 1.06, boxShadow: '0 6px 20px -2px rgba(0, 63, 54, 0.55)' }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <Search className="w-[18px] h-[18px]" style={{ color: 'hsl(46, 100%, 94%)' }} />
+            </motion.button>
+          </div>
         </div>
       </motion.div>
     </div>
