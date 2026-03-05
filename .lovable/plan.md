@@ -1,46 +1,41 @@
 
 
-## Plano: Transições bidirecionais, novas fontes e otimização SEO/performance
+## Plano: Nova fonte, peso do body text e cards maiores com info externa
 
-### 1. Transições fluidas bidirecionais (scroll down e scroll up)
+### 1. Trocar fonte principal para uma semi-serifada moderna
 
-Todos os componentes usam `viewport={{ once: true }}`, o que faz a animação disparar apenas uma vez. Para que as seções animem tanto ao descer quanto ao subir:
-
-**Arquivos afetados (11 componentes):**
-- `SectionHeader.tsx`, `PropertyCard.tsx`, `ExclusiveGallery.tsx`, `FarmsGallery.tsx`, `LuxuryHighlights.tsx`, `ForbesPartnership.tsx`, `InstitutionalCTA.tsx`, `EditorialSection.tsx`, `BlogPreview.tsx`, `Newsletter.tsx`, `CTASection.tsx`
-
-**Alteração:** Trocar `once: true` por `once: false` em todos os `viewport` props e `useInView`. Adicionar `margin: "-80px"` onde não existir, para que a animação dispare quando o elemento estiver ~80px dentro da viewport (evita disparo prematuro).
-
-### 2. Troca de fontes
-
-**Fonte principal (headings):** Substituir **Space Grotesk** por **Cormorant Garamond** — serifada, moderna, elegante, amplamente usada no mercado de luxo.
-
-**Fonte body (textos):** Substituir **Urbanist** por **Inter** — fina, extremamente legível, com excelente renderização em telas. Peso 300 (light) como padrão para manter a leveza.
+Substituir **Cormorant Garamond** por **DM Serif Display** -- serifada moderna, clean, elegante, com toque contemporâneo. Alternativa: **Playfair Display** (mais clássica). Ambas são do Google Fonts.
 
 **Arquivos afetados:**
-- `src/index.css` — trocar o `@import` do Google Fonts e as declarações `font-family`
-- `tailwind.config.ts` — atualizar `fontFamily.serif`, `fontFamily.sans`, `fontFamily.display`
+- `index.html` -- trocar URL do Google Fonts para carregar DM Serif Display
+- `src/index.css` -- atualizar `font-family` nos headings e utilitários `.font-serif`, `.font-display`
+- `tailwind.config.ts` -- atualizar `fontFamily.serif` e `fontFamily.display`
 
-### 3. Otimização SEO e performance
+### 2. Aumentar peso do body text (Inter)
 
-**`index.html`:**
-- Adicionar `<link rel="preconnect">` para Google Fonts e domínios de assets
-- Adicionar `<link rel="dns-prefetch">` complementar
-- Adicionar meta tags SEO: `robots`, `canonical`, `og:image`, `og:url`, `og:locale`, `twitter:card`
-- Adicionar schema.org JSON-LD para `RealEstateAgent`
-- Trocar o carregamento da fonte de `@import` CSS para `<link rel="preload">` no HTML (elimina render-blocking)
+O peso atual é `font-weight: 300` (light). Mudar para **400** (regular) no `body` do CSS. Também trocar todas as ocorrências de `font-light` nos textos de info dos cards (PropertyInfo) para `font-normal`.
 
-**`src/index.css`:**
-- Remover `@import url(...)` do Google Fonts (movido para HTML com preload)
-- Adicionar `font-display: swap` via CSS
+**Arquivos afetados:**
+- `src/index.css` -- `font-weight: 300` → `font-weight: 400`
+- `ExclusiveGallery.tsx` e `FarmsGallery.tsx` -- `font-light` → `font-normal` nos spans do PropertyInfo
 
-**Componentes com imagens:**
-- Verificar que todas as `<img>` já têm `loading="lazy"` (a maioria já tem)
+### 3. Cards maiores com título/info fora da imagem
+
+Nos dois componentes de galeria (grid mode, não carousel):
+- Aumentar aspect ratio de `aspect-[2/3]` para `aspect-[3/4]` (cards mais largos/altos)
+- Aumentar gap de `gap-6` para `gap-8`
+- Mover título e PropertyInfo para **fora** do card de imagem (já estão parcialmente fora, mas confirmar que estejam totalmente externos)
+- Dentro da imagem, manter **somente** o botão "Ver detalhes" no hover
+- No grid, usar `lg:grid-cols-3` ou manter `lg:grid-cols-4` mas com `max-w-8xl` para cards mais largos
+
+**Arquivos afetados:**
+- `src/components/ExclusiveGallery.tsx` -- ajustar grid, aspect ratio, info externa
+- `src/components/FarmsGallery.tsx` -- mesmas alterações
 
 ### Resumo de arquivos
-
-1. **`index.html`** — meta tags SEO, preconnect, JSON-LD
-2. **`src/index.css`** — novas fontes, remover @import
-3. **`tailwind.config.ts`** — atualizar fontFamily
-4. **11 componentes** — `once: true` → `once: false` em viewport/useInView
+1. `index.html` -- nova URL Google Fonts (DM Serif Display + Inter)
+2. `src/index.css` -- font-family headings, font-weight body
+3. `tailwind.config.ts` -- fontFamily.serif/display
+4. `src/components/ExclusiveGallery.tsx` -- cards maiores, info externa
+5. `src/components/FarmsGallery.tsx` -- cards maiores, info externa
 
