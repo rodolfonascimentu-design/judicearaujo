@@ -161,12 +161,13 @@ const HeroSection = () => {
    ══════════════════════════════════════════════════════════ */
 const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
   const [pastHero, setPastHero] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [barVisible, setBarVisible] = useState(false);
+  const [logosVisible, setLogosVisible] = useState(false);
 
   useEffect(() => {
-    // Trigger fade-in after a brief delay for smooth entrance
-    const timer = setTimeout(() => setMounted(true), 500);
-    return () => clearTimeout(timer);
+    const t1 = setTimeout(() => setBarVisible(true), 1000);
+    const t2 = setTimeout(() => setLogosVisible(true), 1800);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   useEffect(() => {
@@ -177,7 +178,7 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
 
   const p = heroProgress;
 
-  // Scale: starts at 1.3 (30% larger), shrinks to 1.0 as scroll progresses (0 → 0.6)
+  // Scale: starts at 1.3, shrinks to 1.0 as scroll progresses (0 → 0.6)
   const scaleT = clamp(p / 0.6);
   const scale = lerp(1.3, 1.0, scaleT);
 
@@ -185,38 +186,57 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
   const moveT = clamp(p / 0.8);
   const topVh = lerp(50, 2.5, moveT);
 
-  // Visible: show on mount, hide when header takes over
-  const isVisible = mounted && !pastHero;
+  // Hide when hero fully expanded (navbar takes over) or past hero
+  const isVisible = barVisible && !pastHero && heroProgress < 1;
 
   return (
     <div
-      className="fixed left-1/2 z-[45] flex items-center gap-3 pointer-events-none"
+      className="fixed left-1/2 z-[45] flex items-center pointer-events-none"
       style={{
         transform: `translateX(-50%) scale(${scale})`,
         top: `${topVh}vh`,
         opacity: isVisible ? 1 : 0,
-        transition: mounted
-          ? pastHero
-            ? "opacity 0.35s ease"
-            : "opacity 4s ease"
-          : "opacity 0s",
+        transition: isVisible
+          ? "opacity 0.8s ease"
+          : "opacity 0.35s ease",
       }}
     >
-      {/* Forbes logo */}
-      <img
-        src={forbesLogoWhite}
-        alt="Forbes Global Properties"
-        className="h-[30px] lg:h-[35px] w-auto"
-      />
-
-      {/* Divider line */}
-      <div className="w-[1.5px] h-10 bg-cream/50" />
-
-      {/* JA logo */}
-      <img
+      {/* J&A logo - slides left from bar */}
+      <motion.img
         src={jaLogoFull}
         alt="Judice & Araujo"
         className="h-[18px] lg:h-[22px] w-auto brightness-0 invert"
+        initial={{ opacity: 0, x: 40 }}
+        animate={{
+          opacity: logosVisible ? 1 : 0,
+          x: logosVisible ? 0 : 40,
+        }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+      />
+
+      {/* Central bar - appears first */}
+      <motion.div
+        className="mx-4 bg-cream/60"
+        style={{ width: "1.5px", height: "80px" }}
+        initial={{ opacity: 0, scaleY: 0 }}
+        animate={{
+          opacity: barVisible ? 1 : 0,
+          scaleY: barVisible ? 1 : 0,
+        }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      />
+
+      {/* Forbes logo - slides right from bar */}
+      <motion.img
+        src={forbesLogoWhite}
+        alt="Forbes Global Properties"
+        className="h-[30px] lg:h-[35px] w-auto"
+        initial={{ opacity: 0, x: -40 }}
+        animate={{
+          opacity: logosVisible ? 1 : 0,
+          x: logosVisible ? 0 : -40,
+        }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
       />
     </div>
   );
