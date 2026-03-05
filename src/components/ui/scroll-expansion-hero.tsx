@@ -147,15 +147,15 @@ const ScrollExpandMedia = ({
             {/* Scroll hint - appears after logo animation */}
             <motion.div
               className="absolute bottom-12 flex-col gap-3 flex items-center justify-end"
-              animate={{ opacity: showContent ? 0 : pageReady && scrollProgress === 0 ? 0.6 : 0 }}
+              animate={{ opacity: showContent ? 0 : pageReady && scrollProgress === 0 ? 0.85 : 0 }}
               transition={{ duration: 0.5 }}>
               
               <motion.div
-                className="w-px h-10 bg-cream/30"
+                className="w-px h-12 bg-cream/60"
                 animate={{ scaleY: [0.5, 1, 0.5] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
               
-              <p className="text-cream/40 font-sans text-[10px] tracking-[0.3em] uppercase">
+              <p className="text-cream/70 font-sans text-[11px] tracking-[0.3em] uppercase">
                 Scroll
               </p>
             </motion.div>

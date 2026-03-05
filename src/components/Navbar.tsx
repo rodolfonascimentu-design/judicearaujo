@@ -53,7 +53,7 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-50"
+        className={`fixed top-0 left-0 right-0 ${mobileOpen ? 'z-[110]' : 'z-50'}`}
         style={{
           background: showGreen ? "rgba(255,255,255,0.95)" : "transparent",
           backdropFilter: showGreen ? "blur(12px)" : "none",
