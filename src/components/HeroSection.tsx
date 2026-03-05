@@ -165,7 +165,7 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
 
   useEffect(() => {
     // Trigger fade-in after a brief delay for smooth entrance
-    const timer = setTimeout(() => setMounted(true), 300);
+    const timer = setTimeout(() => setMounted(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -198,7 +198,7 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
         transition: mounted
           ? pastHero
             ? "opacity 0.35s ease"
-            : "opacity 0.8s ease"
+            : "opacity 4s ease"
           : "opacity 0s",
       }}
     >

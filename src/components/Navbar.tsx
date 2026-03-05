@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Menu, X, Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJA from "@/assets/logo-ja.png";
-import forbesLogo from "@/assets/forbes-global.png";
-import jaLogoFull from "@/assets/logo-ja-full.png";
+import logoJaGreen from "@/assets/logo-ja-green.png";
+import logoForbesGreen from "@/assets/logo-forbes-green.png";
 
 const navLinks = [
   { label: "Lançamentos", href: "#lancamentos" },
@@ -63,9 +63,9 @@ const Navbar = () => {
                 animate={{ opacity: pastHero ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <img src={jaLogoFull} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
+                <img src={logoJaGreen} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
                 <div className="w-px h-8 bg-primary/30" />
-                <img src={forbesLogo} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
+                <img src={logoForbesGreen} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
               </motion.div>
             </a>
 
