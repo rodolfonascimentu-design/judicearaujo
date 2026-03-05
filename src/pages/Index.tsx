@@ -17,9 +17,9 @@ const Index = () => (
     <InstitutionalCTA />
     <LuxuryHighlights />
     <ForbesPartnership />
-    <BlogPreview />
     <Testimonials />
     <FarmsGallery />
+    <BlogPreview />
     <Footer />
   </div>
 );
