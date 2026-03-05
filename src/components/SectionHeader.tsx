@@ -15,7 +15,7 @@ const SectionHeader = ({ title, subtitle, light }: SectionHeaderProps) => (
     transition={{ duration: 0.7 }}
   >
     <h2
-      className={`font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] ${
+      className={`font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] ${
         light ? "text-cream" : "text-foreground"
       }`}
     >

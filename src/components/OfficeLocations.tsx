@@ -56,7 +56,7 @@ const OfficeLocations = () => {
           <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-muted-foreground font-medium mb-4">
             Nossos Escritórios
           </p>
-          <h2 className="font-display text-2xl md:text-4xl font-light tracking-[-0.02em] text-foreground">
+          <h2 className="font-display text-2xl md:text-4xl font-normal tracking-[-0.02em] text-foreground">
             Visite um dos nossos escritórios
           </h2>
         </div>

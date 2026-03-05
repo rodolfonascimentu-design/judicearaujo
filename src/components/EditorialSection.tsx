@@ -32,7 +32,7 @@ const EditorialSection = () => (
           <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-8 font-medium">
             Nossa História
           </p>
-          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-foreground leading-[1.2] mb-10 tracking-[-0.02em]">
+          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal text-foreground leading-[1.2] mb-10 tracking-[-0.02em]">
             Tradição e sofisticação no mercado imobiliário carioca
           </h2>
           <div className="w-10 h-px bg-primary mb-10" />

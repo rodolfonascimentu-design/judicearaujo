@@ -39,7 +39,7 @@ const InstitutionalCTA = () => (
           <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-[#aed9d7] mb-8 font-medium">
             Proprietários
           </p>
-          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-primary-foreground leading-[1.2] mb-10 tracking-[-0.02em]">
+          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal text-primary-foreground leading-[1.2] mb-10 tracking-[-0.02em]">
             Venda seu imóvel com segurança e máxima valorização
           </h2>
           <div className="w-10 h-px bg-primary-foreground/30 mb-10" />

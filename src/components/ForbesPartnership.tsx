@@ -78,7 +78,7 @@ const ForbesPartnership = () => (
             className="h-28 md:h-32 lg:h-40 object-contain mb-12"
           />
 
-          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-primary-foreground leading-[1.2] tracking-[-0.02em] mb-8">
+          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal text-primary-foreground leading-[1.2] tracking-[-0.02em] mb-8">
             Uma rede global<br />para imóveis extraordinários
           </h2>
 
@@ -115,7 +115,7 @@ const ForbesPartnership = () => (
                   strokeWidth={1.5}
                 />
               </motion.div>
-              <h3 className="font-display text-sm font-medium text-primary-foreground mb-3 tracking-wide group-hover:text-primary-foreground/90 transition-colors duration-300">
+              <h3 className="font-display text-sm font-normal text-primary-foreground mb-3 tracking-wide group-hover:text-primary-foreground/90 transition-colors duration-300">
                 {b.title}
               </h3>
               <p className="font-sans text-xs text-primary-foreground/45 leading-[1.8] font-light group-hover:text-primary-foreground/65 transition-colors duration-300">
