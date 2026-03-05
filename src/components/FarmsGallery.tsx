@@ -115,7 +115,7 @@ const FarmsGallery = () => {
 
           {/* Info below image */}
           <motion.div
-            className="mt-6 px-1"
+            className="mt-6 px-1 md:pl-[calc(2.75rem+1.25rem)]"
             key={`info-${currentIndex}`}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
