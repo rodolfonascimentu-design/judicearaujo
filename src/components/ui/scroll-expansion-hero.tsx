@@ -167,24 +167,24 @@ const ScrollExpandMedia = ({
               animate={{ opacity: showContent ? 0 : 1 }}
               transition={{ duration: 0.4 }}
             >
-              {/* JA Logo - slides in from left */}
+              {/* JA Logo - emerges from divider, sliding right to left */}
               <motion.img
                 src={jaLogo}
                 alt="Judice & Araujo"
                 className="h-[50px] md:h-[60px] w-auto brightness-0 invert"
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.2, duration: 0.6, ease: "easeInOut" }}
               />
-              {/* Divider */}
+              {/* Divider - animates top to bottom */}
               <motion.div
-                className="w-px h-12 md:h-16 bg-cream/40"
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
+                className="w-px h-12 md:h-16 bg-cream/60"
+                initial={{ scaleY: 0, opacity: 0 }}
+                animate={{ scaleY: 1, opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.4, ease: "easeInOut" }}
                 style={{ originY: 0 }}
               />
-              {/* Forbes Logo - fades in first, min 75px */}
+              {/* Forbes Logo - fades in first */}
               <motion.img
                 src={forbesLogo}
                 alt="Forbes Global Properties"

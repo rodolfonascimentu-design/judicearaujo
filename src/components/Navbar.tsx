@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJA from "@/assets/logo-ja.png";
-import forbesLogo from "@/assets/forbes-global.png";
+import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import jaLogoFull from "@/assets/logo-ja-full.png";
 
 const navLinks = [
@@ -63,9 +63,9 @@ const Navbar = () => {
                 animate={{ opacity: pastHero ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <img src={jaLogoFull} alt="Judice & Araujo" className="h-4 lg:h-[18px] w-auto brightness-0 invert" />
-                <div className="w-px h-5 bg-primary-foreground/30" />
-                <img src={forbesLogo} alt="Forbes Global Properties" className="h-[22px] lg:h-[26px] w-auto brightness-0 invert" />
+                <img src={jaLogoFull} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto brightness-0 invert" />
+                <div className="w-px h-8 bg-primary-foreground/30" />
+                <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[50px] lg:h-[60px] w-auto" />
               </motion.div>
             </a>
 
