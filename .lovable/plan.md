@@ -1,33 +1,29 @@
 
 
-## Plano: Busca branca, info alinhada, logos centralizados e headline mobile
+## Plano: Header vazio até logo chegar ao topo
 
-### 1. Barra de busca 100% branca
+### Comportamento desejado
 
-Mudar o fundo da search bar de `rgba(255, 255, 255, 0.75)` para `rgba(255, 255, 255, 1)` -- branco puro. Manter bordas e sombras existentes.
+O header começa **completamente vazio** (sem links, sem idioma, sem controles de fonte, sem logo no header, sem hambúrguer no mobile). Os elementos do header só aparecem quando os logos animados do hero scrollam até a posição do header (quando `heroProgress` atinge ~0.8, momento em que `topVh` chega a ~2.5vh). Nesse ponto, todos os elementos surgem com fade-in, em branco. Depois da dobra (`pastHero`), transicionam para verde como já funciona.
 
-**Arquivo:** `HeroSection.tsx` -- linha 53, `background` style
+### Implementação
 
-### 2. Texto/ícones do carrossel alinhados com a foto (não com as setas)
+**Arquivo:** `Navbar.tsx`
 
-Atualmente o `motion.div` com info (`mt-6 px-1`) está no mesmo nível das setas, então começa na borda esquerda incluindo o espaço das setas. Adicionar `md:pl-[calc(2.75rem+1.25rem)]` (largura da seta 44px + gap 20px) para alinhar com o início da imagem no desktop.
+1. Observar `data-hero-progress` via MutationObserver (já existe) e usar `heroExpanded` (que já rastreia `hp >= 1`) -- ajustar threshold para ~0.85 para coincidir com o momento em que os logos chegam ao topo e começam a desaparecer.
 
-**Arquivos:** `ExclusiveGallery.tsx`, `FarmsGallery.tsx` -- div da info abaixo da imagem
+2. Esconder **todos** os elementos do header (logo do header, links desktop, hambúrguer mobile) quando `heroExpanded` é false. Usar `opacity-0 pointer-events-none` → `opacity-100 pointer-events-auto` com transição suave.
 
-### 3. Logos centralizados no mobile
+3. A lógica de cor permanece: branco antes de `pastHero`, verde depois.
 
-O container dos logos usa `left-1/2` + `translateX(-50%)`, mas os logos podem ter tamanhos desiguais causando desalinhamento visual. Adicionar `justify-center` explícito e garantir que o flex container esteja perfeitamente centrado com `w-max`.
+**Detalhes:**
+- `heroExpanded` controla visibilidade (opacity + pointer-events com transition 500ms)
+- Desktop: logo + links + idioma + fonte -- todos condicionados
+- Mobile: hambúrguer -- também condicionado
+- Fundo do nav também só aparece após `pastHero` (já funciona assim)
 
-**Arquivo:** `HeroSection.tsx` -- `HeroLogos` component
-
-### 4. Headline "Para quem escolhe viver diferente" em uma linha no mobile, cor branca
-
-Reduzir o tamanho no mobile de `text-2xl` para `text-[20px]` ou `text-xl` e adicionar `whitespace-nowrap` para forçar uma linha. Garantir `text-white` (já usa `text-cream`, mas confirmar que é branco puro).
-
-**Arquivo:** `HeroSection.tsx` -- headline h1 no `HeroOverlayContent`
-
-### Resumo de arquivos
-1. `HeroSection.tsx` -- busca branca, logos centralizados, headline mobile
-2. `ExclusiveGallery.tsx` -- padding left na info para alinhar com foto
-3. `FarmsGallery.tsx` -- mesmo ajuste de alinhamento
+### Resumo
+- Um único arquivo: `Navbar.tsx`
+- Adicionar wrapper com opacity/transition controlado por `heroExpanded` (threshold ~0.85)
+- Todos os elementos do header ficam invisíveis até os logos do hero chegarem ao topo
 
