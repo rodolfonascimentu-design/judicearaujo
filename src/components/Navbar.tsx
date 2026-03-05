@@ -65,7 +65,7 @@ const Navbar = () => {
               >
                 <img src={jaLogoFull} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto brightness-0 invert" />
                 <div className="w-px h-8 bg-primary-foreground/30" />
-                <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[50px] lg:h-[60px] w-auto" />
+                <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[38px] lg:h-[45px] w-auto" />
               </motion.div>
             </a>
 
