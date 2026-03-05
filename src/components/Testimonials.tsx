@@ -49,6 +49,38 @@ const testimonials = [
     },
     text: "Uma experiência de consultoria imobiliária que realmente entende o significado de luxo e exclusividade. Equipe excepcional.",
   },
+  {
+    author: {
+      name: "Luísa Brandão",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjX2mK8fQpL9rT3tV5xZw0hKnO4cDxEkG6iB9wZ=s120-c-rp-mo-br100",
+    },
+    text: "Compramos nosso apartamento na Gávea com a Judice & Araujo e foi uma experiência incrível. Desde a primeira visita até a entrega das chaves, tudo perfeito.",
+  },
+  {
+    author: {
+      name: "Paulo Henrique Duarte",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjY3nL9gRqM0sU4uW6yAx1iLoP5dEyFkH7jC0xA=s120-c-rp-mo-br100",
+    },
+    text: "Atendimento diferenciado e personalizado. Conhecem profundamente o mercado imobiliário da Zona Sul. Venderam nosso imóvel em tempo recorde.",
+  },
+  {
+    author: {
+      name: "Beatriz Fonseca",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjZ4oM0hSrN1tV5vX7zBy2jMqQ6eFzGlI8kD1yB=s120-c-rp-mo-br100",
+    },
+    text: "Recomendo de olhos fechados! A equipe da Judice & Araujo nos orientou com muita competência na compra do nosso primeiro imóvel no Jardim Botânico.",
+  },
+  {
+    author: {
+      name: "Marcelo Teixeira",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjA5pN1iTsO2uW6wY8ACz3kNrR7fGAHmJ9lE2zC=s120-c-rp-mo-br100",
+    },
+    text: "Profissionais extremamente qualificados e éticos. A transparência em todo o processo nos deu muita segurança. Obrigado, Judice & Araujo!",
+  },
 ];
 
 const Testimonials = () => (

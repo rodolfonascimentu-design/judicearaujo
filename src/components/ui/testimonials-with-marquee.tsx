@@ -46,8 +46,8 @@ export function TestimonialsSection({
 
         <div className="relative">
           <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="flex animate-marquee gap-6" style={{ '--duration': '80s', '--gap': '1.5rem' } as React.CSSProperties}>
-              {[...Array(4)].map((_, setIndex) => (
+            <div className="flex animate-marquee gap-6" style={{ '--duration': '200s', '--gap': '1.5rem' } as React.CSSProperties}>
+              {[...Array(3)].map((_, setIndex) => (
                 testimonials.map((testimonial, i) => (
                   <TestimonialCard
                     key={`${setIndex}-${i}`}
