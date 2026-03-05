@@ -17,13 +17,13 @@ const properties = [
 ];
 
 const FeaturedProperties = () => (
-  <section id="imoveis" className="py-24 lg:py-32 px-6 lg:px-12 bg-background">
+  <section id="imoveis" className="py-32 lg:py-44 px-6 lg:px-12 bg-background">
     <div className="max-w-7xl mx-auto">
       <SectionHeader
         title="Imóveis em Destaque"
         subtitle="Uma seleção exclusiva dos imóveis mais desejados do Rio de Janeiro"
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
         {properties.map((property, i) => (
           <PropertyCard key={i} {...property} index={i} />
         ))}

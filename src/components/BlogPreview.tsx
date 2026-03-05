@@ -29,13 +29,13 @@ const articles = [
 ];
 
 const BlogPreview = () => (
-  <section id="blog" className="py-24 lg:py-32 px-6 lg:px-12 bg-cream">
+  <section id="blog" className="py-32 lg:py-44 px-6 lg:px-12 bg-cream">
     <div className="max-w-7xl mx-auto">
       <SectionHeader
         title="Insights & Tendências"
         subtitle="Artigos sobre o mercado de luxo, design e lifestyle carioca"
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
         {articles.map((article, i) => (
           <motion.article
             key={i}
@@ -43,9 +43,9 @@ const BlogPreview = () => (
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
+            transition={{ duration: 0.7, delay: i * 0.12 }}
           >
-            <div className="relative overflow-hidden aspect-[3/2] mb-5">
+            <div className="relative overflow-hidden aspect-[3/2] mb-6">
               <img
                 src={article.image}
                 alt={article.title}
@@ -53,25 +53,25 @@ const BlogPreview = () => (
                 loading="lazy"
               />
             </div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-xs font-sans font-medium tracking-[0.2em] uppercase text-gold">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-[10px] font-sans font-medium tracking-[0.25em] uppercase text-primary">
                 {article.category}
               </span>
-              <span className="text-xs text-muted-foreground font-sans">{article.date}</span>
+              <span className="text-[10px] text-muted-foreground font-sans tracking-wide">{article.date}</span>
             </div>
-            <h3 className="font-serif text-xl font-medium text-foreground mb-2 group-hover:text-gold transition-colors">
+            <h3 className="font-serif text-lg font-medium text-foreground mb-3 group-hover:text-primary transition-colors tracking-wide">
               {article.title}
             </h3>
-            <p className="font-sans text-sm text-muted-foreground leading-relaxed">
+            <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">
               {article.excerpt}
             </p>
           </motion.article>
         ))}
       </div>
-      <div className="text-center mt-14">
+      <div className="text-center mt-16">
         <a
           href="#"
-          className="text-xs font-sans font-medium tracking-[0.2em] uppercase text-gold hover:text-gold-light transition-colors border-b border-gold/40 hover:border-gold pb-1"
+          className="text-[10px] font-sans font-medium tracking-[0.25em] uppercase text-primary hover:text-gold-light transition-colors border-b border-primary/30 hover:border-primary pb-1"
         >
           Ver Todos os Artigos
         </a>

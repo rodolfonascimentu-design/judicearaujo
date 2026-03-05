@@ -3,33 +3,31 @@ import logoJA from "@/assets/logo-ja.png";
 
 const Footer = () => (
   <footer className="bg-charcoal text-cream">
-    {/* Green accent line */}
-    <div className="h-px bg-gold/30" />
+    <div className="h-px bg-primary/20" />
 
-    <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-20">
+    <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-24">
       {/* Logo */}
-      <div className="text-center mb-14">
+      <div className="text-center mb-16">
         <img
           src={logoJA}
           alt="Judice & Araujo"
-          className="h-14 w-auto mx-auto brightness-0 invert mb-3"
+          className="h-8 w-auto mx-auto brightness-0 invert mb-3"
         />
-        <p className="font-sans text-sm text-cream/50 mt-2">
+        <p className="font-sans text-[10px] text-cream/40 mt-3 tracking-[0.3em] uppercase font-light">
           Imóveis de Luxo · Rio de Janeiro
         </p>
       </div>
 
       {/* Columns */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-16">
-        {/* Navigation */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-12 lg:gap-20">
         <div>
-          <h4 className="font-sans text-xs font-medium tracking-[0.2em] uppercase text-gold mb-6">
+          <h4 className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-primary mb-8">
             Navegação
           </h4>
-          <ul className="space-y-3">
+          <ul className="space-y-3.5">
             {["Imóveis", "Comprar", "Alugar", "Sobre", "Blog", "Contato"].map((link) => (
               <li key={link}>
-                <a href="#" className="font-sans text-sm text-cream/60 hover:text-gold transition-colors">
+                <a href="#" className="font-sans text-xs text-cream/50 hover:text-primary transition-colors font-light tracking-wide">
                   {link}
                 </a>
               </li>
@@ -37,15 +35,14 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Neighborhoods */}
         <div>
-          <h4 className="font-sans text-xs font-medium tracking-[0.2em] uppercase text-gold mb-6">
+          <h4 className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-primary mb-8">
             Bairros
           </h4>
-          <ul className="space-y-3">
+          <ul className="space-y-3.5">
             {["Leblon", "Ipanema", "Lagoa", "Gávea", "Jardim Botânico", "São Conrado"].map((n) => (
               <li key={n}>
-                <a href="#" className="font-sans text-sm text-cream/60 hover:text-gold transition-colors">
+                <a href="#" className="font-sans text-xs text-cream/50 hover:text-primary transition-colors font-light tracking-wide">
                   {n}
                 </a>
               </li>
@@ -53,12 +50,11 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Contact */}
         <div>
-          <h4 className="font-sans text-xs font-medium tracking-[0.2em] uppercase text-gold mb-6">
+          <h4 className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-primary mb-8">
             Contato
           </h4>
-          <div className="space-y-3 font-sans text-sm text-cream/60">
+          <div className="space-y-3.5 font-sans text-xs text-cream/50 font-light tracking-wide">
             <p>Rua Dias Ferreira, 417</p>
             <p>Leblon, Rio de Janeiro</p>
             <p>CEP 22431-050</p>
@@ -67,37 +63,35 @@ const Footer = () => (
           </div>
         </div>
 
-        {/* Social */}
         <div>
-          <h4 className="font-sans text-xs font-medium tracking-[0.2em] uppercase text-gold mb-6">
+          <h4 className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-primary mb-8">
             Redes Sociais
           </h4>
-          <div className="flex gap-4">
-            <a href="#" className="text-cream/60 hover:text-gold transition-colors" aria-label="Instagram">
-              <Instagram className="w-5 h-5" />
+          <div className="flex gap-5">
+            <a href="#" className="text-cream/40 hover:text-primary transition-colors" aria-label="Instagram">
+              <Instagram className="w-4 h-4" />
             </a>
-            <a href="#" className="text-cream/60 hover:text-gold transition-colors" aria-label="WhatsApp">
-              <Phone className="w-5 h-5" />
+            <a href="#" className="text-cream/40 hover:text-primary transition-colors" aria-label="WhatsApp">
+              <Phone className="w-4 h-4" />
             </a>
-            <a href="#" className="text-cream/60 hover:text-gold transition-colors" aria-label="LinkedIn">
-              <Linkedin className="w-5 h-5" />
+            <a href="#" className="text-cream/40 hover:text-primary transition-colors" aria-label="LinkedIn">
+              <Linkedin className="w-4 h-4" />
             </a>
           </div>
         </div>
       </div>
     </div>
 
-    {/* Bottom */}
-    <div className="border-t border-cream/10">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="font-sans text-xs text-cream/40">
+    <div className="border-t border-cream/5">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="font-sans text-[10px] text-cream/30 tracking-wide font-light">
           © 2026 Judice & Araujo. Todos os direitos reservados.
         </p>
-        <div className="flex gap-6">
-          <a href="#" className="font-sans text-xs text-cream/40 hover:text-cream/60 transition-colors">
+        <div className="flex gap-8">
+          <a href="#" className="font-sans text-[10px] text-cream/30 hover:text-cream/50 transition-colors tracking-wide font-light">
             Política de Privacidade
           </a>
-          <a href="#" className="font-sans text-xs text-cream/40 hover:text-cream/60 transition-colors">
+          <a href="#" className="font-sans text-[10px] text-cream/30 hover:text-cream/50 transition-colors tracking-wide font-light">
             Termos de Uso
           </a>
         </div>
