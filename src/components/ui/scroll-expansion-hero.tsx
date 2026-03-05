@@ -117,77 +117,76 @@ const ScrollExpandMedia = ({
         <div className="relative h-screen flex flex-col">
           {/* Background video - stays fixed */}
           <div className="fixed inset-0 -z-10 overflow-hidden">
-            {mediaType === 'video' ? (
-              <video
-                src={mediaSrc}
-                poster={posterSrc}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                className="w-full h-full object-cover scale-110"
-                style={{ filter: showContent ? 'blur(2px)' : 'blur(4px)' }}
-                controls={false}
-                disablePictureInPicture
-              />
-            ) : (
-              <img src={mediaSrc} alt={title || ''} className="w-full h-full object-cover scale-110" />
-            )}
+            {mediaType === 'video' ?
+            <video
+              src={mediaSrc}
+              poster={posterSrc}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover scale-110"
+              style={{ filter: showContent ? 'blur(2px)' : 'blur(4px)' }}
+              controls={false}
+              disablePictureInPicture /> :
+
+
+            <img src={mediaSrc} alt={title || ''} className="w-full h-full object-cover scale-110" />
+            }
             {/* Overlay - 15% brighter than before (was 0.5/0.82, now 0.35/0.67) */}
             <motion.div
               className="absolute inset-0"
               style={{ backgroundColor: 'hsl(var(--charcoal))' }}
-              animate={{ opacity: showContent ? 0.55 : 0.45 }}
-              transition={{ duration: 0.8 }}
-            />
+              animate={{ opacity: showContent ? 0.55 : 0.25 }}
+              transition={{ duration: 0.8 }} />
+            
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
             {/* Scroll hint - appears after logo animation */}
             <motion.div
-              className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-              style={{ top: 'calc(42vh + 48px)' }}
-              animate={{ opacity: showContent ? 0 : (pageReady && scrollProgress === 0 ? 0.8 : 0) }}
-              transition={{ duration: 0.5 }}
-            >
+              className="absolute bottom-12 flex-col gap-3 flex items-center justify-end"
+              animate={{ opacity: showContent ? 0 : pageReady && scrollProgress === 0 ? 0.6 : 0 }}
+              transition={{ duration: 0.5 }}>
+              
               <motion.div
-                className="w-px h-14 bg-cream/50"
+                className="w-px h-10 bg-cream/30"
                 animate={{ scaleY: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <p className="text-cream/70 font-sans text-xs tracking-[0.3em] uppercase">
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
+              
+              <p className="text-cream/40 font-sans text-[10px] tracking-[0.3em] uppercase">
                 Scroll
               </p>
             </motion.div>
 
             {/* Overlay content (search etc.) - appears after full expansion */}
-            {overlayContent && (
-              <motion.div
-                className="absolute inset-0 z-20 flex items-center justify-center px-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: showContent ? 1 : 0 }}
-                transition={{ duration: 0.6, delay: showContent ? 0.2 : 0 }}
-                style={{ pointerEvents: showContent ? 'auto' : 'none' }}
-              >
+            {overlayContent &&
+            <motion.div
+              className="absolute inset-0 z-20 flex items-center justify-center px-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: showContent ? 1 : 0 }}
+              transition={{ duration: 0.6, delay: showContent ? 0.2 : 0 }}
+              style={{ pointerEvents: showContent ? 'auto' : 'none' }}>
+              
                 {overlayContent}
               </motion.div>
-            )}
+            }
 
             {/* Post-expansion content */}
             <motion.section
               className="flex flex-col w-full px-8 py-10 md:px-16 lg:py-20"
               initial={{ opacity: 0 }}
               animate={{ opacity: showContent ? 1 : 0 }}
-              transition={{ duration: 0.7 }}
-            >
+              transition={{ duration: 0.7 }}>
+              
               {children}
             </motion.section>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>);
+
 };
 
 export default ScrollExpandMedia;
