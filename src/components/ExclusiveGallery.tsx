@@ -51,15 +51,15 @@ const ExclusiveGallery = () => {
 
   const current = exclusiveProperties[currentIndex];
 
-  const PropertyInfo = ({ item, className = "", dark = false }: { item: typeof exclusiveProperties[0]; className?: string; dark?: boolean }) => (
-    <div className={`flex items-center gap-4 ${dark ? 'text-muted-foreground' : 'text-cream/60'} ${className}`}>
-      <span className="flex items-center gap-1.5 text-xs font-sans font-light">
+  const PropertyInfo = ({ item, className = "" }: { item: typeof exclusiveProperties[0]; className?: string }) => (
+    <div className={`flex items-center gap-4 text-muted-foreground ${className}`}>
+      <span className="flex items-center gap-1.5 text-xs font-sans font-normal">
         <Maximize className="w-3.5 h-3.5" /> {item.area}m²
       </span>
-      <span className="flex items-center gap-1.5 text-xs font-sans font-light">
+      <span className="flex items-center gap-1.5 text-xs font-sans font-normal">
         <Bed className="w-3.5 h-3.5" /> {item.bedrooms} quartos
       </span>
-      <span className="flex items-center gap-1.5 text-xs font-sans font-light">
+      <span className="flex items-center gap-1.5 text-xs font-sans font-normal">
         <Car className="w-3.5 h-3.5" /> {item.parking} vagas
       </span>
     </div>
@@ -80,8 +80,8 @@ const ExclusiveGallery = () => {
 
         {/* Gallery / Carousel */}
         {!isCarouselMode ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {exclusiveProperties.slice(0, 4).map((prop, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {exclusiveProperties.slice(0, 6).map((prop, i) => (
               <motion.div
                 key={i}
                 className="group cursor-pointer"
@@ -90,24 +90,27 @@ const ExclusiveGallery = () => {
                 viewport={{ once: false, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
               >
-                <div className="relative overflow-hidden rounded-[6px] aspect-[2/3]">
+                <div className="relative overflow-hidden rounded-[6px] aspect-[3/4]">
                   <img
                     src={prop.image}
                     alt={prop.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span className="inline-flex items-center gap-1.5 bg-cream/90 text-foreground px-3 py-1.5 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase">
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+                    <a
+                      href="#"
+                      className="inline-flex items-center gap-2 bg-cream/90 hover:bg-cream text-foreground px-5 py-2.5 rounded-full text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-all duration-300"
+                    >
                       Ver detalhes
-                      <ArrowUpRight className="w-3 h-3" />
-                    </span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
                   </div>
                 </div>
-                <div className="mt-3 px-1">
-                  <p className="font-display text-sm font-medium text-foreground mb-1">{prop.title}</p>
-                  <PropertyInfo item={prop} dark />
+                <div className="mt-4 px-1">
+                  <p className="font-display text-base font-medium text-foreground mb-1.5">{prop.title}</p>
+                  <PropertyInfo item={prop} />
                 </div>
               </motion.div>
             ))}
@@ -134,7 +137,7 @@ const ExclusiveGallery = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <p className="font-display text-lg md:text-2xl font-medium text-cream mb-2">{current.title}</p>
-                <PropertyInfo item={current} className="mb-4" />
+                <PropertyInfo item={current} className="mb-4 text-cream/60" />
                 <a
                   href="#"
                   className="inline-flex items-center gap-2 bg-cream/90 hover:bg-cream text-foreground px-5 py-2.5 rounded-[4px] text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-all duration-300"
