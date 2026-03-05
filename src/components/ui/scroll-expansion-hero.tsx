@@ -137,8 +137,8 @@ const ScrollExpandMedia = ({
 
   return (
     <div className="relative">
-      <section className="relative min-h-screen overflow-hidden">
-        <div className="relative min-h-screen flex flex-col">
+      <section className="relative h-screen overflow-hidden">
+        <div className="relative h-screen flex flex-col">
           {/* Background: same video as the expanding media, blurred & darkened */}
           <div className="fixed inset-0 -z-10 overflow-hidden">
             <video
@@ -158,7 +158,7 @@ const ScrollExpandMedia = ({
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
             {/* Media container with expansion */}
-            <div className="flex flex-col items-center justify-center gap-4 w-full relative z-10 py-8">
+            <div className="flex flex-col items-center justify-center gap-4 w-full relative z-10">
               <div
                 className="relative overflow-hidden rounded-xl transition-all duration-100 ease-out"
                 style={{
