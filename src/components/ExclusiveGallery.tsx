@@ -84,7 +84,7 @@ const ExclusiveGallery = () => {
             {exclusiveProperties.slice(0, 3).map((prop, i) => (
               <motion.div
                 key={i}
-                className="group relative overflow-hidden rounded-[6px] aspect-[3/4] cursor-pointer"
+                className="group relative overflow-hidden rounded-[6px] aspect-[2/3] cursor-pointer"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -112,7 +112,7 @@ const ExclusiveGallery = () => {
           </div>
         ) : (
           <div className="relative">
-            <div className="relative overflow-hidden rounded-[6px] aspect-[16/9] lg:aspect-[21/9] max-w-6xl mx-auto">
+            <div className="relative overflow-hidden rounded-[6px] aspect-[16/9] lg:aspect-[2/1] max-w-6xl mx-auto">
               <motion.img
                 key={currentIndex}
                 src={current.image}
