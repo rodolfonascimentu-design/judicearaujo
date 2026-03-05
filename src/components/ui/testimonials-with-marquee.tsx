@@ -66,11 +66,11 @@ export function TestimonialsSection({
           {/* Gradient overlays */}
           <div className={cn(
             "pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r to-transparent",
-            isDark ? "from-primary" : "from-background"
+            isDark ? "from-primary" : "from-[#FFFBF0]"
           )} />
           <div className={cn(
             "pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l to-transparent",
-            isDark ? "from-primary" : "from-background"
+            isDark ? "from-primary" : "from-[#FFFBF0]"
           )} />
         </div>
       </div>

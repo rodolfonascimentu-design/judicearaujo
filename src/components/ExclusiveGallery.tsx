@@ -80,8 +80,8 @@ const ExclusiveGallery = () => {
 
         {/* Gallery / Carousel */}
         {!isCarouselMode ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {exclusiveProperties.slice(0, 3).map((prop, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {exclusiveProperties.slice(0, 4).map((prop, i) => (
               <motion.div
                 key={i}
                 className="group relative overflow-hidden rounded-[6px] aspect-[2/3] cursor-pointer"
