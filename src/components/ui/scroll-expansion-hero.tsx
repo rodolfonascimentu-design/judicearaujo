@@ -153,7 +153,7 @@ const ScrollExpandMedia = ({
               controls={false}
               disablePictureInPicture
             />
-            <div className="absolute inset-0 bg-charcoal/80" />
+            <div className="absolute inset-0 bg-charcoal/85" />
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
