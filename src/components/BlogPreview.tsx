@@ -61,7 +61,7 @@ const BlogPreview = () => (
               <span className="w-1 h-1 rounded-full bg-border" />
               <span className="text-[10px] text-muted-foreground font-sans tracking-wide">{article.date}</span>
             </div>
-            <h3 className="font-display text-base font-medium text-foreground mb-3 group-hover:text-primary transition-colors duration-300 tracking-[-0.01em]">
+            <h3 className="font-display text-base font-normal text-foreground mb-3 group-hover:text-primary transition-colors duration-300 tracking-[-0.01em]">
               {article.title}
             </h3>
             <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">

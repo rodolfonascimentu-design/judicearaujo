@@ -22,7 +22,7 @@ const CTASection = () => (
       viewport={{ once: false, margin: "-80px" }}
       transition={{ duration: 0.8 }}
     >
-      <h2 className="font-display text-2xl md:text-4xl lg:text-5xl font-medium text-cream max-w-3xl mx-auto leading-[1.12] mb-8 tracking-[-0.02em]">
+      <h2 className="font-display text-2xl md:text-4xl lg:text-5xl font-normal text-cream max-w-3xl mx-auto leading-[1.12] mb-8 tracking-[-0.02em]">
         Encontre o imóvel dos seus sonhos
       </h2>
       <div className="w-10 h-px bg-cream/20 mx-auto mb-8" />
