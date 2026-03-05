@@ -1,30 +1,31 @@
 
 
-## Plano: 3 ajustes pontuais
+## Plano: Corrigir menu mobile + melhorar indicador de scroll
 
-### 1. Quebra de linha no texto "+20 países" no mobile
-**Arquivo:** `ForbesPartnership.tsx` (linha 140)
+### 1. Corrigir botão hambúrguer sumindo no mobile
 
-- Remover `whitespace-nowrap` da classe do `<motion.p>`
-- Adicionar `max-w-[280px] mx-auto` no mobile para forçar quebra natural dentro do grid
-- Manter `whitespace-nowrap` apenas em `md:` para desktop continuar em uma linha
-
-### 2. Transição fluida hambúrguer → X no menu mobile
 **Arquivo:** `Navbar.tsx`
 
-- Substituir a troca abrupta entre `<Menu>` e `<X>` por um único botão com animação
-- Usar `motion.div` com duas barras (`span`) que rotacionam e transicionam para formar o X
-- Quando `mobileOpen = false`: 3 barras horizontais (hambúrguer)
-- Quando `mobileOpen = true`: 2 barras cruzadas em X com rotação animada
-- Usar `framer-motion` `animate` com `rotate` e `translateY` para transição suave entre estados
-- O botão fica sempre visível (não desaparece e reaparece)
-- Na overlay mobile, remover o botão X separado (linha 204-209) — o mesmo botão no nav faz o toggle
+**Problema:** O overlay mobile tem `z-[100]` e o nav tem `z-50`. Quando o menu abre, o overlay cobre o botão.
 
-### 3. Setas brancas com ícone preto nos carrosséis
-**Arquivos:** `ExclusiveGallery.tsx` e `FarmsGallery.tsx`
+**Solução:**
+- Alterar o `z-index` do `<motion.nav>` para `z-[110]` quando `mobileOpen` estiver ativo
+- Isso mantém o botão hambúrguer/X sempre visível e clicável acima do overlay
 
-- Trocar `bg-muted hover:bg-muted/80` por `bg-white hover:bg-white shadow-sm`
-- Trocar `text-foreground/60 hover:text-foreground` por `text-black`
-- Aplicar em todas as setas: desktop (hidden md:flex) e mobile (md:hidden)
-- Total: 4 botões em cada arquivo (2 desktop + 2 mobile)
+### 2. Melhorar visibilidade do indicador de scroll no mobile
+
+**Arquivo:** `scroll-expansion-hero.tsx`
+
+**Problema:** O indicador de scroll (linha pulsante + texto "Scroll") tem opacidade máxima de `0.6`, a barra é `bg-cream/30` e o texto `text-cream/40` — quase invisível no mobile.
+
+**Solução:**
+- Aumentar a opacidade do container de `0.6` para `0.85`
+- Trocar a barra de `bg-cream/30` para `bg-cream/60` (mais visível)
+- Trocar o texto de `text-cream/40` para `text-cream/70` e aumentar o tamanho no mobile para `text-[11px]`
+- Aumentar a altura da barra de `h-10` para `h-12` para mais presença visual
+- Manter a animação pulsante elegante existente
+
+### Arquivos a editar
+1. `Navbar.tsx` — z-index condicional
+2. `scroll-expansion-hero.tsx` — opacidade e tamanho do scroll hint
 
