@@ -1,95 +1,49 @@
 
 
-## Judice & Araujo — Luxury Real Estate Homepage
+## Plan: Co-Branding Logo Animation in Hero Section
 
-A premium, editorial-style homepage for a boutique luxury real estate company in Rio de Janeiro. Inspired by Junot, PP Global, and Majeli Vassart — featuring immersive photography, elegant serif typography, generous whitespace, and smooth scroll animations.
+### Overview
+Replace the single Judice & Araujo logo in the hero's initial state with a cinematic co-branding animation sequence featuring both Forbes Global Properties and Judice & Araujo logos.
 
-### Color & Typography System
-- **Palette**: Deep charcoal (#1a1a1a), warm cream (#f5f0eb), muted gold (#b8976a), white — evoking understated luxury
-- **Headings**: Serif font (Playfair Display) for editorial elegance
-- **Body**: Clean sans-serif (Inter) for readability
-- **Spacing**: Generous padding (80-120px vertical sections), calm rhythm
+### Assets
+- Copy `user-uploads://Forbes_Global_Properties.png` to `src/assets/forbes-global.png`
+- Copy `user-uploads://Judice_Araujo.png` to `src/assets/logo-ja-full.png` (the uploaded version may differ from existing `logo-ja.png`)
 
----
+### Animation Sequence (plays once on page load)
 
-### 1. Navigation
-- Sticky transparent navbar → solid dark on scroll with smooth transition
-- Centered "JUDICE & ARAUJO" logo in elegant serif
-- Nav links: Imóveis · Comprar · Alugar · Bairros · Blog · Sobre · Contato
-- Hamburger menu on mobile with full-screen overlay
-- Subtle stacking animation on scroll
+1. **T=0s** — Forbes Global Properties logo fades in, centered on screen
+2. **T=0.8s** — Thin vertical divider line animates in (top to bottom) to the left of Forbes logo
+3. **T=1.2s** — Judice & Araujo logo slides in from the left, emerging from behind the divider
+4. **T=1.6s** — Final composition visible: `Judice & Araujo | Forbes Global Properties` centered
+5. **T=3.6s** (after ~2s hold) — Both logos + divider fade out together
+6. After fade-out, the scroll hint becomes visible and the hero continues as before
 
-### 2. Hero Section
-- Full-viewport immersive hero with a stunning Rio de Janeiro luxury interior/view image
-- Scroll-expansion effect: image starts slightly cropped, expands to full bleed on scroll
-- Animated headline fading in: *"Viver com exclusividade no Rio de Janeiro"*
-- Luxury tagline beneath: *"Imóveis únicos nos endereços mais prestigiados"*
-- Elegant search bar overlay with: Location, Type, Price Range, Search button
-- Two CTAs: "Ver Imóveis" and "Agendar Consultoria"
+### File Changes
 
-### 3. Featured Properties (6 cards)
-- 3-column grid (desktop), 1 column (mobile)
-- Each card: large image with subtle zoom-on-hover, neighborhood tag, price, bedrooms, area (m²), "Ver Detalhes" link
-- Mock data: Leblon penthouse, Ipanema apartment, Lagoa house, Gávea mansion, Jardim Botânico villa, São Conrado estate
-- Prices in BRL format (R$ 4.500.000+)
-- Section header with serif typography and thin decorative line
+**`src/components/ui/scroll-expansion-hero.tsx`**
+- Replace the single centered logo (lines 148-166) with a new `LogoAnimation` component
+- The animation uses framer-motion's `animate` with sequential delays
+- After animation completes (~3.6s), set a state `logoAnimDone` to true
+- The scroll hint only appears after `logoAnimDone`
+- When scroll progresses (`showContent` becomes true), the co-branding fades out (already handled by existing opacity logic)
+- Remove the import of `logoJA` from this file (logo logic moves to an inline composition)
 
-### 4. Editorial / Brand Story Section
-- Magazine-style split layout: large atmospheric image on one side, text on the other
-- Scroll-reveal animation (container scroll style — content fades/slides in as user scrolls)
-- Headline: *"Tradição e sofisticação no mercado imobiliário carioca"*
-- Body text about the brand's heritage, expertise, and commitment to exclusivity
-- "Conheça Nossa História" CTA link
+**Animation implementation detail:**
+- Container: `flex items-center gap-6` centered absolutely
+- Forbes logo: `motion.img` with `initial={{ opacity: 0 }}`, `animate={{ opacity: 1 }}`, delay 0
+- Divider: `motion.div` (1px wide, ~40px tall, cream colored), `initial={{ scaleY: 0 }}`, `animate={{ scaleY: 1 }}`, origin top, delay 0.8s
+- JA logo: `motion.img` with `initial={{ opacity: 0, x: -20 }}`, `animate={{ opacity: 1, x: 0 }}`, delay 1.2s
+- Whole group: after 3.6s, animate opacity to 0 via a timeout that triggers state change
 
-### 5. Luxury Highlights (Horizontal Scroll)
-- Horizontally scrollable category cards:
-  - Frente para o Mar (Beachfront)
-  - Coberturas (Penthouses)
-  - Casarões Históricos (Historic Mansions)
-  - Arquitetura Contemporânea (Architectural Homes)
-- Each card: full-bleed image with category name overlay, subtle glow effect on hover
-- Drag/swipe enabled
+**`src/components/HeroSection.tsx`**
+- No changes needed (overlay content and scroll progress logic remain the same)
 
-### 6. Market Insights / Blog Preview
-- 3-card layout with large hero images
-- Each card: image, category tag, title, date, excerpt
-- Mock articles about Rio luxury market trends, neighborhood guides, lifestyle
-- "Ver Todos os Artigos" link
+**`src/components/Navbar.tsx`**
+- The navbar logo (`logoJA`) continues to appear only after `pastHero` — no changes needed
 
-### 7. Testimonials
-- Elegant centered layout with large quotation marks
-- Client quote in italic serif
-- Client name and neighborhood below
-- Auto-rotating carousel with dots or manual navigation
-
-### 8. Call to Action
-- Full-width section with atmospheric Rio skyline/beach background (dark overlay)
-- Large serif headline: *"Encontre o imóvel dos seus sonhos"*
-- Subtext: *"Agende uma consultoria exclusiva com nossos especialistas"*
-- Two buttons: "Agendar Consultoria" (primary gold) and "Fale Conosco" (outlined)
-
-### 9. Footer
-- Dark background (charcoal)
-- 4-column layout: Navigation, Bairros, Contato, Redes Sociais
-- Brand logo at top
-- Instagram, WhatsApp, LinkedIn icons
-- Legal text and copyright at bottom
-- Thin gold accent line separator
-
-### Reusable Components
-- `PropertyCard` — used in featured properties grid
-- `BlogCard` — used in blog preview section
-- `CategoryCard` — used in luxury highlights carousel
-- `TestimonialCard` — used in testimonials section
-- `CTASection` — reusable call-to-action block
-- `SectionHeader` — serif heading with decorative line
-- `Navbar` — sticky transparent-to-solid navigation
-
-### Animations & Effects
-- Scroll-triggered fade-in for all sections
-- Hero scroll-expansion effect
-- Property card image zoom on hover
-- Subtle glow effect on highlight category cards
-- Smooth navbar background transition on scroll
-- Horizontal drag scroll for highlights section
+### Visual Style
+- Both logos rendered white (using `brightness-0 invert` filter) against the dark video background
+- Divider: 1px wide, ~40px tall, `bg-cream/40`
+- Smooth `ease-in-out` transitions throughout
+- Forbes logo slightly larger or equal height to JA logo for balanced composition
 
