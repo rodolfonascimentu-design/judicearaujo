@@ -21,4 +21,3 @@ Transformar de layout centralizado (1 coluna) para layout em 2 colunas:
   - Mudar de `text-primary-foreground/50` para `text-[hsl(var(--gold-light))]` 
   - Aumentar tamanho para `text-lg md:text-xl`
   - Manter o CountUp animado
-
