@@ -89,7 +89,7 @@ const HeroOverlayContent = () => {
           </div>
 
           {/* Search input row */}
-          <div className="relative flex items-center px-3 py-1.5">
+          <div className="relative flex items-center px-2 pb-2 pt-1.5">
             <input
               type="text"
               placeholder="Busque por bairro, cidade, condomínio ou código"
@@ -99,7 +99,7 @@ const HeroOverlayContent = () => {
               style={{ color: "hsl(var(--charcoal))" }}
             />
             <motion.button
-              className="flex-shrink-0 mr-1.5 w-12 h-12 rounded-lg flex items-center justify-center bg-primary"
+              className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center bg-primary"
               style={{
                 boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
               }}
