@@ -1,29 +1,45 @@
 
 
-## Plano: Header vazio até logo chegar ao topo
+## Plano: Redesign da barra de busca inspirada na referência
 
-### Comportamento desejado
+### Design da referência (imagem)
+- Tabs flutuando **acima** do container (não dentro)
+- Tab ativa em dourado/gold, inativas em branco/cinza claro
+- Container escuro semi-transparente com blur, bordas arredondadas generosas
+- Label "BUSCAR IMÓVEL" em caps acima do placeholder
+- Input com placeholder cinza claro sobre fundo escuro
+- Botão de busca circular dourado/gold à direita
 
-O header começa **completamente vazio** (sem links, sem idioma, sem controles de fonte, sem logo no header, sem hambúrguer no mobile). Os elementos do header só aparecem quando os logos animados do hero scrollam até a posição do header (quando `heroProgress` atinge ~0.8, momento em que `topVh` chega a ~2.5vh). Nesse ponto, todos os elementos surgem com fade-in, em branco. Depois da dobra (`pastHero`), transicionam para verde como já funciona.
+### Adaptação com as cores do projeto
+- Fundo do container: verde escuro semi-transparente (`rgba(0, 63, 54, 0.85)`) com backdrop-blur
+- Tabs acima: ativa em gold (`#D4A853` ou similar quente), inativas em `cream/60`
+- Label "BUSCAR IMÓVEL" em branco/cream, tracking largo, tamanho pequeno
+- Placeholder em `cream/40`
+- Botão circular em gold com ícone branco
+- Bordas arredondadas `rounded-2xl`
+
+### Mobile
+- Mesmo layout dark, tabs menores
+- Input + label empilhados
+- Botão "Buscar" full-width em gold abaixo do input
 
 ### Implementação
 
-**Arquivo:** `Navbar.tsx`
+**Arquivo:** `HeroSection.tsx` (componente `HeroOverlayContent`)
 
-1. Observar `data-hero-progress` via MutationObserver (já existe) e usar `heroExpanded` (que já rastreia `hp >= 1`) -- ajustar threshold para ~0.85 para coincidir com o momento em que os logos chegam ao topo e começam a desaparecer.
+1. **Tabs:** Mover para fora do container principal, centralizar acima com `mb-3`. Tab ativa com cor gold e underline/pill gold. Inativas em branco translúcido.
 
-2. Esconder **todos** os elementos do header (logo do header, links desktop, hambúrguer mobile) quando `heroExpanded` é false. Usar `opacity-0 pointer-events-none` → `opacity-100 pointer-events-auto` com transição suave.
+2. **Container:** Trocar fundo branco por verde escuro translúcido com blur. Adicionar `rounded-2xl`.
 
-3. A lógica de cor permanece: branco antes de `pastHero`, verde depois.
+3. **Interior:** Adicionar label "BUSCAR IMÓVEL" em uppercase, tracking largo, tamanho `10px`, cor cream. Abaixo, input com placeholder cream/40 e texto branco.
 
-**Detalhes:**
-- `heroExpanded` controla visibilidade (opacity + pointer-events com transition 500ms)
-- Desktop: logo + links + idioma + fonte -- todos condicionados
-- Mobile: hambúrguer -- também condicionado
-- Fundo do nav também só aparece após `pastHero` (já funciona assim)
+4. **Botão desktop:** Circular, fundo gold (`bg-[#D4A853]`), ícone branco.
+
+5. **Botão mobile:** Full-width, fundo gold, texto branco "Buscar" + lupa.
+
+6. **Animações:** Manter staggered entrance existente.
 
 ### Resumo
-- Um único arquivo: `Navbar.tsx`
-- Adicionar wrapper com opacity/transition controlado por `heroExpanded` (threshold ~0.85)
-- Todos os elementos do header ficam invisíveis até os logos do hero chegarem ao topo
+- Um único arquivo: `HeroSection.tsx`
+- Redesign completo do `HeroOverlayContent` seguindo a referência dark com cores do projeto
 
