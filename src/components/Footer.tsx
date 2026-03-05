@@ -1,16 +1,19 @@
 import { Instagram, Phone, Linkedin } from "lucide-react";
+import logoJA from "@/assets/logo-ja.png";
 
 const Footer = () => (
   <footer className="bg-charcoal text-cream">
-    {/* Gold line */}
+    {/* Green accent line */}
     <div className="h-px bg-gold/30" />
 
     <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-20">
       {/* Logo */}
       <div className="text-center mb-14">
-        <h2 className="font-serif text-2xl tracking-[0.15em] text-cream">
-          JUDICE & ARAUJO
-        </h2>
+        <img
+          src={logoJA}
+          alt="Judice & Araujo"
+          className="h-14 w-auto mx-auto brightness-0 invert mb-3"
+        />
         <p className="font-sans text-sm text-cream/50 mt-2">
           Imóveis de Luxo · Rio de Janeiro
         </p>
