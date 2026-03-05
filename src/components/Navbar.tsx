@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJA from "@/assets/logo-ja.png";
-import forbesLogoWhite from "@/assets/forbes-global-white.png";
+import forbesLogo from "@/assets/forbes-global.png";
 import jaLogoFull from "@/assets/logo-ja-full.png";
 
 const navLinks = [
@@ -47,7 +47,7 @@ const Navbar = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           showGreen
-            ? "bg-primary/95 backdrop-blur-md shadow-lg"
+            ? "bg-white/95 backdrop-blur-md shadow-lg"
             : "bg-transparent"
         }`}
         initial={{ y: -100 }}
@@ -63,9 +63,9 @@ const Navbar = () => {
                 animate={{ opacity: pastHero ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <img src={jaLogoFull} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto brightness-0 invert" />
-                <div className="w-px h-8 bg-primary-foreground/30" />
-                <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
+                <img src={jaLogoFull} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
+                <div className="w-px h-8 bg-primary/30" />
+                <img src={forbesLogo} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
               </motion.div>
             </a>
 
@@ -83,7 +83,7 @@ const Navbar = () => {
                     <a
                       key={link.label}
                       href={link.href}
-                      className="text-[11px] font-sans font-medium tracking-[0.2em] uppercase text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
+                    className="text-[11px] font-sans font-medium tracking-[0.2em] uppercase text-primary/70 hover:text-primary transition-colors duration-300"
                     >
                       {link.label}
                     </a>
@@ -93,7 +93,7 @@ const Navbar = () => {
                   <div className="relative">
                     <button
                       onClick={() => setLangOpen(!langOpen)}
-                      className="flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                      className="flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors"
                     >
                       {currentLang}
                       <ChevronDown className="w-3 h-3" />
@@ -101,7 +101,7 @@ const Navbar = () => {
                     <AnimatePresence>
                       {langOpen && (
                         <motion.div
-                          className="absolute top-full mt-2 right-0 bg-primary/95 backdrop-blur-md border border-primary-foreground/10 rounded-[4px] overflow-hidden"
+                          className="absolute top-full mt-2 right-0 bg-white/95 backdrop-blur-md border border-primary/10 rounded-[4px] overflow-hidden"
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -4 }}
@@ -111,7 +111,7 @@ const Navbar = () => {
                               key={lang}
                               onClick={() => { setCurrentLang(lang); setLangOpen(false); }}
                               className={`block w-full px-5 py-2 text-[11px] font-sans tracking-[0.15em] uppercase text-left transition-colors ${
-                                lang === currentLang ? "text-primary-foreground bg-primary-foreground/5" : "text-primary-foreground/50 hover:text-primary-foreground hover:bg-primary-foreground/5"
+                                lang === currentLang ? "text-primary bg-primary/5" : "text-primary/50 hover:text-primary hover:bg-primary/5"
                               }`}
                             >
                               {lang}
@@ -123,18 +123,18 @@ const Navbar = () => {
                   </div>
 
                   {/* Font size controls */}
-                  <div className="flex items-center gap-1 border border-primary-foreground/10 rounded-[4px] px-1">
+                  <div className="flex items-center gap-1 border border-primary/10 rounded-[4px] px-1">
                     <button
                       onClick={() => adjustFont(-5)}
-                      className="p-1.5 text-primary-foreground/50 hover:text-primary-foreground transition-colors"
+                      className="p-1.5 text-primary/50 hover:text-primary transition-colors"
                       aria-label="Diminuir fonte"
                     >
                       <Minus className="w-3 h-3" />
                     </button>
-                    <span className="text-[9px] font-sans text-primary-foreground/40 tracking-wider uppercase w-5 text-center">A</span>
+                    <span className="text-[9px] font-sans text-primary/40 tracking-wider uppercase w-5 text-center">A</span>
                     <button
                       onClick={() => adjustFont(5)}
-                      className="p-1.5 text-primary-foreground/50 hover:text-primary-foreground transition-colors"
+                      className="p-1.5 text-primary/50 hover:text-primary transition-colors"
                       aria-label="Aumentar fonte"
                     >
                       <Plus className="w-3 h-3" />
@@ -148,7 +148,7 @@ const Navbar = () => {
             {pastHero && (
               <button
                 onClick={() => setMobileOpen(true)}
-                className="lg:hidden text-primary-foreground"
+                className="lg:hidden text-primary"
                 aria-label="Abrir menu"
               >
                 <Menu className="w-6 h-6" />
