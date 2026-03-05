@@ -9,7 +9,7 @@ const categories = [
   {
     image: lifestyleCampo,
     title: "Campo",
-    description: "Refúgio, natureza e privacidade.",
+    description: "Refúgio, natureza e privacidade em meio à paisagem.",
     href: "#campo",
   },
   {
@@ -27,7 +27,7 @@ const categories = [
   {
     image: lifestyleCasas,
     title: "Casas",
-    description: "Espaço, exclusividade e design.",
+    description: "Espaço, exclusividade e design que inspiram.",
     href: "#casas",
   },
 ];
@@ -67,7 +67,7 @@ const LuxuryHighlights = () => {
                 <h3 className="font-display text-2xl md:text-3xl font-medium text-cream tracking-[-0.01em] transition-all duration-500 group-hover:text-white">
                   {cat.title}
                 </h3>
-                <p className="font-sans text-sm text-cream/50 mt-2 font-light tracking-wide transition-all duration-500 group-hover:text-white/90">
+                <p className="font-sans text-sm text-cream/50 mt-2 font-light tracking-wide transition-all duration-500 group-hover:text-white/90 min-h-[2.5rem]">
                   {cat.description}
                 </p>
               </div>
