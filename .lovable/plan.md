@@ -1,28 +1,22 @@
 
 
-## Plano: Redesign da barra de busca + nova headline
+## Plano: Ajustar botão da lupa + reposicionar scroll indicator
 
-### Mudanças
+### 1. Botão da lupa — remover padding extra, alinhar com 8px de margem (`HeroSection.tsx`)
 
-1. **Headline** (linha 33): trocar texto para "Para quem escolhe viver diferente"
+O botão atualmente tem `mr-1.5` (6px) e o container tem `px-3 py-1.5`. Vou ajustar para que o botão fique com **8px** de distância da borda direita e da borda inferior da barra branca:
 
-2. **Barra de busca — menos redonda** (linha 51): trocar `rounded-2xl` para `rounded-lg` (~8px em vez de 16px)
+- Container do input row: `px-3 py-1.5` → `px-2 pb-2 pt-1.5` (8px de padding direito e inferior)
+- Botão: `mr-1.5` → `mr-0` (a margem agora vem do padding do container)
 
-3. **Remover lupa ao lado do placeholder** (linhas 96-99): remover o ícone `<Search>` que fica antes do input
+### 2. Scroll indicator — alinhar com a barrinha central dos logos (`scroll-expansion-hero.tsx`)
 
-4. **Tabs (Venda/Locação/Temporada) — compactas e modernas**:
-   - Reduzir padding dos botões: `px-7 py-3.5` → `px-5 py-2`
-   - Reduzir padding do container: `px-2 pt-2` → `px-1.5 pt-1.5`
-   - Trocar o underline animado por um **pill/chip** de fundo animado (motion.div com `layoutId` que desliza atrás do item ativo — efeito "sliding pill" fluido)
-   - Fundo do pill: `bg-primary/10` com `rounded-full`
-   - Texto ativo: cor primary; inativo: cinza claro
-   - Remover border-bottom do container de tabs
+A barrinha central dos logos tem 80px de altura e está centrada verticalmente no container posicionado em `top: 42vh`. O centro dos logos fica em ~42vh, e a base da barrinha fica em `42vh + 40px`. O scroll indicator precisa começar logo abaixo dessa base.
 
-5. **Input row — menos espaço branco**:
-   - Reduzir padding: `px-4 py-2.5` → `px-3 py-1.5`
-   - Input interno: `py-5` → `py-3`
+Atualmente está em `top: calc(42vh + 56px)` — vou ajustar para `top: calc(42vh + 48px)` para que a linha do scroll indicator fique visualmente contínua com a base da barrinha dos logos (considerando o gap de 3 entre eles). O valor exato pode precisar de ajuste fino, mas o cálculo é: posição do container (42vh) + metade da altura da barra (40px) + pequeno gap (8px).
 
 ### Arquivos afetados
 
-- **`src/components/HeroSection.tsx`** — todas as mudanças acima no `HeroOverlayContent`
+1. **`src/components/HeroSection.tsx`** — padding do container e margem do botão
+2. **`src/components/ui/scroll-expansion-hero.tsx`** — posição vertical do scroll indicator
 
