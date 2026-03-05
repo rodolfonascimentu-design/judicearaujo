@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Globe, Building2, Target, TrendingUp } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
 import logoJA from "@/assets/logo-ja.png";
 import forbesLogo from "@/assets/forbes-global-white.png";
 
@@ -26,15 +27,52 @@ const benefits = [
   },
 ];
 
+function CountUp({ target, duration = 2 }: { target: number; duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let start = 0;
+    const step = Math.ceil(target / (duration * 60));
+    const interval = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(interval);
+      } else {
+        setCount(start);
+      }
+    }, 1000 / 60);
+    return () => clearInterval(interval);
+  }, [isInView, target, duration]);
+
+  return <span ref={ref}>{count}</span>;
+}
+
 const ForbesPartnership = () => (
   <section className="py-32 lg:py-44 px-6 lg:px-12 bg-primary">
     <div className="max-w-5xl mx-auto text-center">
+      {/* Logos — above label */}
+      <motion.div
+        className="flex items-center justify-center gap-8 mb-12"
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <img src={logoJA} alt="Judice & Araujo" className="h-7 lg:h-8 object-contain brightness-0 invert opacity-90" />
+        <div className="w-px h-10 bg-primary-foreground/30" />
+        <img src={forbesLogo} alt="Forbes Global Properties" className="h-10 lg:h-12 object-contain opacity-90" />
+      </motion.div>
+
       {/* Headline */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.7, delay: 0.15 }}
       >
         <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary-foreground/50 mb-8 font-medium">
           Parceria Global
@@ -47,31 +85,24 @@ const ForbesPartnership = () => (
         </p>
       </motion.div>
 
-      {/* Logos */}
-      <motion.div
-        className="flex items-center justify-center gap-8 my-16 lg:my-20"
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, delay: 0.1 }}
-      >
-        <img src={logoJA} alt="Judice & Araujo" className="h-10 lg:h-12 object-contain brightness-0 invert opacity-90" />
-        <div className="w-px h-12 bg-primary-foreground/30" />
-        <img src={forbesLogo} alt="Forbes Global Properties" className="h-8 lg:h-10 object-contain opacity-90" />
-      </motion.div>
-
       {/* Benefits grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mt-16 lg:mt-20 mb-16">
         {benefits.map((b, i) => (
           <motion.div
             key={b.title}
-            className="text-center"
+            className="text-center group cursor-default"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
           >
-            <b.icon className="w-6 h-6 text-primary-foreground/60 mx-auto mb-4" strokeWidth={1.5} />
+            <motion.div
+              className="mx-auto mb-4 w-10 h-10 flex items-center justify-center"
+              whileHover={{ scale: 1.2, rotate: 6 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
+              <b.icon className="w-6 h-6 text-primary-foreground/60 group-hover:text-primary-foreground transition-colors duration-300" strokeWidth={1.5} />
+            </motion.div>
             <h3 className="font-display text-sm font-medium text-primary-foreground mb-2 tracking-wide">
               {b.title}
             </h3>
@@ -82,30 +113,20 @@ const ForbesPartnership = () => (
         ))}
       </div>
 
-      {/* Stat */}
-      <motion.p
-        className="font-sans text-xs tracking-[0.2em] uppercase text-primary-foreground/40 mb-14"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        + de 20 países conectados pela rede Forbes Global Properties
-      </motion.p>
-
-      {/* CTA */}
+      {/* Stat with counter */}
       <motion.div
+        className="text-center"
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
       >
-        <a
-          href="#avaliar"
-          className="inline-block px-10 py-4 bg-cream text-primary text-[11px] font-sans font-medium tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-primary-foreground hover:text-primary"
-        >
-          Anuncie seu imóvel na rede Forbes
-        </a>
+        <p className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-primary-foreground mb-3">
+          +<CountUp target={20} duration={1.8} /> países
+        </p>
+        <p className="font-sans text-sm md:text-base text-primary-foreground/50 tracking-wide font-light">
+          conectados pela rede Forbes Global Properties
+        </p>
       </motion.div>
     </div>
   </section>
