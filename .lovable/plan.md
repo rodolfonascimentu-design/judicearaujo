@@ -1,23 +1,28 @@
 
 
-## Plano: Padronizar cards de lifestyle + Redesenhar seção Forbes
+## Plano: Cards externos nas galerias + Forbes headline + Scroll indicator
 
-### 1. `src/components/LuxuryHighlights.tsx` — Padronizar descrições com 2 linhas
+### 1. `ExclusiveGallery.tsx` e `FarmsGallery.tsx` — Info fora do card (grid mode)
 
-Atualmente "Campo" tem 1 linha curta e "Casas" também. Vou garantir que todas as descrições tenham tamanho similar (2 linhas) e fixar a altura mínima do bloco de texto para que fiquem visualmente iguais:
+Atualmente o titulo e as infos (metragem, quartos, vagas) aparecem como overlay dentro da imagem no hover. Vou mover essas informações para fora do card, abaixo da imagem, com texto escuro visível sempre. O botão "Ver detalhes" permanece dentro do card como overlay no hover.
 
-- Atualizar descrições curtas para terem comprimento equivalente a 2 linhas:
-  - "Campo" → "Refúgio, natureza e privacidade em meio à paisagem."
-  - "Casas" → "Espaço, exclusividade e design que inspiram."
-- Adicionar `min-h-[2.5rem]` ou `line-clamp-2` no `<p>` da descrição para garantir que todos ocupem exatamente 2 linhas visuais
+**Mudanças no grid (ambos arquivos):**
+- Remover o `<div>` de overlay com titulo + PropertyInfo (linhas 99-103)
+- Manter apenas o overlay do botão "Ver detalhes" (linhas 104-109)
+- Trocar o wrapper de `<motion.div>` com `aspect-[2/3]` para um container que separa imagem e texto
+- Adicionar abaixo da imagem: titulo em `text-foreground` e PropertyInfo em `text-muted-foreground` (cores escuras)
+- Ajustar PropertyInfo para usar `text-foreground/60` em vez de `text-cream/60`
 
-### 2. `src/components/ForbesPartnership.tsx` — Layout split com animações direcionais
+### 2. `ForbesPartnership.tsx` — Quebra de linha na headline
 
-Transformar de layout centralizado (1 coluna) para layout em 2 colunas:
+Linha 81-83: trocar o texto para usar `<br />`:
+```
+Uma rede global<br />para imóveis extraordinários
+```
 
-- **Lado esquerdo**: Label "Parceria Global", headline, subtítulo e logo Forbes (maior, `h-32 lg:h-40`). Animação de entrada da esquerda para direita (`initial={{ opacity: 0, x: -60 }}`)
-- **Lado direito**: Grid 2×2 com os 4 cards de benefícios. Animação de entrada da direita para esquerda (`initial={{ opacity: 0, x: 60 }}`)
-- **Abaixo (full-width)**: Mensagem "+20 países" com cores mais vivas:
-  - Mudar de `text-primary-foreground/50` para `text-[hsl(var(--gold-light))]` 
-  - Aumentar tamanho para `text-lg md:text-xl`
-  - Manter o CountUp animado
+### 3. `scroll-expansion-hero.tsx` — Scroll indicator maior e mais visível
+
+- Linha 154: barrinha `h-10` → `h-14`, `bg-cream/30` → `bg-cream/50`
+- Linha 158: texto `text-[10px]` → `text-xs`, `text-cream/40` → `text-cream/70`
+- Aumentar opacidade geral do indicator de `0.6` para `0.8` (linha 150)
+
