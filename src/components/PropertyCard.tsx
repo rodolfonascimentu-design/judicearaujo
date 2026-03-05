@@ -16,7 +16,7 @@ const PropertyCard = ({ image, title, neighborhood, price, bedrooms, area, index
     className="group cursor-pointer"
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
+    viewport={{ once: false, margin: "-80px" }}
     transition={{ duration: 0.6, delay: index * 0.1 }}
   >
     {/* Image container */}

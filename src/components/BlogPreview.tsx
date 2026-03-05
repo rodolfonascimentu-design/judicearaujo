@@ -42,7 +42,7 @@ const BlogPreview = () => (
             className="group cursor-pointer"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, margin: "-80px" }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
           >
             <div className="relative overflow-hidden rounded-[4px] aspect-[3/2] mb-6">

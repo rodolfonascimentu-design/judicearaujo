@@ -11,7 +11,7 @@ const SectionHeader = ({ title, subtitle, light }: SectionHeaderProps) => (
     className="text-center mb-20"
     initial={{ opacity: 0, y: 24 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
+    viewport={{ once: false, margin: "-80px" }}
     transition={{ duration: 0.7 }}
   >
     <h2
