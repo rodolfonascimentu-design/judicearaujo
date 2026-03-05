@@ -146,7 +146,8 @@ const ScrollExpandMedia = ({
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
             {/* Scroll hint - appears after logo animation */}
             <motion.div
-              className="absolute bottom-12 flex flex-col items-center gap-3"
+              className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+              style={{ top: 'calc(42vh + 56px)' }}
               animate={{ opacity: showContent ? 0 : (pageReady && scrollProgress === 0 ? 0.8 : 0) }}
               transition={{ duration: 0.5 }}
             >
