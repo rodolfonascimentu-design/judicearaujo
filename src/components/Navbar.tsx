@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Menu, X, Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJA from "@/assets/logo-ja.png";
+import forbesLogo from "@/assets/forbes-global.png";
+import jaLogoFull from "@/assets/logo-ja-full.png";
 
 const navLinks = [
   { label: "Lançamentos", href: "#lancamentos" },
@@ -54,15 +56,18 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
-            {/* Logo - only visible after scrolling past hero (hero has its own centered logo) */}
-            <a href="#" className="flex-shrink-0">
-              <motion.img
-                src={logoJA}
-                alt="Judice & Araujo"
-                className="h-4 lg:h-[18px] w-auto brightness-0 invert"
+            <div className="flex-1" />
+            {/* Co-branding logo centered in header */}
+            <a href="#" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3">
+              <motion.div
+                className="flex items-center gap-3"
                 animate={{ opacity: pastHero ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
-              />
+              >
+                <img src={jaLogoFull} alt="Judice & Araujo" className="h-4 lg:h-[18px] w-auto brightness-0 invert" />
+                <div className="w-px h-6 bg-primary-foreground/30" />
+                <img src={forbesLogo} alt="Forbes Global Properties" className="h-[18px] lg:h-5 w-auto brightness-0 invert" />
+              </motion.div>
             </a>
 
             {/* Desktop nav - only after past hero */}
