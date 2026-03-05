@@ -38,8 +38,8 @@
 
     --charcoal: 0 0% 7%;
     --cream: 46 100% 94%;
-    --gold: 171 100% 12%;
-    --gold-light: 171 50% 22%;
+    --gold: 39 55% 58%;
+    --gold-light: 39 55% 68%;
     --burnt-umber: 5 64% 33%;
 
     --sidebar-background: 0 0% 98%;
@@ -133,6 +133,11 @@
   .border-gold {
     border-color: hsl(var(--gold));
   }
+}
+
+/* Dark search input placeholder */
+.dark-search-input::placeholder {
+  color: hsl(var(--cream) / 0.35);
 }
 
 /* Smooth scrolling */

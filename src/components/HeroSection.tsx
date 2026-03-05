@@ -18,13 +18,12 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
    ══════════════════════════════════════════════════════════ */
 const HeroOverlayContent = () => {
   const [activeType, setActiveType] = useState<string>("Venda");
-  const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center gap-5 w-full max-w-[780px] mx-auto px-4">
+    <div className="flex flex-col items-center justify-center h-full text-center w-full max-w-[700px] mx-auto px-4">
       {/* Headline */}
       <motion.h1
-        className="font-display text-xl md:text-[34px] lg:text-[40px] leading-[1.2] text-white font-light tracking-tight whitespace-nowrap"
+        className="font-display text-xl md:text-[34px] lg:text-[40px] leading-[1.2] text-white font-light tracking-tight whitespace-nowrap mb-6"
         style={{ textShadow: "0 2px 24px rgba(0,0,0,0.35)" }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -33,116 +32,118 @@ const HeroOverlayContent = () => {
         Para quem escolhe viver diferente
       </motion.h1>
 
+      {/* Tabs - floating above container */}
       <motion.div
-        className="w-10 h-px bg-cream/15"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
-      />
+        className="flex items-center gap-1 mb-3"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25, duration: 0.5 }}
+      >
+        {searchTypes.map((type, i) => (
+          <motion.button
+            key={type}
+            onClick={() => setActiveType(type)}
+            className="relative px-5 py-2 text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-colors duration-300"
+            style={{
+              color:
+                activeType === type
+                  ? "hsl(var(--gold))"
+                  : "rgba(255,255,255,0.5)",
+            }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 + i * 0.05, duration: 0.4 }}
+          >
+            {activeType === type && (
+              <motion.div
+                layoutId="searchTabPill"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-8 rounded-full"
+                style={{ background: "hsl(var(--gold))" }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              />
+            )}
+            <span className="relative z-10">{type}</span>
+          </motion.button>
+        ))}
+      </motion.div>
 
-      {/* Search bar */}
+      {/* Search container - dark green translucent */}
       <motion.div
-        className="w-full mt-1"
+        className="w-full"
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.7, ease: "easeOut" }}
+        transition={{ delay: 0.35, duration: 0.7, ease: "easeOut" }}
       >
         <div
-          className="w-full rounded-lg overflow-hidden transition-shadow duration-500"
+          className="w-full rounded-2xl overflow-hidden"
           style={{
-            background: "rgba(255, 255, 255, 1)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            border: isFocused
-              ? "1px solid hsl(var(--primary) / 0.3)"
-              : "1px solid rgba(255, 255, 255, 0.4)",
-            boxShadow: isFocused
-              ? "0 25px 60px -12px rgba(0,0,0,0.3), 0 0 0 1px hsl(var(--primary) / 0.08)"
-              : "0 20px 50px -15px rgba(0,0,0,0.2)",
-            transition: "border 0.3s ease, box-shadow 0.5s ease",
+            background: "rgba(0, 63, 54, 0.85)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
+            boxShadow: "0 20px 50px -15px rgba(0,0,0,0.4)",
           }}
         >
-          {/* Segmented tabs */}
-          <div className="flex items-center gap-1 px-1.5 pt-1.5">
-            {searchTypes.map((type, i) => (
-              <motion.button
-                key={type}
-                onClick={() => setActiveType(type)}
-                className="relative px-5 py-2 text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-colors duration-300"
+          {/* Desktop layout */}
+          <div className="hidden md:flex items-center px-5 py-4 gap-4">
+            <div className="flex-1">
+              <p className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-1.5"
+                style={{ color: "hsl(var(--cream))" }}>
+                Buscar imóvel
+              </p>
+              <input
+                type="text"
+                placeholder="Bairro, cidade, condomínio ou código"
+                className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none dark-search-input"
                 style={{
-                  color:
-                    activeType === type
-                      ? "hsl(var(--primary))"
-                      : "rgba(0,0,0,0.32)",
+                  color: "hsl(var(--cream))",
                 }}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35 + i * 0.05, duration: 0.4 }}
-              >
-                {activeType === type && (
-                  <motion.div
-                    layoutId="searchTabPill"
-                    className="absolute inset-0 rounded-md bg-primary/10"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{type}</span>
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Search input row - desktop */}
-          <div className="hidden md:flex relative items-center px-2 pb-2 pt-1.5">
-            <input
-              type="text"
-              placeholder="Busque por bairro, cidade, condomínio ou código"
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              className="w-full bg-transparent px-4 py-3 text-base font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
-              style={{ color: "hsl(var(--charcoal))" }}
-            />
+              />
+            </div>
             <motion.button
-              className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center bg-primary"
+              className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
               style={{
-                boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
+                background: "hsl(var(--gold))",
+                boxShadow: "0 4px 14px -2px hsl(var(--gold) / 0.5)",
               }}
               whileHover={{
-                scale: 1.05,
-                boxShadow: "0 6px 20px -2px hsl(var(--primary) / 0.55)",
+                scale: 1.08,
+                boxShadow: "0 6px 20px -2px hsl(var(--gold) / 0.6)",
               }}
-              whileTap={{ scale: 0.97 }}
+              whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              <Search className="w-[18px] h-[18px] text-primary-foreground" />
+              <Search className="w-[18px] h-[18px] text-white" />
             </motion.button>
           </div>
 
-          {/* Search input + button - mobile (stacked) */}
-          <div className="md:hidden px-2 pb-2 pt-1.5 space-y-2">
-            <motion.input
-              type="text"
-              placeholder="Bairro, cidade ou código"
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              className="w-full bg-transparent px-4 py-3 text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
-              style={{ color: "hsl(var(--charcoal))" }}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.4 }}
-            />
+          {/* Mobile layout */}
+          <div className="md:hidden px-4 py-4 space-y-3">
+            <div>
+              <p className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-1.5"
+                style={{ color: "hsl(var(--cream))" }}>
+                Buscar imóvel
+              </p>
+              <input
+                type="text"
+                placeholder="Bairro, cidade ou código"
+                className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none dark-search-input"
+                style={{
+                  color: "hsl(var(--cream))",
+                }}
+              />
+            </div>
             <motion.button
-              className="w-full flex items-center justify-center gap-2.5 bg-primary text-primary-foreground py-3.5 rounded-lg text-[12px] font-sans font-semibold tracking-[0.18em] uppercase"
+              className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-[12px] font-sans font-semibold tracking-[0.18em] uppercase text-white"
               style={{
-                boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
+                background: "hsl(var(--gold))",
+                boxShadow: "0 4px 14px -2px hsl(var(--gold) / 0.5)",
               }}
-              whileHover={{
-                scale: 1.02,
-                boxShadow: "0 6px 20px -2px hsl(var(--primary) / 0.55)",
-              }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.4, ease: "easeOut" }}
+              transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
             >
               <Search className="w-4 h-4" />
               Buscar
