@@ -36,7 +36,7 @@ const InstitutionalCTA = () => (
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary-foreground/50 mb-8 font-medium">
+          <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-[#aed9d7] mb-8 font-medium">
             Proprietários
           </p>
           <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-primary-foreground leading-[1.2] mb-10 tracking-[-0.02em]">
@@ -62,7 +62,7 @@ const InstitutionalCTA = () => (
           >
             Avaliar meu imóvel
           </a>
-          <p className="mt-4 text-xs text-primary-foreground/40 font-light tracking-wide">
+          <p className="mt-4 text-xs text-[#aed9d7] font-light tracking-wide">
             Avaliação rápida e confidencial.
           </p>
         </motion.div>
