@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Minus, Plus, ChevronDown } from "lucide-react";
+import { Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJA from "@/assets/logo-ja.png";
 import logoJaGreen from "@/assets/logo-ja-green.png";
@@ -175,17 +175,31 @@ const Navbar = () => {
                   </div>
             </div>
 
-            {/* Mobile menu button */}
+            {/* Mobile menu button — animated hamburger ↔ X */}
             <button
-              onClick={() => setMobileOpen(true)}
-              className={`lg:hidden transition-all duration-500 ${pastHero ? "text-primary" : "text-cream"}`}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className={`lg:hidden relative w-7 h-7 flex flex-col items-center justify-center transition-all duration-500 ${pastHero ? "text-primary" : "text-cream"}`}
               style={{
                 opacity: heroExpanded ? 1 : 0,
                 pointerEvents: heroExpanded ? "auto" : "none",
               }}
-              aria-label="Abrir menu"
+              aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
             >
-              <Menu className="w-6 h-6" />
+              <motion.span
+                className={`absolute block h-[1.5px] w-5 rounded-full ${pastHero && !mobileOpen ? "bg-primary" : mobileOpen ? "bg-primary-foreground" : "bg-cream"}`}
+                animate={mobileOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -4 }}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+              />
+              <motion.span
+                className={`absolute block h-[1.5px] w-5 rounded-full ${pastHero && !mobileOpen ? "bg-primary" : mobileOpen ? "bg-primary-foreground" : "bg-cream"}`}
+                animate={mobileOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+              />
+              <motion.span
+                className={`absolute block h-[1.5px] w-5 rounded-full ${pastHero && !mobileOpen ? "bg-primary" : mobileOpen ? "bg-primary-foreground" : "bg-cream"}`}
+                animate={mobileOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 4 }}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+              />
             </button>
           </div>
         </div>
@@ -201,13 +215,7 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <button
-              onClick={() => setMobileOpen(false)}
-              className="absolute top-6 right-6 text-primary-foreground"
-              aria-label="Fechar menu"
-            >
-              <X className="w-7 h-7" />
-            </button>
+            {/* X button removed — hamburger button in nav handles toggle */}
             <img
               src={logoJA}
               alt="Judice & Araujo"
