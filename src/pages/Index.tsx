@@ -6,7 +6,7 @@ import InstitutionalCTA from "@/components/InstitutionalCTA";
 import ForbesPartnership from "@/components/ForbesPartnership";
 import BlogPreview from "@/components/BlogPreview";
 import Testimonials from "@/components/Testimonials";
-import CTASection from "@/components/CTASection";
+import FarmsGallery from "@/components/FarmsGallery";
 import Footer from "@/components/Footer";
 
 const Index = () => (
@@ -19,7 +19,7 @@ const Index = () => (
     <ForbesPartnership />
     <BlogPreview />
     <Testimonials />
-    <CTASection />
+    <FarmsGallery />
     <Footer />
   </div>
 );
