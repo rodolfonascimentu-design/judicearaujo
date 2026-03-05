@@ -51,8 +51,8 @@ const ExclusiveGallery = () => {
 
   const current = exclusiveProperties[currentIndex];
 
-  const PropertyInfo = ({ item, className = "" }: { item: typeof exclusiveProperties[0]; className?: string }) => (
-    <div className={`flex items-center gap-4 text-cream/60 ${className}`}>
+  const PropertyInfo = ({ item, className = "", dark = false }: { item: typeof exclusiveProperties[0]; className?: string; dark?: boolean }) => (
+    <div className={`flex items-center gap-4 ${dark ? 'text-muted-foreground' : 'text-cream/60'} ${className}`}>
       <span className="flex items-center gap-1.5 text-xs font-sans font-light">
         <Maximize className="w-3.5 h-3.5" /> {item.area}m²
       </span>
@@ -84,28 +84,30 @@ const ExclusiveGallery = () => {
             {exclusiveProperties.slice(0, 4).map((prop, i) => (
               <motion.div
                 key={i}
-                className="group relative overflow-hidden rounded-[6px] aspect-[2/3] cursor-pointer"
+                className="group cursor-pointer"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
               >
-                <img
-                  src={prop.image}
-                  alt={prop.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  <p className="font-display text-sm font-medium text-cream mb-2">{prop.title}</p>
-                  <PropertyInfo item={prop} />
+                <div className="relative overflow-hidden rounded-[6px] aspect-[2/3]">
+                  <img
+                    src={prop.image}
+                    alt={prop.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span className="inline-flex items-center gap-1.5 bg-cream/90 text-foreground px-3 py-1.5 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase">
+                      Ver detalhes
+                      <ArrowUpRight className="w-3 h-3" />
+                    </span>
+                  </div>
                 </div>
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <span className="inline-flex items-center gap-1.5 bg-cream/90 text-foreground px-3 py-1.5 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase">
-                    Ver detalhes
-                    <ArrowUpRight className="w-3 h-3" />
-                  </span>
+                <div className="mt-3 px-1">
+                  <p className="font-display text-sm font-medium text-foreground mb-1">{prop.title}</p>
+                  <PropertyInfo item={prop} dark />
                 </div>
               </motion.div>
             ))}
