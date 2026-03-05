@@ -1,39 +1,33 @@
 
 
-## Plano: Header branco, setas fora do card, swipe mobile e search bar melhorada
+## Plano: Busca branca, info alinhada, logos centralizados e headline mobile
 
-### 1. Header -- links sempre visíveis em branco antes da dobra
+### 1. Barra de busca 100% branca
 
-Atualmente os links só aparecem quando `heroExpanded || pastHero`. Remover essa condição: links, idioma e controles de fonte ficam **sempre visíveis**. Cor branca (cream) antes da dobra, verde (primary) depois.
+Mudar o fundo da search bar de `rgba(255, 255, 255, 0.75)` para `rgba(255, 255, 255, 1)` -- branco puro. Manter bordas e sombras existentes.
 
-**Arquivo:** `Navbar.tsx` -- remover `showNavLinks` como condição de renderização. Manter apenas para cor.
+**Arquivo:** `HeroSection.tsx` -- linha 53, `background` style
 
-### 2. Setas de navegação fora do card (ExclusiveGallery + FarmsGallery)
+### 2. Texto/ícones do carrossel alinhados com a foto (não com as setas)
 
-Mover os botões prev/next de `absolute` dentro da imagem para **fora** do container da imagem, posicionados lateralmente ao card com espaçamento. No mobile, ficam abaixo da imagem junto aos dots.
+Atualmente o `motion.div` com info (`mt-6 px-1`) está no mesmo nível das setas, então começa na borda esquerda incluindo o espaço das setas. Adicionar `md:pl-[calc(2.75rem+1.25rem)]` (largura da seta 44px + gap 20px) para alinhar com o início da imagem no desktop.
 
-**Arquivos:** `ExclusiveGallery.tsx`, `FarmsGallery.tsx`
+**Arquivos:** `ExclusiveGallery.tsx`, `FarmsGallery.tsx` -- div da info abaixo da imagem
 
-### 3. Swipe/touch nos carrosseis mobile
+### 3. Logos centralizados no mobile
 
-Adicionar suporte a drag/swipe via `framer-motion` (`drag="x"`, `onDragEnd`) nos três carrosseis: ExclusiveGallery, FarmsGallery e LuxuryHighlights (mobile). Ao arrastar para esquerda → next, para direita → prev.
+O container dos logos usa `left-1/2` + `translateX(-50%)`, mas os logos podem ter tamanhos desiguais causando desalinhamento visual. Adicionar `justify-center` explícito e garantir que o flex container esteja perfeitamente centrado com `w-max`.
 
-**Arquivos:** `ExclusiveGallery.tsx`, `FarmsGallery.tsx`, `LuxuryHighlights.tsx`
+**Arquivo:** `HeroSection.tsx` -- `HeroLogos` component
 
-### 4. Search bar mobile melhorada
+### 4. Headline "Para quem escolhe viver diferente" em uma linha no mobile, cor branca
 
-No mobile (`md:` breakpoint), separar o layout em duas linhas:
-- **Linha 1:** Tabs (Venda/Locação/Temporada) + input de busca
-- **Linha 2:** Botão full-width com texto "Buscar" + ícone lupa, com animação de hover/tap
+Reduzir o tamanho no mobile de `text-2xl` para `text-[20px]` ou `text-xl` e adicionar `whitespace-nowrap` para forçar uma linha. Garantir `text-white` (já usa `text-cream`, mas confirmar que é branco puro).
 
-Adicionar animação de entrada staggered (tabs → input → botão) para fluidez.
-
-**Arquivo:** `HeroSection.tsx` (componente `HeroOverlayContent`)
+**Arquivo:** `HeroSection.tsx` -- headline h1 no `HeroOverlayContent`
 
 ### Resumo de arquivos
-1. `Navbar.tsx` -- links sempre visíveis, branco → verde
-2. `ExclusiveGallery.tsx` -- setas fora, swipe
-3. `FarmsGallery.tsx` -- setas fora, swipe
-4. `LuxuryHighlights.tsx` -- swipe mobile
-5. `HeroSection.tsx` -- search bar mobile redesign
+1. `HeroSection.tsx` -- busca branca, logos centralizados, headline mobile
+2. `ExclusiveGallery.tsx` -- padding left na info para alinhar com foto
+3. `FarmsGallery.tsx` -- mesmo ajuste de alinhamento
 
