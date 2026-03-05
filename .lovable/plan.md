@@ -1,22 +1,28 @@
 
 
-## Plano: Ajustar botão da lupa + reposicionar scroll indicator
+## Plano: Seção "Visite um dos nossos escritórios"
 
-### 1. Botão da lupa — remover padding extra, alinhar com 8px de margem (`HeroSection.tsx`)
+### Resumo
+Criar um novo componente `OfficeLocations.tsx` posicionado entre BlogPreview e Footer, com design compacto, elegante e alinhado à estética de luxo do site.
 
-O botão atualmente tem `mr-1.5` (6px) e o container tem `px-3 py-1.5`. Vou ajustar para que o botão fique com **8px** de distância da borda direita e da borda inferior da barra branca:
+### Design
+- Fundo `bg-[#FDFDFD]` (consistente com BlogPreview) ou off-white suave
+- Layout: 3 cards lado a lado (grid 3 colunas no desktop, empilhados no mobile)
+- Cada card terá uma imagem placeholder do escritório no topo com efeito de zoom suave no hover
+- Abaixo da imagem: nome da unidade, endereço, telefones, WhatsApp (com ícone clicável abrindo `wa.me`), e-mail (com `mailto:`), e horário de funcionamento
+- Cards com borda sutil (`border border-border/50`) e `rounded-[4px]` seguindo o padrão do site
+- Tipografia: labels em `text-[10px] tracking-[0.2em] uppercase`, dados em `text-sm font-light`
+- Ícones do Lucide (MapPin, Phone, Mail, MessageCircle) com hover sutil em cor primary
+- Animação de entrada com `framer-motion` (fade-up escalonado por card)
+- Seção compacta: `py-24 lg:py-32` (menor que outras seções)
+- SectionHeader reutilizado com título "Visite um dos nossos escritórios"
 
-- Container do input row: `px-3 py-1.5` → `px-2 pb-2 pt-1.5` (8px de padding direito e inferior)
-- Botão: `mr-1.5` → `mr-0` (a margem agora vem do padding do container)
-
-### 2. Scroll indicator — alinhar com a barrinha central dos logos (`scroll-expansion-hero.tsx`)
-
-A barrinha central dos logos tem 80px de altura e está centrada verticalmente no container posicionado em `top: 42vh`. O centro dos logos fica em ~42vh, e a base da barrinha fica em `42vh + 40px`. O scroll indicator precisa começar logo abaixo dessa base.
-
-Atualmente está em `top: calc(42vh + 56px)` — vou ajustar para `top: calc(42vh + 48px)` para que a linha do scroll indicator fique visualmente contínua com a base da barrinha dos logos (considerando o gap de 3 entre eles). O valor exato pode precisar de ajuste fino, mas o cálculo é: posição do container (42vh) + metade da altura da barra (40px) + pequeno gap (8px).
+### Dados das 3 unidades
+1. **Zona Sul - RJ** — Ipanema, tel 2540.9999, WhatsApp 99559.2196
+2. **Itaipava - Petrópolis** — Estrada União Indústria, tel 2222.0382, WhatsApp 99967.3830
+3. **Barra & Lançamentos - RJ** — DownTown, Barra 99967.3830, Lançamentos 99511.3331
 
 ### Arquivos afetados
-
-1. **`src/components/HeroSection.tsx`** — padding do container e margem do botão
-2. **`src/components/ui/scroll-expansion-hero.tsx`** — posição vertical do scroll indicator
+1. **Criar `src/components/OfficeLocations.tsx`** — novo componente com os 3 cards
+2. **Editar `src/pages/Index.tsx`** — importar e inserir `<OfficeLocations />` entre `<BlogPreview />` e `<Footer />`
 
