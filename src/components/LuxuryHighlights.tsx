@@ -34,7 +34,7 @@ const categories = [
 
 const LuxuryHighlights = () => {
   return (
-    <section id="bairros" className="py-32 lg:py-44 bg-[#F7F7F7]">
+    <section id="bairros" className="py-32 lg:py-44 bg-[#FDFDFD]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <SectionHeader
           title="Encontre o imóvel do seu jeito"
