@@ -178,7 +178,7 @@ const ScrollExpandMedia = ({
               />
               {/* Divider - animates top to bottom */}
               <motion.div
-                className="w-px h-12 md:h-16 bg-cream/60"
+                className="w-[1.5px] h-14 md:h-[70px] bg-cream/80"
                 initial={{ scaleY: 0, opacity: 0 }}
                 animate={{ scaleY: 1, opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.4, ease: "easeInOut" }}
