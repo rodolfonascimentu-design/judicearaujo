@@ -7,6 +7,7 @@ import ForbesPartnership from "@/components/ForbesPartnership";
 import BlogPreview from "@/components/BlogPreview";
 import Testimonials from "@/components/Testimonials";
 import FarmsGallery from "@/components/FarmsGallery";
+import OfficeLocations from "@/components/OfficeLocations";
 import Footer from "@/components/Footer";
 
 const Index = () => (
@@ -20,6 +21,7 @@ const Index = () => (
     <Testimonials />
     <FarmsGallery />
     <BlogPreview />
+    <OfficeLocations />
     <Footer />
   </div>
 );
