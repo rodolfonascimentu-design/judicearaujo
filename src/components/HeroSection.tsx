@@ -1,17 +1,17 @@
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 
 const VIDEO_SRC = "/videos/RJ.mp4";
 
-const searchTypes = ["Venda", "Aluguel", "Temporada"] as const;
+const searchTypes = ["Venda", "Locação", "Temporada"] as const;
 
 const HeroOverlayContent = () => {
   const [activeType, setActiveType] = useState<string>("Venda");
 
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center gap-6 max-w-4xl mx-auto">
+    <div className="flex flex-col items-center justify-center h-full text-center gap-6 max-w-xl mx-auto">
       <motion.p
         className="font-sans text-[10px] md:text-xs tracking-[0.4em] uppercase text-cream/50 font-light"
         initial={{ opacity: 0, y: 16 }}
@@ -21,30 +21,19 @@ const HeroOverlayContent = () => {
         Desde 1978 · Rio de Janeiro
       </motion.p>
 
-      <motion.h1
-        className="font-display text-xl md:text-3xl lg:text-[38px] font-light text-cream leading-[1.12] tracking-[-0.02em]"
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.7 }}
-      >
-        Viver com exclusividade
-        <br />
-        no Rio de Janeiro
-      </motion.h1>
-
       <motion.div
         className="w-10 h-px bg-cream/20"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ delay: 0.3, duration: 0.7 }}
+        transition={{ delay: 0.2, duration: 0.7 }}
       />
 
       {/* Search component */}
       <motion.div
-        className="w-full max-w-xl mt-2"
+        className="w-full mt-2"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.7 }}
+        transition={{ delay: 0.3, duration: 0.7 }}
       >
         {/* Segmented control */}
         <div className="flex items-center justify-center mb-0">
@@ -63,7 +52,7 @@ const HeroOverlayContent = () => {
           ))}
         </div>
 
-        {/* Search input with icon button */}
+        {/* Search input */}
         <div className="relative flex items-center bg-cream/5 backdrop-blur-xl border border-cream/10 border-t-0 rounded-b-[4px]">
           <input
             type="text"
@@ -80,12 +69,24 @@ const HeroOverlayContent = () => {
 };
 
 const HeroSection = () => {
+  const [heroProgress, setHeroProgress] = useState(0);
+
+  const handleScrollProgress = useCallback((progress: number) => {
+    setHeroProgress(progress);
+  }, []);
+
+  // Dispatch custom event for navbar to listen
+  // Using a simpler approach: store in a data attribute on html
+  if (typeof document !== 'undefined') {
+    document.documentElement.dataset.heroProgress = String(heroProgress);
+  }
+
   return (
     <ScrollExpandMedia
       mediaType="video"
       mediaSrc={VIDEO_SRC}
-      title="Viver com exclusividade no Rio"
       overlayContent={<HeroOverlayContent />}
+      onScrollProgress={handleScrollProgress}
     />
   );
 };

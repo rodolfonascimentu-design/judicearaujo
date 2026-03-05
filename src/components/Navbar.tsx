@@ -13,13 +13,18 @@ const languages = ["PT", "EN", "ES"];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState("PT");
   const [fontSize, setFontSize] = useState(100);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60);
+      // Past hero = scrolled beyond viewport height
+      setPastHero(window.scrollY > window.innerHeight - 80);
+    };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -32,11 +37,14 @@ const Navbar = () => {
     setFontSize((prev) => Math.min(130, Math.max(80, prev + delta)));
   };
 
+  // Header: transparent while on hero, green after leaving hero
+  const showGreen = pastHero;
+
   return (
     <>
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+          showGreen
             ? "bg-primary/95 backdrop-blur-md shadow-lg"
             : "bg-transparent"
         }`}
@@ -46,18 +54,20 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
+            {/* Logo - only visible after scrolling past hero (hero has its own centered logo) */}
             <a href="#" className="flex-shrink-0">
-              <img
+              <motion.img
                 src={logoJA}
                 alt="Judice & Araujo"
                 className="h-4 lg:h-[18px] w-auto brightness-0 invert"
+                animate={{ opacity: pastHero ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
               />
             </a>
 
-            {/* Desktop nav - only after scroll */}
+            {/* Desktop nav - only after past hero */}
             <AnimatePresence>
-              {scrolled && (
+              {pastHero && (
                 <motion.div
                   className="hidden lg:flex items-center gap-8"
                   initial={{ opacity: 0, y: -10 }}
@@ -131,7 +141,7 @@ const Navbar = () => {
             </AnimatePresence>
 
             {/* Mobile menu button */}
-            {scrolled && (
+            {pastHero && (
               <button
                 onClick={() => setMobileOpen(true)}
                 className="lg:hidden text-primary-foreground"

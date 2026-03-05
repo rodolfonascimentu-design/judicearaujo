@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export interface TestimonialAuthor {
   name: string
@@ -12,15 +12,18 @@ export interface TestimonialCardProps {
   text: string
   href?: string
   className?: string
+  dark?: boolean
 }
 
 export function TestimonialCard({ 
   author,
   text,
   href,
-  className
+  className,
+  dark
 }: TestimonialCardProps) {
   const Card = href ? 'a' : 'div'
+  const initials = author.name.split(' ').map(n => n[0]).join('').slice(0, 2)
   
   return (
     <Card
@@ -35,17 +38,32 @@ export function TestimonialCard({
       <div className="flex items-center gap-3">
         <Avatar className="h-10 w-10">
           <AvatarImage src={author.avatar} alt={author.name} />
+          <AvatarFallback className={cn(
+            "text-xs font-medium",
+            dark ? "bg-primary-foreground/20 text-primary-foreground" : "bg-muted text-muted-foreground"
+          )}>
+            {initials}
+          </AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
-          <span className="font-sans text-sm font-medium text-foreground">
+          <span className={cn(
+            "font-sans text-sm font-medium",
+            dark ? "text-primary-foreground" : "text-foreground"
+          )}>
             {author.name}
           </span>
-          <span className="font-sans text-xs text-muted-foreground">
+          <span className={cn(
+            "font-sans text-xs",
+            dark ? "text-primary-foreground/50" : "text-muted-foreground"
+          )}>
             {author.handle}
           </span>
         </div>
       </div>
-      <p className="font-sans text-sm text-muted-foreground leading-relaxed">
+      <p className={cn(
+        "font-sans text-sm leading-relaxed",
+        dark ? "text-primary-foreground/70" : "text-muted-foreground"
+      )}>
         {text}
       </p>
     </Card>
