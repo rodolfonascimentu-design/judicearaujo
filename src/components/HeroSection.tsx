@@ -79,7 +79,7 @@ const HeroOverlayContent = () => {
                 {activeType === type && (
                   <motion.div
                     layoutId="searchTabPill"
-                    className="absolute inset-0 rounded-full bg-primary/10"
+                    className="absolute inset-0 rounded-md bg-primary/10"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -99,7 +99,7 @@ const HeroOverlayContent = () => {
               style={{ color: "hsl(var(--charcoal))" }}
             />
             <motion.button
-              className="flex-shrink-0 mr-1.5 w-12 h-12 rounded-full flex items-center justify-center bg-primary"
+              className="flex-shrink-0 mr-1.5 w-12 h-12 rounded-lg flex items-center justify-center bg-primary"
               style={{
                 boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
               }}
