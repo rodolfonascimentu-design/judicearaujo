@@ -54,11 +54,13 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          showGreen
-            ? "bg-white/95 backdrop-blur-md shadow-lg"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50"
+        style={{
+          background: showGreen ? "rgba(255,255,255,0.95)" : "transparent",
+          backdropFilter: showGreen ? "blur(12px)" : "none",
+          boxShadow: showGreen ? "0 4px 30px rgba(0,0,0,0.08)" : "none",
+          transition: "all 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
+        }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -70,7 +72,7 @@ const Navbar = () => {
               <motion.div
                 className="flex items-center gap-2"
                 animate={{ opacity: showNavLinks ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
               >
                 {pastHero ? (
                   <>
@@ -96,13 +98,13 @@ const Navbar = () => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
                   {navLinks.map((link) => (
                     <a
                       key={link.label}
                       href={link.href}
-                      className={`text-[11px] font-sans font-medium tracking-[0.2em] uppercase transition-colors duration-300 ${
+                      className={`text-[11px] font-sans font-medium tracking-[0.2em] uppercase transition-colors duration-500 ease-in-out ${
                         pastHero
                           ? "text-primary/70 hover:text-primary"
                           : "text-cream/70 hover:text-cream"

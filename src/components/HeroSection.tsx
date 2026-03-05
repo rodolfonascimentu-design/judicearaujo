@@ -182,12 +182,14 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
   const scaleT = clamp(p / 0.6);
   const scale = lerp(1.3, 1.0, scaleT);
 
-  // Position: starts at center (50vh), moves to top (2.5vh) as scroll progresses (0 → 0.8)
+  // Position: starts aligned with scroll indicator (~42vh), moves to top (2.5vh)
   const moveT = clamp(p / 0.8);
-  const topVh = lerp(50, 2.5, moveT);
+  const topVh = lerp(42, 2.5, moveT);
 
-  // Hide when hero fully expanded (navbar takes over) or past hero
-  const isVisible = barVisible && !pastHero && heroProgress < 1;
+  // Smooth fade-out in last 15% of scroll progress
+  const fadeOutOpacity = p > 0.85 ? lerp(1, 0, clamp((p - 0.85) / 0.15)) : 1;
+  const isVisible = barVisible && !pastHero && heroProgress < 0.98;
+  const finalOpacity = isVisible ? fadeOutOpacity : 0;
 
   return (
     <div
@@ -195,10 +197,8 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
       style={{
         transform: `translateX(-50%) scale(${scale})`,
         top: `${topVh}vh`,
-        opacity: isVisible ? 1 : 0,
-        transition: isVisible
-          ? "opacity 0.8s ease"
-          : "opacity 0.35s ease",
+        opacity: finalOpacity,
+        transition: "opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
       {/* J&A logo - slides left from bar */}
