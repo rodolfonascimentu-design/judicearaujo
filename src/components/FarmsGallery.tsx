@@ -66,7 +66,7 @@ const FarmsGallery = () => {
   );
 
   return (
-    <section ref={sectionRef} className="py-32 lg:py-44 bg-background overflow-hidden">
+    <section ref={sectionRef} className="py-32 lg:py-44 bg-[#FDFDFD] overflow-hidden">
       <motion.div style={{ opacity }} className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="text-center mb-16 lg:mb-24">

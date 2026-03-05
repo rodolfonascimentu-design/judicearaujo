@@ -29,7 +29,7 @@ const articles = [
 ];
 
 const BlogPreview = () => (
-  <section id="blog" className="py-32 lg:py-44 px-6 lg:px-12 bg-[#F7F7F7]">
+  <section id="blog" className="py-32 lg:py-44 px-6 lg:px-12 bg-[#FDFDFD]">
     <div className="max-w-7xl mx-auto">
       <SectionHeader
         title="Insights & Tendências"
