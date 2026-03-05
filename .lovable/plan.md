@@ -1,28 +1,46 @@
 
 
-## Plano: Seção "Visite um dos nossos escritórios"
+## Plano: Transições bidirecionais, novas fontes e otimização SEO/performance
 
-### Resumo
-Criar um novo componente `OfficeLocations.tsx` posicionado entre BlogPreview e Footer, com design compacto, elegante e alinhado à estética de luxo do site.
+### 1. Transições fluidas bidirecionais (scroll down e scroll up)
 
-### Design
-- Fundo `bg-[#FDFDFD]` (consistente com BlogPreview) ou off-white suave
-- Layout: 3 cards lado a lado (grid 3 colunas no desktop, empilhados no mobile)
-- Cada card terá uma imagem placeholder do escritório no topo com efeito de zoom suave no hover
-- Abaixo da imagem: nome da unidade, endereço, telefones, WhatsApp (com ícone clicável abrindo `wa.me`), e-mail (com `mailto:`), e horário de funcionamento
-- Cards com borda sutil (`border border-border/50`) e `rounded-[4px]` seguindo o padrão do site
-- Tipografia: labels em `text-[10px] tracking-[0.2em] uppercase`, dados em `text-sm font-light`
-- Ícones do Lucide (MapPin, Phone, Mail, MessageCircle) com hover sutil em cor primary
-- Animação de entrada com `framer-motion` (fade-up escalonado por card)
-- Seção compacta: `py-24 lg:py-32` (menor que outras seções)
-- SectionHeader reutilizado com título "Visite um dos nossos escritórios"
+Todos os componentes usam `viewport={{ once: true }}`, o que faz a animação disparar apenas uma vez. Para que as seções animem tanto ao descer quanto ao subir:
 
-### Dados das 3 unidades
-1. **Zona Sul - RJ** — Ipanema, tel 2540.9999, WhatsApp 99559.2196
-2. **Itaipava - Petrópolis** — Estrada União Indústria, tel 2222.0382, WhatsApp 99967.3830
-3. **Barra & Lançamentos - RJ** — DownTown, Barra 99967.3830, Lançamentos 99511.3331
+**Arquivos afetados (11 componentes):**
+- `SectionHeader.tsx`, `PropertyCard.tsx`, `ExclusiveGallery.tsx`, `FarmsGallery.tsx`, `LuxuryHighlights.tsx`, `ForbesPartnership.tsx`, `InstitutionalCTA.tsx`, `EditorialSection.tsx`, `BlogPreview.tsx`, `Newsletter.tsx`, `CTASection.tsx`
 
-### Arquivos afetados
-1. **Criar `src/components/OfficeLocations.tsx`** — novo componente com os 3 cards
-2. **Editar `src/pages/Index.tsx`** — importar e inserir `<OfficeLocations />` entre `<BlogPreview />` e `<Footer />`
+**Alteração:** Trocar `once: true` por `once: false` em todos os `viewport` props e `useInView`. Adicionar `margin: "-80px"` onde não existir, para que a animação dispare quando o elemento estiver ~80px dentro da viewport (evita disparo prematuro).
+
+### 2. Troca de fontes
+
+**Fonte principal (headings):** Substituir **Space Grotesk** por **Cormorant Garamond** — serifada, moderna, elegante, amplamente usada no mercado de luxo.
+
+**Fonte body (textos):** Substituir **Urbanist** por **Inter** — fina, extremamente legível, com excelente renderização em telas. Peso 300 (light) como padrão para manter a leveza.
+
+**Arquivos afetados:**
+- `src/index.css` — trocar o `@import` do Google Fonts e as declarações `font-family`
+- `tailwind.config.ts` — atualizar `fontFamily.serif`, `fontFamily.sans`, `fontFamily.display`
+
+### 3. Otimização SEO e performance
+
+**`index.html`:**
+- Adicionar `<link rel="preconnect">` para Google Fonts e domínios de assets
+- Adicionar `<link rel="dns-prefetch">` complementar
+- Adicionar meta tags SEO: `robots`, `canonical`, `og:image`, `og:url`, `og:locale`, `twitter:card`
+- Adicionar schema.org JSON-LD para `RealEstateAgent`
+- Trocar o carregamento da fonte de `@import` CSS para `<link rel="preload">` no HTML (elimina render-blocking)
+
+**`src/index.css`:**
+- Remover `@import url(...)` do Google Fonts (movido para HTML com preload)
+- Adicionar `font-display: swap` via CSS
+
+**Componentes com imagens:**
+- Verificar que todas as `<img>` já têm `loading="lazy"` (a maioria já tem)
+
+### Resumo de arquivos
+
+1. **`index.html`** — meta tags SEO, preconnect, JSON-LD
+2. **`src/index.css`** — novas fontes, remover @import
+3. **`tailwind.config.ts`** — atualizar fontFamily
+4. **11 componentes** — `once: true` → `once: false` em viewport/useInView
 
