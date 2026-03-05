@@ -1,37 +1,29 @@
 
 
-## Plano: Reestruturar seção "Avalie seu imóvel" para layout editorial premium
+## Plano: Seção institucional Forbes Global Properties
 
 ### Resumo
-Transformar a seção centralizada simples em um layout de duas colunas com copy persuasiva, lista de benefícios, CTA refinado e imagem editorial dominante.
+Criar um novo componente `ForbesPartnership.tsx` com fundo verde institucional (`bg-primary`), layout centralizado editorial, posicionado entre `InstitutionalCTA` e `BlogPreview` na home.
 
-### Alterações
+### Estrutura do componente
 
-#### 1. Gerar imagem editorial
-- Gerar uma imagem de ambiente interno luxuoso com vista privilegiada (estilo editorial) e salvar como `src/assets/cta-proprietarios.jpg`.
+**Seção com `py-32 lg:py-44 bg-primary text-center`**, dividida em 3 blocos verticais:
 
-#### 2. Reescrever `src/components/InstitutionalCTA.tsx`
-Substituir o layout centralizado por duas colunas (`grid grid-cols-1 lg:grid-cols-2 gap-16`):
+1. **Headline** — Label "PARCERIA GLOBAL" + título "Uma rede global para imóveis extraordinários" + subtítulo curto sobre a Forbes Global Properties. Textos em `text-primary-foreground`.
 
-**Coluna esquerda** (texto + CTA):
-- Label: "PROPRIETÁRIOS" — `text-[10px] tracking-[0.35em] uppercase text-muted-foreground`
-- Título: "Venda seu imóvel com segurança e máxima valorização" — `font-display text-2xl md:text-3xl lg:text-4xl font-light`
-- Parágrafo descritivo com copy fornecida
-- 3 benefícios com ícone Check (`lucide-react`) em cor primary:
-  - Avaliação profissional do imóvel
-  - Divulgação para compradores qualificados
-  - Alcance internacional
-- Botão CTA "Avaliar meu imóvel": `bg-cream text-primary` → hover: `bg-primary text-white`, `rounded-full px-10 py-4`, transição 300ms
-- Texto de reforço abaixo: "Avaliação rápida e confidencial." em `text-xs text-muted-foreground`
+2. **Logos** — Bloco centralizado com logo J&A e Forbes Global (versões brancas já existentes: `logo-ja.png` e `forbes-global-white.png`) separados por linha vertical fina (`w-px h-12 bg-primary-foreground/30`). Bastante respiro vertical (`my-16`).
 
-**Coluna direita** (imagem):
-- Imagem grande com `rounded-lg`, sombra suave, `object-cover`, aspect ratio ~3:4
+3. **Benefícios (grid 2x2 ou 4 colunas em desktop)** — 4 cards com ícones `lucide-react` (`Globe`, `Building2`, `Target`, `TrendingUp`), título curto e descrição de 1 linha. Textos em `text-primary-foreground/80`. Abaixo do grid, stat destaque: "+ de 20 países conectados pela rede Forbes Global Properties".
 
-**Animações** (framer-motion):
-- Coluna esquerda: `opacity 0→1, y 30→0`, duração 0.7s
-- Coluna direita: `opacity 0→1, scale 1.03→1`, duração 0.8s, delay 0.2s
-- Ambas com `viewport={{ once: true }}`
+4. **CTA** — Botão "Anuncie seu imóvel na rede Forbes" com estilo `bg-cream text-primary rounded-full hover:bg-primary-foreground hover:text-primary`.
 
-### Resultado
-Seção premium de duas colunas que transmite confiança e exclusividade, incentivando proprietários a iniciar avaliação do imóvel.
+### Animações (framer-motion)
+- Headline: `opacity 0→1, y 24→0`, 0.7s
+- Logos: `opacity 0→1, scale 0.95→1`, 0.8s, delay 0.1s
+- Benefícios: staggered com `delay: index * 0.1`
+- CTA: fade-in, delay 0.3s
+
+### Alterações em arquivos
+1. **Criar** `src/components/ForbesPartnership.tsx` — componente completo
+2. **Editar** `src/pages/Index.tsx` — importar e inserir `<ForbesPartnership />` entre `<InstitutionalCTA />` e `<BlogPreview />`
 
