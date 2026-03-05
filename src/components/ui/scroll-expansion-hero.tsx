@@ -139,7 +139,7 @@ const ScrollExpandMedia = ({
     <div className="relative">
       <section className="relative h-screen overflow-hidden">
         <div className="relative h-screen flex flex-col">
-          {/* Background: same video as the expanding media, blurred & darkened */}
+          {/* Background video */}
           <div className="fixed inset-0 -z-10 overflow-hidden">
             <video
               src={mediaSrc}
@@ -149,23 +149,32 @@ const ScrollExpandMedia = ({
               loop
               playsInline
               preload="auto"
-              className="w-full h-full object-cover scale-110 blur-sm"
+              className="w-full h-full object-cover scale-110"
+              style={{ filter: showContent ? 'blur(2px)' : 'blur(4px)' }}
               controls={false}
               disablePictureInPicture />
             
-            <div className="absolute inset-0 bg-charcoal/70" />
+            <motion.div
+              className="absolute inset-0"
+              style={{ backgroundColor: 'hsl(0 0% 7%)' }}
+              animate={{ opacity: showContent ? 0.82 : 0.6 }}
+              transition={{ duration: 0.8 }}
+            />
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
-            {/* Media container with expansion */}
+            {/* Media container with expansion - hidden when content shows */}
             <div className="flex flex-col items-center justify-center gap-4 w-full relative z-10">
-              <div
+              <motion.div
                 className="relative overflow-hidden rounded-xl transition-all duration-100 ease-out"
+                animate={{ opacity: showContent ? 0 : 1 }}
+                transition={{ duration: 0.4 }}
                 style={{
                   width: `${mediaWidth}px`,
                   height: `${mediaHeight}px`,
                   maxWidth: '100vw',
-                  maxHeight: '100vh'
+                  maxHeight: '100vh',
+                  pointerEvents: showContent ? 'none' : 'auto',
                 }}>
                 
                 {mediaType === 'video' ?
@@ -202,20 +211,20 @@ const ScrollExpandMedia = ({
                   
                   </div>
                 }
+              </motion.div>
 
-                {/* Overlay content: only appears AFTER full expansion */}
-                {overlayContent &&
-                <motion.div
-                  className="absolute inset-0 z-20 flex-col px-6 flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: showContent ? 1 : 0 }}
-                  transition={{ duration: 0.6, delay: showContent ? 0.2 : 0 }}
-                  style={{ pointerEvents: showContent ? 'auto' : 'none' }}>
-                  
-                    {overlayContent}
-                  </motion.div>
-                }
-              </div>
+              {/* Overlay content: only appears AFTER full expansion, now over background */}
+              {overlayContent &&
+              <motion.div
+                className="absolute inset-0 z-20 flex-col px-6 flex items-center justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: showContent ? 1 : 0 }}
+                transition={{ duration: 0.6, delay: showContent ? 0.2 : 0 }}
+                style={{ pointerEvents: showContent ? 'auto' : 'none' }}>
+                
+                  {overlayContent}
+                </motion.div>
+              }
 
               {/* Title text that splits apart during scroll */}
               <motion.div
