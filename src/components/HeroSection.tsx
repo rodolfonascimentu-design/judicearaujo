@@ -99,18 +99,20 @@ const HeroOverlayContent = () => {
               />
             </div>
             <motion.button
-              className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-primary"
+              className="group flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-primary"
               style={{
                 boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
               }}
               whileHover={{
-                scale: 1.08,
-                boxShadow: "0 6px 20px -2px hsl(var(--primary) / 0.5)",
+                scale: 1.1,
+                rotate: 8,
+                boxShadow: "0 6px 20px -2px hsl(var(--gold) / 0.6)",
+                backgroundColor: "hsl(var(--gold))",
               }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
+              whileTap={{ scale: 0.93, rotate: -4 }}
+              transition={{ type: "spring", stiffness: 400, damping: 18 }}
             >
-              <Search className="w-[18px] h-[18px]" style={{ color: "hsl(var(--gold))" }} />
+              <Search className="w-[18px] h-[18px] text-white transition-transform duration-300 group-hover:scale-110" />
             </motion.button>
           </div>
 
