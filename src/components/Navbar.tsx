@@ -31,7 +31,7 @@ const Navbar = () => {
     };
     const checkHeroProgress = () => {
       const hp = parseFloat(document.documentElement.dataset.heroProgress || "0");
-      setHeroExpanded(hp >= 1);
+      setHeroExpanded(hp >= 0.85);
     };
     const observer = new MutationObserver(checkHeroProgress);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-hero-progress"] });
@@ -67,7 +67,14 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
             {/* Co-branding logo in top-left of header */}
-            <a href="#" className="flex-shrink-0 flex items-center gap-2">
+            <a
+              href="#"
+              className="flex-shrink-0 flex items-center gap-2 transition-all duration-500"
+              style={{
+                opacity: heroExpanded ? 1 : 0,
+                pointerEvents: heroExpanded ? "auto" : "none",
+              }}
+            >
               <div className="flex items-center gap-2">
                 {pastHero ? (
                   <>
@@ -85,8 +92,14 @@ const Navbar = () => {
               </div>
             </a>
 
-            {/* Desktop nav - always visible */}
-            <div className="hidden lg:flex items-center gap-8">
+            {/* Desktop nav */}
+            <div
+              className="hidden lg:flex items-center gap-8 transition-all duration-500"
+              style={{
+                opacity: heroExpanded ? 1 : 0,
+                pointerEvents: heroExpanded ? "auto" : "none",
+              }}
+            >
                   {navLinks.map((link) => (
                     <a
                       key={link.label}
@@ -165,7 +178,11 @@ const Navbar = () => {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileOpen(true)}
-              className={`lg:hidden transition-colors duration-500 ${pastHero ? "text-primary" : "text-cream"}`}
+              className={`lg:hidden transition-all duration-500 ${pastHero ? "text-primary" : "text-cream"}`}
+              style={{
+                opacity: heroExpanded ? 1 : 0,
+                pointerEvents: heroExpanded ? "auto" : "none",
+              }}
               aria-label="Abrir menu"
             >
               <Menu className="w-6 h-6" />
