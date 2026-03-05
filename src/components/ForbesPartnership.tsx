@@ -54,25 +54,12 @@ function CountUp({ target, duration = 2 }: { target: number; duration?: number }
 const ForbesPartnership = () => (
   <section className="py-32 lg:py-44 px-6 lg:px-12 bg-primary">
     <div className="max-w-5xl mx-auto text-center">
-      {/* Logos — above label */}
-      <motion.div
-        className="flex items-center justify-center gap-8 mb-12"
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <img src={logoJA} alt="Judice & Araujo" className="h-7 lg:h-8 object-contain brightness-0 invert opacity-90" />
-        <div className="w-px h-10 bg-primary-foreground/30" />
-        <img src={forbesLogo} alt="Forbes Global Properties" className="h-10 lg:h-12 object-contain opacity-90" />
-      </motion.div>
-
       {/* Headline */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.7, delay: 0.15 }}
+        transition={{ duration: 0.7 }}
       >
         <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary-foreground/50 mb-8 font-medium">
           Parceria Global
@@ -85,8 +72,40 @@ const ForbesPartnership = () => (
         </p>
       </motion.div>
 
+      {/* Logos — cinematic entrance between subtitle and benefits */}
+      <div className="flex items-center justify-center gap-8 my-16 lg:my-20">
+        {/* J&A logo — slides from left */}
+        <motion.img
+          src={logoJA}
+          alt="Judice & Araujo"
+          className="h-7 lg:h-8 object-contain brightness-0 invert opacity-90"
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
+        />
+        {/* Divider — appears first */}
+        <motion.div
+          className="w-px h-10 bg-primary-foreground/30"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        />
+        {/* Forbes logo — slides from right */}
+        <motion.img
+          src={forbesLogo}
+          alt="Forbes Global Properties"
+          className="h-10 lg:h-12 object-contain opacity-90"
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
+        />
+      </div>
+
       {/* Benefits grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mt-16 lg:mt-20 mb-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-16">
         {benefits.map((b, i) => (
           <motion.div
             key={b.title}
@@ -95,6 +114,7 @@ const ForbesPartnership = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
+            whileHover={{ scale: 1.05, y: -4 }}
           >
             <motion.div
               className="mx-auto mb-4 w-10 h-10 flex items-center justify-center"
@@ -103,31 +123,26 @@ const ForbesPartnership = () => (
             >
               <b.icon className="w-6 h-6 text-primary-foreground/60 group-hover:text-primary-foreground transition-colors duration-300" strokeWidth={1.5} />
             </motion.div>
-            <h3 className="font-display text-sm font-medium text-primary-foreground mb-2 tracking-wide">
+            <h3 className="font-display text-sm font-medium text-primary-foreground mb-2 tracking-wide group-hover:text-primary-foreground/80 transition-colors duration-300">
               {b.title}
             </h3>
-            <p className="font-sans text-xs text-primary-foreground/50 leading-[1.8] font-light">
+            <p className="font-sans text-xs text-primary-foreground/50 leading-[1.8] font-light group-hover:text-primary-foreground/70 transition-colors duration-300">
               {b.description}
             </p>
           </motion.div>
         ))}
       </div>
 
-      {/* Stat with counter */}
-      <motion.div
-        className="text-center"
+      {/* Stat with counter — single line, smaller */}
+      <motion.p
+        className="font-sans text-xl md:text-2xl text-primary-foreground/70 tracking-wide font-light whitespace-nowrap"
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
-        <p className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-primary-foreground mb-3">
-          +<CountUp target={20} duration={1.8} /> países
-        </p>
-        <p className="font-sans text-sm md:text-base text-primary-foreground/50 tracking-wide font-light">
-          conectados pela rede Forbes Global Properties
-        </p>
-      </motion.div>
+        +<CountUp target={20} duration={1.8} /> países conectados pela rede Forbes Global Properties
+      </motion.p>
     </div>
   </section>
 );
