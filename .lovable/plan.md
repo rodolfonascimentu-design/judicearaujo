@@ -1,43 +1,33 @@
 
 
-## Plano: Nova animação de entrada dos logos com barrinha central
+## Plano: Alinhar logos com scroll indicator + transições suaves no navbar
 
-### Sequência da animação ao carregar a página
+### 1. Alinhar barrinha dos logos com a barrinha do scroll indicator (`HeroSection.tsx`)
 
-1. **Overlay mais escuro** no vídeo de fundo (opacidade inicial `0.45` em vez de `0.25`)
-2. **Barrinha vertical** surge primeiro no centro da tela (fade-in, ~1s delay) — igual à do scroll indicator mas maior (~80px de altura, 2px de largura)
-3. **Logo J&A desliza para a esquerda** a partir da barrinha (delay ~1.5s, `x: 0 → -gap`)
-4. **Logo Forbes desliza para a direita** a partir da barrinha (delay ~1.5s, `x: 0 → +gap`)
-5. **Scroll indicator** aparece abaixo, alinhado verticalmente com a barrinha central
+Atualmente o conjunto logos+barrinha está posicionado com `top: 50vh` (centro vertical), mas o scroll indicator está em `bottom: 12` (48px do fundo). Vou alinhar verticalmente a barrinha central dos logos com a barrinha do scroll indicator, posicionando o conjunto de logos de forma que a barrinha central fique alinhada acima da barrinha do scroll — não centralizado na tela, mas sim ancorado em relação ao scroll indicator.
 
-### Comportamento no scroll
+**Mudança:** Trocar `topVh = lerp(50, 2.5, moveT)` para algo como `lerp(42, 2.5, moveT)` (ajustar para que a barrinha central fique visualmente alinhada com a linha do scroll indicator, que fica a ~`bottom-12` = ~`calc(100vh - 48px - 56px - gap)`). O valor exato será calibrado para que as duas barrinhas verticais fiquem na mesma coluna central, uma acima da outra.
 
-- Conforme o usuário scrolla, o conjunto (barrinha + logos) sobe do centro (50vh) até o topo (2.5vh) e reduz de escala — igual ao comportamento atual
-- Quando o scroll atinge 100% (search bar aparece):
-  - Logos desaparecem do centro e o **Navbar** assume
-  - Menu mostra links (Lançamentos, Avaliar Imóvel, Blog) com **texto branco** e **fundo transparente** (sem o bg-white)
-  - Logos vão para o lado esquerdo do header (como já funciona após passar da dobra)
+### 2. Navbar — todos brancos até a dobra, verde só após dobra (`Navbar.tsx`)
 
-### Navbar durante o hero expandido
+Atualmente já funciona parcialmente (branco quando `heroExpanded && !pastHero`, verde quando `pastHero`). O pedido é confirmar que **tudo** (logos, links, idioma, font controls, mobile button) ficam brancos enquanto no hero expandido. Já está assim no código, mas vou garantir que as transições sejam mais suaves.
 
-- Quando `showContent = true` e ainda está no hero (não `pastHero`): mostrar os nav links em branco sobre fundo transparente
-- Quando `pastHero`: comportamento atual (fundo branco, texto verde)
+**Mudanças de suavização:**
+- `transition-all duration-500` no nav → aumentar para `duration-700`
+- Links: `transition-colors duration-300` → `duration-500`
+- Logos container: `transition={{ duration: 0.3 }}` → `duration: 0.5`
+- AnimatePresence dos nav links: `transition={{ duration: 0.3 }}` → `duration: 0.5` com ease
+- Background do nav: adicionar transição mais suave entre transparent → white usando `motion.nav` animate em vez de className toggle
+- Sombra: transição gradual com `transition: "all 0.7s cubic-bezier(0.4, 0, 0.2, 1)"`
+
+### 3. HeroLogos — transição de saída mais suave (`HeroSection.tsx`)
+
+- Quando `heroProgress` se aproxima de 1, fazer fade-out gradual em vez de corte abrupto
+- Mudar: `isVisible = barVisible && !pastHero && heroProgress < 1` → `heroProgress < 0.95`
+- Opacity: usar `lerp(1, 0, clamp((heroProgress - 0.85) / 0.15))` para fade suave nos últimos 15% do scroll
 
 ### Arquivos afetados
 
-1. **`src/components/HeroSection.tsx`** — `HeroLogos`:
-   - Adicionar estados de animação staged: `barVisible`, `logosVisible` (com timeouts 1s e 1.8s)
-   - Renderizar a barrinha como elemento separado que aparece primeiro
-   - Logos J&A e Forbes começam na posição da barrinha (x: 0) e deslizam para lados opostos
-   - Ordem: J&A à esquerda, Forbes à direita (invertendo a ordem atual)
-   - Barrinha alinhada verticalmente com o scroll indicator
-
-2. **`src/components/ui/scroll-expansion-hero.tsx`**:
-   - Aumentar opacidade inicial do overlay de `0.25` para `0.45` (mais escuro antes do scroll)
-
-3. **`src/components/Navbar.tsx`**:
-   - Adicionar nova fase: quando hero está expandido (`showContent`) mas não `pastHero`, mostrar links em branco sem fundo
-   - Ler `heroProgress` via `document.documentElement.dataset.heroProgress` ou receber via prop/context
-   - Quando `heroProgress >= 1` e `!pastHero`: links brancos, fundo transparente
-   - Quando `pastHero`: comportamento atual (fundo branco, texto verde, logos à esquerda)
+1. **`src/components/HeroSection.tsx`** — ajustar posição vertical inicial dos logos e suavizar fade-out
+2. **`src/components/Navbar.tsx`** — aumentar durações de transição para fluidez
 
