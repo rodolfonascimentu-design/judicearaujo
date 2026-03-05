@@ -116,15 +116,17 @@ const ScrollExpandMedia = ({
     return () => clearTimeout(timer);
   }, []);
 
-  // Scroll-based logo transform: center → header position
-  const logoTop = logoAnimDone ? `calc(50% - ${scrollProgress * (50 - 2)}%)` : '50%';
-  const logoScaleValue = 1 - scrollProgress * 0.55; // 1 → 0.45
+  // Scroll-based logo transform: center → top of screen
+  // Forbes: 75px initial → 55px min (scale factor: 55/75 ≈ 0.733)
+  const logoScaleValue = 1 - scrollProgress * 0.267; // 1 → 0.733
+  // Move from 50% to ~5% (header area)
+  const logoTopPercent = 50 - scrollProgress * 45; // 50% → 5%
 
   return (
     <div className="relative">
       <section className="relative h-screen overflow-hidden">
         <div className="relative h-screen flex flex-col">
-          {/* Background video */}
+          {/* Background video - stays fixed */}
           <div className="fixed inset-0 -z-10 overflow-hidden">
             {mediaType === 'video' ? (
               <video
@@ -154,9 +156,9 @@ const ScrollExpandMedia = ({
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
             {/* Co-branding logo animation */}
             <motion.div
-              className="absolute z-20 flex items-center justify-center gap-6"
+              className="absolute z-20 flex items-center justify-center gap-4 md:gap-6"
               style={{
-                top: logoTop,
+                top: `${logoTopPercent}%`,
                 left: '50%',
                 x: '-50%',
                 y: '-50%',
@@ -169,24 +171,24 @@ const ScrollExpandMedia = ({
               <motion.img
                 src={jaLogo}
                 alt="Judice & Araujo"
-                className="h-6 md:h-8 w-auto brightness-0 invert"
+                className="h-[50px] md:h-[60px] w-auto brightness-0 invert"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.2, duration: 0.6, ease: "easeInOut" }}
               />
               {/* Divider */}
               <motion.div
-                className="w-px h-10 bg-cream/40"
+                className="w-px h-12 md:h-16 bg-cream/40"
                 initial={{ scaleY: 0 }}
                 animate={{ scaleY: 1 }}
                 transition={{ delay: 0.8, duration: 0.4, ease: "easeInOut" }}
                 style={{ originY: 0 }}
               />
-              {/* Forbes Logo - fades in first */}
+              {/* Forbes Logo - fades in first, min 75px */}
               <motion.img
                 src={forbesLogo}
                 alt="Forbes Global Properties"
-                className="h-7 md:h-9 w-auto brightness-0 invert"
+                className="h-[75px] md:h-[85px] w-auto brightness-0 invert"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0, duration: 0.8, ease: "easeInOut" }}
