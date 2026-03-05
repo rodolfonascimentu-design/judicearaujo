@@ -137,7 +137,7 @@ const ForbesPartnership = () => (
 
       {/* Stat — more vivid */}
       <motion.p
-        className="font-sans text-lg md:text-xl text-primary-foreground tracking-[0.15em] font-light whitespace-nowrap text-center"
+        className="font-sans text-lg md:text-xl text-primary-foreground tracking-[0.15em] font-light text-center max-w-[280px] mx-auto md:max-w-none md:whitespace-nowrap"
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-80px" }}

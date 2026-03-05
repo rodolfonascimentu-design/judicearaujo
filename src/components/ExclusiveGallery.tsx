@@ -54,7 +54,7 @@ const ExclusiveGallery = () => {
             {/* Left arrow - hidden on mobile, shown on md+ */}
             <button
               onClick={() => goTo("prev")}
-              className="hidden md:flex flex-shrink-0 w-11 h-11 bg-muted hover:bg-muted/80 rounded-full items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
+              className="hidden md:flex flex-shrink-0 w-11 h-11 bg-white hover:bg-white shadow-sm rounded-full items-center justify-center text-black transition-all duration-300"
               aria-label="Anterior"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -106,7 +106,7 @@ const ExclusiveGallery = () => {
             {/* Right arrow - hidden on mobile */}
             <button
               onClick={() => goTo("next")}
-              className="hidden md:flex flex-shrink-0 w-11 h-11 bg-muted hover:bg-muted/80 rounded-full items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
+              className="hidden md:flex flex-shrink-0 w-11 h-11 bg-white hover:bg-white shadow-sm rounded-full items-center justify-center text-black transition-all duration-300"
               aria-label="Próximo"
             >
               <ChevronRight className="w-5 h-5" />
@@ -139,7 +139,7 @@ const ExclusiveGallery = () => {
           <div className="flex items-center justify-center gap-3 mt-6">
             <button
               onClick={() => goTo("prev")}
-              className="md:hidden w-8 h-8 bg-muted hover:bg-muted/80 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
+              className="md:hidden w-8 h-8 bg-white hover:bg-white shadow-sm rounded-full flex items-center justify-center text-black transition-all duration-300"
               aria-label="Anterior"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -158,7 +158,7 @@ const ExclusiveGallery = () => {
             </div>
             <button
               onClick={() => goTo("next")}
-              className="md:hidden w-8 h-8 bg-muted hover:bg-muted/80 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
+              className="md:hidden w-8 h-8 bg-white hover:bg-white shadow-sm rounded-full flex items-center justify-center text-black transition-all duration-300"
               aria-label="Próximo"
             >
               <ChevronRight className="w-4 h-4" />
