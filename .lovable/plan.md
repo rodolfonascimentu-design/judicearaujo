@@ -1,41 +1,36 @@
 
 
-## Plano: Nova fonte, peso do body text e cards maiores com info externa
+## Plano: Fonte regular nos titulos, carrossel permanente e lifestyle responsivo
 
-### 1. Trocar fonte principal para uma semi-serifada moderna
+### 1. Titulos com font-weight regular
 
-Substituir **Cormorant Garamond** por **DM Serif Display** -- serifada moderna, clean, elegante, com toque contemporâneo. Alternativa: **Playfair Display** (mais clássica). Ambas são do Google Fonts.
+Atualmente os titulos usam DM Serif Display com `font-medium` ou `font-light`. Trocar todos para `font-normal` (400) para reduzir o peso visual.
 
-**Arquivos afetados:**
-- `index.html` -- trocar URL do Google Fonts para carregar DM Serif Display
-- `src/index.css` -- atualizar `font-family` nos headings e utilitários `.font-serif`, `.font-display`
-- `tailwind.config.ts` -- atualizar `fontFamily.serif` e `fontFamily.display`
+**Arquivos:** Todos os componentes que usam `font-display` com `font-medium` ou `font-light` nos h2/h3 -- ExclusiveGallery, FarmsGallery, LuxuryHighlights, CTASection, ForbesPartnership, BlogPreview, InstitutionalCTA, EditorialSection, Newsletter, OfficeLocations, Navbar, Footer, SectionHeader.
 
-### 2. Aumentar peso do body text (Inter)
+### 2. ExclusiveGallery e FarmsGallery -- carrossel permanente com 4 itens
 
-O peso atual é `font-weight: 300` (light). Mudar para **400** (regular) no `body` do CSS. Também trocar todas as ocorrências de `font-light` nos textos de info dos cards (PropertyInfo) para `font-normal`.
+Remover a logica de grid/`isCarouselMode` e o IntersectionObserver. Ambas as secoes passam a ser **sempre carrossel** com setas (prev/next), foto grande e informacoes (titulo, metragem, quartos, vagas) posicionadas **abaixo** da imagem (fora do overlay). Reduzir o array de 6 para 4 itens em cada.
 
-**Arquivos afetados:**
-- `src/index.css` -- `font-weight: 300` → `font-weight: 400`
-- `ExclusiveGallery.tsx` e `FarmsGallery.tsx` -- `font-light` → `font-normal` nos spans do PropertyInfo
+**Estrutura do carrossel:**
+- Imagem grande com aspect-ratio `16/9` ou `2/1`
+- Setas de navegacao laterais (ChevronLeft/Right)
+- Abaixo da imagem: titulo + PropertyInfo + botao "Ver detalhes"
+- Dots indicadores
 
-### 3. Cards maiores com título/info fora da imagem
+**Arquivos:** `ExclusiveGallery.tsx`, `FarmsGallery.tsx`
 
-Nos dois componentes de galeria (grid mode, não carousel):
-- Aumentar aspect ratio de `aspect-[2/3]` para `aspect-[3/4]` (cards mais largos/altos)
-- Aumentar gap de `gap-6` para `gap-8`
-- Mover título e PropertyInfo para **fora** do card de imagem (já estão parcialmente fora, mas confirmar que estejam totalmente externos)
-- Dentro da imagem, manter **somente** o botão "Ver detalhes" no hover
-- No grid, usar `lg:grid-cols-3` ou manter `lg:grid-cols-4` mas com `max-w-8xl` para cards mais largos
+### 3. LuxuryHighlights -- carrossel no mobile/tablet, grid no desktop
 
-**Arquivos afetados:**
-- `src/components/ExclusiveGallery.tsx` -- ajustar grid, aspect ratio, info externa
-- `src/components/FarmsGallery.tsx` -- mesmas alterações
+No desktop (`lg:`), manter o grid de 4 colunas atual. No mobile e tablet, transformar em carrossel com setas para navegar entre os 4 cards, evitando scroll excessivo.
+
+**Implementacao:** Usar estado + setas para telas `< lg`. Detectar via hook `useMediaQuery` ou CSS condicional com `useState` + `window.matchMedia`.
+
+**Arquivo:** `LuxuryHighlights.tsx`
 
 ### Resumo de arquivos
-1. `index.html` -- nova URL Google Fonts (DM Serif Display + Inter)
-2. `src/index.css` -- font-family headings, font-weight body
-3. `tailwind.config.ts` -- fontFamily.serif/display
-4. `src/components/ExclusiveGallery.tsx` -- cards maiores, info externa
-5. `src/components/FarmsGallery.tsx` -- cards maiores, info externa
+1. Componentes com titulos -- `font-medium`/`font-light` para `font-normal`
+2. `ExclusiveGallery.tsx` -- carrossel permanente, 4 itens, info externa
+3. `FarmsGallery.tsx` -- carrossel permanente, 4 itens, info externa
+4. `LuxuryHighlights.tsx` -- carrossel mobile/tablet, grid desktop
 
