@@ -49,7 +49,7 @@ const EditorialSection = () => (
           </p>
           <a
             href="#"
-            className="inline-block text-[10px] font-sans font-medium tracking-[0.2em] uppercase text-primary hover:text-gold-light transition-colors border-b border-primary/30 hover:border-primary pb-1"
+            className="inline-block px-10 py-4 bg-primary text-primary-foreground text-[11px] font-sans font-medium tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-cream hover:text-primary"
           >
             Conheça Nossa História
           </a>
