@@ -33,25 +33,26 @@ const LuxuryHighlights = () => {
         {categories.map((cat, i) => (
           <motion.div
             key={cat.title}
-            className="relative flex-shrink-0 w-[300px] md:w-[380px] h-[520px] md:h-[580px] overflow-hidden snap-start group cursor-pointer"
-            initial={{ opacity: 0, x: 40 }}
+            className="relative flex-shrink-0 w-[300px] md:w-[380px] h-[520px] md:h-[580px] overflow-hidden snap-start group cursor-pointer rounded-[4px]"
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: i * 0.12 }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
           >
             <img
               src={cat.image}
               alt={cat.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 rounded-[4px]"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-primary/5" />
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-cream/60 mb-3 font-light">
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent rounded-[4px]" />
+            {/* Subtle glow on hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-t from-primary/15 via-transparent to-transparent rounded-[4px]" />
+            <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500 group-hover:translate-y-[-4px]">
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-cream/50 mb-3 font-light">
                 {cat.subtitle}
               </p>
-              <h3 className="font-display text-xl md:text-2xl font-normal text-cream tracking-[0.04em] uppercase">
+              <h3 className="font-display text-xl md:text-2xl font-medium text-cream tracking-[-0.01em]">
                 {cat.title}
               </h3>
             </div>

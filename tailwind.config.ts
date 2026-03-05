@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ["'Lora'", "Georgia", "serif"],
-        sans: ["'Outfit'", "system-ui", "sans-serif"],
-        display: ["'Cinzel'", "'Lora'", "serif"],
+        serif: ["'Space Grotesk'", "'Urbanist'", "sans-serif"],
+        sans: ["'Urbanist'", "system-ui", "sans-serif"],
+        display: ["'Space Grotesk'", "'Urbanist'", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

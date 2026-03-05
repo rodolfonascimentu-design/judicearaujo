@@ -40,26 +40,28 @@ const BlogPreview = () => (
           <motion.article
             key={i}
             className="group cursor-pointer"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: i * 0.12 }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
           >
-            <div className="relative overflow-hidden aspect-[3/2] mb-6">
+            <div className="relative overflow-hidden rounded-[4px] aspect-[3/2] mb-6">
               <img
                 src={article.image}
                 alt={article.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                 loading="lazy"
               />
+              <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/10 transition-all duration-500 rounded-[4px]" />
             </div>
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-[10px] font-sans font-medium tracking-[0.25em] uppercase text-primary">
+              <span className="text-[10px] font-sans font-medium tracking-[0.2em] uppercase text-primary">
                 {article.category}
               </span>
+              <span className="w-1 h-1 rounded-full bg-border" />
               <span className="text-[10px] text-muted-foreground font-sans tracking-wide">{article.date}</span>
             </div>
-            <h3 className="font-serif text-lg font-medium text-foreground mb-3 group-hover:text-primary transition-colors tracking-wide">
+            <h3 className="font-display text-base font-medium text-foreground mb-3 group-hover:text-primary transition-colors duration-300 tracking-[-0.01em]">
               {article.title}
             </h3>
             <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">
@@ -71,7 +73,7 @@ const BlogPreview = () => (
       <div className="text-center mt-16">
         <a
           href="#"
-          className="text-[10px] font-sans font-medium tracking-[0.25em] uppercase text-primary hover:text-gold-light transition-colors border-b border-primary/30 hover:border-primary pb-1"
+          className="text-[10px] font-sans font-medium tracking-[0.2em] uppercase text-primary hover:text-gold-light transition-colors border-b border-primary/30 hover:border-primary pb-1"
         >
           Ver Todos os Artigos
         </a>

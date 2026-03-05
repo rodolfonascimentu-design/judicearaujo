@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Bed, Maximize } from "lucide-react";
+import { Bed, Maximize, ArrowUpRight } from "lucide-react";
 
 interface PropertyCardProps {
   image: string;
@@ -14,31 +14,41 @@ interface PropertyCardProps {
 const PropertyCard = ({ image, title, neighborhood, price, bedrooms, area, index }: PropertyCardProps) => (
   <motion.div
     className="group cursor-pointer"
-    initial={{ opacity: 0, y: 40 }}
+    initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
-    transition={{ duration: 0.7, delay: index * 0.12 }}
+    transition={{ duration: 0.6, delay: index * 0.1 }}
   >
     {/* Image container */}
-    <div className="relative overflow-hidden aspect-[4/3] mb-6">
+    <div className="relative overflow-hidden rounded-[4px] aspect-[4/3] mb-6">
       <img
         src={image}
         alt={title}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
         loading="lazy"
       />
-      <div className="absolute top-5 left-5">
-        <span className="bg-charcoal/70 backdrop-blur-sm text-cream text-[10px] font-sans font-medium tracking-[0.2em] uppercase px-3.5 py-1.5">
+      {/* Hover overlay */}
+      <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex items-center justify-center">
+        <motion.div
+          className="opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-3 group-hover:translate-y-0"
+        >
+          <span className="inline-flex items-center gap-2 bg-cream/95 text-foreground px-5 py-2.5 rounded-[4px] text-xs font-sans font-medium tracking-[0.15em] uppercase backdrop-blur-sm">
+            Ver Detalhes
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </span>
+        </motion.div>
+      </div>
+      <div className="absolute top-4 left-4">
+        <span className="bg-charcoal/60 backdrop-blur-md text-cream text-[10px] font-sans font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-[3px]">
           {neighborhood}
         </span>
       </div>
-      <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/10 transition-colors duration-500" />
     </div>
 
     {/* Info */}
-    <h3 className="font-serif text-lg font-medium text-foreground mb-2 tracking-wide">{title}</h3>
-    <p className="font-sans text-base font-medium text-primary mb-4">{price}</p>
-    <div className="flex items-center gap-6 text-muted-foreground text-xs font-sans tracking-wide">
+    <h3 className="font-display text-base font-medium text-foreground mb-1.5 tracking-[-0.01em] group-hover:text-primary transition-colors duration-300">{title}</h3>
+    <p className="font-sans text-sm font-medium text-primary mb-3">{price}</p>
+    <div className="flex items-center gap-5 text-muted-foreground text-xs font-sans tracking-wide font-light">
       <span className="flex items-center gap-1.5">
         <Bed className="w-3.5 h-3.5" />
         {bedrooms} quartos
@@ -48,12 +58,6 @@ const PropertyCard = ({ image, title, neighborhood, price, bedrooms, area, index
         {area} m²
       </span>
     </div>
-    <a
-      href="#"
-      className="inline-block mt-5 text-[10px] font-sans font-medium tracking-[0.25em] uppercase text-primary hover:text-gold-light transition-colors border-b border-primary/30 hover:border-primary pb-0.5"
-    >
-      Ver Detalhes
-    </a>
   </motion.div>
 );
 
