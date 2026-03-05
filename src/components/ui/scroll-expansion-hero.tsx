@@ -24,7 +24,7 @@ const ScrollExpandMedia = ({
   const [showContent, setShowContent] = useState(false);
   const [mediaFullyExpanded, setMediaFullyExpanded] = useState(false);
   const [touchStartY, setTouchStartY] = useState(0);
-  const [logoAnimDone, setLogoAnimDone] = useState(false);
+  const [pageReady, setPageReady] = useState(false);
 
   useEffect(() => {
     setScrollProgress(0);
@@ -107,7 +107,7 @@ const ScrollExpandMedia = ({
   }, [scrollProgress, mediaFullyExpanded, touchStartY]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLogoAnimDone(true), 3600);
+    const timer = setTimeout(() => setPageReady(true), 800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -138,7 +138,7 @@ const ScrollExpandMedia = ({
             <motion.div
               className="absolute inset-0"
               style={{ backgroundColor: 'hsl(var(--charcoal))' }}
-              animate={{ opacity: showContent ? 0.67 : 0.35 }}
+              animate={{ opacity: showContent ? 0.55 : 0.25 }}
               transition={{ duration: 0.8 }}
             />
           </div>
@@ -147,7 +147,7 @@ const ScrollExpandMedia = ({
             {/* Scroll hint - appears after logo animation */}
             <motion.div
               className="absolute bottom-12 flex flex-col items-center gap-3"
-              animate={{ opacity: showContent ? 0 : (logoAnimDone ? 0.6 : 0) }}
+              animate={{ opacity: showContent ? 0 : (pageReady && scrollProgress === 0 ? 0.6 : 0) }}
               transition={{ duration: 0.5 }}
             >
               <motion.div
