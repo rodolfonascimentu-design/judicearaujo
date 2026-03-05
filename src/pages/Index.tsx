@@ -4,6 +4,7 @@ import ExclusiveGallery from "@/components/ExclusiveGallery";
 import EditorialSection from "@/components/EditorialSection";
 import LuxuryHighlights from "@/components/LuxuryHighlights";
 import InstitutionalCTA from "@/components/InstitutionalCTA";
+import ForbesPartnership from "@/components/ForbesPartnership";
 import BlogPreview from "@/components/BlogPreview";
 import Testimonials from "@/components/Testimonials";
 import CTASection from "@/components/CTASection";
@@ -17,6 +18,7 @@ const Index = () => (
     <EditorialSection />
     <LuxuryHighlights />
     <InstitutionalCTA />
+    <ForbesPartnership />
     <BlogPreview />
     <Testimonials />
     <CTASection />
