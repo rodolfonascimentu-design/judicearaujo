@@ -1,6 +1,7 @@
 import { useEffect, useState, ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import logoJA from "@/assets/logo-ja.png";
+import forbesLogo from "@/assets/forbes-global.png";
+import jaLogo from "@/assets/logo-ja-full.png";
 
 interface ScrollExpandMediaProps {
   mediaType?: 'video' | 'image';
@@ -27,6 +28,7 @@ const ScrollExpandMedia = ({
   const [showContent, setShowContent] = useState(false);
   const [mediaFullyExpanded, setMediaFullyExpanded] = useState(false);
   const [touchStartY, setTouchStartY] = useState(0);
+  const [logoAnimDone, setLogoAnimDone] = useState(false);
 
   useEffect(() => {
     setScrollProgress(0);
@@ -108,9 +110,11 @@ const ScrollExpandMedia = ({
     };
   }, [scrollProgress, mediaFullyExpanded, touchStartY]);
 
-  // Logo animation: starts centered, moves to top-left header position
-  const logoScale = 1 - scrollProgress * 0.5; // 1 → 0.5
-  const logoOpacity = showContent ? 0 : 1;
+  // Logo animation: fade out after 3.6s
+  useEffect(() => {
+    const timer = setTimeout(() => setLogoAnimDone(true), 3600);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="relative">
@@ -144,32 +148,46 @@ const ScrollExpandMedia = ({
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
-            {/* Centered logo that animates up during scroll */}
+            {/* Co-branding logo animation */}
             <motion.div
-              className="absolute z-20 flex items-center justify-center"
-              animate={{
-                top: showContent ? '0px' : '50%',
-                left: showContent ? '24px' : '50%',
-                x: showContent ? '0%' : '-50%',
-                y: showContent ? '0px' : '-50%',
-                scale: logoScale,
-                opacity: logoOpacity,
-              }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              style={{ originX: 0.5, originY: 0.5 }}
+              className="absolute z-20 flex items-center justify-center gap-6"
+              style={{ top: '50%', left: '50%', x: '-50%', y: '-50%' }}
+              animate={{ opacity: showContent ? 0 : (logoAnimDone ? 0 : 1) }}
+              transition={{ duration: 0.8 }}
             >
-              <img
-                src={logoJA}
+              {/* JA Logo - slides in from left */}
+              <motion.img
+                src={jaLogo}
                 alt="Judice & Araujo"
                 className="h-6 md:h-8 w-auto brightness-0 invert"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.2, duration: 0.6, ease: "easeInOut" }}
+              />
+              {/* Divider */}
+              <motion.div
+                className="w-px h-10 bg-cream/40"
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ delay: 0.8, duration: 0.4, ease: "easeInOut" }}
+                style={{ originY: 0 }}
+              />
+              {/* Forbes Logo - fades in first */}
+              <motion.img
+                src={forbesLogo}
+                alt="Forbes Global Properties"
+                className="h-7 md:h-9 w-auto brightness-0 invert"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0, duration: 0.8, ease: "easeInOut" }}
               />
             </motion.div>
 
-            {/* Scroll hint below logo */}
+            {/* Scroll hint below logo - appears after logo animation */}
             <motion.div
               className="absolute bottom-12 flex flex-col items-center gap-3"
-              animate={{ opacity: showContent ? 0 : 0.6 }}
-              transition={{ duration: 0.3 }}
+              animate={{ opacity: showContent ? 0 : (logoAnimDone ? 0.6 : 0) }}
+              transition={{ duration: 0.5 }}
             >
               <motion.div
                 className="w-px h-10 bg-cream/30"
