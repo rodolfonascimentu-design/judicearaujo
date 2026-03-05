@@ -30,7 +30,7 @@ const HeroOverlayContent = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.7 }}
       >
-        Imóveis extraordinários nos endereços mais desejados do Rio
+        Para quem escolhe viver diferente
       </motion.h1>
 
       <motion.div
@@ -48,7 +48,7 @@ const HeroOverlayContent = () => {
         transition={{ delay: 0.3, duration: 0.7, ease: "easeOut" }}
       >
         <div
-          className="w-full rounded-2xl overflow-hidden transition-shadow duration-500"
+          className="w-full rounded-lg overflow-hidden transition-shadow duration-500"
           style={{
             background: "rgba(255, 255, 255, 0.75)",
             backdropFilter: "blur(16px)",
@@ -63,12 +63,12 @@ const HeroOverlayContent = () => {
           }}
         >
           {/* Segmented tabs */}
-          <div className="flex items-center border-b border-charcoal/[0.06] px-2 pt-2">
+          <div className="flex items-center gap-1 px-1.5 pt-1.5">
             {searchTypes.map((type) => (
               <button
                 key={type}
                 onClick={() => setActiveType(type)}
-                className="relative px-7 py-3.5 text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-all duration-300 group"
+                className="relative px-5 py-2 text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-colors duration-300"
                 style={{
                   color:
                     activeType === type
@@ -76,33 +76,26 @@ const HeroOverlayContent = () => {
                       : "rgba(0,0,0,0.32)",
                 }}
               >
-                {type}
-                <motion.div
-                  className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-primary"
-                  initial={false}
-                  animate={{
-                    opacity: activeType === type ? 1 : 0,
-                    scaleX: activeType === type ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                />
-                <span className="absolute inset-1 rounded-lg bg-charcoal/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-200 -z-10" />
+                {activeType === type && (
+                  <motion.div
+                    layoutId="searchTabPill"
+                    className="absolute inset-0 rounded-full bg-primary/10"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{type}</span>
               </button>
             ))}
           </div>
 
           {/* Search input row */}
-          <div className="relative flex items-center px-4 py-2.5">
-            <Search
-              className="ml-3 w-5 h-5 flex-shrink-0"
-              style={{ color: "rgba(0,0,0,0.22)" }}
-            />
+          <div className="relative flex items-center px-3 py-1.5">
             <input
               type="text"
               placeholder="Busque por bairro, cidade, condomínio ou código"
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className="w-full bg-transparent px-4 py-5 text-[15px] md:text-base font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
+              className="w-full bg-transparent px-4 py-3 text-[15px] md:text-base font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
               style={{ color: "hsl(var(--charcoal))" }}
             />
             <motion.button
