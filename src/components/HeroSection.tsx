@@ -155,10 +155,19 @@ const HeroSection = () => {
 
 /* ══════════════════════════════════════════════════════════
    Scroll-driven logo animation
-   Forbes → expanding line → JA slide-in → move to top → header
+   - Logos appear on page load with fade-in, centered, 30% larger
+   - On scroll: shrink to normal size + move from center to top
+   - Visible until header takes over
    ══════════════════════════════════════════════════════════ */
 const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
   const [pastHero, setPastHero] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Trigger fade-in after a brief delay for smooth entrance
+    const timer = setTimeout(() => setMounted(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setPastHero(window.scrollY > window.innerHeight - 80);
@@ -168,31 +177,29 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
 
   const p = heroProgress;
 
-  // Phase 1: Forbes fades in (0 → 0.12)
-  const forbesOp = clamp(p / 0.12);
+  // Scale: starts at 1.3 (30% larger), shrinks to 1.0 as scroll progresses (0 → 0.6)
+  const scaleT = clamp(p / 0.6);
+  const scale = lerp(1.3, 1.0, scaleT);
 
-  // Phase 2: Line expands (0.12 → 0.28) — only expands, never retracts
-  const lineScale = clamp((p - 0.12) / 0.16);
+  // Position: starts at center (50vh), moves to top (2.5vh) as scroll progresses (0 → 0.8)
+  const moveT = clamp(p / 0.8);
+  const topVh = lerp(50, 2.5, moveT);
 
-  // Phase 3: JA slides in from right (0.22 → 0.38)
-  const jaOp = clamp((p - 0.22) / 0.1);
-  const jaX = (1 - clamp((p - 0.22) / 0.16)) * 50; // 50px → 0
-
-  // Phase 4: Move from center (42vh) to top (2.5vh) between 0.4 → 0.75
-  const moveT = clamp((p - 0.4) / 0.35);
-  const topVh = lerp(42, 2.5, moveT);
-
-  // Visible until header takes over
-  const isVisible = !pastHero && p > 0;
+  // Visible: show on mount, hide when header takes over
+  const isVisible = mounted && !pastHero;
 
   return (
     <div
       className="fixed left-1/2 z-[45] flex items-center gap-3 pointer-events-none"
       style={{
-        transform: "translateX(-50%)",
+        transform: `translateX(-50%) scale(${scale})`,
         top: `${topVh}vh`,
         opacity: isVisible ? 1 : 0,
-        transition: pastHero ? "opacity 0.35s ease" : "opacity 0.1s ease",
+        transition: mounted
+          ? pastHero
+            ? "opacity 0.35s ease"
+            : "opacity 0.8s ease"
+          : "opacity 0s",
       }}
     >
       {/* Forbes logo */}
@@ -200,28 +207,16 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
         src={forbesLogoWhite}
         alt="Forbes Global Properties"
         className="h-[30px] lg:h-[35px] w-auto"
-        style={{ opacity: forbesOp }}
       />
 
-      {/* Expanding divider line */}
-      <div
-        className="w-[1.5px] h-10 bg-cream/50 origin-center"
-        style={{
-          transform: `scaleY(${lineScale})`,
-          opacity: lineScale > 0 ? 1 : 0,
-          transition: "opacity 0.15s ease",
-        }}
-      />
+      {/* Divider line */}
+      <div className="w-[1.5px] h-10 bg-cream/50" />
 
-      {/* JA logo — slides from right */}
+      {/* JA logo */}
       <img
         src={jaLogoFull}
         alt="Judice & Araujo"
         className="h-[18px] lg:h-[22px] w-auto brightness-0 invert"
-        style={{
-          opacity: jaOp,
-          transform: `translateX(${jaX}px)`,
-        }}
       />
     </div>
   );
