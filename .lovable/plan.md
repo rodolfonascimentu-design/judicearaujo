@@ -1,30 +1,37 @@
 
 
-## Plano: Fade-in lento dos logos + logos verdes no header
+## Plano: Reestruturar seção "Avalie seu imóvel" para layout editorial premium
 
 ### Resumo
-Duas mudanças principais:
-1. **Fade-in lento (4s)** dos logos centralizados ao carregar a página, para que o usuário veja o surgimento cinematográfico.
-2. **Logos verdes no header** — substituir as logos brancas do hero pelas versões verdes (uploads `j.png` e `f.png`) quando o header fica com fundo branco.
+Transformar a seção centralizada simples em um layout de duas colunas com copy persuasiva, lista de benefícios, CTA refinado e imagem editorial dominante.
 
 ### Alterações
 
-#### 1. Copiar assets verdes
-- Copiar `user-uploads://j.png` → `src/assets/logo-ja-green.png`
-- Copiar `user-uploads://f.png` → `src/assets/logo-forbes-green.png`
+#### 1. Gerar imagem editorial
+- Gerar uma imagem de ambiente interno luxuoso com vista privilegiada (estilo editorial) e salvar como `src/assets/cta-proprietarios.jpg`.
 
-#### 2. `src/components/HeroSection.tsx` — Fade-in de 4 segundos
-No componente `HeroLogos`:
-- Aumentar o delay do `setTimeout` de `300ms` para ~`500ms` e mudar a `transition` de `opacity 0.8s` para **`opacity 4s ease`** quando `mounted` e não `pastHero`. Isso faz o fade-in durar 4 segundos no estado inicial centralizado.
-- O restante (scroll shrink + move to top) permanece igual.
+#### 2. Reescrever `src/components/InstitutionalCTA.tsx`
+Substituir o layout centralizado por duas colunas (`grid grid-cols-1 lg:grid-cols-2 gap-16`):
 
-#### 3. `src/components/Navbar.tsx` — Usar logos verdes no header
-- Importar `logoJaGreen` de `src/assets/logo-ja-green.png` e `logoForbesGreen` de `src/assets/logo-forbes-green.png`.
-- Substituir `jaLogoFull` e `forbesLogo` no bloco de logos do header por essas versões verdes.
-- Remover qualquer filtro `brightness-0 invert` se houver, já que as imagens já são verdes.
+**Coluna esquerda** (texto + CTA):
+- Label: "PROPRIETÁRIOS" — `text-[10px] tracking-[0.35em] uppercase text-muted-foreground`
+- Título: "Venda seu imóvel com segurança e máxima valorização" — `font-display text-2xl md:text-3xl lg:text-4xl font-light`
+- Parágrafo descritivo com copy fornecida
+- 3 benefícios com ícone Check (`lucide-react`) em cor primary:
+  - Avaliação profissional do imóvel
+  - Divulgação para compradores qualificados
+  - Alcance internacional
+- Botão CTA "Avaliar meu imóvel": `bg-cream text-primary` → hover: `bg-primary text-white`, `rounded-full px-10 py-4`, transição 300ms
+- Texto de reforço abaixo: "Avaliação rápida e confidencial." em `text-xs text-muted-foreground`
 
-### Resultado visual
-- **Page load:** Logos brancas aparecem no centro da tela com um fade-in suave de 4 segundos sobre o vídeo escuro.
-- **Scroll:** Logos encolhem e sobem até o header.
-- **Header branco:** Logos verdes (das imagens enviadas) aparecem no canto esquerdo com boa legibilidade sobre fundo branco.
+**Coluna direita** (imagem):
+- Imagem grande com `rounded-lg`, sombra suave, `object-cover`, aspect ratio ~3:4
+
+**Animações** (framer-motion):
+- Coluna esquerda: `opacity 0→1, y 30→0`, duração 0.7s
+- Coluna direita: `opacity 0→1, scale 1.03→1`, duração 0.8s, delay 0.2s
+- Ambas com `viewport={{ once: true }}`
+
+### Resultado
+Seção premium de duas colunas que transmite confiança e exclusividade, incentivando proprietários a iniciar avaliação do imóvel.
 
