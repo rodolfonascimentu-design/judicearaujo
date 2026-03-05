@@ -1,14 +1,11 @@
 import { useEffect, useState, ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import forbesLogo from "@/assets/forbes-global.png";
-import jaLogo from "@/assets/logo-ja-full.png";
 
 interface ScrollExpandMediaProps {
   mediaType?: 'video' | 'image';
   mediaSrc: string;
   posterSrc?: string;
   title?: string;
-  scrollToExpand?: string;
   children?: ReactNode;
   overlayContent?: ReactNode;
   onScrollProgress?: (progress: number) => void;
@@ -19,7 +16,6 @@ const ScrollExpandMedia = ({
   mediaSrc,
   posterSrc,
   title,
-  scrollToExpand,
   children,
   overlayContent,
   onScrollProgress
@@ -110,17 +106,10 @@ const ScrollExpandMedia = ({
     };
   }, [scrollProgress, mediaFullyExpanded, touchStartY]);
 
-  // Logo animation: mark intro done after 3.6s (logos stay visible, scroll hint appears)
   useEffect(() => {
     const timer = setTimeout(() => setLogoAnimDone(true), 3600);
     return () => clearTimeout(timer);
   }, []);
-
-  // Scroll-based logo transform: center → top of screen
-  // Forbes: 75px initial → 55px min (scale factor: 55/75 ≈ 0.733)
-  const logoScaleValue = 1 - scrollProgress * 0.267; // 1 → 0.733
-  // Move from 50% to ~5% (header area)
-  const logoTopPercent = 50 - scrollProgress * 45; // 50% → 5%
 
   return (
     <div className="relative">
@@ -145,57 +134,17 @@ const ScrollExpandMedia = ({
             ) : (
               <img src={mediaSrc} alt={title || ''} className="w-full h-full object-cover scale-110" />
             )}
+            {/* Overlay - 15% brighter than before (was 0.5/0.82, now 0.35/0.67) */}
             <motion.div
               className="absolute inset-0"
               style={{ backgroundColor: 'hsl(var(--charcoal))' }}
-              animate={{ opacity: showContent ? 0.82 : 0.5 }}
+              animate={{ opacity: showContent ? 0.67 : 0.35 }}
               transition={{ duration: 0.8 }}
             />
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
-            {/* Co-branding logo animation */}
-            <motion.div
-              className="absolute z-20 flex items-center justify-center gap-4 md:gap-6"
-              style={{
-                top: `${logoTopPercent}%`,
-                left: '50%',
-                x: '-50%',
-                y: '-50%',
-                scale: logoScaleValue,
-              }}
-              animate={{ opacity: showContent ? 0 : 1 }}
-              transition={{ duration: 0.4 }}
-            >
-              {/* JA Logo - emerges from divider, sliding right to left */}
-              <motion.img
-                src={jaLogo}
-                alt="Judice & Araujo"
-                className="h-[50px] md:h-[60px] w-auto brightness-0 invert"
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.2, duration: 0.6, ease: "easeInOut" }}
-              />
-              {/* Divider - animates top to bottom */}
-              <motion.div
-                className="w-[1.5px] h-14 md:h-[70px] bg-cream/80"
-                initial={{ scaleY: 0, opacity: 0 }}
-                animate={{ scaleY: 1, opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.4, ease: "easeInOut" }}
-                style={{ originY: 0 }}
-              />
-              {/* Forbes Logo - fades in first */}
-              <motion.img
-                src={forbesLogo}
-                alt="Forbes Global Properties"
-                className="h-[75px] md:h-[85px] w-auto brightness-0 invert"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0, duration: 0.8, ease: "easeInOut" }}
-              />
-            </motion.div>
-
-            {/* Scroll hint below logo - appears after logo animation */}
+            {/* Scroll hint - appears after logo animation */}
             <motion.div
               className="absolute bottom-12 flex flex-col items-center gap-3"
               animate={{ opacity: showContent ? 0 : (logoAnimDone ? 0.6 : 0) }}
