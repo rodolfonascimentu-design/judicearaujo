@@ -68,7 +68,7 @@ const ForbesPartnership = () => (
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-[hsl(var(--gold-light))] mb-10 font-medium">
+          <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#aed9d7] mb-10 font-medium">
             Parceria Global
           </p>
 
