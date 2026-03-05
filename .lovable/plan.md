@@ -1,45 +1,30 @@
 
 
-## Plano: Redesign da barra de busca inspirada na referência
+## Plano: 3 ajustes pontuais
 
-### Design da referência (imagem)
-- Tabs flutuando **acima** do container (não dentro)
-- Tab ativa em dourado/gold, inativas em branco/cinza claro
-- Container escuro semi-transparente com blur, bordas arredondadas generosas
-- Label "BUSCAR IMÓVEL" em caps acima do placeholder
-- Input com placeholder cinza claro sobre fundo escuro
-- Botão de busca circular dourado/gold à direita
+### 1. Quebra de linha no texto "+20 países" no mobile
+**Arquivo:** `ForbesPartnership.tsx` (linha 140)
 
-### Adaptação com as cores do projeto
-- Fundo do container: verde escuro semi-transparente (`rgba(0, 63, 54, 0.85)`) com backdrop-blur
-- Tabs acima: ativa em gold (`#D4A853` ou similar quente), inativas em `cream/60`
-- Label "BUSCAR IMÓVEL" em branco/cream, tracking largo, tamanho pequeno
-- Placeholder em `cream/40`
-- Botão circular em gold com ícone branco
-- Bordas arredondadas `rounded-2xl`
+- Remover `whitespace-nowrap` da classe do `<motion.p>`
+- Adicionar `max-w-[280px] mx-auto` no mobile para forçar quebra natural dentro do grid
+- Manter `whitespace-nowrap` apenas em `md:` para desktop continuar em uma linha
 
-### Mobile
-- Mesmo layout dark, tabs menores
-- Input + label empilhados
-- Botão "Buscar" full-width em gold abaixo do input
+### 2. Transição fluida hambúrguer → X no menu mobile
+**Arquivo:** `Navbar.tsx`
 
-### Implementação
+- Substituir a troca abrupta entre `<Menu>` e `<X>` por um único botão com animação
+- Usar `motion.div` com duas barras (`span`) que rotacionam e transicionam para formar o X
+- Quando `mobileOpen = false`: 3 barras horizontais (hambúrguer)
+- Quando `mobileOpen = true`: 2 barras cruzadas em X com rotação animada
+- Usar `framer-motion` `animate` com `rotate` e `translateY` para transição suave entre estados
+- O botão fica sempre visível (não desaparece e reaparece)
+- Na overlay mobile, remover o botão X separado (linha 204-209) — o mesmo botão no nav faz o toggle
 
-**Arquivo:** `HeroSection.tsx` (componente `HeroOverlayContent`)
+### 3. Setas brancas com ícone preto nos carrosséis
+**Arquivos:** `ExclusiveGallery.tsx` e `FarmsGallery.tsx`
 
-1. **Tabs:** Mover para fora do container principal, centralizar acima com `mb-3`. Tab ativa com cor gold e underline/pill gold. Inativas em branco translúcido.
-
-2. **Container:** Trocar fundo branco por verde escuro translúcido com blur. Adicionar `rounded-2xl`.
-
-3. **Interior:** Adicionar label "BUSCAR IMÓVEL" em uppercase, tracking largo, tamanho `10px`, cor cream. Abaixo, input com placeholder cream/40 e texto branco.
-
-4. **Botão desktop:** Circular, fundo gold (`bg-[#D4A853]`), ícone branco.
-
-5. **Botão mobile:** Full-width, fundo gold, texto branco "Buscar" + lupa.
-
-6. **Animações:** Manter staggered entrance existente.
-
-### Resumo
-- Um único arquivo: `HeroSection.tsx`
-- Redesign completo do `HeroOverlayContent` seguindo a referência dark com cores do projeto
+- Trocar `bg-muted hover:bg-muted/80` por `bg-white hover:bg-white shadow-sm`
+- Trocar `text-foreground/60 hover:text-foreground` por `text-black`
+- Aplicar em todas as setas: desktop (hidden md:flex) e mobile (md:hidden)
+- Total: 4 botões em cada arquivo (2 desktop + 2 mobile)
 
