@@ -1,49 +1,30 @@
 
 
-## Plan: Co-Branding Logo Animation in Hero Section
+## Plano: Fade-in lento dos logos + logos verdes no header
 
-### Overview
-Replace the single Judice & Araujo logo in the hero's initial state with a cinematic co-branding animation sequence featuring both Forbes Global Properties and Judice & Araujo logos.
+### Resumo
+Duas mudanças principais:
+1. **Fade-in lento (4s)** dos logos centralizados ao carregar a página, para que o usuário veja o surgimento cinematográfico.
+2. **Logos verdes no header** — substituir as logos brancas do hero pelas versões verdes (uploads `j.png` e `f.png`) quando o header fica com fundo branco.
 
-### Assets
-- Copy `user-uploads://Forbes_Global_Properties.png` to `src/assets/forbes-global.png`
-- Copy `user-uploads://Judice_Araujo.png` to `src/assets/logo-ja-full.png` (the uploaded version may differ from existing `logo-ja.png`)
+### Alterações
 
-### Animation Sequence (plays once on page load)
+#### 1. Copiar assets verdes
+- Copiar `user-uploads://j.png` → `src/assets/logo-ja-green.png`
+- Copiar `user-uploads://f.png` → `src/assets/logo-forbes-green.png`
 
-1. **T=0s** — Forbes Global Properties logo fades in, centered on screen
-2. **T=0.8s** — Thin vertical divider line animates in (top to bottom) to the left of Forbes logo
-3. **T=1.2s** — Judice & Araujo logo slides in from the left, emerging from behind the divider
-4. **T=1.6s** — Final composition visible: `Judice & Araujo | Forbes Global Properties` centered
-5. **T=3.6s** (after ~2s hold) — Both logos + divider fade out together
-6. After fade-out, the scroll hint becomes visible and the hero continues as before
+#### 2. `src/components/HeroSection.tsx` — Fade-in de 4 segundos
+No componente `HeroLogos`:
+- Aumentar o delay do `setTimeout` de `300ms` para ~`500ms` e mudar a `transition` de `opacity 0.8s` para **`opacity 4s ease`** quando `mounted` e não `pastHero`. Isso faz o fade-in durar 4 segundos no estado inicial centralizado.
+- O restante (scroll shrink + move to top) permanece igual.
 
-### File Changes
+#### 3. `src/components/Navbar.tsx` — Usar logos verdes no header
+- Importar `logoJaGreen` de `src/assets/logo-ja-green.png` e `logoForbesGreen` de `src/assets/logo-forbes-green.png`.
+- Substituir `jaLogoFull` e `forbesLogo` no bloco de logos do header por essas versões verdes.
+- Remover qualquer filtro `brightness-0 invert` se houver, já que as imagens já são verdes.
 
-**`src/components/ui/scroll-expansion-hero.tsx`**
-- Replace the single centered logo (lines 148-166) with a new `LogoAnimation` component
-- The animation uses framer-motion's `animate` with sequential delays
-- After animation completes (~3.6s), set a state `logoAnimDone` to true
-- The scroll hint only appears after `logoAnimDone`
-- When scroll progresses (`showContent` becomes true), the co-branding fades out (already handled by existing opacity logic)
-- Remove the import of `logoJA` from this file (logo logic moves to an inline composition)
-
-**Animation implementation detail:**
-- Container: `flex items-center gap-6` centered absolutely
-- Forbes logo: `motion.img` with `initial={{ opacity: 0 }}`, `animate={{ opacity: 1 }}`, delay 0
-- Divider: `motion.div` (1px wide, ~40px tall, cream colored), `initial={{ scaleY: 0 }}`, `animate={{ scaleY: 1 }}`, origin top, delay 0.8s
-- JA logo: `motion.img` with `initial={{ opacity: 0, x: -20 }}`, `animate={{ opacity: 1, x: 0 }}`, delay 1.2s
-- Whole group: after 3.6s, animate opacity to 0 via a timeout that triggers state change
-
-**`src/components/HeroSection.tsx`**
-- No changes needed (overlay content and scroll progress logic remain the same)
-
-**`src/components/Navbar.tsx`**
-- The navbar logo (`logoJA`) continues to appear only after `pastHero` — no changes needed
-
-### Visual Style
-- Both logos rendered white (using `brightness-0 invert` filter) against the dark video background
-- Divider: 1px wide, ~40px tall, `bg-cream/40`
-- Smooth `ease-in-out` transitions throughout
-- Forbes logo slightly larger or equal height to JA logo for balanced composition
+### Resultado visual
+- **Page load:** Logos brancas aparecem no centro da tela com um fade-in suave de 4 segundos sobre o vídeo escuro.
+- **Scroll:** Logos encolhem e sobem até o header.
+- **Header branco:** Logos verdes (das imagens enviadas) aparecem no canto esquerdo com boa legibilidade sobre fundo branco.
 
