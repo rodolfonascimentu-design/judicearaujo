@@ -1,27 +1,36 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJA from "@/assets/logo-ja.png";
 
 const navLinks = [
-  { label: "Imóveis", href: "#imoveis" },
-  { label: "Comprar", href: "#comprar" },
-  { label: "Alugar", href: "#alugar" },
-  { label: "Bairros", href: "#bairros" },
+  { label: "Lançamentos", href: "#lancamentos" },
+  { label: "Avaliar Imóvel", href: "#avaliar" },
   { label: "Blog", href: "#blog" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Contato", href: "#contato" },
 ];
+
+const languages = ["PT", "EN", "ES"];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState("PT");
+  const [fontSize, setFontSize] = useState(100);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${fontSize}%`;
+  }, [fontSize]);
+
+  const adjustFont = (delta: number) => {
+    setFontSize((prev) => Math.min(130, Math.max(80, prev + delta)));
+  };
 
   return (
     <>
@@ -37,49 +46,100 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
-            {/* Left nav (desktop) */}
-            <div className="hidden lg:flex items-center gap-8">
-              {navLinks.slice(0, 3).map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-xs font-sans font-medium tracking-[0.2em] uppercase text-cream/80 hover:text-gold transition-colors duration-300"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
-            {/* Logo */}
+            {/* Logo - always visible */}
             <a href="#" className="flex-shrink-0">
               <img
                 src={logoJA}
                 alt="Judice & Araujo"
-                className="h-6 lg:h-7 w-auto brightness-0 invert"
+                className="h-4 lg:h-[18px] w-auto brightness-0 invert"
               />
             </a>
 
-            {/* Right nav (desktop) */}
-            <div className="hidden lg:flex items-center gap-8">
-              {navLinks.slice(3).map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-xs font-sans font-medium tracking-[0.2em] uppercase text-cream/80 hover:text-gold transition-colors duration-300"
+            {/* Desktop nav - only after scroll */}
+            <AnimatePresence>
+              {scrolled && (
+                <motion.div
+                  className="hidden lg:flex items-center gap-8"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  {link.label}
-                </a>
-              ))}
-            </div>
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      className="text-[11px] font-sans font-medium tracking-[0.2em] uppercase text-cream/70 hover:text-cream transition-colors duration-300"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
 
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setMobileOpen(true)}
-              className="lg:hidden text-cream"
-              aria-label="Abrir menu"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
+                  {/* Language selector */}
+                  <div className="relative">
+                    <button
+                      onClick={() => setLangOpen(!langOpen)}
+                      className="flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase text-cream/70 hover:text-cream transition-colors"
+                    >
+                      {currentLang}
+                      <ChevronDown className="w-3 h-3" />
+                    </button>
+                    <AnimatePresence>
+                      {langOpen && (
+                        <motion.div
+                          className="absolute top-full mt-2 right-0 bg-charcoal/95 backdrop-blur-md border border-cream/10 rounded-[4px] overflow-hidden"
+                          initial={{ opacity: 0, y: -4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -4 }}
+                        >
+                          {languages.map((lang) => (
+                            <button
+                              key={lang}
+                              onClick={() => { setCurrentLang(lang); setLangOpen(false); }}
+                              className={`block w-full px-5 py-2 text-[11px] font-sans tracking-[0.15em] uppercase text-left transition-colors ${
+                                lang === currentLang ? "text-cream bg-cream/5" : "text-cream/50 hover:text-cream hover:bg-cream/5"
+                              }`}
+                            >
+                              {lang}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Font size controls */}
+                  <div className="flex items-center gap-1 border border-cream/10 rounded-[4px] px-1">
+                    <button
+                      onClick={() => adjustFont(-5)}
+                      className="p-1.5 text-cream/50 hover:text-cream transition-colors"
+                      aria-label="Diminuir fonte"
+                    >
+                      <Minus className="w-3 h-3" />
+                    </button>
+                    <span className="text-[9px] font-sans text-cream/40 tracking-wider uppercase w-5 text-center">A</span>
+                    <button
+                      onClick={() => adjustFont(5)}
+                      className="p-1.5 text-cream/50 hover:text-cream transition-colors"
+                      aria-label="Aumentar fonte"
+                    >
+                      <Plus className="w-3 h-3" />
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Mobile menu button - only after scroll */}
+            {scrolled && (
+              <button
+                onClick={() => setMobileOpen(true)}
+                className="lg:hidden text-cream"
+                aria-label="Abrir menu"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+            )}
           </div>
         </div>
       </motion.nav>
@@ -104,7 +164,7 @@ const Navbar = () => {
             <img
               src={logoJA}
               alt="Judice & Araujo"
-              className="h-8 w-auto brightness-0 invert mb-10"
+              className="h-5 w-auto brightness-0 invert mb-10"
             />
             <div className="flex flex-col items-center gap-8">
               {navLinks.map((link, i) => (
@@ -112,7 +172,7 @@ const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="font-serif text-2xl text-cream/90 hover:text-gold transition-colors"
+                  className="font-display text-xl text-cream/90 hover:text-primary transition-colors tracking-[0.1em] uppercase"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
@@ -120,6 +180,32 @@ const Navbar = () => {
                   {link.label}
                 </motion.a>
               ))}
+
+              {/* Mobile language */}
+              <div className="flex gap-4 mt-4">
+                {languages.map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => setCurrentLang(lang)}
+                    className={`text-xs font-sans tracking-[0.15em] uppercase transition-colors ${
+                      lang === currentLang ? "text-cream" : "text-cream/40"
+                    }`}
+                  >
+                    {lang}
+                  </button>
+                ))}
+              </div>
+
+              {/* Mobile font controls */}
+              <div className="flex items-center gap-3 mt-2">
+                <button onClick={() => adjustFont(-5)} className="text-cream/50 hover:text-cream p-2">
+                  <Minus className="w-4 h-4" />
+                </button>
+                <span className="text-xs font-sans text-cream/40 tracking-wider">Aa</span>
+                <button onClick={() => adjustFont(5)} className="text-cream/50 hover:text-cream p-2">
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </motion.div>
         )}

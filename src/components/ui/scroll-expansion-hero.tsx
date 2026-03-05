@@ -139,7 +139,7 @@ const ScrollExpandMedia = ({
     <div className="relative">
       <section className="relative min-h-screen overflow-hidden">
         <div className="relative min-h-screen flex flex-col">
-          {/* Background: same video as the expanding media, blurred & darkened */}
+          {/* Background video, darkened */}
           <div className="fixed inset-0 -z-10 overflow-hidden">
             <video
               src={mediaSrc}
@@ -153,7 +153,7 @@ const ScrollExpandMedia = ({
               controls={false}
               disablePictureInPicture
             />
-            <div className="absolute inset-0 bg-charcoal/70" />
+            <div className="absolute inset-0 bg-charcoal/80" />
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
@@ -183,8 +183,8 @@ const ScrollExpandMedia = ({
                       disablePictureInPicture
                     />
                     <motion.div
-                      className="absolute inset-0 bg-charcoal/20 rounded-xl"
-                      animate={{ opacity: 0.4 - scrollProgress * 0.3 }}
+                      className="absolute inset-0 bg-charcoal/30 rounded-xl"
+                      animate={{ opacity: 0.5 - scrollProgress * 0.3 }}
                       transition={{ duration: 0.2 }}
                     />
                   </div>
@@ -203,7 +203,7 @@ const ScrollExpandMedia = ({
                   </div>
                 )}
 
-                {/* Overlay content: only appears AFTER full expansion */}
+                {/* Overlay content after expansion */}
                 {overlayContent && (
                   <motion.div
                     className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6"
@@ -217,41 +217,46 @@ const ScrollExpandMedia = ({
                 )}
               </div>
 
-              {/* Title text that splits apart during scroll */}
+              {/* Title text that splits apart */}
               <motion.div
                 className="flex items-center justify-center text-center gap-2 md:gap-4 w-full relative z-10 transition-none flex-col mix-blend-difference"
                 animate={{ opacity: showContent ? 0 : 1 }}
                 transition={{ duration: 0.3 }}
               >
                 <motion.h2
-                  className="text-4xl md:text-6xl lg:text-8xl font-display font-light text-cream transition-none tracking-[0.04em] italic"
+                  className="text-3xl md:text-5xl lg:text-7xl font-display font-light text-cream transition-none tracking-[-0.02em]"
                   style={{ transform: `translateX(-${textTranslateX}vw)` }}
                 >
                   {firstWord}
                 </motion.h2>
                 <motion.h2
-                  className="text-4xl md:text-6xl lg:text-8xl font-display font-light text-center text-cream transition-none tracking-[0.04em] italic"
+                  className="text-3xl md:text-5xl lg:text-7xl font-display font-light text-center text-cream transition-none tracking-[-0.02em]"
                   style={{ transform: `translateX(${textTranslateX}vw)` }}
                 >
                   {restOfTitle}
                 </motion.h2>
               </motion.div>
 
-              {/* Scroll hint */}
+              {/* Scroll indicator - visual only, no text */}
               <motion.div
-                className="flex flex-col items-center gap-2 mt-4"
+                className="flex flex-col items-center gap-2 mt-6"
                 animate={{ opacity: showContent ? 0 : 0.6 }}
                 transition={{ duration: 0.3 }}
               >
-                {scrollToExpand && (
-                  <p className="text-cream/50 font-sans font-medium text-center text-xs tracking-[0.2em] uppercase">
-                    {scrollToExpand}
-                  </p>
-                )}
+                <motion.div
+                  className="w-5 h-8 border border-cream/30 rounded-full flex items-start justify-center p-1"
+                  initial={{ opacity: 0.5 }}
+                >
+                  <motion.div
+                    className="w-1 h-2 bg-cream/60 rounded-full"
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </motion.div>
               </motion.div>
             </div>
 
-            {/* Post-expansion content (children passed to component) */}
+            {/* Post-expansion content */}
             <motion.section
               className="flex flex-col w-full px-8 py-10 md:px-16 lg:py-20"
               initial={{ opacity: 0 }}
