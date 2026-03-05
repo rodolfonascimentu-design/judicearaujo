@@ -72,19 +72,19 @@ const ForbesPartnership = () => (
             Parceria Global
           </p>
 
+          <img
+            src={forbesLogo}
+            alt="Judice & Araujo — Forbes Global Properties"
+            className="h-28 md:h-32 lg:h-40 object-contain mb-12"
+          />
+
           <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-primary-foreground leading-[1.2] tracking-[-0.02em] mb-8">
             Uma rede global para imóveis extraordinários
           </h2>
 
-          <p className="font-sans text-sm md:text-base text-primary-foreground/60 max-w-md font-light leading-[1.8] tracking-wide mb-16">
+          <p className="font-sans text-sm md:text-base text-primary-foreground/60 max-w-md font-light leading-[1.8] tracking-wide">
             A Judice &amp; Araujo faz parte da Forbes Global Properties, uma rede internacional que reúne algumas das mais prestigiadas imobiliárias do mundo.
           </p>
-
-          <img
-            src={forbesLogo}
-            alt="Judice & Araujo — Forbes Global Properties"
-            className="h-28 md:h-32 lg:h-40 object-contain"
-          />
         </motion.div>
 
         {/* Right side — 2×2 benefit cards, enters from right */}
@@ -111,7 +111,7 @@ const ForbesPartnership = () => (
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
               >
                 <b.icon
-                  className="w-6 h-6 text-primary-foreground/70 group-hover:text-[hsl(var(--gold-light))] transition-colors duration-300"
+                  className="w-6 h-6 text-primary-foreground transition-colors duration-300"
                   strokeWidth={1.5}
                 />
               </motion.div>
@@ -137,7 +137,7 @@ const ForbesPartnership = () => (
 
       {/* Stat — more vivid */}
       <motion.p
-        className="font-sans text-lg md:text-xl text-[hsl(var(--gold-light))] tracking-[0.15em] font-light whitespace-nowrap text-center"
+        className="font-sans text-lg md:text-xl text-primary-foreground tracking-[0.15em] font-light whitespace-nowrap text-center"
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
