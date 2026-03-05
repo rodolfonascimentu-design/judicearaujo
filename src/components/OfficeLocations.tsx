@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Phone, Mail, MessageCircle, Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import officeZonaSul from "@/assets/office-zonasul.jpg";
+import officeSerra from "@/assets/office-serra.jpg";
+import officeBarra from "@/assets/office-barra.jpg";
 
 const offices = [
   {
@@ -11,7 +14,7 @@ const offices = [
     whatsapp: { number: "+55 (21) 99559.2196", href: "https://wa.me/5521995592196" },
     email: "zonasul@judicearaujo.com.br",
     hours: ["Segunda à Sexta: 9h às 18:40h", "Sábado: 9:30h às 14:30h", "Domingo e feriados: Fechada com plantão remoto"],
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&h=700&fit=crop&q=80",
+    image: officeZonaSul,
   },
   {
     name: "Itaipava - Petrópolis",
@@ -21,7 +24,7 @@ const offices = [
     whatsapp: { number: "+55 (21) 99967.3830", href: "https://wa.me/5521999673830" },
     email: "itaipava@judicearaujo.com.br",
     hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"],
-    image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&h=700&fit=crop&q=80",
+    image: officeSerra,
   },
   {
     name: "Barra & Lançamentos - RJ",
@@ -34,7 +37,7 @@ const offices = [
     whatsapp: null,
     email: "lancamentos@judicearaujo.com.br",
     hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"],
-    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=900&h=700&fit=crop&q=80",
+    image: officeBarra,
   },
 ];
 
