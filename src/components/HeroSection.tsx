@@ -24,7 +24,7 @@ const HeroOverlayContent = () => {
     <div className="flex flex-col items-center justify-center h-full text-center gap-5 w-full max-w-[780px] mx-auto px-4">
       {/* Headline */}
       <motion.h1
-        className="font-display text-2xl md:text-[34px] lg:text-[40px] leading-[1.2] text-cream font-light tracking-tight"
+        className="font-display text-xl md:text-[34px] lg:text-[40px] leading-[1.2] text-white font-light tracking-tight whitespace-nowrap"
         style={{ textShadow: "0 2px 24px rgba(0,0,0,0.35)" }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ const HeroOverlayContent = () => {
         <div
           className="w-full rounded-lg overflow-hidden transition-shadow duration-500"
           style={{
-            background: "rgba(255, 255, 255, 0.75)",
+            background: "rgba(255, 255, 255, 1)",
             backdropFilter: "blur(16px)",
             WebkitBackdropFilter: "blur(16px)",
             border: isFocused
@@ -221,7 +221,7 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
 
   return (
     <div
-      className="fixed left-1/2 z-[45] flex items-center pointer-events-none"
+      className="fixed left-1/2 z-[45] flex items-center justify-center pointer-events-none w-max"
       style={{
         transform: `translateX(-50%) scale(${scale})`,
         top: `${topVh}vh`,
