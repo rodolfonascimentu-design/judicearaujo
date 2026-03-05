@@ -79,7 +79,7 @@ const ForbesPartnership = () => (
           />
 
           <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-primary-foreground leading-[1.2] tracking-[-0.02em] mb-8">
-            Uma rede global para imóveis extraordinários
+            Uma rede global<br />para imóveis extraordinários
           </h2>
 
           <p className="font-sans text-sm md:text-base text-primary-foreground/60 max-w-md font-light leading-[1.8] tracking-wide">
