@@ -138,7 +138,7 @@ const ScrollExpandMedia = ({
             <motion.div
               className="absolute inset-0"
               style={{ backgroundColor: 'hsl(var(--charcoal))' }}
-              animate={{ opacity: showContent ? 0.55 : 0.25 }}
+              animate={{ opacity: showContent ? 0.55 : 0.45 }}
               transition={{ duration: 0.8 }}
             />
           </div>

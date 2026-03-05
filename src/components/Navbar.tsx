@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import logoJA from "@/assets/logo-ja.png";
 import logoJaGreen from "@/assets/logo-ja-green.png";
 import logoForbesGreen from "@/assets/logo-forbes-green.png";
+import jaLogoFull from "@/assets/logo-ja-full.png";
+import forbesLogoWhite from "@/assets/forbes-global-white.png";
 
 const navLinks = [
   { label: "Lançamentos", href: "#lancamentos" },
@@ -20,15 +22,21 @@ const Navbar = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState("PT");
   const [fontSize, setFontSize] = useState(100);
+  const [heroExpanded, setHeroExpanded] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
-      // Past hero = scrolled beyond viewport height
       setPastHero(window.scrollY > window.innerHeight - 80);
     };
+    const checkHeroProgress = () => {
+      const hp = parseFloat(document.documentElement.dataset.heroProgress || "0");
+      setHeroExpanded(hp >= 1);
+    };
+    const observer = new MutationObserver(checkHeroProgress);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-hero-progress"] });
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => { window.removeEventListener("scroll", onScroll); observer.disconnect(); };
   }, []);
 
   useEffect(() => {
@@ -39,8 +47,9 @@ const Navbar = () => {
     setFontSize((prev) => Math.min(130, Math.max(80, prev + delta)));
   };
 
-  // Header: transparent while on hero, green after leaving hero
+  // Header phases: transparent (initial) → transparent+white links (hero expanded) → green (past hero)
   const showGreen = pastHero;
+  const showNavLinks = pastHero || (heroExpanded && !pastHero);
 
   return (
     <>
@@ -60,18 +69,28 @@ const Navbar = () => {
             <a href="#" className="flex-shrink-0 flex items-center gap-2">
               <motion.div
                 className="flex items-center gap-2"
-                animate={{ opacity: pastHero ? 1 : 0 }}
+                animate={{ opacity: showNavLinks ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <img src={logoJaGreen} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
-                <div className="w-px h-8 bg-primary/30" />
-                <img src={logoForbesGreen} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
+                {pastHero ? (
+                  <>
+                    <img src={logoJaGreen} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
+                    <div className="w-px h-8 bg-primary/30" />
+                    <img src={logoForbesGreen} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
+                  </>
+                ) : (
+                  <>
+                    <img src={jaLogoFull} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto brightness-0 invert" />
+                    <div className="w-px h-8 bg-cream/40" />
+                    <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
+                  </>
+                )}
               </motion.div>
             </a>
 
-            {/* Desktop nav - only after past hero */}
+            {/* Desktop nav - shows when hero expanded or past hero */}
             <AnimatePresence>
-              {pastHero && (
+              {showNavLinks && (
                 <motion.div
                   className="hidden lg:flex items-center gap-8"
                   initial={{ opacity: 0, y: -10 }}
@@ -83,7 +102,11 @@ const Navbar = () => {
                     <a
                       key={link.label}
                       href={link.href}
-                    className="text-[11px] font-sans font-medium tracking-[0.2em] uppercase text-primary/70 hover:text-primary transition-colors duration-300"
+                      className={`text-[11px] font-sans font-medium tracking-[0.2em] uppercase transition-colors duration-300 ${
+                        pastHero
+                          ? "text-primary/70 hover:text-primary"
+                          : "text-cream/70 hover:text-cream"
+                      }`}
                     >
                       {link.label}
                     </a>
@@ -93,7 +116,9 @@ const Navbar = () => {
                   <div className="relative">
                     <button
                       onClick={() => setLangOpen(!langOpen)}
-                      className="flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase text-primary/70 hover:text-primary transition-colors"
+                      className={`flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-colors ${
+                        pastHero ? "text-primary/70 hover:text-primary" : "text-cream/70 hover:text-cream"
+                      }`}
                     >
                       {currentLang}
                       <ChevronDown className="w-3 h-3" />
@@ -101,7 +126,9 @@ const Navbar = () => {
                     <AnimatePresence>
                       {langOpen && (
                         <motion.div
-                          className="absolute top-full mt-2 right-0 bg-white/95 backdrop-blur-md border border-primary/10 rounded-[4px] overflow-hidden"
+                          className={`absolute top-full mt-2 right-0 backdrop-blur-md rounded-[4px] overflow-hidden ${
+                            pastHero ? "bg-white/95 border border-primary/10" : "bg-white/10 border border-cream/20"
+                          }`}
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -4 }}
@@ -111,7 +138,9 @@ const Navbar = () => {
                               key={lang}
                               onClick={() => { setCurrentLang(lang); setLangOpen(false); }}
                               className={`block w-full px-5 py-2 text-[11px] font-sans tracking-[0.15em] uppercase text-left transition-colors ${
-                                lang === currentLang ? "text-primary bg-primary/5" : "text-primary/50 hover:text-primary hover:bg-primary/5"
+                                pastHero
+                                  ? (lang === currentLang ? "text-primary bg-primary/5" : "text-primary/50 hover:text-primary hover:bg-primary/5")
+                                  : (lang === currentLang ? "text-cream bg-cream/10" : "text-cream/50 hover:text-cream hover:bg-cream/10")
                               }`}
                             >
                               {lang}
@@ -123,18 +152,20 @@ const Navbar = () => {
                   </div>
 
                   {/* Font size controls */}
-                  <div className="flex items-center gap-1 border border-primary/10 rounded-[4px] px-1">
+                  <div className={`flex items-center gap-1 rounded-[4px] px-1 border ${
+                    pastHero ? "border-primary/10" : "border-cream/20"
+                  }`}>
                     <button
                       onClick={() => adjustFont(-5)}
-                      className="p-1.5 text-primary/50 hover:text-primary transition-colors"
+                      className={`p-1.5 transition-colors ${pastHero ? "text-primary/50 hover:text-primary" : "text-cream/50 hover:text-cream"}`}
                       aria-label="Diminuir fonte"
                     >
                       <Minus className="w-3 h-3" />
                     </button>
-                    <span className="text-[9px] font-sans text-primary/40 tracking-wider uppercase w-5 text-center">A</span>
+                    <span className={`text-[9px] font-sans tracking-wider uppercase w-5 text-center ${pastHero ? "text-primary/40" : "text-cream/40"}`}>A</span>
                     <button
                       onClick={() => adjustFont(5)}
-                      className="p-1.5 text-primary/50 hover:text-primary transition-colors"
+                      className={`p-1.5 transition-colors ${pastHero ? "text-primary/50 hover:text-primary" : "text-cream/50 hover:text-cream"}`}
                       aria-label="Aumentar fonte"
                     >
                       <Plus className="w-3 h-3" />
@@ -145,10 +176,10 @@ const Navbar = () => {
             </AnimatePresence>
 
             {/* Mobile menu button */}
-            {pastHero && (
+            {showNavLinks && (
               <button
                 onClick={() => setMobileOpen(true)}
-                className="lg:hidden text-primary"
+                className={`lg:hidden ${pastHero ? "text-primary" : "text-cream"}`}
                 aria-label="Abrir menu"
               >
                 <Menu className="w-6 h-6" />
