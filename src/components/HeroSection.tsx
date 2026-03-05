@@ -82,7 +82,7 @@ const HeroSection = () => {
   return (
     <ScrollExpandMedia
       mediaType="video"
-      mediaSrc="https://me7aitdbxq.ufs.sh/f/2wsMIGDMQRdYuZ5R8ahEEZ4aQK56LizRdfBSqeDMsmUIrJN1"
+      mediaSrc="https://videos.pexels.com/video-files/8435624/8435624-uhd_2560_1440_30fps.mp4"
       posterSrc={heroImage}
       bgImageSrc={heroImage}
       title="Viver com exclusividade no Rio"
