@@ -13,6 +13,8 @@ const exclusiveProperties = [
   { image: property4, title: "Mansão Contemporânea · Gávea", area: 850, bedrooms: 6, parking: 6 },
 ];
 
+const SWIPE_THRESHOLD = 50;
+
 const ExclusiveGallery = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,51 +48,65 @@ const ExclusiveGallery = () => {
           </h2>
         </div>
 
-        {/* Carousel */}
+        {/* Carousel with arrows outside */}
         <div className="relative max-w-6xl mx-auto">
-          <div className="relative overflow-hidden rounded-[6px] aspect-[4/3] md:aspect-[16/9] lg:aspect-[2/1]">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={currentIndex}
-                src={current.image}
-                alt={current.title}
-                className="w-full h-full object-cover"
-                initial={{ opacity: 0, scale: 1.02 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6 }}
-              />
-            </AnimatePresence>
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />
-
-            {/* Ver detalhes button inside image */}
-            <motion.div
-              className="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-8"
-              key={`btn-${currentIndex}`}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 bg-cream/90 hover:bg-cream text-foreground px-5 py-2.5 rounded-full text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-all duration-300"
-              >
-                Ver detalhes
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-            </motion.div>
-
-            {/* Navigation arrows */}
+          <div className="flex items-center gap-3 md:gap-5">
+            {/* Left arrow - hidden on mobile, shown on md+ */}
             <button
               onClick={() => goTo("prev")}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-charcoal/40 backdrop-blur-md hover:bg-charcoal/60 rounded-full flex items-center justify-center text-cream transition-all duration-300"
+              className="hidden md:flex flex-shrink-0 w-11 h-11 bg-muted hover:bg-muted/80 rounded-full items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
               aria-label="Anterior"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
+
+            {/* Image container with swipe */}
+            <div className="flex-1 min-w-0">
+              <div className="relative overflow-hidden rounded-[6px] aspect-[4/3] md:aspect-[16/9] lg:aspect-[2/1]">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentIndex}
+                    src={current.image}
+                    alt={current.title}
+                    className="w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.02 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6 }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.15}
+                    onDragEnd={(_, info) => {
+                      if (info.offset.x < -SWIPE_THRESHOLD) goTo("next");
+                      else if (info.offset.x > SWIPE_THRESHOLD) goTo("prev");
+                    }}
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent pointer-events-none" />
+
+                {/* Ver detalhes button inside image */}
+                <motion.div
+                  className="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-8 pointer-events-auto"
+                  key={`btn-${currentIndex}`}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <a
+                    href="#"
+                    className="inline-flex items-center gap-2 bg-cream/90 hover:bg-cream text-foreground px-5 py-2.5 rounded-full text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-all duration-300"
+                  >
+                    Ver detalhes
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Right arrow - hidden on mobile */}
             <button
               onClick={() => goTo("next")}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-charcoal/40 backdrop-blur-md hover:bg-charcoal/60 rounded-full flex items-center justify-center text-cream transition-all duration-300"
+              className="hidden md:flex flex-shrink-0 w-11 h-11 bg-muted hover:bg-muted/80 rounded-full items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
               aria-label="Próximo"
             >
               <ChevronRight className="w-5 h-5" />
@@ -119,18 +135,34 @@ const ExclusiveGallery = () => {
             </div>
           </motion.div>
 
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-6">
-            {exclusiveProperties.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIndex(i)}
-                className={`h-1 rounded-full transition-all duration-300 ${
-                  i === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-border"
-                }`}
-                aria-label={`Imóvel ${i + 1}`}
-              />
-            ))}
+          {/* Dots + mobile arrows */}
+          <div className="flex items-center justify-center gap-3 mt-6">
+            <button
+              onClick={() => goTo("prev")}
+              className="md:hidden w-8 h-8 bg-muted hover:bg-muted/80 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
+              aria-label="Anterior"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <div className="flex gap-2">
+              {exclusiveProperties.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentIndex(i)}
+                  className={`h-1 rounded-full transition-all duration-300 ${
+                    i === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-border"
+                  }`}
+                  aria-label={`Imóvel ${i + 1}`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={() => goTo("next")}
+              className="md:hidden w-8 h-8 bg-muted hover:bg-muted/80 rounded-full flex items-center justify-center text-foreground/60 hover:text-foreground transition-all duration-300"
+              aria-label="Próximo"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </motion.div>
