@@ -110,11 +110,15 @@ const ScrollExpandMedia = ({
     };
   }, [scrollProgress, mediaFullyExpanded, touchStartY]);
 
-  // Logo animation: fade out after 3.6s
+  // Logo animation: mark intro done after 3.6s (logos stay visible, scroll hint appears)
   useEffect(() => {
     const timer = setTimeout(() => setLogoAnimDone(true), 3600);
     return () => clearTimeout(timer);
   }, []);
+
+  // Scroll-based logo transform: center → header position
+  const logoTop = logoAnimDone ? `calc(50% - ${scrollProgress * (50 - 2)}%)` : '50%';
+  const logoScaleValue = 1 - scrollProgress * 0.55; // 1 → 0.45
 
   return (
     <div className="relative">
@@ -151,9 +155,15 @@ const ScrollExpandMedia = ({
             {/* Co-branding logo animation */}
             <motion.div
               className="absolute z-20 flex items-center justify-center gap-6"
-              style={{ top: '50%', left: '50%', x: '-50%', y: '-50%' }}
-              animate={{ opacity: showContent ? 0 : (logoAnimDone ? 0 : 1) }}
-              transition={{ duration: 0.8 }}
+              style={{
+                top: logoTop,
+                left: '50%',
+                x: '-50%',
+                y: '-50%',
+                scale: logoScaleValue,
+              }}
+              animate={{ opacity: showContent ? 0 : 1 }}
+              transition={{ duration: 0.4 }}
             >
               {/* JA Logo - slides in from left */}
               <motion.img
