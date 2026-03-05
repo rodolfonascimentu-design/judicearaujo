@@ -9,6 +9,7 @@ import Testimonials from "@/components/Testimonials";
 import FarmsGallery from "@/components/FarmsGallery";
 import OfficeLocations from "@/components/OfficeLocations";
 import Footer from "@/components/Footer";
+import Newsletter from "@/components/Newsletter";
 
 const Index = () => (
   <div className="min-h-screen">
@@ -22,6 +23,7 @@ const Index = () => (
     <FarmsGallery />
     <BlogPreview />
     <OfficeLocations />
+    <Newsletter />
     <Footer />
   </div>
 );
