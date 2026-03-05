@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ["'Playfair Display'", "Georgia", "serif"],
-        sans: ["'Inter'", "system-ui", "sans-serif"],
+        serif: ["'Lora'", "Georgia", "serif"],
+        sans: ["'Outfit'", "system-ui", "sans-serif"],
+        display: ["'Cinzel'", "'Lora'", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

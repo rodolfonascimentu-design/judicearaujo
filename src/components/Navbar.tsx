@@ -55,7 +55,7 @@ const Navbar = () => {
               <img
                 src={logoJA}
                 alt="Judice & Araujo"
-                className="h-10 lg:h-12 w-auto brightness-0 invert"
+                className="h-6 lg:h-7 w-auto brightness-0 invert"
               />
             </a>
 
@@ -104,7 +104,7 @@ const Navbar = () => {
             <img
               src={logoJA}
               alt="Judice & Araujo"
-              className="h-12 w-auto brightness-0 invert mb-10"
+              className="h-8 w-auto brightness-0 invert mb-10"
             />
             <div className="flex flex-col items-center gap-8">
               {navLinks.map((link, i) => (

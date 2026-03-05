@@ -17,7 +17,7 @@ const LuxuryHighlights = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="bairros" className="py-24 lg:py-32 bg-background">
+    <section id="bairros" className="py-32 lg:py-44 bg-background">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <SectionHeader
           title="Categorias Exclusivas"
@@ -27,32 +27,31 @@ const LuxuryHighlights = () => {
 
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto px-6 lg:px-12 pb-4 snap-x snap-mandatory scrollbar-hide cursor-grab"
+        className="flex gap-5 overflow-x-auto px-6 lg:px-12 pb-4 snap-x snap-mandatory scrollbar-hide cursor-grab"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {categories.map((cat, i) => (
           <motion.div
             key={cat.title}
-            className="relative flex-shrink-0 w-[320px] md:w-[400px] h-[500px] md:h-[550px] overflow-hidden snap-start group cursor-pointer"
+            className="relative flex-shrink-0 w-[300px] md:w-[380px] h-[520px] md:h-[580px] overflow-hidden snap-start group cursor-pointer"
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
+            transition={{ duration: 0.7, delay: i * 0.12 }}
           >
             <img
               src={cat.image}
               alt={cat.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
-            {/* Glow effect on hover */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gold/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-transparent" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-primary/5" />
             <div className="absolute bottom-0 left-0 right-0 p-8">
-              <p className="font-sans text-xs tracking-[0.25em] uppercase text-gold-light mb-2">
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-cream/60 mb-3 font-light">
                 {cat.subtitle}
               </p>
-              <h3 className="font-serif text-2xl md:text-3xl font-medium text-cream">
+              <h3 className="font-display text-xl md:text-2xl font-normal text-cream tracking-[0.04em] uppercase">
                 {cat.title}
               </h3>
             </div>

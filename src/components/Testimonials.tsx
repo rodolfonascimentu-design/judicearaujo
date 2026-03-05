@@ -31,11 +31,11 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <section className="py-24 lg:py-32 px-6 lg:px-12 bg-background">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-32 lg:py-44 px-6 lg:px-12 bg-background">
+      <div className="max-w-3xl mx-auto">
         <SectionHeader title="Depoimentos" />
 
-        <div className="relative min-h-[250px] flex items-center justify-center">
+        <div className="relative min-h-[280px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
@@ -43,17 +43,16 @@ const Testimonials = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
             >
-              {/* Quote marks */}
-              <span className="font-serif text-6xl text-gold/30 leading-none block mb-4">"</span>
-              <p className="font-serif text-xl md:text-2xl italic text-foreground leading-relaxed mb-8 max-w-3xl">
+              <span className="font-display text-5xl text-primary/20 leading-none block mb-6">"</span>
+              <p className="font-serif text-lg md:text-xl italic text-foreground leading-[1.8] mb-10 max-w-2xl mx-auto">
                 {testimonials[current].quote}
               </p>
-              <p className="font-sans text-sm font-medium text-foreground tracking-wider uppercase">
+              <p className="font-sans text-[11px] font-medium text-foreground tracking-[0.2em] uppercase">
                 {testimonials[current].name}
               </p>
-              <p className="font-sans text-xs text-muted-foreground tracking-wider uppercase mt-1">
+              <p className="font-sans text-[10px] text-muted-foreground tracking-[0.2em] uppercase mt-1.5">
                 {testimonials[current].location}
               </p>
             </motion.div>
@@ -61,13 +60,13 @@ const Testimonials = () => {
         </div>
 
         {/* Dots */}
-        <div className="flex justify-center gap-3 mt-8">
+        <div className="flex justify-center gap-3 mt-10">
           {testimonials.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === current ? "bg-gold w-6" : "bg-border"
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                i === current ? "bg-primary w-6" : "bg-border"
               }`}
               aria-label={`Depoimento ${i + 1}`}
             />
