@@ -19,7 +19,7 @@ const CTASection = () => (
       className="relative z-10 text-center px-6"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: false, margin: "-80px" }}
       transition={{ duration: 0.8 }}
     >
       <h2 className="font-display text-2xl md:text-4xl lg:text-5xl font-medium text-cream max-w-3xl mx-auto leading-[1.12] mb-8 tracking-[-0.02em]">

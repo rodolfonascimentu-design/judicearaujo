@@ -49,7 +49,7 @@ const LuxuryHighlights = () => {
               className="relative h-[520px] md:h-[580px] overflow-hidden group cursor-pointer rounded-[4px] block"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, margin: "-80px" }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
             >
               <img

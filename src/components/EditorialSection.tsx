@@ -10,7 +10,7 @@ const EditorialSection = () => (
           className="relative overflow-hidden rounded-[4px] aspect-[3/4] lg:aspect-auto lg:h-[700px]"
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+           viewport={{ once: false, margin: "-80px" }}
           transition={{ duration: 0.8 }}
         >
           <img
@@ -26,7 +26,7 @@ const EditorialSection = () => (
           className="lg:py-16"
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-80px" }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
           <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-8 font-medium">

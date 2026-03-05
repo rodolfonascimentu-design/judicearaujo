@@ -28,7 +28,7 @@ const benefits = [
 
 function CountUp({ target, duration = 2 }: { target: number; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-80px" });
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const ForbesPartnership = () => (
           className="text-left"
           initial={{ opacity: 0, x: -60 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+           viewport={{ once: false, margin: "-80px" }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#aed9d7] mb-10 font-medium">
@@ -92,7 +92,7 @@ const ForbesPartnership = () => (
           className="grid grid-cols-1 sm:grid-cols-2 gap-6"
           initial={{ opacity: 0, x: 60 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-80px" }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
         >
           {benefits.map((b, i) => (
@@ -101,7 +101,7 @@ const ForbesPartnership = () => (
               className="group cursor-default rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 transition-colors duration-300 hover:bg-white/10 hover:border-white/20"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: false, margin: "-80px" }}
               transition={{ duration: 0.6, delay: 0.4 + i * 0.12 }}
               whileHover={{ scale: 1.03, y: -6 }}
             >
@@ -131,7 +131,7 @@ const ForbesPartnership = () => (
         className="w-16 h-px bg-primary-foreground/20 mx-auto mb-6"
         initial={{ opacity: 0, scaleX: 0 }}
         whileInView={{ opacity: 1, scaleX: 1 }}
-        viewport={{ once: true }}
+         viewport={{ once: false, margin: "-80px" }}
         transition={{ duration: 0.8, delay: 0.6 }}
       />
 
@@ -140,7 +140,7 @@ const ForbesPartnership = () => (
         className="font-sans text-lg md:text-xl text-primary-foreground tracking-[0.15em] font-light whitespace-nowrap text-center"
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false, margin: "-80px" }}
         transition={{ duration: 0.7, delay: 0.8 }}
       >
         +<CountUp target={20} duration={1.8} /> países conectados pela rede Forbes Global Properties

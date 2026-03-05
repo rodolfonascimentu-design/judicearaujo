@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ["'Space Grotesk'", "'Urbanist'", "sans-serif"],
-        sans: ["'Urbanist'", "system-ui", "sans-serif"],
-        display: ["'Space Grotesk'", "'Urbanist'", "sans-serif"],
+        serif: ["'Cormorant Garamond'", "Georgia", "serif"],
+        sans: ["'Inter'", "system-ui", "sans-serif"],
+        display: ["'Cormorant Garamond'", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
