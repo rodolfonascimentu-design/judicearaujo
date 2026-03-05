@@ -7,10 +7,10 @@ import exclusive3 from "@/assets/exclusive-3.jpg";
 import exclusive4 from "@/assets/exclusive-4.jpg";
 
 const exclusiveProperties = [
-  { image: property1, title: "Cobertura Duplex · Leblon", area: 480, bedrooms: 5, parking: 4 },
-  { image: property2, title: "Apartamento Frente Mar · Ipanema", area: 320, bedrooms: 4, parking: 3 },
-  { image: property3, title: "Casa à Beira da Lagoa", area: 550, bedrooms: 4, parking: 3 },
-  { image: property4, title: "Mansão Contemporânea · Gávea", area: 850, bedrooms: 6, parking: 6 },
+  { image: exclusive1, title: "Cobertura Duplex · Leblon", area: 480, bedrooms: 5, parking: 4 },
+  { image: exclusive2, title: "Apartamento Frente Mar · Ipanema", area: 320, bedrooms: 4, parking: 3 },
+  { image: exclusive3, title: "Casa à Beira da Lagoa", area: 550, bedrooms: 4, parking: 3 },
+  { image: exclusive4, title: "Mansão Contemporânea · Gávea", area: 850, bedrooms: 6, parking: 6 },
 ];
 
 const SWIPE_THRESHOLD = 50;
