@@ -1,9 +1,9 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ExclusiveGallery from "@/components/ExclusiveGallery";
-import FeaturedProperties from "@/components/FeaturedProperties";
 import EditorialSection from "@/components/EditorialSection";
 import LuxuryHighlights from "@/components/LuxuryHighlights";
+import InstitutionalCTA from "@/components/InstitutionalCTA";
 import BlogPreview from "@/components/BlogPreview";
 import Testimonials from "@/components/Testimonials";
 import CTASection from "@/components/CTASection";
@@ -14,9 +14,9 @@ const Index = () => (
     <Navbar />
     <HeroSection />
     <ExclusiveGallery />
-    <FeaturedProperties />
     <EditorialSection />
     <LuxuryHighlights />
+    <InstitutionalCTA />
     <BlogPreview />
     <Testimonials />
     <CTASection />

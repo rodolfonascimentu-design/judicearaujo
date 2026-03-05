@@ -16,7 +16,7 @@ const HeroOverlayContent = () => (
     </motion.p>
 
     <motion.h1
-      className="font-display text-2xl md:text-4xl lg:text-[44px] font-light text-cream leading-[1.12] tracking-[-0.02em]"
+      className="font-display text-xl md:text-3xl lg:text-[38px] font-light text-cream leading-[1.12] tracking-[-0.02em]"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.7 }}
@@ -33,21 +33,12 @@ const HeroOverlayContent = () => (
       transition={{ delay: 0.3, duration: 0.7 }}
     />
 
-    <motion.p
-      className="font-sans text-sm text-cream/40 max-w-md font-light tracking-wide"
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.35, duration: 0.7 }}
-    >
-      Imóveis únicos nos endereços mais prestigiados
-    </motion.p>
-
-    {/* Search bar */}
+    {/* Search bar - simplified */}
     <motion.div
       className="w-full max-w-2xl bg-cream/5 backdrop-blur-xl border border-cream/8 rounded-[4px] p-1.5 mt-2"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.45, duration: 0.7 }}
+      transition={{ delay: 0.4, duration: 0.7 }}
     >
       <div className="flex flex-col md:flex-row gap-0">
         <input
@@ -57,7 +48,7 @@ const HeroOverlayContent = () => (
         />
         <select className="flex-1 bg-transparent border-b md:border-b-0 md:border-r border-cream/8 px-5 py-3.5 text-sm text-cream/40 focus:outline-none font-sans font-light appearance-none tracking-wide">
           <option>Venda</option>
-          <option>Aluguel</option>
+          <option>Locação</option>
           <option>Temporada</option>
         </select>
         <button className="bg-primary hover:bg-gold-light text-primary-foreground px-8 py-3.5 text-xs font-sans font-medium tracking-[0.15em] uppercase transition-all duration-300 flex items-center justify-center gap-2 rounded-[3px]">

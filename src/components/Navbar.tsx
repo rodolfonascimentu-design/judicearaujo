@@ -37,7 +37,7 @@ const Navbar = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-charcoal/95 backdrop-blur-md shadow-lg"
+            ? "bg-primary/95 backdrop-blur-md shadow-lg"
             : "bg-transparent"
         }`}
         initial={{ y: -100 }}
@@ -46,7 +46,7 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
-            {/* Logo - always visible */}
+            {/* Logo */}
             <a href="#" className="flex-shrink-0">
               <img
                 src={logoJA}
@@ -69,7 +69,7 @@ const Navbar = () => {
                     <a
                       key={link.label}
                       href={link.href}
-                      className="text-[11px] font-sans font-medium tracking-[0.2em] uppercase text-cream/70 hover:text-cream transition-colors duration-300"
+                      className="text-[11px] font-sans font-medium tracking-[0.2em] uppercase text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300"
                     >
                       {link.label}
                     </a>
@@ -79,7 +79,7 @@ const Navbar = () => {
                   <div className="relative">
                     <button
                       onClick={() => setLangOpen(!langOpen)}
-                      className="flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase text-cream/70 hover:text-cream transition-colors"
+                      className="flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                     >
                       {currentLang}
                       <ChevronDown className="w-3 h-3" />
@@ -87,7 +87,7 @@ const Navbar = () => {
                     <AnimatePresence>
                       {langOpen && (
                         <motion.div
-                          className="absolute top-full mt-2 right-0 bg-charcoal/95 backdrop-blur-md border border-cream/10 rounded-[4px] overflow-hidden"
+                          className="absolute top-full mt-2 right-0 bg-primary/95 backdrop-blur-md border border-primary-foreground/10 rounded-[4px] overflow-hidden"
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -4 }}
@@ -97,7 +97,7 @@ const Navbar = () => {
                               key={lang}
                               onClick={() => { setCurrentLang(lang); setLangOpen(false); }}
                               className={`block w-full px-5 py-2 text-[11px] font-sans tracking-[0.15em] uppercase text-left transition-colors ${
-                                lang === currentLang ? "text-cream bg-cream/5" : "text-cream/50 hover:text-cream hover:bg-cream/5"
+                                lang === currentLang ? "text-primary-foreground bg-primary-foreground/5" : "text-primary-foreground/50 hover:text-primary-foreground hover:bg-primary-foreground/5"
                               }`}
                             >
                               {lang}
@@ -109,18 +109,18 @@ const Navbar = () => {
                   </div>
 
                   {/* Font size controls */}
-                  <div className="flex items-center gap-1 border border-cream/10 rounded-[4px] px-1">
+                  <div className="flex items-center gap-1 border border-primary-foreground/10 rounded-[4px] px-1">
                     <button
                       onClick={() => adjustFont(-5)}
-                      className="p-1.5 text-cream/50 hover:text-cream transition-colors"
+                      className="p-1.5 text-primary-foreground/50 hover:text-primary-foreground transition-colors"
                       aria-label="Diminuir fonte"
                     >
                       <Minus className="w-3 h-3" />
                     </button>
-                    <span className="text-[9px] font-sans text-cream/40 tracking-wider uppercase w-5 text-center">A</span>
+                    <span className="text-[9px] font-sans text-primary-foreground/40 tracking-wider uppercase w-5 text-center">A</span>
                     <button
                       onClick={() => adjustFont(5)}
-                      className="p-1.5 text-cream/50 hover:text-cream transition-colors"
+                      className="p-1.5 text-primary-foreground/50 hover:text-primary-foreground transition-colors"
                       aria-label="Aumentar fonte"
                     >
                       <Plus className="w-3 h-3" />
@@ -130,11 +130,11 @@ const Navbar = () => {
               )}
             </AnimatePresence>
 
-            {/* Mobile menu button - only after scroll */}
+            {/* Mobile menu button */}
             {scrolled && (
               <button
                 onClick={() => setMobileOpen(true)}
-                className="lg:hidden text-cream"
+                className="lg:hidden text-primary-foreground"
                 aria-label="Abrir menu"
               >
                 <Menu className="w-6 h-6" />
@@ -148,7 +148,7 @@ const Navbar = () => {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="fixed inset-0 z-[100] bg-charcoal flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[100] bg-primary flex flex-col items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -156,7 +156,7 @@ const Navbar = () => {
           >
             <button
               onClick={() => setMobileOpen(false)}
-              className="absolute top-6 right-6 text-cream"
+              className="absolute top-6 right-6 text-primary-foreground"
               aria-label="Fechar menu"
             >
               <X className="w-7 h-7" />
@@ -172,7 +172,7 @@ const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="font-display text-xl text-cream/90 hover:text-primary transition-colors tracking-[0.1em] uppercase"
+                  className="font-display text-xl text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.1em] uppercase"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
@@ -180,29 +180,25 @@ const Navbar = () => {
                   {link.label}
                 </motion.a>
               ))}
-
-              {/* Mobile language */}
               <div className="flex gap-4 mt-4">
                 {languages.map((lang) => (
                   <button
                     key={lang}
                     onClick={() => setCurrentLang(lang)}
                     className={`text-xs font-sans tracking-[0.15em] uppercase transition-colors ${
-                      lang === currentLang ? "text-cream" : "text-cream/40"
+                      lang === currentLang ? "text-primary-foreground" : "text-primary-foreground/40"
                     }`}
                   >
                     {lang}
                   </button>
                 ))}
               </div>
-
-              {/* Mobile font controls */}
               <div className="flex items-center gap-3 mt-2">
-                <button onClick={() => adjustFont(-5)} className="text-cream/50 hover:text-cream p-2">
+                <button onClick={() => adjustFont(-5)} className="text-primary-foreground/50 hover:text-primary-foreground p-2">
                   <Minus className="w-4 h-4" />
                 </button>
-                <span className="text-xs font-sans text-cream/40 tracking-wider">Aa</span>
-                <button onClick={() => adjustFont(5)} className="text-cream/50 hover:text-cream p-2">
+                <span className="text-xs font-sans text-primary-foreground/40 tracking-wider">Aa</span>
+                <button onClick={() => adjustFont(5)} className="text-primary-foreground/50 hover:text-primary-foreground p-2">
                   <Plus className="w-4 h-4" />
                 </button>
               </div>

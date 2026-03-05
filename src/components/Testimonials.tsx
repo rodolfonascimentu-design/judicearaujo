@@ -1,80 +1,62 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import SectionHeader from "./SectionHeader";
+import { TestimonialsSection } from "@/components/ui/testimonials-with-marquee";
 
 const testimonials = [
   {
-    quote: "A Judice & Araujo encontrou o apartamento perfeito para nossa família no Leblon. O atendimento foi impecável do início ao fim.",
-    name: "Mariana & Pedro Vasconcellos",
-    location: "Leblon",
+    author: {
+      name: "Romero Rodrigues",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://ui-avatars.com/api/?name=RR&background=003F36&color=FFF8E2&size=150",
+    },
+    text: "O profissionalismo, o cuidado e o carinho da Judice & Araujo são diferenciais essenciais e únicos para quem procura a casa dos seus sonhos.",
   },
   {
-    quote: "Profissionalismo e discrição incomparáveis. Venderam nossa cobertura em Ipanema acima do valor que esperávamos.",
-    name: "Ricardo Almeida",
-    location: "Ipanema",
+    author: {
+      name: "Ana Paula Monteiro",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://ui-avatars.com/api/?name=AM&background=003F36&color=FFF8E2&size=150",
+    },
+    text: "Excelente atendimento! A equipe foi muito atenciosa e nos ajudou a encontrar o imóvel perfeito no Leblon. Recomendo a todos que buscam qualidade e confiança.",
   },
   {
-    quote: "Uma experiência de consultoria imobiliária que realmente entende o significado de luxo e exclusividade.",
-    name: "Ana Clara Montenegro",
-    location: "Lagoa",
+    author: {
+      name: "Ricardo Almeida",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://ui-avatars.com/api/?name=RA&background=003F36&color=FFF8E2&size=150",
+    },
+    text: "Profissionalismo e discrição incomparáveis. Venderam nossa cobertura em Ipanema acima do valor que esperávamos. Experiência impecável.",
+  },
+  {
+    author: {
+      name: "Mariana Vasconcellos",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://ui-avatars.com/api/?name=MV&background=003F36&color=FFF8E2&size=150",
+    },
+    text: "A Judice & Araujo encontrou o apartamento perfeito para nossa família. O atendimento foi impecável do início ao fim, com total transparência.",
+  },
+  {
+    author: {
+      name: "Carlos Eduardo Silva",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://ui-avatars.com/api/?name=CS&background=003F36&color=FFF8E2&size=150",
+    },
+    text: "Empresa séria e comprometida. Nos acompanharam em todo o processo de compra com muita dedicação. A melhor imobiliária do Rio sem dúvidas.",
+  },
+  {
+    author: {
+      name: "Fernanda Costa",
+      handle: "Google Reviews ★★★★★",
+      avatar: "https://ui-avatars.com/api/?name=FC&background=003F36&color=FFF8E2&size=150",
+    },
+    text: "Uma experiência de consultoria imobiliária que realmente entende o significado de luxo e exclusividade. Equipe excepcional.",
   },
 ];
 
-const Testimonials = () => {
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <section className="py-32 lg:py-44 px-6 lg:px-12 bg-background">
-      <div className="max-w-3xl mx-auto">
-        <SectionHeader title="Depoimentos" />
-
-        <div className="relative min-h-[280px] flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              className="text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="font-display text-5xl text-primary/20 leading-none block mb-6">"</span>
-              <p className="font-serif text-lg md:text-xl italic text-foreground leading-[1.8] mb-10 max-w-2xl mx-auto">
-                {testimonials[current].quote}
-              </p>
-              <p className="font-sans text-[11px] font-medium text-foreground tracking-[0.2em] uppercase">
-                {testimonials[current].name}
-              </p>
-              <p className="font-sans text-[10px] text-muted-foreground tracking-[0.2em] uppercase mt-1.5">
-                {testimonials[current].location}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Dots */}
-        <div className="flex justify-center gap-3 mt-10">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                i === current ? "bg-primary w-6" : "bg-border"
-              }`}
-              aria-label={`Depoimento ${i + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+const Testimonials = () => (
+  <TestimonialsSection
+    title="O que pensam nossos clientes"
+    description="Avaliações reais de clientes que confiaram na Judice & Araujo para encontrar o imóvel ideal"
+    testimonials={testimonials}
+  />
+);
 
 export default Testimonials;
