@@ -57,7 +57,7 @@ const HeroOverlayContent = () => {
             {activeType === type && (
               <motion.div
                 layoutId="searchTabPill"
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-8 rounded-full"
+                className="absolute bottom-0 left-0 right-0 mx-auto h-[2px] w-8 rounded-full"
                 style={{ background: "hsl(var(--gold))" }}
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               />
@@ -77,67 +77,61 @@ const HeroOverlayContent = () => {
         <div
           className="w-full rounded-2xl overflow-hidden"
           style={{
-            background: "rgba(0, 63, 54, 0.85)",
+            background: "rgba(255, 255, 255, 0.92)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(255, 255, 255, 0.08)",
-            boxShadow: "0 20px 50px -15px rgba(0,0,0,0.4)",
+            border: "1px solid rgba(255, 255, 255, 0.5)",
+            boxShadow: "0 20px 50px -15px rgba(0,0,0,0.25)",
           }}
         >
           {/* Desktop layout */}
           <div className="hidden md:flex items-center px-5 py-4 gap-4">
-            <div className="flex-1">
+            <div className="flex-1 text-left">
               <p className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-1.5"
-                style={{ color: "hsl(var(--cream))" }}>
+                style={{ color: "hsl(var(--charcoal) / 0.45)" }}>
                 Buscar imóvel
               </p>
               <input
                 type="text"
                 placeholder="Bairro, cidade, condomínio ou código"
-                className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none dark-search-input"
-                style={{
-                  color: "hsl(var(--cream))",
-                }}
+                className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
+                style={{ color: "hsl(var(--charcoal))" }}
               />
             </div>
             <motion.button
-              className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+              className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-primary"
               style={{
-                background: "hsl(var(--gold))",
-                boxShadow: "0 4px 14px -2px hsl(var(--gold) / 0.5)",
+                boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
               }}
               whileHover={{
                 scale: 1.08,
-                boxShadow: "0 6px 20px -2px hsl(var(--gold) / 0.6)",
+                boxShadow: "0 6px 20px -2px hsl(var(--primary) / 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              <Search className="w-[18px] h-[18px] text-white" />
+              <Search className="w-[18px] h-[18px]" style={{ color: "hsl(var(--gold))" }} />
             </motion.button>
           </div>
 
           {/* Mobile layout */}
           <div className="md:hidden px-4 py-4 space-y-3">
-            <div>
+            <div className="text-left">
               <p className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-1.5"
-                style={{ color: "hsl(var(--cream))" }}>
+                style={{ color: "hsl(var(--charcoal) / 0.45)" }}>
                 Buscar imóvel
               </p>
               <input
                 type="text"
                 placeholder="Bairro, cidade ou código"
-                className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none dark-search-input"
-                style={{
-                  color: "hsl(var(--cream))",
-                }}
+                className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
+                style={{ color: "hsl(var(--charcoal))" }}
               />
             </div>
             <motion.button
-              className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-[12px] font-sans font-semibold tracking-[0.18em] uppercase text-white"
+              className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-[12px] font-sans font-semibold tracking-[0.18em] uppercase text-primary-foreground bg-primary"
               style={{
-                background: "hsl(var(--gold))",
-                boxShadow: "0 4px 14px -2px hsl(var(--gold) / 0.5)",
+                boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
               }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
@@ -145,7 +139,7 @@ const HeroOverlayContent = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-4 h-4" style={{ color: "hsl(var(--gold))" }} />
               Buscar
             </motion.button>
           </div>
