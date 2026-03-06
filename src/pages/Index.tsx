@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ExclusiveGallery from "@/components/ExclusiveGallery";
@@ -19,6 +18,11 @@ const Index = () => {
   const location = useLocation();
 
   useEffect(() => {
+    document.title = "Judice & Araujo — Imóveis de Luxo no Rio de Janeiro";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Imóveis de luxo exclusivos nos endereços mais prestigiados do Rio de Janeiro. Leblon, Ipanema, Lagoa, Gávea e Jardim Botânico. Membro exclusivo Forbes Global Properties.");
+  }, []);
+
+  useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get("search") === "1") {
       setTimeout(() => {
@@ -30,11 +34,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <Helmet>
-        <title>Judice &amp; Araujo — Imóveis de Luxo no Rio de Janeiro</title>
-        <meta name="description" content="Imóveis de luxo exclusivos nos endereços mais prestigiados do Rio de Janeiro. Leblon, Ipanema, Lagoa, Gávea e Jardim Botânico. Membro exclusivo Forbes Global Properties." />
-        <link rel="canonical" href="https://www.judicearaujo.com.br" />
-      </Helmet>
       <Navbar />
       <main>
         <HeroSection />
