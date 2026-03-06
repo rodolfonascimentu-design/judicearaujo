@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJaGreen from "@/assets/logo-ja-green.png";
@@ -18,6 +19,8 @@ const Navbar = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [fontSize, setFontSize] = useState(100);
   const [heroExpanded, setHeroExpanded] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const navLinks = [
     { label: t("nav.launches"), href: "#lancamentos" },
@@ -48,7 +51,8 @@ const Navbar = () => {
     setFontSize((prev) => Math.min(130, Math.max(80, prev + delta)));
   };
 
-  const showGreen = pastHero;
+  const showGreen = !isHomePage || pastHero;
+  const isExpanded = !isHomePage || heroExpanded;
 
   return (
     <>
@@ -71,8 +75,8 @@ const Navbar = () => {
               href="#"
               className="flex-shrink-0 flex items-center gap-2 transition-all duration-500"
               style={{
-                opacity: heroExpanded ? 1 : 0,
-                pointerEvents: heroExpanded ? "auto" : "none",
+                opacity: isExpanded ? 1 : 0,
+                pointerEvents: isExpanded ? "auto" : "none",
               }}
             >
               <div className="flex items-center gap-2">
@@ -96,8 +100,8 @@ const Navbar = () => {
             <div
               className="hidden lg:flex items-center gap-8 transition-all duration-500"
               style={{
-                opacity: heroExpanded ? 1 : 0,
-                pointerEvents: heroExpanded ? "auto" : "none",
+                opacity: isExpanded ? 1 : 0,
+                pointerEvents: isExpanded ? "auto" : "none",
               }}
             >
                   {navLinks.map((link) => (
@@ -180,8 +184,8 @@ const Navbar = () => {
               onClick={() => setMobileOpen(!mobileOpen)}
               className={`lg:hidden relative w-7 h-7 flex flex-col items-center justify-center transition-all duration-500 ${pastHero ? "text-primary" : "text-cream"}`}
               style={{
-                opacity: heroExpanded ? 1 : 0,
-                pointerEvents: heroExpanded ? "auto" : "none",
+                opacity: isExpanded ? 1 : 0,
+                pointerEvents: isExpanded ? "auto" : "none",
               }}
               aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
             >
