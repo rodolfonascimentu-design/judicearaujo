@@ -211,8 +211,8 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
   const moveT = clamp(p / 0.8);
   const topVh = lerp(42, 2.5, moveT);
 
-  // Fade-out when logos approach the header (~12vh = ~20px before h-20 header)
-  const proximityFade = topVh <= 12 ? clamp((12 - topVh) / 10) : 0;
+  // Fade-out when logos approach the header (~30vh threshold for early fade)
+  const proximityFade = topVh <= 30 ? clamp((30 - topVh) / 28) : 0;
   const fadeOutOpacity = 1 - proximityFade;
   const isVisible = barVisible && !pastHero && heroProgress < 0.98;
   const finalOpacity = isVisible ? fadeOutOpacity : 0;

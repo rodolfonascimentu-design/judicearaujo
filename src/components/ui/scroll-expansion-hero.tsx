@@ -25,6 +25,7 @@ const ScrollExpandMedia = ({
   const [mediaFullyExpanded, setMediaFullyExpanded] = useState(false);
   const [touchStartY, setTouchStartY] = useState(0);
   const [pageReady, setPageReady] = useState(false);
+  const [contentFadeOut, setContentFadeOut] = useState(1);
 
   useEffect(() => {
     setScrollProgress(0);
@@ -111,6 +112,21 @@ const ScrollExpandMedia = ({
     return () => clearTimeout(timer);
   }, []);
 
+  // Fade-out H1/search as user scrolls down after expansion
+  useEffect(() => {
+    if (!mediaFullyExpanded) {
+      setContentFadeOut(1);
+      return;
+    }
+    const onScroll = () => {
+      const fade = Math.max(0, 1 - window.scrollY / 200);
+      setContentFadeOut(fade);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [mediaFullyExpanded]);
+
   return (
     <div className="relative">
       <section className="relative h-screen overflow-hidden">
@@ -129,7 +145,7 @@ const ScrollExpandMedia = ({
               className="w-full h-full object-cover scale-110"
               style={{
                 filter: showContent
-                  ? 'blur(2px)'
+                  ? 'blur(0px)'
                   : `blur(${6 - scrollProgress * 6}px)`,
                 transition: 'filter 0.4s ease',
               }}
@@ -145,8 +161,8 @@ const ScrollExpandMedia = ({
               style={{ backgroundColor: 'hsl(var(--charcoal))' }}
               animate={{
                 opacity: showContent
-                  ? 0.55
-                  : 0.45 - scrollProgress * 0.2,
+                  ? 0.20
+                  : 0.45 - scrollProgress * 0.25,
               }}
               transition={{ duration: 0.8 }} />
             
@@ -174,9 +190,9 @@ const ScrollExpandMedia = ({
             <motion.div
               className="absolute inset-0 z-20 flex items-center justify-center px-6"
               initial={{ opacity: 0 }}
-              animate={{ opacity: showContent ? 1 : 0 }}
+              animate={{ opacity: showContent ? contentFadeOut : 0 }}
               transition={{ duration: 0.6, delay: showContent ? 0.2 : 0 }}
-              style={{ pointerEvents: showContent ? 'auto' : 'none' }}>
+              style={{ pointerEvents: showContent && contentFadeOut > 0.1 ? 'auto' : 'none' }}>
               
                 {overlayContent}
               </motion.div>
