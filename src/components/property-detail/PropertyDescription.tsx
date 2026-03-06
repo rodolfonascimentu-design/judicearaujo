@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Info, Share2, Calculator } from "lucide-react";
+import { MessageCircle, Info, Share2, Calculator, ArrowRight } from "lucide-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 const PropertyDescription = ({ property }: Props) => {
   return (
     <section className="py-20 md:py-28 px-6 md:px-16 bg-background">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 lg:gap-16">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
         {/* Left — editorial description */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -25,9 +25,16 @@ const PropertyDescription = ({ property }: Props) => {
           </h2>
           <div className="space-y-6">
             {property.description.map((p, i) => (
-              <p key={i} className="font-sans text-sm md:text-base text-muted-foreground leading-[1.9]">
+              <motion.p
+                key={i}
+                className="font-sans text-sm md:text-base text-muted-foreground leading-[1.9]"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
                 {p}
-              </p>
+              </motion.p>
             ))}
           </div>
         </motion.div>
@@ -35,53 +42,69 @@ const PropertyDescription = ({ property }: Props) => {
         {/* Right — sticky conversion card */}
         <div className="lg:sticky lg:top-24 self-start">
           <motion.div
-            className="bg-card border border-border rounded-[4px] p-8 space-y-6"
+            className="relative overflow-hidden bg-card border border-border/50 rounded-lg p-0 shadow-[0_8px_40px_-12px_hsl(var(--foreground)/0.08)]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            {/* Status */}
-            <span className="inline-block font-sans text-[10px] tracking-[0.2em] uppercase px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
-              {property.status === "launch" ? "Lançamento" : property.status === "construction" ? "Em obras" : "Pronto para morar"}
-            </span>
+            {/* Top accent bar */}
+            <div className="h-1 w-full bg-primary" />
 
-            {/* Price */}
-            <div>
-              <p className="font-sans text-xs text-muted-foreground mb-1">{property.priceLabel}</p>
-              <p className="font-display text-2xl text-foreground">{property.price}</p>
-            </div>
-
-            {/* CTA buttons */}
-            <div className="space-y-3">
-              <a
-                href={`https://wa.me/${property.agent.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full bg-primary text-primary-foreground py-3 rounded-full text-xs font-sans font-medium tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
+            <div className="p-8 space-y-6">
+              {/* Status badge */}
+              <motion.span
+                className="inline-block font-sans text-[10px] tracking-[0.2em] uppercase px-4 py-1.5 rounded-full bg-primary/8 text-primary font-medium border border-primary/15"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.4, delay: 0.4 }}
               >
-                <MessageCircle className="w-4 h-4" />
-                WhatsApp
-              </a>
-              <button className="flex items-center justify-center gap-2 w-full border border-border text-foreground py-3 rounded-full text-xs font-sans font-medium tracking-[0.1em] uppercase hover:bg-muted/50 transition-colors">
-                <Info className="w-4 h-4" />
-                Solicitar Informações
-              </button>
-              <button className="flex items-center justify-center gap-2 w-full border border-border text-foreground py-3 rounded-full text-xs font-sans font-medium tracking-[0.1em] uppercase hover:bg-muted/50 transition-colors">
-                <Share2 className="w-4 h-4" />
-                Compartilhar
-              </button>
-            </div>
+                {property.status === "launch" ? "Lançamento" : property.status === "construction" ? "Em obras" : "Pronto para morar"}
+              </motion.span>
 
-            {/* Financing */}
-            <div className="border-t border-border pt-6">
-              <p className="font-sans text-sm text-muted-foreground mb-3">
-                Que tal financiar a compra deste imóvel?
-              </p>
-              <button className="flex items-center justify-center gap-2 w-full bg-accent text-accent-foreground py-3 rounded-full text-xs font-sans font-medium tracking-[0.1em] uppercase hover:bg-accent/80 transition-colors">
-                <Calculator className="w-4 h-4" />
-                Quero Simular
-              </button>
+              {/* Price */}
+              <div>
+                <p className="font-sans text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-2">{property.priceLabel}</p>
+                <p className="font-display text-3xl text-foreground">{property.price}</p>
+              </div>
+
+              {/* Divider */}
+              <div className="h-px bg-border" />
+
+              {/* CTA buttons */}
+              <div className="space-y-3">
+                <a
+                  href={`https://wa.me/${property.agent.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center gap-2.5 w-full bg-primary text-primary-foreground py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.4)]"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                </a>
+                <button className="group flex items-center justify-center gap-2.5 w-full border border-border text-foreground py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
+                  <Info className="w-4 h-4" />
+                  Solicitar Informações
+                </button>
+                <button className="group flex items-center justify-center gap-2 w-full text-muted-foreground py-2.5 text-xs font-sans font-medium tracking-[0.1em] uppercase hover:text-foreground transition-colors duration-300">
+                  <Share2 className="w-3.5 h-3.5" />
+                  Compartilhar
+                </button>
+              </div>
+
+              {/* Financing */}
+              <div className="relative bg-[hsl(var(--muted))] rounded-lg p-5 -mx-1">
+                <p className="font-sans text-xs text-muted-foreground mb-3 leading-relaxed">
+                  Que tal financiar a compra deste imóvel?
+                </p>
+                <button className="group flex items-center justify-center gap-2.5 w-full bg-foreground text-background py-3 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-foreground/90 transition-all duration-300">
+                  <Calculator className="w-4 h-4" />
+                  Quero Simular
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                </button>
+              </div>
             </div>
           </motion.div>
         </div>

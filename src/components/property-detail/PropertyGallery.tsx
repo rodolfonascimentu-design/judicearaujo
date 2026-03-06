@@ -1,17 +1,11 @@
 import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight, Play, Eye } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Eye, Camera, Video, View } from "lucide-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
 
 interface Props {
   property: PropertyDetailData;
 }
-
-const categories = [
-  { key: "photos", label: "Fotos" },
-  { key: "video", label: "Vídeo" },
-  { key: "tour", label: "Tour Virtual" },
-];
 
 const PropertyGallery = ({ property }: Props) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -55,58 +49,61 @@ const PropertyGallery = ({ property }: Props) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, margin: "-80px" }}
           transition={{ duration: 0.7 }}
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
-          <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-3">
-            Galeria
-          </p>
-          <h2 className="font-display text-2xl md:text-4xl text-foreground">
-            Explore cada detalhe
-          </h2>
+          <div>
+            <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-3">
+              Galeria
+            </p>
+            <h2 className="font-display text-2xl md:text-4xl text-foreground">
+              Explore cada detalhe
+            </h2>
+          </div>
+
+          {/* Media type badges */}
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-sans font-medium tracking-wide">
+              <Camera className="w-3.5 h-3.5" />
+              {property.images.length} fotos
+            </span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-muted-foreground text-xs font-sans font-medium tracking-wide hover:bg-muted/50 transition-colors cursor-pointer">
+              <Video className="w-3.5 h-3.5" />
+              Vídeo
+            </span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-muted-foreground text-xs font-sans font-medium tracking-wide hover:bg-muted/50 transition-colors cursor-pointer">
+              <View className="w-3.5 h-3.5" />
+              Tour 360°
+            </span>
+          </div>
         </motion.div>
       </div>
 
-      {/* Horizontal scroll row */}
-      {categories.map((cat) => (
-        <div key={cat.key} className="mb-10">
-          <p className="px-6 md:px-16 font-sans text-xs tracking-[0.15em] uppercase text-muted-foreground mb-4">
-            {cat.label}
-          </p>
-          <div className="flex gap-4 overflow-x-auto scrollbar-thin px-6 md:px-16 pb-4">
-            {cat.key === "photos"
-              ? property.images.map((img, i) => (
-                  <motion.button
-                    key={i}
-                    onClick={() => openLightbox(i)}
-                    className="relative flex-shrink-0 w-72 md:w-96 h-52 md:h-64 rounded-[4px] overflow-hidden group"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <img src={img} alt={`Foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                      <Eye className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                  </motion.button>
-                ))
-              : [0, 1].map((i) => (
-                  <div
-                    key={i}
-                    className="relative flex-shrink-0 w-72 md:w-96 h-52 md:h-64 rounded-[4px] overflow-hidden bg-muted flex items-center justify-center"
-                  >
-                    <Play className="w-10 h-10 text-muted-foreground/40" />
-                    <span className="absolute bottom-4 left-4 font-sans text-xs text-muted-foreground">
-                      {cat.label} {i + 1}
-                    </span>
-                  </div>
-                ))}
-          </div>
-        </div>
-      ))}
+      {/* Photos horizontal scroll */}
+      <div className="flex gap-4 overflow-x-auto scrollbar-thin px-6 md:px-16 pb-4">
+        {property.images.map((img, i) => (
+          <motion.button
+            key={i}
+            onClick={() => openLightbox(i)}
+            className="relative flex-shrink-0 w-72 md:w-96 h-52 md:h-64 rounded-[4px] overflow-hidden group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: i * 0.06 }}
+            whileHover={{ scale: 1.02 }}
+          >
+            <img src={img} alt={`Foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500 flex items-center justify-center">
+              <Eye className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+          </motion.button>
+        ))}
+      </div>
 
       {/* Lightbox */}
       <AnimatePresence>
         {lightboxOpen && (
           <motion.div
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

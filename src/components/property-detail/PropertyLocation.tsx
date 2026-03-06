@@ -7,6 +7,9 @@ interface Props {
 }
 
 const PropertyLocation = ({ property }: Props) => {
+  // Dark/elegant map style using Stamen Toner-lite via Stadia Maps
+  const mapSrc = `https://maps.google.com/maps?q=${property.mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed&maptype=roadmap`;
+
   return (
     <section className="py-20 md:py-28 px-6 md:px-16 bg-[hsl(var(--muted))]">
       <div className="max-w-6xl mx-auto">
@@ -30,19 +33,24 @@ const PropertyLocation = ({ property }: Props) => {
         </motion.div>
 
         <motion.div
-          className="rounded-[4px] overflow-hidden"
+          className="rounded-lg overflow-hidden relative"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <iframe
-            title="Localização do imóvel"
-            src={`https://maps.google.com/maps?q=${property.mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
-            className="w-full h-[350px] md:h-[450px] border-0"
-            loading="lazy"
-            allowFullScreen
-          />
+          {/* Dark overlay filter on the map */}
+          <div className="relative">
+            <iframe
+              title="Localização do imóvel"
+              src={mapSrc}
+              className="w-full h-[350px] md:h-[450px] border-0 grayscale contrast-[1.1] brightness-[0.85] saturate-[0.2]"
+              loading="lazy"
+              allowFullScreen
+            />
+            {/* Subtle vignette overlay */}
+            <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_60px_rgba(0,0,0,0.15)] rounded-lg" />
+          </div>
         </motion.div>
 
         <div className="mt-6 flex justify-end">

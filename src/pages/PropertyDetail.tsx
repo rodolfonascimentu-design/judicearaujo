@@ -9,12 +9,9 @@ import PropertyStory from "@/components/property-detail/PropertyStory";
 import PropertyDescription from "@/components/property-detail/PropertyDescription";
 import PropertyGallery from "@/components/property-detail/PropertyGallery";
 import PropertyFeatures from "@/components/property-detail/PropertyFeatures";
-import PropertyUnits from "@/components/property-detail/PropertyUnits";
-import PropertyTimeline from "@/components/property-detail/PropertyTimeline";
 import PropertyLocation from "@/components/property-detail/PropertyLocation";
 import PropertyNeighborhood from "@/components/property-detail/PropertyNeighborhood";
 import PropertyNearby from "@/components/property-detail/PropertyNearby";
-import PropertyAgent from "@/components/property-detail/PropertyAgent";
 import PropertyContact from "@/components/property-detail/PropertyContact";
 import PropertySimilar from "@/components/property-detail/PropertySimilar";
 
@@ -34,12 +31,9 @@ const PropertyDetail = () => {
       <PropertyDescription property={property} />
       <PropertyGallery property={property} />
       <PropertyFeatures property={property} />
-      <PropertyUnits property={property} />
-      <PropertyTimeline property={property} />
       <PropertyLocation property={property} />
       <PropertyNeighborhood property={property} />
       <PropertyNearby property={property} />
-      <PropertyAgent property={property} />
       <PropertyContact />
       <PropertySimilar property={property} />
       <Footer />
