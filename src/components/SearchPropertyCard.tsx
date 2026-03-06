@@ -75,11 +75,8 @@ const SearchPropertyCard = ({
         )}
 
         {/* Hover overlay with extra info */}
-        <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex flex-col items-center justify-center">
-          <motion.div className="opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-3 group-hover:translate-y-0 flex flex-col items-center gap-2">
-            <span className="text-cream/80 text-[10px] font-sans tracking-[0.15em] uppercase">
-              {type} · {parking} {t("unit.parking")}
-            </span>
+        <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex items-center justify-center">
+          <motion.div className="opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-3 group-hover:translate-y-0">
             <span className="inline-flex items-center gap-2 bg-cream/95 text-foreground px-5 py-2.5 rounded-[4px] text-xs font-sans font-medium tracking-[0.15em] uppercase backdrop-blur-sm">
               {t("search.viewDetails")}
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -101,12 +98,7 @@ const SearchPropertyCard = ({
           </div>
         )}
 
-        {/* Neighborhood badge - below tags */}
-        <div className="absolute bottom-4 left-4">
-          <span className="bg-charcoal/60 backdrop-blur-md text-cream text-[10px] font-sans font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-[3px]">
-            {neighborhood}
-          </span>
-        </div>
+        
 
         {/* Favorite button - top right */}
         <motion.button
@@ -125,9 +117,10 @@ const SearchPropertyCard = ({
       </motion.div>
 
       {/* Info */}
-      <h3 className="font-display text-base font-medium text-foreground mb-1.5 tracking-[-0.01em] group-hover:text-primary transition-colors duration-300">
+      <h3 className="font-display text-base font-medium text-foreground mb-1 tracking-[-0.01em] group-hover:text-primary transition-colors duration-300">
         {title}
       </h3>
+      <p className="font-sans text-xs text-muted-foreground mb-1.5">{neighborhood}</p>
       <p className="font-sans text-sm font-medium text-primary mb-3">{price}</p>
       <div className="flex items-center gap-5 text-muted-foreground text-xs font-sans tracking-wide font-light">
         <span className="flex items-center gap-1.5">
