@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, ArrowUpDown, SlidersHorizontal, Bookmark } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 interface SearchBarProps {
   count: number;
@@ -16,9 +17,9 @@ const SearchBar = ({ count, location, type }: SearchBarProps) => {
 
   const typeLabel = t(`search.type.${type}`) || type;
 
-  const handleSearch = () => {
-    const q = query.trim() || "Barra da Tijuca";
-    navigate(`/imoveis?q=${encodeURIComponent(q)}&type=${type}`);
+  const handleSearch = (q?: string) => {
+    const term = (q || query).trim() || "Barra da Tijuca";
+    navigate(`/imoveis?q=${encodeURIComponent(term)}&type=${type}`);
   };
 
   return (
@@ -26,16 +27,16 @@ const SearchBar = ({ count, location, type }: SearchBarProps) => {
       {/* Sticky search bar */}
       <div className="sticky top-20 z-40 bg-white border-b border-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex items-center gap-4">
-          {/* Search input */}
+          {/* Search input with autocomplete */}
           <div className="flex-1 flex items-center gap-3 bg-muted/40 rounded-[4px] px-4 py-2.5">
             <Search className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-            <input
-              type="text"
+            <SearchAutocomplete
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              onChange={setQuery}
+              onSelect={(v) => { setQuery(v); handleSearch(v); }}
               placeholder={t("hero.searchPlaceholder")}
-              className="w-full bg-transparent text-sm font-sans font-light tracking-wide text-foreground focus:outline-none placeholder:text-muted-foreground/50"
+              className="w-full"
+              inputClassName="w-full bg-transparent text-sm font-sans font-light tracking-wide text-foreground focus:outline-none placeholder:text-muted-foreground/50"
             />
           </div>
 

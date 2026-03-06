@@ -6,6 +6,7 @@ import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import jaLogoFull from "@/assets/logo-ja-full.png";
 import { useLanguage } from "@/i18n/LanguageContext";
+import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 const VIDEO_SRC = "/videos/RJ.mp4";
 
@@ -111,14 +112,14 @@ const HeroOverlayContent = () => {
                 style={{ color: "hsl(var(--charcoal) / 0.45)" }}>
                 {t("hero.searchLabel")}
               </p>
-              <input
-                type="text"
+              <SearchAutocomplete
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={setSearchQuery}
+                onSelect={(v) => { setSearchQuery(v); }}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder={t("hero.searchPlaceholder")}
-                className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
-                style={{ color: "hsl(var(--charcoal))" }}
+                className="w-full"
+                inputClassName="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
               />
             </div>
             <motion.button
@@ -147,13 +148,13 @@ const HeroOverlayContent = () => {
                 style={{ color: "hsl(var(--charcoal) / 0.45)" }}>
                 {t("hero.searchLabel")}
               </p>
-              <input
-                type="text"
+              <SearchAutocomplete
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={setSearchQuery}
+                onSelect={(v) => { setSearchQuery(v); }}
                 placeholder={t("hero.searchPlaceholderMobile")}
-                className="w-full bg-transparent text-[16px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25 py-2"
-                style={{ color: "hsl(var(--charcoal))" }}
+                className="w-full"
+                inputClassName="w-full bg-transparent text-[16px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25 py-2"
               />
             </div>
             <motion.button
