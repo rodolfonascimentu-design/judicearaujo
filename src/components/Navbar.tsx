@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJaGreen from "@/assets/logo-ja-green.png";
@@ -73,7 +73,17 @@ const Navbar = () => {
             {/* Co-branding logo */}
             <a
               href="/"
-              className="flex-shrink-0 flex items-center gap-2 transition-all duration-500"
+              onClick={(e) => {
+                e.preventDefault();
+                if (isHomePage) {
+                  // Already on home — scroll to search area
+                  window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'smooth' });
+                } else {
+                  // Navigate to home with search flag
+                  window.location.href = '/?search=1';
+                }
+              }}
+              className="flex-shrink-0 flex items-center gap-2 transition-all duration-500 cursor-pointer"
               style={{
                 opacity: isExpanded ? 1 : 0,
                 pointerEvents: isExpanded ? "auto" : "none",
