@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoJaGreen from "@/assets/logo-ja-green.png";
-import logoForbesGreen from "@/assets/logo-forbes-green.png";
+import logoJaBlack from "@/assets/logo-ja-black.png";
+import logoForbesBlack from "@/assets/forbes-global-black.png";
 import jaLogoFull from "@/assets/logo-ja-full.png";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -92,9 +92,9 @@ const Navbar = () => {
               <div className="flex items-center gap-2">
                 {showGreen ? (
                   <>
-                    <img src={logoJaGreen} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
-                    <div className="w-px h-8 bg-primary/30" />
-                    <img src={logoForbesGreen} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
+                    <img src={logoJaBlack} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
+                    <div className="w-px h-8 bg-foreground/20" />
+                    <img src={logoForbesBlack} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
                   </>
                 ) : (
                   <>
