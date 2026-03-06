@@ -88,7 +88,7 @@ const Testimonials = () => (
     title="O que pensam nossos clientes"
     description="Avaliações reais de clientes que confiaram na Judice & Araujo para encontrar o imóvel ideal"
     testimonials={testimonials}
-    className="bg-[#FFFBF0]"
+    className="bg-[#FEFBF1]"
   />
 );
 
