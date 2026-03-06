@@ -113,15 +113,15 @@ const ScrollExpandMedia = ({
   }, []);
 
   // Fade-out H1/search as user scrolls down after expansion
-  // Dead zone: first 400px of scroll = fully visible, then fades over next 300px
+  // Dead zone: first 150px of scroll = fully visible, then fades over next 150px
   useEffect(() => {
     if (!mediaFullyExpanded) {
       setContentFadeOut(1);
       return;
     }
     const onScroll = () => {
-      const deadZone = 400;
-      const fadeRange = 300;
+      const deadZone = 150;
+      const fadeRange = 150;
       const scrollY = window.scrollY;
       if (scrollY <= deadZone) {
         setContentFadeOut(1);
