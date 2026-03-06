@@ -1,101 +1,129 @@
 
 
-## Plano: Página de Listagem de Imóveis (Resultado de Busca)
+# Property Detail Page — Luxury Cinematographic Experience
 
-### Visão Geral
+## Overview
 
-Criar uma página completa de resultados de busca (`/imoveis`) que mantém a identidade visual premium do site, com cards reutilizáveis, scroll infinito simulado, favoritos, skeleton loading e transições cinematográficas.
+Create a new route `/imovel/:id` with a premium, editorial property detail page inspired by Majeli Vassart, PP Global, and the Judice & Araujo brand identity. The page prioritizes visual impact first, then narrative, then conversion — following luxury real estate UX best practices.
 
----
-
-### Arquitetura de Arquivos
+## File Structure
 
 ```text
 src/
 ├── pages/
-│   └── Properties.tsx          ← Nova página de listagem
-├── components/
-│   └── SearchPropertyCard.tsx  ← Card com favorito, tags, hover premium
-│   └── SearchBar.tsx           ← Barra fixa de resultados/filtros
-│   └── PropertyCardSkeleton.tsx← Skeleton loading dos cards
+│   └── PropertyDetail.tsx          ← Main page (orchestrator)
+├── components/property-detail/
+│   ├── PropertyHero.tsx            ← Cinematic fullscreen hero with slideshow
+│   ├── PropertyStory.tsx           ← Scroll storytelling sections (Apple-style reveals)
+│   ├── PropertyDescription.tsx     ← Two-column: editorial text + sticky conversion card
+│   ├── PropertyGallery.tsx         ← Netflix-style horizontal scroll gallery + lightbox
+│   ├── PropertyFeatures.tsx        ← Minimalist icons grid (internal + condo amenities)
+│   ├── PropertyUnits.tsx           ← Available units table (for launches)
+│   ├── PropertyTimeline.tsx        ← Construction status horizontal timeline
+│   ├── PropertyLocation.tsx        ← Map embed + neighborhood editorial
+│   ├── PropertyNearby.tsx          ← Nearby attractions grid
+│   ├── PropertyAgent.tsx           ← Agent card
+│   ├── PropertyContact.tsx         ← Contact form with LGPD
+│   └── PropertySimilar.tsx         ← Horizontal carousel of similar properties
+├── data/
+│   └── propertyDetail.ts           ← Mock data for the detail page
 ```
 
----
+## Routing
 
-### 1. Roteamento e Navegação da Busca
+Add route in `App.tsx`:
+```
+<Route path="/imovel/:id" element={<PropertyDetail />} />
+```
 
-- Adicionar rota `/imoveis` em `App.tsx` apontando para `Properties.tsx`
-- No `HeroSection.tsx`, capturar o valor do input de busca e o tipo ativo (Venda/Locação/Temporada), e usar `useNavigate` para redirecionar para `/imoveis?q=Barra+da+Tijuca&type=venda`
-- A página `Properties.tsx` lê os query params para exibir os resultados
+Update `SearchPropertyCard` click handler to navigate to `/imovel/${id}`.
 
-### 2. Header
+## Section-by-Section Design
 
-- Reutilizar o `Navbar` existente exatamente como está (já funciona em qualquer rota)
-- O header mantém logos, menu hambúrguer e comportamento de scroll
+### 1. Hero Cinematográfico
+- Fullscreen `100vh` with auto-playing slideshow (embla-carousel or manual interval)
+- Arrow navigation (desktop) + swipe (mobile via embla)
+- Dark overlay gradient (bottom-heavy) with white text
+- Content overlay: property type label, location, name, quick specs (area, suites, bathrooms, parking), price, and 3 CTA buttons (WhatsApp, Solicitar Info, Compartilhar)
+- Cinematic entry animation: fade-in with slight scale from 1.05 to 1.0
+- Slide counter (1/8) bottom-right
 
-### 3. Barra Fixa de Resultados (`SearchBar.tsx`)
+### 2. Scroll Storytelling
+- 3 sections with `framer-motion` viewport-triggered animations
+- Section 1: Large serif headline + panoramic image (fade-up)
+- Section 2: Editorial text block about design/materials (slide-in from left)
+- Section 3: Full-width hero image showcasing view/pool/terrace (scale reveal)
+- Generous whitespace (`py-24` to `py-32`)
 
-- Posicionada abaixo do header com `sticky top-20 z-40`
-- Fundo branco com `backdrop-blur` e sombra sutil
-- **Lado esquerdo:** "32 imóveis à venda na Barra da Tijuca" (dinâmico com query params)
-- **Lado direito:** botões "Ordenar", "Filtrar" e ícone "Salvar busca" (sem funcionalidade por enquanto, apenas UI)
-- Tipografia: `font-sans text-xs tracking-[0.15em] uppercase` consistente com o site
+### 3. Property Description (Two-Column)
+- Left: Editorial description with DM Serif Display headings, Inter body text
+- Right: Sticky card (`position: sticky; top: 6rem`) with price, status badge, WhatsApp/Info/Share buttons, and financing simulation CTA
+- Mobile: card becomes non-sticky, stacked below description
 
-### 4. Card de Imóvel (`SearchPropertyCard.tsx`)
+### 4. Netflix-Style Gallery
+- Horizontal scrollable rows by category (Fotos, Vídeo, Tour Virtual)
+- Each thumbnail with hover zoom preview
+- Click opens fullscreen lightbox with keyboard navigation (ArrowLeft/Right, Escape)
+- Uses `framer-motion` `AnimatePresence` for lightbox transitions
 
-Baseado no `PropertyCard` existente, com melhorias:
+### 5. Features Grid
+- Two-column layout with minimalist lucide icons
+- Left: Internal features (suítes, closet, varanda, home theater, etc.)
+- Right: Condominium amenities (academia, piscina, playground, etc.)
+- Subtle fade-in animation per item
 
-- **Favorito:** ícone de coração no canto superior direito da imagem. Ao clicar, animação de escala (pulse) com `framer-motion` e estado ativo (preenchido). Estado armazenado em `useState` local (sem backend por enquanto)
-- **Tags:** badges sutis no canto superior esquerdo (ex: "Lançamento", "Exclusivo", "Novo"). Estilo: `bg-charcoal/60 backdrop-blur-md text-cream text-[10px] tracking-[0.2em]` (mesmo padrão do neighborhood badge atual)
-- **Hover premium:**
-  - Elevação sutil do card (`translateY(-4px)`)
-  - Sombra suave (`shadow-lg`)
-  - Zoom na imagem (`scale-1.05`, 700ms)
-  - Overlay escuro gradual revelando info extra (tipo do imóvel, nº de vagas)
-  - Botão "Ver Detalhes" aparece com fade-in
-- **Imagem lazy loaded** com micro fade-in ao carregar (estado `loaded` + `opacity transition`)
+### 6. Available Units Table
+- Conditionally rendered for launches
+- Clean table with columns: Tipo, Metragem, Quartos, Suítes, Vagas, Preço
+- Hover row highlight, minimal borders
 
-### 5. Grid da Listagem (`Properties.tsx`)
+### 7. Construction Timeline
+- Horizontal progress bar with 4 stages
+- Active stage highlighted with primary color
+- Clean, minimal design
 
-- Layout: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14`
-- Fundo branco (`bg-white`)
-- Padding generoso: `px-6 lg:px-12 py-12`
-- `max-w-7xl mx-auto`
-- Cards com animação fade-in + translateY ao entrar na viewport (framer-motion `whileInView`)
+### 8. Location
+- Embedded Google Maps iframe (static, no API key needed)
+- "Abrir no Google Maps" button
+- Neighborhood + city label
 
-### 6. Scroll Infinito
+### 9. About the Neighborhood
+- Editorial section with lifestyle description
+- Image + text layout similar to EditorialSection pattern
 
-- Dados mock: array de ~18 imóveis usando as 6 imagens existentes rotacionadas
-- Carregar 9 imóveis iniciais
-- Usar `IntersectionObserver` no final da lista para detectar scroll e carregar mais 6
-- Loading indicator: spinner discreto ou skeleton cards no rodapé
-- Simular delay de 800ms com `setTimeout`
+### 10. Nearby Attractions
+- Grid of categories (Shoppings, Restaurantes, Escolas, Hospitais, Metrô, Parques)
+- Each with icon + list of places
 
-### 7. Skeleton Loading (`PropertyCardSkeleton.tsx`)
+### 11. Agent Card
+- Photo, name, CRECI, phone, WhatsApp button
+- Clean card with subtle border
 
-- Usar o componente `Skeleton` existente (`src/components/ui/skeleton.tsx`)
-- Replicar a forma do card: retângulo aspect-[4/3] + linhas de texto
-- Exibido no carregamento inicial e ao carregar mais itens
+### 12. Contact Form
+- Name, Email, Phone, Message fields
+- LGPD consent text
+- Submit button in brand style
 
-### 8. Transição Cinematográfica
+### 13. Similar Properties
+- Horizontal carousel reusing existing `SearchPropertyCard` component
+- embla-carousel for smooth scrolling
 
-- Usar `framer-motion` `layoutId` nos cards para criar transição suave ao navegar
-- Como não há página de detalhe ainda, o clique no card fará uma animação de expansão sutil no próprio card (scale up + fade) como feedback visual
-- Preparar estrutura para futura integração com página de detalhe
+## Mobile Specifics
+- Fixed WhatsApp FAB button (bottom-right, always visible)
+- Swipe-enabled hero slideshow
+- Stacked layout for all two-column sections
+- Touch-friendly gallery
 
-### 9. Traduções (i18n)
+## Visual Guidelines
+- Colors: white surfaces, `--primary` (#003F36) for accents, `--foreground` for text
+- Typography: DM Serif Display for headings, Inter 400 for body
+- Rounded corners: 4px consistent with existing cards
+- Animations: `framer-motion` with `whileInView`, `once: false` per brand policy
+- Generous whitespace throughout
 
-Adicionar chaves em `translations.ts` para PT/EN/ES:
-- `search.results`: "{count} imóveis à venda em {location}"
-- `search.sort`: "Ordenar"
-- `search.filter`: "Filtrar"  
-- `search.save`: "Salvar busca"
-- `search.viewDetails`: "Ver Detalhes"
-- Tags: `tag.launch`, `tag.new`, `tag.exclusive`, `tag.construction`
+## Mock Data
+Create `propertyDetail.ts` with a single rich mock property including all fields (images array, features, units, agent info, neighborhood data, nearby attractions). Reuse existing property images from `src/assets/`.
 
-### 10. Performance
-
-- Todas as imagens com `loading="lazy"`
-- Cards renderizados com `whileInView` e `viewport={{ once: true }}` para animação única
-- Scroll infinito evita renderizar tudo de uma vez
+## Estimated Scope
+This is a large page with 13 sections. All components will be created as separate files for maintainability, with the page component orchestrating layout and scroll behavior.
 
