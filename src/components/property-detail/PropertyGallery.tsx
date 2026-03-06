@@ -42,7 +42,7 @@ const PropertyGallery = ({ property }: Props) => {
   }, [lightboxOpen, closeLightbox, goNext, goPrev]);
 
   return (
-    <section className="py-20 md:py-28 bg-[hsl(var(--muted))] overflow-hidden">
+    <section className="py-20 md:py-28 bg-background overflow-hidden">
       <div className="px-6 md:px-16 mb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

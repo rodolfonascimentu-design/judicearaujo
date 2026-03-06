@@ -30,7 +30,7 @@ const PropertySimilar = ({ property }: Props) => {
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="py-20 md:py-28 bg-[hsl(var(--muted))] overflow-hidden">
+    <section className="py-20 md:py-28 bg-background overflow-hidden">
       <div className="px-6 md:px-16">
         <div className="max-w-6xl mx-auto flex items-end justify-between mb-12">
           <motion.div

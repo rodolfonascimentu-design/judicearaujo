@@ -95,7 +95,7 @@ const PropertyDescription = ({ property }: Props) => {
               </div>
 
               {/* Financing */}
-              <div className="relative bg-[hsl(var(--muted))] rounded-lg p-5 -mx-1">
+              <div className="relative bg-muted/30 rounded-lg p-5 -mx-1">
                 <p className="font-sans text-xs text-muted-foreground mb-3 leading-relaxed">
                   Que tal financiar a compra deste imóvel?
                 </p>
