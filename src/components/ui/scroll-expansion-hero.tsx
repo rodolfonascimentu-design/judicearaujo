@@ -127,7 +127,12 @@ const ScrollExpandMedia = ({
               playsInline
               preload="auto"
               className="w-full h-full object-cover scale-110"
-              style={{ filter: showContent ? 'blur(2px)' : 'blur(4px)' }}
+              style={{
+                filter: showContent
+                  ? 'blur(2px)'
+                  : `blur(${6 - scrollProgress * 6}px)`,
+                transition: 'filter 0.4s ease',
+              }}
               controls={false}
               disablePictureInPicture /> :
 
@@ -138,7 +143,11 @@ const ScrollExpandMedia = ({
             <motion.div
               className="absolute inset-0"
               style={{ backgroundColor: 'hsl(var(--charcoal))' }}
-              animate={{ opacity: showContent ? 0.55 : 0.25 }}
+              animate={{
+                opacity: showContent
+                  ? 0.55
+                  : 0.45 - scrollProgress * 0.2,
+              }}
               transition={{ duration: 0.8 }} />
             
           </div>

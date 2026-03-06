@@ -211,8 +211,9 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
   const moveT = clamp(p / 0.8);
   const topVh = lerp(42, 2.5, moveT);
 
-  // Smooth fade-out in last 15% of scroll progress
-  const fadeOutOpacity = p > 0.85 ? lerp(1, 0, clamp((p - 0.85) / 0.15)) : 1;
+  // Fade-out when logos approach the header (~12vh = ~20px before h-20 header)
+  const proximityFade = topVh <= 12 ? clamp((12 - topVh) / 10) : 0;
+  const fadeOutOpacity = 1 - proximityFade;
   const isVisible = barVisible && !pastHero && heroProgress < 0.98;
   const finalOpacity = isVisible ? fadeOutOpacity : 0;
 
