@@ -86,11 +86,11 @@ const SearchPropertyCard = ({
 
         {/* Tags - top left */}
         {tags.length > 0 && (
-          <div className="absolute top-4 left-4 flex flex-col gap-1.5">
+          <div className="absolute top-3 left-3 flex flex-col gap-1">
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="bg-charcoal/60 backdrop-blur-md text-cream text-[10px] font-sans font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-[3px] w-fit"
+                className="bg-charcoal/60 backdrop-blur-md text-cream text-[9px] font-sans font-medium tracking-[0.15em] uppercase px-2 py-1 rounded-[3px] w-fit"
               >
                 {tag}
               </span>
@@ -103,13 +103,13 @@ const SearchPropertyCard = ({
         {/* Favorite button - top right */}
         <motion.button
           onClick={handleFavorite}
-          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-charcoal/30 backdrop-blur-md flex items-center justify-center transition-colors hover:bg-charcoal/50"
+          className="absolute top-3 right-3 w-7 h-7 rounded-full bg-charcoal/30 backdrop-blur-md flex items-center justify-center transition-colors hover:bg-charcoal/50"
           whileTap={{ scale: 0.85 }}
           animate={favorited ? { scale: [1, 1.3, 1] } : {}}
           transition={{ duration: 0.3 }}
         >
           <Heart
-            className={`w-4 h-4 transition-colors duration-300 ${
+            className={`w-3.5 h-3.5 transition-colors duration-300 ${
               favorited ? "text-accent fill-accent" : "text-cream"
             }`}
           />

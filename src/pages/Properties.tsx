@@ -142,13 +142,21 @@ const Properties = () => {
             )}
 
             {items.length >= allProperties.length && (
-              <motion.p
-                className="text-center text-muted-foreground text-xs font-sans tracking-[0.15em] uppercase mt-16"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+              <motion.div
+                className="flex flex-col items-center gap-3 py-20 mt-10"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                {t("search.allLoaded")}
-              </motion.p>
+                <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <p className="text-muted-foreground text-xs font-sans tracking-[0.15em] uppercase">
+                  {t("search.allLoaded")}
+                </p>
+              </motion.div>
             )}
           </>
         )}
