@@ -4,7 +4,7 @@ import { Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJaBlack from "@/assets/logo-ja-black.png";
 import logoForbesBlack from "@/assets/forbes-global-black.png";
-import jaLogoFull from "@/assets/logo-ja-full.png";
+import jaLogoWhite from "@/assets/logo-ja-white.png";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { Lang } from "@/i18n/translations";
@@ -98,7 +98,7 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <img src={jaLogoFull} alt="Judice & Araujo" className="h-[26px] lg:h-[30px] w-auto brightness-0 invert" />
+                    <img src={jaLogoWhite} alt="Judice & Araujo" className="h-[26px] lg:h-[30px] w-auto" />
                     <div className="w-px h-8 bg-cream/40" />
                     <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
                   </>
