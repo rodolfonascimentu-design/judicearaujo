@@ -56,6 +56,22 @@ const SearchBar = ({ count, location, type }: SearchBarProps) => {
             </button>
           </div>
         </div>
+
+        {/* Mobile action buttons */}
+        <div className="md:hidden flex items-center gap-1 px-6 pb-4">
+          <button className="flex items-center gap-1.5 px-3 py-2 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+            <ArrowUpDown className="w-3.5 h-3.5" />
+            {t("search.sort")}
+          </button>
+          <button className="flex items-center gap-1.5 px-3 py-2 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+            <SlidersHorizontal className="w-3.5 h-3.5" />
+            {t("search.filter")}
+          </button>
+          <button className="flex items-center gap-1.5 px-3 py-2 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+            <Bookmark className="w-3.5 h-3.5" />
+            {t("search.save")}
+          </button>
+        </div>
       </div>
 
       {/* Results count below the bar */}
