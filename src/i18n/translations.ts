@@ -16,6 +16,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.launches": "Lançamentos",
     "nav.evaluate": "Avaliar Imóvel",
     "nav.blog": "Blog",
+    "nav.back": "Voltar para listagem",
 
     // Exclusive Gallery
     "exclusive.subtitle": "Seleção Exclusiva",
@@ -165,6 +166,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.launches": "New Developments",
     "nav.evaluate": "Evaluate Property",
     "nav.blog": "Blog",
+    "nav.back": "Back to listings",
 
     "exclusive.subtitle": "Exclusive Selection",
     "exclusive.title": "Exclusive Properties",
@@ -299,6 +301,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.launches": "Lanzamientos",
     "nav.evaluate": "Evaluar Inmueble",
     "nav.blog": "Blog",
+    "nav.back": "Volver a la lista",
 
     "exclusive.subtitle": "Selección Exclusiva",
     "exclusive.title": "Inmuebles Exclusivos",
