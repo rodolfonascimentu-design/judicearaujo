@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJaBlack from "@/assets/logo-ja-black.png";
