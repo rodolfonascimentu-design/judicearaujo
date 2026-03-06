@@ -13,7 +13,7 @@ import Footer from "@/components/Footer";
 import Newsletter from "@/components/Newsletter";
 
 const Index = () => (
-  <div className="min-h-screen">
+  <div className="min-h-screen overflow-x-hidden">
     <Navbar />
     <HeroSection />
     <ExclusiveGallery />
