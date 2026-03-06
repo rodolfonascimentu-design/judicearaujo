@@ -80,7 +80,7 @@ const Navbar = () => {
               }}
             >
               <div className="flex items-center gap-2">
-                {pastHero ? (
+                {showGreen ? (
                   <>
                     <img src={logoJaGreen} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
                     <div className="w-px h-8 bg-primary/30" />
