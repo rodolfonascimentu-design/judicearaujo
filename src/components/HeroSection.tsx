@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
-import jaLogoFull from "@/assets/logo-ja-full.png";
+import jaLogoWhite from "@/assets/logo-ja-white.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
 
@@ -247,9 +247,9 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
       }}
     >
       <motion.img
-        src={jaLogoFull}
+        src={jaLogoWhite}
         alt="Judice & Araujo"
-        className="h-[18px] lg:h-[22px] w-auto brightness-0 invert"
+        className="h-[26px] lg:h-[30px] w-auto"
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : 40 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
