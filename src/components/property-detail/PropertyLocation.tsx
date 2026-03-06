@@ -11,7 +11,7 @@ const PropertyLocation = ({ property }: Props) => {
   const mapSrc = `https://maps.google.com/maps?q=${property.mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed&maptype=roadmap`;
 
   return (
-    <section className="py-20 md:py-28 px-6 md:px-16 bg-[hsl(var(--muted))]">
+    <section className="py-20 md:py-28 px-6 md:px-16 bg-background">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
