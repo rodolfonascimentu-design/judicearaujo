@@ -161,8 +161,8 @@ const ScrollExpandMedia = ({
               style={{ backgroundColor: 'hsl(var(--charcoal))' }}
               animate={{
                 opacity: showContent
-                  ? 0.25
-                  : 0.45 - scrollProgress * 0.2,
+                  ? 0.30
+                  : 0.45 - scrollProgress * 0.15,
               }}
               transition={{ duration: 0.8 }} />
             
