@@ -1,0 +1,178 @@
+import property1 from "@/assets/property-1.jpg";
+import property2 from "@/assets/property-2.jpg";
+import property3 from "@/assets/property-3.jpg";
+import property4 from "@/assets/property-4.jpg";
+import property5 from "@/assets/property-5.jpg";
+import property6 from "@/assets/property-6.jpg";
+import exclusive1 from "@/assets/exclusive-1.jpg";
+import exclusive2 from "@/assets/exclusive-2.jpg";
+import exclusive3 from "@/assets/exclusive-3.jpg";
+import exclusive4 from "@/assets/exclusive-4.jpg";
+import highlightBeachfront from "@/assets/highlight-beachfront.jpg";
+import highlightContemporary from "@/assets/highlight-contemporary.jpg";
+import highlightHistoric from "@/assets/highlight-historic.jpg";
+import highlightPenthouse from "@/assets/highlight-penthouse.jpg";
+
+export interface PropertyUnit {
+  type: string;
+  area: number;
+  bedrooms: number;
+  suites: number;
+  parking: number;
+  price: string;
+}
+
+export interface NearbyCategory {
+  category: string;
+  icon: string;
+  places: string[];
+}
+
+export interface PropertyAgent {
+  name: string;
+  photo: string;
+  creci: string;
+  phone: string;
+  whatsapp: string;
+}
+
+export interface SimilarProperty {
+  id: string;
+  image: string;
+  title: string;
+  neighborhood: string;
+  price: string;
+  bedrooms: number;
+  area: number;
+  parking: number;
+  type: string;
+}
+
+export interface PropertyDetailData {
+  id: string;
+  type: string;
+  status: "launch" | "ready" | "construction";
+  name: string;
+  neighborhood: string;
+  city: string;
+  address: string;
+  price: string;
+  priceLabel: string;
+  area: number;
+  suites: number;
+  bathrooms: number;
+  parking: number;
+  images: string[];
+  storyHeadline: string;
+  storyImage: string;
+  storyText: string;
+  storyHighlightImage: string;
+  description: string[];
+  internalFeatures: string[];
+  condoFeatures: string[];
+  units: PropertyUnit[];
+  constructionStage: number; // 0-3
+  constructionStages: string[];
+  mapQuery: string;
+  neighborhoodDescription: string[];
+  neighborhoodImage: string;
+  nearby: NearbyCategory[];
+  agent: PropertyAgent;
+  similar: SimilarProperty[];
+}
+
+export const mockProperty: PropertyDetailData = {
+  id: "mar-azul-ii",
+  type: "Casa",
+  status: "launch",
+  name: "Condomínio Mar Azul II",
+  neighborhood: "Joá",
+  city: "Rio de Janeiro",
+  address: "Estrada do Joá, 3.200 – Joá, Rio de Janeiro – RJ",
+  price: "R$ 4.200.000",
+  priceLabel: "A partir de",
+  area: 520,
+  suites: 4,
+  bathrooms: 5,
+  parking: 6,
+  images: [
+    property1,
+    property2,
+    property3,
+    exclusive1,
+    exclusive2,
+    property4,
+    highlightBeachfront,
+    highlightPenthouse,
+  ],
+  storyHeadline: "Arquitetura que se integra à paisagem.",
+  storyImage: highlightContemporary,
+  storyText:
+    "Cada detalhe foi pensado para criar uma relação íntima entre o morador e a natureza exuberante do Joá. Materiais nobres como pedra natural, madeira de demolição e vidro temperado compõem uma paleta que dialoga com o verde da Mata Atlântica e o azul infinito do oceano. A iluminação natural é protagonista — grandes panos de vidro trazem a luz do sol para cada ambiente, enquanto a ventilação cruzada garante conforto térmico durante todo o ano.",
+  storyHighlightImage: highlightHistoric,
+  description: [
+    "Situada em uma das localizações mais privilegiadas do Rio de Janeiro, esta residência é um verdadeiro refúgio de sofisticação e exclusividade. Com 520m² de área construída e um terreno generoso que se abre para uma vista panorâmica da Praia do Joá e da Pedra da Gávea, a propriedade oferece uma experiência de moradia incomparável.",
+    "A planta foi concebida pelo renomado escritório de arquitetura Studio MK27, priorizando a integração entre os espaços internos e externos. A sala de estar, com pé-direito duplo e lareira, conecta-se diretamente ao deck da piscina infinita, criando um fluxo natural que convida à contemplação.",
+    "O pavimento íntimo abriga quatro suítes com closets planejados, sendo a master suite um verdadeiro santuário com 65m², banheira de imersão, ducha dupla e varanda privativa com vista para o mar. O home theater, com isolamento acústico profissional e sistema Bose integrado, complementa a área de lazer.",
+    "A cozinha gourmet, equipada com eletrodomésticos Sub-Zero e Wolf, foi desenhada para receber com elegância. A adega climatizada com capacidade para 300 garrafas e o espaço de bar completam a experiência gastronômica.",
+  ],
+  internalFeatures: [
+    "4 Suítes com closet",
+    "Varanda panorâmica",
+    "Home theater",
+    "Cozinha gourmet",
+    "Adega climatizada",
+    "Piscina infinita",
+    "Lareira",
+    "Pé-direito duplo",
+    "Automação residencial",
+    "Energia solar",
+  ],
+  condoFeatures: [
+    "Academia",
+    "Piscina adulto",
+    "Piscina infantil",
+    "Playground",
+    "Salão de festas",
+    "Espaço gourmet",
+    "Portaria 24h",
+    "Segurança armada",
+    "Heliponto",
+    "Quadra de tênis",
+  ],
+  units: [
+    { type: "Tipo A – Garden", area: 420, bedrooms: 3, suites: 3, parking: 4, price: "R$ 3.800.000" },
+    { type: "Tipo B – Standard", area: 520, bedrooms: 4, suites: 4, parking: 6, price: "R$ 4.200.000" },
+    { type: "Tipo C – Premium", area: 650, bedrooms: 5, suites: 5, parking: 6, price: "R$ 5.500.000" },
+    { type: "Tipo D – Penthouse", area: 780, bedrooms: 5, suites: 5, parking: 8, price: "R$ 7.200.000" },
+  ],
+  constructionStage: 1,
+  constructionStages: ["Não iniciada", "Estrutura", "Acabamento", "Pronto"],
+  mapQuery: "Estrada+do+Joá+3200+Rio+de+Janeiro+RJ",
+  neighborhoodDescription: [
+    "O Joá é um dos endereços mais exclusivos e preservados do Rio de Janeiro. Encravado entre a Pedra da Gávea e o mar, o bairro combina a exuberância da Mata Atlântica com a sofisticação de residências de altíssimo padrão. É o refúgio perfeito para quem busca privacidade absoluta sem abrir mão da proximidade com a Barra da Tijuca e São Conrado.",
+    "A gastronomia do entorno é um capítulo à parte: restaurantes como o Térèze, no Hotel Santa Teresa, e o Lasai, estrelado pelo Guia Michelin, estão a poucos minutos. Os amantes da natureza encontram trilhas deslumbrantes na Floresta da Tijuca e praias desertas acessíveis apenas por trilha.",
+  ],
+  neighborhoodImage: exclusive3,
+  nearby: [
+    { category: "Shoppings", icon: "ShoppingBag", places: ["Village Mall", "BarraShopping", "Fashion Mall"] },
+    { category: "Restaurantes", icon: "UtensilsCrossed", places: ["Térèze", "Lasai", "Olympe", "Oteque"] },
+    { category: "Escolas", icon: "GraduationCap", places: ["Escola Americana", "Escola Britânica", "Escola Parque"] },
+    { category: "Hospitais", icon: "Heart", places: ["Hospital Samaritano", "Copa D'Or", "Hospital Barra D'Or"] },
+    { category: "Praias", icon: "Waves", places: ["Praia do Joá", "São Conrado", "Prainha"] },
+    { category: "Parques", icon: "TreePine", places: ["Floresta da Tijuca", "Parque da Cidade", "Jardim Botânico"] },
+  ],
+  agent: {
+    name: "Carolina Mendes",
+    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face",
+    creci: "CRECI-RJ 45.678",
+    phone: "(21) 99876-5432",
+    whatsapp: "5521998765432",
+  },
+  similar: [
+    { id: "1", image: property5, title: "Villa Contemporânea", neighborhood: "São Conrado", price: "R$ 5.800.000", bedrooms: 5, area: 620, parking: 4, type: "Casa" },
+    { id: "2", image: property6, title: "Mansão Colonial", neighborhood: "Gávea", price: "R$ 8.500.000", bedrooms: 6, area: 850, parking: 6, type: "Casa" },
+    { id: "3", image: exclusive4, title: "Penthouse Vista Mar", neighborhood: "Leblon", price: "R$ 12.000.000", bedrooms: 4, area: 450, parking: 4, type: "Apartamento" },
+    { id: "4", image: highlightBeachfront, title: "Residência Beira-Mar", neighborhood: "Ipanema", price: "R$ 9.200.000", bedrooms: 4, area: 380, parking: 3, type: "Apartamento" },
+  ],
+};

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Bed, Maximize, ArrowUpRight, Heart, Car } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -34,6 +35,7 @@ const SearchPropertyCard = ({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const handleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -42,7 +44,10 @@ const SearchPropertyCard = ({
 
   const handleClick = () => {
     setClicked(true);
-    setTimeout(() => setClicked(false), 600);
+    setTimeout(() => {
+      setClicked(false);
+      navigate(`/imovel/${id}`);
+    }, 300);
   };
 
   return (
