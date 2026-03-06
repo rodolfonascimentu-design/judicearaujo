@@ -113,14 +113,22 @@ const ScrollExpandMedia = ({
   }, []);
 
   // Fade-out H1/search as user scrolls down after expansion
+  // Dead zone: first 400px of scroll = fully visible, then fades over next 300px
   useEffect(() => {
     if (!mediaFullyExpanded) {
       setContentFadeOut(1);
       return;
     }
     const onScroll = () => {
-      const fade = Math.max(0, 1 - window.scrollY / 200);
-      setContentFadeOut(fade);
+      const deadZone = 400;
+      const fadeRange = 300;
+      const scrollY = window.scrollY;
+      if (scrollY <= deadZone) {
+        setContentFadeOut(1);
+      } else {
+        const fade = Math.max(0, 1 - (scrollY - deadZone) / fadeRange);
+        setContentFadeOut(fade);
+      }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -191,7 +199,7 @@ const ScrollExpandMedia = ({
               className="absolute inset-0 z-20 flex items-center justify-center px-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: showContent ? contentFadeOut : 0 }}
-              transition={{ duration: 0.6, delay: showContent ? 0.2 : 0 }}
+              transition={{ duration: 0.3, delay: 0 }}
               style={{ pointerEvents: showContent && contentFadeOut > 0.1 ? 'auto' : 'none' }}>
               
                 {overlayContent}
