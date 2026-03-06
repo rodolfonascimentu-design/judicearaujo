@@ -96,7 +96,7 @@ const HeroOverlayContent = () => {
         transition={{ delay: 0.35, duration: 0.7, ease: "easeOut" }}
       >
         <div
-          className="w-full rounded-2xl overflow-hidden"
+          className="w-full rounded-2xl"
           style={{
             background: "rgba(255, 255, 255, 0.92)",
             backdropFilter: "blur(20px)",
