@@ -249,7 +249,7 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
       <motion.img
         src={jaLogoWhite}
         alt="Judice & Araujo"
-        className="h-[26px] lg:h-[30px] w-auto"
+        className="h-[30px] lg:h-[34px] w-auto"
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : 40 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
