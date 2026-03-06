@@ -13,12 +13,10 @@ const SearchBar = ({ count, location, type }: SearchBarProps) => {
   const typeLabel = t(`search.type.${type}`) || type;
 
   return (
-    <div className="sticky top-20 z-40 bg-background/95 backdrop-blur-md border-b border-border">
+    <div className="sticky top-20 z-40 bg-white/95 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center justify-between">
-        <p className="font-sans text-xs md:text-sm tracking-wide text-foreground">
-          <span className="font-semibold">{count}</span>{" "}
-          {t("search.resultsLabel")} <span className="font-medium">{typeLabel.toLowerCase()}</span>{" "}
-          {t("search.inLocation")} <span className="font-semibold">{location}</span>
+        <p className="font-sans text-xs md:text-sm tracking-wide text-foreground font-light">
+          {count} {t("search.resultsLabel")} {typeLabel.toLowerCase()} {t("search.inLocation")} {location}
         </p>
 
         <div className="hidden md:flex items-center gap-2">

@@ -109,8 +109,8 @@ const Navbar = () => {
                       key={link.href}
                       href={link.href}
                       className={`text-[11px] font-sans font-medium tracking-[0.2em] uppercase transition-colors duration-500 ease-in-out ${
-                        pastHero
-                          ? "text-primary/70 hover:text-primary"
+                        showGreen
+                          ? "text-foreground/70 hover:text-foreground"
                           : "text-cream/70 hover:text-cream"
                       }`}
                     >
@@ -123,7 +123,7 @@ const Navbar = () => {
                     <button
                       onClick={() => setLangOpen(!langOpen)}
                       className={`flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-colors ${
-                        pastHero ? "text-primary/70 hover:text-primary" : "text-cream/70 hover:text-cream"
+                        showGreen ? "text-foreground/70 hover:text-foreground" : "text-cream/70 hover:text-cream"
                       }`}
                     >
                       {lang}
@@ -133,7 +133,7 @@ const Navbar = () => {
                       {langOpen && (
                         <motion.div
                           className={`absolute top-full mt-2 right-0 backdrop-blur-md rounded-[4px] overflow-hidden ${
-                            pastHero ? "bg-white/95 border border-primary/10" : "bg-white/10 border border-cream/20"
+                            showGreen ? "bg-white/95 border border-foreground/10" : "bg-white/10 border border-cream/20"
                           }`}
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -144,8 +144,8 @@ const Navbar = () => {
                               key={l}
                               onClick={() => { setLang(l); setLangOpen(false); }}
                               className={`block w-full px-5 py-2 text-[11px] font-sans tracking-[0.15em] uppercase text-left transition-colors ${
-                                pastHero
-                                  ? (l === lang ? "text-primary bg-primary/5" : "text-primary/50 hover:text-primary hover:bg-primary/5")
+                                showGreen
+                                  ? (l === lang ? "text-foreground bg-foreground/5" : "text-foreground/50 hover:text-foreground hover:bg-foreground/5")
                                   : (l === lang ? "text-cream bg-cream/10" : "text-cream/50 hover:text-cream hover:bg-cream/10")
                               }`}
                             >
@@ -159,19 +159,19 @@ const Navbar = () => {
 
                   {/* Font size controls */}
                   <div className={`flex items-center gap-1 rounded-[4px] px-1 border ${
-                    pastHero ? "border-primary/10" : "border-cream/20"
+                    showGreen ? "border-foreground/10" : "border-cream/20"
                   }`}>
                     <button
                       onClick={() => adjustFont(-5)}
-                      className={`p-1.5 transition-colors ${pastHero ? "text-primary/50 hover:text-primary" : "text-cream/50 hover:text-cream"}`}
+                      className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-cream/50 hover:text-cream"}`}
                       aria-label="Diminuir fonte"
                     >
                       <Minus className="w-3 h-3" />
                     </button>
-                    <span className={`text-[9px] font-sans tracking-wider uppercase w-5 text-center ${pastHero ? "text-primary/40" : "text-cream/40"}`}>A</span>
+                    <span className={`text-[9px] font-sans tracking-wider uppercase w-5 text-center ${showGreen ? "text-foreground/40" : "text-cream/40"}`}>A</span>
                     <button
                       onClick={() => adjustFont(5)}
-                      className={`p-1.5 transition-colors ${pastHero ? "text-primary/50 hover:text-primary" : "text-cream/50 hover:text-cream"}`}
+                      className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-cream/50 hover:text-cream"}`}
                       aria-label="Aumentar fonte"
                     >
                       <Plus className="w-3 h-3" />
@@ -182,7 +182,7 @@ const Navbar = () => {
             {/* Mobile menu button — X is now green */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`lg:hidden relative w-7 h-7 flex flex-col items-center justify-center transition-all duration-500 ${pastHero ? "text-primary" : "text-cream"}`}
+              className={`lg:hidden relative w-7 h-7 flex flex-col items-center justify-center transition-all duration-500 ${showGreen ? "text-foreground" : "text-cream"}`}
               style={{
                 opacity: isExpanded ? 1 : 0,
                 pointerEvents: isExpanded ? "auto" : "none",
@@ -190,17 +190,17 @@ const Navbar = () => {
               aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
             >
               <motion.span
-                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : pastHero ? "bg-primary" : "bg-cream"}`}
+                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : showGreen ? "bg-foreground" : "bg-cream"}`}
                 animate={mobileOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -4 }}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
               />
               <motion.span
-                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : pastHero ? "bg-primary" : "bg-cream"}`}
+                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : showGreen ? "bg-foreground" : "bg-cream"}`}
                 animate={mobileOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
                 transition={{ duration: 0.25, ease: "easeInOut" }}
               />
               <motion.span
-                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : pastHero ? "bg-primary" : "bg-cream"}`}
+                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : showGreen ? "bg-foreground" : "bg-cream"}`}
                 animate={mobileOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 4 }}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
               />
