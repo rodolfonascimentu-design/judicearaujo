@@ -92,13 +92,13 @@ const Navbar = () => {
               <div className="flex items-center gap-2">
                 {showGreen ? (
                   <>
-                    <img src={logoJaBlack} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
+                    <img src={logoJaBlack} alt="Judice & Araujo" className="h-[26px] lg:h-[30px] w-auto" />
                     <div className="w-px h-8 bg-foreground/20" />
                     <img src={logoForbesBlack} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
                   </>
                 ) : (
                   <>
-                    <img src={jaLogoFull} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto brightness-0 invert" />
+                    <img src={jaLogoFull} alt="Judice & Araujo" className="h-[26px] lg:h-[30px] w-auto brightness-0 invert" />
                     <div className="w-px h-8 bg-cream/40" />
                     <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
                   </>

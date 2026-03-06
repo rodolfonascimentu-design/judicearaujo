@@ -19,7 +19,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-16">
           <div className="flex items-start gap-3">
-            <img src={logoJaBlack} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
+            <img src={logoJaBlack} alt="Judice & Araujo" className="h-[26px] lg:h-[30px] w-auto" />
             <div className="w-px h-10 bg-foreground/20" />
             <img src={logoForbesBlack} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
           </div>
