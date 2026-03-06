@@ -9,8 +9,6 @@ import exclusive2 from "@/assets/exclusive-2.jpg";
 import exclusive3 from "@/assets/exclusive-3.jpg";
 import exclusive4 from "@/assets/exclusive-4.jpg";
 import highlightBeachfront from "@/assets/highlight-beachfront.jpg";
-import highlightContemporary from "@/assets/highlight-contemporary.jpg";
-import highlightHistoric from "@/assets/highlight-historic.jpg";
 import highlightPenthouse from "@/assets/highlight-penthouse.jpg";
 
 export interface PropertyUnit {
