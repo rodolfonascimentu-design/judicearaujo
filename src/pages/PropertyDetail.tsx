@@ -5,7 +5,7 @@ import { mockProperty } from "@/data/propertyDetail";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PropertyHero from "@/components/property-detail/PropertyHero";
-import PropertyStory from "@/components/property-detail/PropertyStory";
+
 import PropertyDescription from "@/components/property-detail/PropertyDescription";
 import PropertyGallery from "@/components/property-detail/PropertyGallery";
 import PropertyFeatures from "@/components/property-detail/PropertyFeatures";
@@ -25,7 +25,7 @@ const PropertyDetail = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen bg-background property-detail-page">
+    <div className="min-h-screen bg-background property-detail-page overflow-x-hidden">
       <Navbar />
       
       {/* Back button */}
@@ -40,7 +40,7 @@ const PropertyDetail = () => {
       </div>
 
       <PropertyHero property={property} />
-      <PropertyStory property={property} />
+      
       <PropertyDescription property={property} />
       <PropertyGallery property={property} />
       <PropertyFeatures property={property} />
