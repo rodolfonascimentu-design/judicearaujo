@@ -72,7 +72,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-20">
             {/* Co-branding logo */}
             <a
-              href="#"
+              href="/"
               className="flex-shrink-0 flex items-center gap-2 transition-all duration-500"
               style={{
                 opacity: isExpanded ? 1 : 0,
