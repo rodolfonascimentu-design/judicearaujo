@@ -135,6 +135,15 @@
   }
 }
 
+/* Property detail page — white background override */
+.property-detail-page {
+  --background: 0 0% 100%;
+  --card: 0 0% 100%;
+  --muted: 0 0% 96%;
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+}
+
 /* Dark search input placeholder */
 .dark-search-input::placeholder {
   color: hsl(var(--cream) / 0.35);
