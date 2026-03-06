@@ -19,6 +19,13 @@ const images = [
   { src: parallax7, scale: [9, 1] as [number, number], top: "22.5vh", left: "25vw", width: "15vw", height: "15vh" },
 ];
 
+/* Mobile-optimized: fewer images, larger sizes */
+const mobileImages = [
+  { src: parallax1, scale: [3, 1] as [number, number] },
+  { src: parallax2, scale: [4, 1] as [number, number], top: "-20vh", left: "0vw", width: "60vw", height: "30vh" },
+  { src: parallax3, scale: [5, 1] as [number, number], top: "20vh", left: "-5vw", width: "55vw", height: "30vh" },
+];
+
 const ZoomParallax = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -27,36 +34,69 @@ const ZoomParallax = () => {
   });
 
   return (
-    <div ref={containerRef} className="h-[300vh] relative">
+    <div ref={containerRef} className="h-[200vh] md:h-[300vh] relative">
       <div className="sticky top-0 h-screen overflow-hidden">
-        {images.map((img, i) => {
-          const scale = useTransform(scrollYProgress, [0, 1], img.scale);
-
-          return (
-            <motion.div
-              key={i}
-              style={{ scale }}
-              className="absolute top-0 left-0 w-full h-full flex items-center justify-center will-change-transform"
-            >
-              <div
-                className="relative overflow-hidden rounded-md"
-                style={{
-                  width: img.width || "25vw",
-                  height: img.height || "25vh",
-                  top: img.top || "0",
-                  left: img.left || "0",
-                }}
+        {/* Desktop: all images */}
+        <div className="hidden md:block w-full h-full">
+          {images.map((img, i) => {
+            const scale = useTransform(scrollYProgress, [0, 1], img.scale);
+            return (
+              <motion.div
+                key={i}
+                style={{ scale }}
+                className="absolute top-0 left-0 w-full h-full flex items-center justify-center will-change-transform"
               >
-                <img
-                  src={img.src}
-                  alt="Propriedade de luxo"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </motion.div>
-          );
-        })}
+                <div
+                  className="relative overflow-hidden rounded-md"
+                  style={{
+                    width: img.width || "25vw",
+                    height: img.height || "25vh",
+                    top: img.top || "0",
+                    left: img.left || "0",
+                  }}
+                >
+                  <img
+                    src={img.src}
+                    alt="Propriedade de luxo"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Mobile: fewer, larger images */}
+        <div className="md:hidden w-full h-full">
+          {mobileImages.map((img, i) => {
+            const scale = useTransform(scrollYProgress, [0, 1], img.scale);
+            return (
+              <motion.div
+                key={i}
+                style={{ scale }}
+                className="absolute top-0 left-0 w-full h-full flex items-center justify-center will-change-transform"
+              >
+                <div
+                  className="relative overflow-hidden rounded-md"
+                  style={{
+                    width: img.width || "70vw",
+                    height: img.height || "40vh",
+                    top: img.top || "0",
+                    left: img.left || "0",
+                  }}
+                >
+                  <img
+                    src={img.src}
+                    alt="Propriedade de luxo"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

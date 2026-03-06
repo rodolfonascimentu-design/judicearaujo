@@ -3,6 +3,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, Bed, Maximize, Car } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
@@ -21,6 +22,7 @@ const properties = [
 ];
 
 const FeaturedCarousel = () => {
+  const { t } = useLanguage();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "center",
     loop: true,
@@ -54,67 +56,33 @@ const FeaturedCarousel = () => {
     <section className="py-32 lg:py-44 bg-[#FDFDFD] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <SectionHeader
-          title="Imóveis em Destaque"
-          subtitle="Uma seleção exclusiva dos imóveis mais desejados do Rio de Janeiro"
+          title={t("featured.title")}
+          subtitle={t("featured.subtitle")}
         />
       </div>
 
       <div className="relative max-w-[1400px] mx-auto px-4">
-        {/* Carousel */}
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {properties.map((property, i) => {
               const isCenter = i === selectedIndex;
               return (
-                <div
-                  key={i}
-                  className="flex-shrink-0 px-3 basis-[85%] md:basis-[50%] lg:basis-[33.33%]"
-                >
-                  <div
-                    className="group cursor-pointer transition-all duration-400"
-                    style={{
-                      transform: isCenter ? "scale(1)" : "scale(0.95)",
-                      opacity: isCenter ? 1 : 0.7,
-                      transition: "transform 0.4s ease, opacity 0.4s ease",
-                    }}
-                  >
-                    {/* Image */}
+                <div key={i} className="flex-shrink-0 px-3 basis-[85%] md:basis-[50%] lg:basis-[33.33%]">
+                  <div className="group cursor-pointer transition-all duration-400" style={{ transform: isCenter ? "scale(1)" : "scale(0.95)", opacity: isCenter ? 1 : 0.7, transition: "transform 0.4s ease, opacity 0.4s ease" }}>
                     <div className="relative overflow-hidden rounded-[4px] h-[400px]">
-                      <img
-                        src={property.image}
-                        alt={property.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+                      <img src={property.image} alt={property.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/10 transition-all duration-500" />
                     </div>
-
-                    {/* Info */}
                     <div className="pt-5">
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="text-[10px] font-sans font-medium tracking-[0.2em] uppercase text-primary">
-                          {property.neighborhood}
-                        </span>
+                        <span className="text-[10px] font-sans font-medium tracking-[0.2em] uppercase text-primary">{property.neighborhood}</span>
                       </div>
-                      <h3 className="font-display text-base font-normal text-foreground mb-2 leading-snug group-hover:text-primary transition-colors duration-300 tracking-[-0.01em]">
-                        {property.title}
-                      </h3>
-                      <p className="font-sans text-sm font-medium text-primary mb-3">
-                        {property.price}
-                      </p>
+                      <h3 className="font-display text-base font-normal text-foreground mb-2 leading-snug group-hover:text-primary transition-colors duration-300 tracking-[-0.01em]">{property.title}</h3>
+                      <p className="font-sans text-sm font-medium text-primary mb-3">{property.price}</p>
                       <div className="flex items-center gap-5 text-muted-foreground text-xs font-sans tracking-wide font-light">
-                        <span className="flex items-center gap-1.5">
-                          <Bed className="w-3.5 h-3.5" />
-                          {property.bedrooms} quartos
-                        </span>
-                        <span className="flex items-center gap-1.5">
-                          <Maximize className="w-3.5 h-3.5" />
-                          {property.area} m²
-                        </span>
-                        <span className="flex items-center gap-1.5">
-                          <Car className="w-3.5 h-3.5" />
-                          {property.parking} vagas
-                        </span>
+                        <span className="flex items-center gap-1.5"><Bed className="w-3.5 h-3.5" />{property.bedrooms} {t("unit.bedrooms")}</span>
+                        <span className="flex items-center gap-1.5"><Maximize className="w-3.5 h-3.5" />{property.area} m²</span>
+                        <span className="flex items-center gap-1.5"><Car className="w-3.5 h-3.5" />{property.parking} {t("unit.parking")}</span>
                       </div>
                     </div>
                   </div>
@@ -124,21 +92,10 @@ const FeaturedCarousel = () => {
           </div>
         </div>
 
-        {/* Arrows */}
-        <button
-          onClick={() => emblaApi?.scrollPrev()}
-          disabled={!canScrollPrev}
-          className="absolute left-2 top-[200px] z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 flex items-center justify-center shadow-sm hover:bg-white transition-colors disabled:opacity-30"
-          aria-label="Anterior"
-        >
+        <button onClick={() => emblaApi?.scrollPrev()} disabled={!canScrollPrev} className="absolute left-2 top-[200px] z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 flex items-center justify-center shadow-sm hover:bg-white transition-colors disabled:opacity-30" aria-label="Anterior">
           <ChevronLeft className="w-5 h-5 text-foreground" />
         </button>
-        <button
-          onClick={() => emblaApi?.scrollNext()}
-          disabled={!canScrollNext}
-          className="absolute right-2 top-[200px] z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 flex items-center justify-center shadow-sm hover:bg-white transition-colors disabled:opacity-30"
-          aria-label="Próximo"
-        >
+        <button onClick={() => emblaApi?.scrollNext()} disabled={!canScrollNext} className="absolute right-2 top-[200px] z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 flex items-center justify-center shadow-sm hover:bg-white transition-colors disabled:opacity-30" aria-label="Próximo">
           <ChevronRight className="w-5 h-5 text-foreground" />
         </button>
       </div>

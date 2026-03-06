@@ -4,10 +4,9 @@ import { motion } from "framer-motion";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import jaLogoFull from "@/assets/logo-ja-full.png";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const VIDEO_SRC = "/videos/RJ.mp4";
-
-const searchTypes = ["Venda", "Locação", "Temporada"] as const;
 
 /* ── helper ── */
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
@@ -18,6 +17,13 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
    ══════════════════════════════════════════════════════════ */
 const HeroOverlayContent = () => {
   const [activeType, setActiveType] = useState<string>("Venda");
+  const { t } = useLanguage();
+
+  const searchTypes = [
+    { key: "hero.sale", label: t("hero.sale") },
+    { key: "hero.rental", label: t("hero.rental") },
+    { key: "hero.seasonal", label: t("hero.seasonal") },
+  ];
 
   return (
     <div className="flex flex-col items-center justify-center h-full text-center w-full max-w-[700px] mx-auto px-4">
@@ -29,10 +35,10 @@ const HeroOverlayContent = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.7 }}
       >
-        Para quem escolhe viver diferente
+        {t("hero.headline")}
       </motion.h1>
 
-      {/* Tabs - floating above container */}
+      {/* Tabs */}
       <motion.div
         className="flex items-center gap-1 mb-3"
         initial={{ opacity: 0, y: 10 }}
@@ -41,12 +47,12 @@ const HeroOverlayContent = () => {
       >
         {searchTypes.map((type, i) => (
           <motion.button
-            key={type}
-            onClick={() => setActiveType(type)}
+            key={type.key}
+            onClick={() => setActiveType(type.key)}
             className="relative px-5 py-2 text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-colors duration-300"
             style={{
               color:
-                activeType === type
+                activeType === type.key
                   ? "hsl(var(--gold))"
                   : "rgba(255,255,255,0.5)",
             }}
@@ -54,7 +60,7 @@ const HeroOverlayContent = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 + i * 0.05, duration: 0.4 }}
           >
-            {activeType === type && (
+            {activeType === type.key && (
               <motion.div
                 layoutId="searchTabPill"
                 className="absolute bottom-0 left-0 right-0 mx-auto h-[2px] w-8 rounded-full"
@@ -62,12 +68,12 @@ const HeroOverlayContent = () => {
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               />
             )}
-            <span className="relative z-10">{type}</span>
+            <span className="relative z-10">{type.label}</span>
           </motion.button>
         ))}
       </motion.div>
 
-      {/* Search container - dark green translucent */}
+      {/* Search container */}
       <motion.div
         className="w-full"
         initial={{ opacity: 0, y: 18 }}
@@ -89,11 +95,11 @@ const HeroOverlayContent = () => {
             <div className="flex-1 text-left">
               <p className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-1.5"
                 style={{ color: "hsl(var(--charcoal) / 0.45)" }}>
-                Buscar imóvel
+                {t("hero.searchLabel")}
               </p>
               <input
                 type="text"
-                placeholder="Bairro, cidade, condomínio ou código"
+                placeholder={t("hero.searchPlaceholder")}
                 className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
                 style={{ color: "hsl(var(--charcoal))" }}
               />
@@ -116,22 +122,22 @@ const HeroOverlayContent = () => {
             </motion.button>
           </div>
 
-          {/* Mobile layout */}
-          <div className="md:hidden px-4 py-4 space-y-3">
+          {/* Mobile layout - LARGER input area */}
+          <div className="md:hidden px-4 py-5 space-y-5">
             <div className="text-left">
-              <p className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-1.5"
+              <p className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-2"
                 style={{ color: "hsl(var(--charcoal) / 0.45)" }}>
-                Buscar imóvel
+                {t("hero.searchLabel")}
               </p>
               <input
                 type="text"
-                placeholder="Bairro, cidade ou código"
-                className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
+                placeholder={t("hero.searchPlaceholderMobile")}
+                className="w-full bg-transparent text-[16px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25 py-2"
                 style={{ color: "hsl(var(--charcoal))" }}
               />
             </div>
             <motion.button
-              className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-[12px] font-sans font-semibold tracking-[0.18em] uppercase text-primary-foreground bg-primary"
+              className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl text-[12px] font-sans font-semibold tracking-[0.18em] uppercase text-primary-foreground bg-primary"
               style={{
                 boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
               }}
@@ -142,7 +148,7 @@ const HeroOverlayContent = () => {
               transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
             >
               <Search className="w-4 h-4" style={{ color: "hsl(var(--gold))" }} />
-              Buscar
+              {t("hero.searchButton")}
             </motion.button>
           </div>
         </div>
@@ -180,9 +186,6 @@ const HeroSection = () => {
 
 /* ══════════════════════════════════════════════════════════
    Scroll-driven logo animation
-   - Logos appear on page load with fade-in, centered, 30% larger
-   - On scroll: shrink to normal size + move from center to top
-   - Visible until header takes over
    ══════════════════════════════════════════════════════════ */
 const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
   const [pastHero, setPastHero] = useState(false);
@@ -202,16 +205,10 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
   }, []);
 
   const p = heroProgress;
-
-  // Scale: starts at 1.3, shrinks to 1.0 as scroll progresses (0 → 0.6)
   const scaleT = clamp(p / 0.6);
   const scale = lerp(1.3, 1.0, scaleT);
-
-  // Position: starts aligned with scroll indicator (~42vh), moves to top (2.5vh)
   const moveT = clamp(p / 0.8);
   const topVh = lerp(42, 2.5, moveT);
-
-  // Fade-out when logos approach the header (~30vh threshold for early fade)
   const proximityFade = topVh <= 30 ? clamp((30 - topVh) / 28) : 0;
   const fadeOutOpacity = 1 - proximityFade;
   const isVisible = barVisible && !pastHero && heroProgress < 0.98;
@@ -227,41 +224,27 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
         transition: "opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
-      {/* J&A logo - slides left from bar */}
       <motion.img
         src={jaLogoFull}
         alt="Judice & Araujo"
         className="h-[18px] lg:h-[22px] w-auto brightness-0 invert"
         initial={{ opacity: 0, x: 40 }}
-        animate={{
-          opacity: logosVisible ? 1 : 0,
-          x: logosVisible ? 0 : 40,
-        }}
+        animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : 40 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
       />
-
-      {/* Central bar - appears first */}
       <motion.div
         className="mx-4 bg-cream/60"
         style={{ width: "1.5px", height: "80px" }}
         initial={{ opacity: 0, scaleY: 0 }}
-        animate={{
-          opacity: barVisible ? 1 : 0,
-          scaleY: barVisible ? 1 : 0,
-        }}
+        animate={{ opacity: barVisible ? 1 : 0, scaleY: barVisible ? 1 : 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       />
-
-      {/* Forbes logo - slides right from bar */}
       <motion.img
         src={forbesLogoWhite}
         alt="Forbes Global Properties"
         className="h-[30px] lg:h-[35px] w-auto"
         initial={{ opacity: 0, x: -40 }}
-        animate={{
-          opacity: logosVisible ? 1 : 0,
-          x: logosVisible ? 0 : -40,
-        }}
+        animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : -40 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
       />
     </div>
