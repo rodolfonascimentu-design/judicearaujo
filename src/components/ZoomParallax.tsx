@@ -34,7 +34,7 @@ const ZoomParallax = () => {
   });
 
   return (
-    <div ref={containerRef} className="h-[150vh] md:h-[200vh] relative">
+    <div ref={containerRef} className="h-[120vh] md:h-[160vh] relative">
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Desktop: all images */}
         <div className="hidden md:block w-full h-full">
