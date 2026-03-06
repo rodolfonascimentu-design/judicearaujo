@@ -134,6 +134,22 @@ const translations: Record<Lang, Record<string, string>> = {
     "lifestyle.apartamentoDesc": "Conforto, sofisticação e localização privilegiada.",
     "lifestyle.casas": "Casas",
     "lifestyle.casasDesc": "Espaço, exclusividade e design que inspiram.",
+
+    // Search / Properties page
+    "search.resultsLabel": "imóveis à",
+    "search.inLocation": "em",
+    "search.type.venda": "Venda",
+    "search.type.locacao": "Locação",
+    "search.type.temporada": "Temporada",
+    "search.sort": "Ordenar",
+    "search.filter": "Filtrar",
+    "search.save": "Salvar busca",
+    "search.viewDetails": "Ver Detalhes",
+    "search.allLoaded": "Todos os imóveis foram carregados",
+    "tag.launch": "Lançamento",
+    "tag.new": "Novo",
+    "tag.exclusive": "Exclusivo",
+    "tag.construction": "Em construção",
   },
 
   EN: {
@@ -253,6 +269,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "lifestyle.apartamentoDesc": "Comfort, sophistication and prime location.",
     "lifestyle.casas": "Houses",
     "lifestyle.casasDesc": "Space, exclusivity and inspiring design.",
+
+    "search.resultsLabel": "properties for",
+    "search.inLocation": "in",
+    "search.type.venda": "Sale",
+    "search.type.locacao": "Rental",
+    "search.type.temporada": "Seasonal",
+    "search.sort": "Sort",
+    "search.filter": "Filter",
+    "search.save": "Save search",
+    "search.viewDetails": "View Details",
+    "search.allLoaded": "All properties have been loaded",
+    "tag.launch": "New Launch",
+    "tag.new": "New",
+    "tag.exclusive": "Exclusive",
+    "tag.construction": "Under construction",
   },
 
   ES: {
@@ -372,6 +403,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "lifestyle.apartamentoDesc": "Confort, sofisticación y ubicación privilegiada.",
     "lifestyle.casas": "Casas",
     "lifestyle.casasDesc": "Espacio, exclusividad y diseño que inspiran.",
+
+    "search.resultsLabel": "inmuebles en",
+    "search.inLocation": "en",
+    "search.type.venda": "Venta",
+    "search.type.locacao": "Alquiler",
+    "search.type.temporada": "Temporada",
+    "search.sort": "Ordenar",
+    "search.filter": "Filtrar",
+    "search.save": "Guardar búsqueda",
+    "search.viewDetails": "Ver Detalles",
+    "search.allLoaded": "Todos los inmuebles han sido cargados",
+    "tag.launch": "Lanzamiento",
+    "tag.new": "Nuevo",
+    "tag.exclusive": "Exclusivo",
+    "tag.construction": "En construcción",
   },
 };
 

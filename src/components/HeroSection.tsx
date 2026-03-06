@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import { useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
@@ -16,8 +17,21 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
    Search bar overlay – appears after full hero expansion
    ══════════════════════════════════════════════════════════ */
 const HeroOverlayContent = () => {
-  const [activeType, setActiveType] = useState<string>("Venda");
+  const [activeType, setActiveType] = useState<string>("hero.sale");
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
   const { t } = useLanguage();
+
+  const typeMap: Record<string, string> = {
+    "hero.sale": "venda",
+    "hero.rental": "locacao",
+    "hero.seasonal": "temporada",
+  };
+
+  const handleSearch = () => {
+    const q = searchQuery.trim() || "Barra da Tijuca";
+    navigate(`/imoveis?q=${encodeURIComponent(q)}&type=${typeMap[activeType] || "venda"}`);
+  };
 
   const searchTypes = [
     { key: "hero.sale", label: t("hero.sale") },
@@ -99,6 +113,9 @@ const HeroOverlayContent = () => {
               </p>
               <input
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder={t("hero.searchPlaceholder")}
                 className="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
                 style={{ color: "hsl(var(--charcoal))" }}
@@ -106,6 +123,7 @@ const HeroOverlayContent = () => {
             </div>
             <motion.button
               className="group flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-primary"
+              onClick={handleSearch}
               style={{
                 boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
               }}
@@ -131,6 +149,8 @@ const HeroOverlayContent = () => {
               </p>
               <input
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t("hero.searchPlaceholderMobile")}
                 className="w-full bg-transparent text-[16px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25 py-2"
                 style={{ color: "hsl(var(--charcoal))" }}
@@ -138,6 +158,7 @@ const HeroOverlayContent = () => {
             </div>
             <motion.button
               className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl text-[12px] font-sans font-semibold tracking-[0.18em] uppercase text-primary-foreground bg-primary"
+              onClick={handleSearch}
               style={{
                 boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
               }}
