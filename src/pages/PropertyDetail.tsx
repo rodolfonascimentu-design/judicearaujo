@@ -29,13 +29,13 @@ const PropertyDetail = () => {
   return (
     <div className="min-h-screen bg-background property-detail-page overflow-x-hidden">
       <Helmet>
-        <title>{`${property.title} — ${property.neighborhood} | Judice & Araujo`}</title>
-        <meta name="description" content={`${property.title} em ${property.neighborhood}. ${property.area}m², ${property.bedrooms} suítes. Judice & Araujo — Membro exclusivo Forbes Global Properties.`} />
+        <title>{`${property.name} — ${property.neighborhood} | Judice & Araujo`}</title>
+        <meta name="description" content={`${property.name} em ${property.neighborhood}. ${property.area}m², ${property.suites} suítes. Judice & Araujo — Membro exclusivo Forbes Global Properties.`} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "RealEstateListing",
-          "name": property.title,
-          "description": property.description,
+          "name": property.name,
+          "description": property.description?.[0] || "",
           "url": `https://www.judicearaujo.com.br/imovel/${id}`,
           "image": property.images?.[0],
           "address": {
