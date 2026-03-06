@@ -79,7 +79,7 @@ const FeaturedCarousel = () => {
                     }}
                   >
                     {/* Image */}
-                    <div className="relative overflow-hidden rounded-[4px] h-[500px]">
+                    <div className="relative overflow-hidden rounded-[4px] h-[400px]">
                       <img
                         src={property.image}
                         alt={property.title}
@@ -128,7 +128,7 @@ const FeaturedCarousel = () => {
         <button
           onClick={() => emblaApi?.scrollPrev()}
           disabled={!canScrollPrev}
-          className="absolute left-2 top-[250px] z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 flex items-center justify-center shadow-sm hover:bg-white transition-colors disabled:opacity-30"
+          className="absolute left-2 top-[200px] z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 flex items-center justify-center shadow-sm hover:bg-white transition-colors disabled:opacity-30"
           aria-label="Anterior"
         >
           <ChevronLeft className="w-5 h-5 text-foreground" />
@@ -136,7 +136,7 @@ const FeaturedCarousel = () => {
         <button
           onClick={() => emblaApi?.scrollNext()}
           disabled={!canScrollNext}
-          className="absolute right-2 top-[250px] z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 flex items-center justify-center shadow-sm hover:bg-white transition-colors disabled:opacity-30"
+          className="absolute right-2 top-[200px] z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 flex items-center justify-center shadow-sm hover:bg-white transition-colors disabled:opacity-30"
           aria-label="Próximo"
         >
           <ChevronRight className="w-5 h-5 text-foreground" />
