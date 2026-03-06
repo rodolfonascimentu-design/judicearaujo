@@ -9,8 +9,6 @@ import exclusive2 from "@/assets/exclusive-2.jpg";
 import exclusive3 from "@/assets/exclusive-3.jpg";
 import exclusive4 from "@/assets/exclusive-4.jpg";
 import highlightBeachfront from "@/assets/highlight-beachfront.jpg";
-import highlightContemporary from "@/assets/highlight-contemporary.jpg";
-import highlightHistoric from "@/assets/highlight-historic.jpg";
 import highlightPenthouse from "@/assets/highlight-penthouse.jpg";
 
 export interface PropertyUnit {
@@ -63,10 +61,6 @@ export interface PropertyDetailData {
   bathrooms: number;
   parking: number;
   images: string[];
-  storyHeadline: string;
-  storyImage: string;
-  storyText: string;
-  storyHighlightImage: string;
   description: string[];
   internalFeatures: string[];
   condoFeatures: string[];
@@ -105,11 +99,6 @@ export const mockProperty: PropertyDetailData = {
     highlightBeachfront,
     highlightPenthouse,
   ],
-  storyHeadline: "Arquitetura que se integra à paisagem.",
-  storyImage: highlightContemporary,
-  storyText:
-    "Cada detalhe foi pensado para criar uma relação íntima entre o morador e a natureza exuberante do Joá. Materiais nobres como pedra natural, madeira de demolição e vidro temperado compõem uma paleta que dialoga com o verde da Mata Atlântica e o azul infinito do oceano. A iluminação natural é protagonista — grandes panos de vidro trazem a luz do sol para cada ambiente, enquanto a ventilação cruzada garante conforto térmico durante todo o ano.",
-  storyHighlightImage: highlightHistoric,
   description: [
     "Situada em uma das localizações mais privilegiadas do Rio de Janeiro, esta residência é um verdadeiro refúgio de sofisticação e exclusividade. Com 520m² de área construída e um terreno generoso que se abre para uma vista panorâmica da Praia do Joá e da Pedra da Gávea, a propriedade oferece uma experiência de moradia incomparável.",
     "A planta foi concebida pelo renomado escritório de arquitetura Studio MK27, priorizando a integração entre os espaços internos e externos. A sala de estar, com pé-direito duplo e lareira, conecta-se diretamente ao deck da piscina infinita, criando um fluxo natural que convida à contemplação.",

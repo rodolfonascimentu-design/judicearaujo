@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
@@ -73,13 +74,11 @@ const Properties = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  // Simulate initial load
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
 
-  // Infinite scroll
   const loadMore = useCallback(() => {
     if (loadingMore || items.length >= allProperties.length) return;
     setLoadingMore(true);
@@ -104,11 +103,13 @@ const Properties = () => {
   }, [loadMore]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
+      <Helmet>
+        <title>{`Imóveis para ${type === "locacao" ? "Locação" : type === "temporada" ? "Temporada" : "Venda"} em ${query} — Judice & Araujo`}</title>
+        <meta name="description" content={`Encontre imóveis de luxo para ${type === "locacao" ? "locação" : type === "temporada" ? "temporada" : "venda"} em ${query}. Judice & Araujo — Membro exclusivo Forbes Global Properties.`} />
+      </Helmet>
       <Navbar />
-
-      {/* Spacer for fixed navbar */}
-      <div className="h-20" />
+      <div className="h-20" aria-hidden="true" />
 
       <SearchBar count={allProperties.length} location={query} type={type} />
 
@@ -127,7 +128,6 @@ const Properties = () => {
               ))}
             </div>
 
-            {/* Loading more skeletons */}
             {loadingMore && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 mt-14">
                 {Array.from({ length: 3 }).map((_, i) => (
@@ -136,9 +136,8 @@ const Properties = () => {
               </div>
             )}
 
-            {/* Sentinel for infinite scroll */}
             {items.length < allProperties.length && (
-              <div ref={sentinelRef} className="h-4" />
+              <div ref={sentinelRef} className="h-4" aria-hidden="true" />
             )}
 
             {items.length >= allProperties.length && (
