@@ -24,8 +24,8 @@ const SearchBar = ({ count, location, type }: SearchBarProps) => {
   return (
     <div>
       {/* Sticky search bar */}
-      <div className="sticky top-20 z-40 bg-white/95 backdrop-blur-md border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-3 flex items-center gap-4">
+      <div className="sticky top-20 z-40 bg-white border-b border-border">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex items-center gap-4">
           {/* Search input */}
           <div className="flex-1 flex items-center gap-3 bg-muted/40 rounded-[4px] px-4 py-2.5">
             <Search className="w-4 h-4 text-muted-foreground flex-shrink-0" />
