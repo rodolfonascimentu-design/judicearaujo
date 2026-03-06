@@ -1,28 +1,29 @@
 import { useState, useEffect } from "react";
 import { Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoJA from "@/assets/logo-ja.png";
 import logoJaGreen from "@/assets/logo-ja-green.png";
 import logoForbesGreen from "@/assets/logo-forbes-green.png";
 import jaLogoFull from "@/assets/logo-ja-full.png";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
+import { useLanguage } from "@/i18n/LanguageContext";
+import type { Lang } from "@/i18n/translations";
 
-const navLinks = [
-  { label: "Lançamentos", href: "#lancamentos" },
-  { label: "Avaliar Imóvel", href: "#avaliar" },
-  { label: "Blog", href: "#blog" },
-];
-
-const languages = ["PT", "EN", "ES"];
+const languages: Lang[] = ["PT", "EN", "ES"];
 
 const Navbar = () => {
+  const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState("PT");
   const [fontSize, setFontSize] = useState(100);
   const [heroExpanded, setHeroExpanded] = useState(false);
+
+  const navLinks = [
+    { label: t("nav.launches"), href: "#lancamentos" },
+    { label: t("nav.evaluate"), href: "#avaliar" },
+    { label: t("nav.blog"), href: "#blog" },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -47,7 +48,6 @@ const Navbar = () => {
     setFontSize((prev) => Math.min(130, Math.max(80, prev + delta)));
   };
 
-  // Header phases: links always visible. White before fold, green after.
   const showGreen = pastHero;
 
   return (
@@ -66,7 +66,7 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
-            {/* Co-branding logo in top-left of header */}
+            {/* Co-branding logo */}
             <a
               href="#"
               className="flex-shrink-0 flex items-center gap-2 transition-all duration-500"
@@ -102,7 +102,7 @@ const Navbar = () => {
             >
                   {navLinks.map((link) => (
                     <a
-                      key={link.label}
+                      key={link.href}
                       href={link.href}
                       className={`text-[11px] font-sans font-medium tracking-[0.2em] uppercase transition-colors duration-500 ease-in-out ${
                         pastHero
@@ -122,7 +122,7 @@ const Navbar = () => {
                         pastHero ? "text-primary/70 hover:text-primary" : "text-cream/70 hover:text-cream"
                       }`}
                     >
-                      {currentLang}
+                      {lang}
                       <ChevronDown className="w-3 h-3" />
                     </button>
                     <AnimatePresence>
@@ -135,17 +135,17 @@ const Navbar = () => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -4 }}
                         >
-                          {languages.map((lang) => (
+                          {languages.map((l) => (
                             <button
-                              key={lang}
-                              onClick={() => { setCurrentLang(lang); setLangOpen(false); }}
+                              key={l}
+                              onClick={() => { setLang(l); setLangOpen(false); }}
                               className={`block w-full px-5 py-2 text-[11px] font-sans tracking-[0.15em] uppercase text-left transition-colors ${
                                 pastHero
-                                  ? (lang === currentLang ? "text-primary bg-primary/5" : "text-primary/50 hover:text-primary hover:bg-primary/5")
-                                  : (lang === currentLang ? "text-cream bg-cream/10" : "text-cream/50 hover:text-cream hover:bg-cream/10")
+                                  ? (l === lang ? "text-primary bg-primary/5" : "text-primary/50 hover:text-primary hover:bg-primary/5")
+                                  : (l === lang ? "text-cream bg-cream/10" : "text-cream/50 hover:text-cream hover:bg-cream/10")
                               }`}
                             >
-                              {lang}
+                              {l}
                             </button>
                           ))}
                         </motion.div>
@@ -175,7 +175,7 @@ const Navbar = () => {
                   </div>
             </div>
 
-            {/* Mobile menu button — animated hamburger ↔ X */}
+            {/* Mobile menu button — X is now green */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className={`lg:hidden relative w-7 h-7 flex flex-col items-center justify-center transition-all duration-500 ${pastHero ? "text-primary" : "text-cream"}`}
@@ -186,17 +186,17 @@ const Navbar = () => {
               aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
             >
               <motion.span
-                className={`absolute block h-[1.5px] w-5 rounded-full ${pastHero && !mobileOpen ? "bg-primary" : mobileOpen ? "bg-primary-foreground" : "bg-cream"}`}
+                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : pastHero ? "bg-primary" : "bg-cream"}`}
                 animate={mobileOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -4 }}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
               />
               <motion.span
-                className={`absolute block h-[1.5px] w-5 rounded-full ${pastHero && !mobileOpen ? "bg-primary" : mobileOpen ? "bg-primary-foreground" : "bg-cream"}`}
+                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : pastHero ? "bg-primary" : "bg-cream"}`}
                 animate={mobileOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
                 transition={{ duration: 0.25, ease: "easeInOut" }}
               />
               <motion.span
-                className={`absolute block h-[1.5px] w-5 rounded-full ${pastHero && !mobileOpen ? "bg-primary" : mobileOpen ? "bg-primary-foreground" : "bg-cream"}`}
+                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : pastHero ? "bg-primary" : "bg-cream"}`}
                 animate={mobileOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 4 }}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
               />
@@ -205,7 +205,7 @@ const Navbar = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile overlay */}
+      {/* Mobile overlay — logo removed, X is green */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -215,16 +215,10 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* X button removed — hamburger button in nav handles toggle */}
-            <img
-              src={logoJA}
-              alt="Judice & Araujo"
-              className="h-5 w-auto brightness-0 invert mb-10"
-            />
             <div className="flex flex-col items-center gap-8">
               {navLinks.map((link, i) => (
                 <motion.a
-                  key={link.label}
+                  key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="font-display text-xl text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.1em] uppercase"
@@ -236,15 +230,15 @@ const Navbar = () => {
                 </motion.a>
               ))}
               <div className="flex gap-4 mt-4">
-                {languages.map((lang) => (
+                {languages.map((l) => (
                   <button
-                    key={lang}
-                    onClick={() => setCurrentLang(lang)}
+                    key={l}
+                    onClick={() => setLang(l)}
                     className={`text-xs font-sans tracking-[0.15em] uppercase transition-colors ${
-                      lang === currentLang ? "text-primary-foreground" : "text-primary-foreground/40"
+                      l === lang ? "text-primary-foreground" : "text-primary-foreground/40"
                     }`}
                   >
-                    {lang}
+                    {l}
                   </button>
                 ))}
               </div>
