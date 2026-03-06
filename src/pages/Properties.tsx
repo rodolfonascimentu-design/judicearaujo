@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
@@ -75,6 +74,11 @@ const Properties = () => {
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const typeLabel = type === "locacao" ? "Locação" : type === "temporada" ? "Temporada" : "Venda";
+    document.title = `Imóveis para ${typeLabel} em ${query} — Judice & Araujo`;
+  }, [query, type]);
+
+  useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
@@ -104,10 +108,6 @@ const Properties = () => {
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      <Helmet>
-        <title>{`Imóveis para ${type === "locacao" ? "Locação" : type === "temporada" ? "Temporada" : "Venda"} em ${query} — Judice & Araujo`}</title>
-        <meta name="description" content={`Encontre imóveis de luxo para ${type === "locacao" ? "locação" : type === "temporada" ? "temporada" : "venda"} em ${query}. Judice & Araujo — Membro exclusivo Forbes Global Properties.`} />
-      </Helmet>
       <Navbar />
       <div className="h-20" aria-hidden="true" />
 

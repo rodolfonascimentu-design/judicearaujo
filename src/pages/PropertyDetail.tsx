@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import { MessageCircle, ArrowLeft } from "lucide-react";
 import { mockProperty } from "@/data/propertyDetail";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -24,28 +23,11 @@ const PropertyDetail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+    document.title = `${property.name} — ${property.neighborhood} | Judice & Araujo`;
+  }, [id, property.name, property.neighborhood]);
 
   return (
     <div className="min-h-screen bg-background property-detail-page overflow-x-hidden">
-      <Helmet>
-        <title>{`${property.name} — ${property.neighborhood} | Judice & Araujo`}</title>
-        <meta name="description" content={`${property.name} em ${property.neighborhood}. ${property.area}m², ${property.suites} suítes. Judice & Araujo — Membro exclusivo Forbes Global Properties.`} />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "RealEstateListing",
-          "name": property.name,
-          "description": property.description?.[0] || "",
-          "url": `https://www.judicearaujo.com.br/imovel/${id}`,
-          "image": property.images?.[0],
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": property.neighborhood,
-            "addressRegion": "RJ",
-            "addressCountry": "BR"
-          }
-        })}</script>
-      </Helmet>
       <Navbar />
 
       <div className="container mx-auto px-4 pt-4">
