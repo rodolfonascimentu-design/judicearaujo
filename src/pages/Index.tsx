@@ -45,6 +45,7 @@ const Index = () => {
     <Newsletter />
     <Footer />
   </div>
-);
+  );
+};
 
 export default Index;
