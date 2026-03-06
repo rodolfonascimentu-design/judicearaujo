@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { MessageCircle } from "lucide-react";
+import { useParams, useNavigate } from "react-router-dom";
+import { MessageCircle, ArrowLeft } from "lucide-react";
 import { mockProperty } from "@/data/propertyDetail";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -17,7 +17,8 @@ import PropertySimilar from "@/components/property-detail/PropertySimilar";
 
 const PropertyDetail = () => {
   const { id } = useParams();
-  const property = mockProperty; // In production, fetch by id
+  const navigate = useNavigate();
+  const property = mockProperty;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,6 +27,18 @@ const PropertyDetail = () => {
   return (
     <div className="min-h-screen bg-background property-detail-page">
       <Navbar />
+      
+      {/* Back button */}
+      <div className="container mx-auto px-4 pt-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Voltar para listagem
+        </button>
+      </div>
+
       <PropertyHero property={property} />
       <PropertyStory property={property} />
       <PropertyDescription property={property} />
