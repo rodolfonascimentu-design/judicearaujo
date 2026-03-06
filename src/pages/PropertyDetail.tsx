@@ -52,10 +52,10 @@ const PropertyDetail = () => {
         <button
           onClick={() => navigate(-1)}
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          aria-label={t("nav.back") || "Voltar"}
+          aria-label={t("nav.back")}
         >
           <ArrowLeft className="w-4 h-4" />
-          {t("nav.back") || "Voltar para listagem"}
+          {t("nav.back")}
         </button>
       </div>
 
