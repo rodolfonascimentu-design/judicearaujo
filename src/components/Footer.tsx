@@ -1,7 +1,7 @@
 import { Instagram, Phone, Linkedin } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import logoJaGreen from "@/assets/logo-ja-green.png";
-import logoForbesGreen from "@/assets/logo-forbes-green.png";
+import logoJaBlack from "@/assets/logo-ja-black.png";
+import logoForbesBlack from "@/assets/forbes-global-black.png";
 
 const neighborhoods = ["Leblon", "Ipanema", "Lagoa", "Gávea", "Jardim Botânico", "São Conrado"];
 
@@ -18,10 +18,10 @@ const Footer = () => {
       <div className="h-px bg-border/30" />
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-16">
-          <div className="flex items-start gap-2">
-            <img src={logoJaGreen} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
-            <div className="w-px h-8 bg-primary/20" />
-            <img src={logoForbesGreen} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
+          <div className="flex items-start gap-3">
+            <img src={logoJaBlack} alt="Judice & Araujo" className="h-[18px] lg:h-[22px] w-auto" />
+            <div className="w-px h-10 bg-foreground/20" />
+            <img src={logoForbesBlack} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 lg:gap-16">
             <div>
