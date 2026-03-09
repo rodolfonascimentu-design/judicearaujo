@@ -10,6 +10,12 @@ import exclusive3 from "@/assets/exclusive-3.jpg";
 import exclusive4 from "@/assets/exclusive-4.jpg";
 import highlightBeachfront from "@/assets/highlight-beachfront.jpg";
 import highlightPenthouse from "@/assets/highlight-penthouse.jpg";
+import test1 from "@/assets/test-1.jpg";
+import test2 from "@/assets/test-2.jpg";
+import test3 from "@/assets/test-3.jpg";
+import test4 from "@/assets/test-4.jpg";
+import test5 from "@/assets/test-5.jpg";
+import test6 from "@/assets/test-6.jpg";
 
 export interface PropertyUnit {
   type: string;
