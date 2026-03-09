@@ -187,7 +187,9 @@ const HeroOverlayContent = () => {
    ══════════════════════════════════════════════════════════ */
 const HeroSection = () => {
   const [heroProgress, setHeroProgress] = useState(0);
-  const shouldSkip = sessionStorage.getItem('heroAnimationSeen') === '1';
+  // Only skip on desktop (md+), always show animation on mobile
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const shouldSkip = !isMobile && sessionStorage.getItem('heroAnimationSeen') === '1';
 
   const handleScrollProgress = useCallback((progress: number) => {
     setHeroProgress(progress);
