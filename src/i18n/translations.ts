@@ -15,7 +15,7 @@ const translations: Record<Lang, Record<string, string>> = {
     // Navbar
     "nav.launches": "Lançamentos",
     "nav.evaluate": "Avaliar Imóvel",
-    "nav.blog": "Blog",
+    "nav.blog": "Administração de Imóveis",
     "nav.back": "Voltar para listagem",
 
     // Exclusive Gallery
