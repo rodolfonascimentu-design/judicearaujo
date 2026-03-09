@@ -62,7 +62,7 @@ const ScrollExpandMedia = ({
         setScrollProgress(1);
         setMediaFullyExpanded(true);
         setShowContent(true);
-        sessionStorage.setItem('heroAnimationSeen', '1');
+        markHeroAnimationSeen();
       }
     };
     requestAnimationFrame(animate);
