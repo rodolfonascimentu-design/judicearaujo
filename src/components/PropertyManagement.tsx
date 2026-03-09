@@ -52,22 +52,41 @@ const PropertyManagement = () => {
 
   return (
     <section className="bg-primary relative overflow-hidden">
-      {/* Forbes content */}
-      <div className="py-28 lg:py-36 px-6 lg:px-12">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* Forbes content — logo from left, text from right, meet in center side by side */}
+      <div className="pt-28 lg:pt-36 pb-10 lg:pb-14 px-6 lg:px-12">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
+          {/* Logo — enters from left */}
           <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="flex-shrink-0"
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false, margin: "-80px" }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
           >
-            <img src={forbesLogo} alt="Forbes Global Properties" className="h-24 md:h-28 lg:h-36 object-contain mx-auto mb-10" />
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-primary-foreground whitespace-pre-line">
+            <img src={forbesLogo} alt="Forbes Global Properties" className="h-20 md:h-24 lg:h-32 object-contain" />
+          </motion.div>
+
+          {/* Divider */}
+          <motion.div
+            className="hidden md:block w-px h-24 bg-primary-foreground/20"
+            initial={{ opacity: 0, scaleY: 0 }}
+            whileInView={{ opacity: 1, scaleY: 1 }}
+            viewport={{ once: false, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          />
+
+          {/* Text — enters from right */}
+          <motion.div
+            className="text-center md:text-left max-w-lg"
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, margin: "-80px" }}
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
+          >
+            <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-normal tracking-[-0.02em] text-primary-foreground whitespace-pre-line leading-[1.3] mb-4">
               {t("forbes.title")}
             </h2>
-            <div className="w-10 h-px bg-primary-foreground/30 mx-auto mt-7 mb-5" />
-            <p className="font-sans text-sm md:text-base max-w-xl mx-auto font-light tracking-wide text-primary-foreground/60">
+            <p className="font-sans text-sm md:text-base font-light tracking-wide text-primary-foreground/55 leading-[1.8]">
               {t("forbes.desc")}
             </p>
           </motion.div>
