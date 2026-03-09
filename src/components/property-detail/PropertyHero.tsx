@@ -123,9 +123,6 @@ const PropertyHero = ({ property }: Props) => {
             ))}
           </div>
 
-          {/* Price */}
-          <p className="font-sans text-xs text-white/60 mb-1">{property.priceLabel}</p>
-          <p className="font-display text-2xl md:text-3xl text-white mb-8">{property.price}</p>
 
         </div>
       </motion.div>
