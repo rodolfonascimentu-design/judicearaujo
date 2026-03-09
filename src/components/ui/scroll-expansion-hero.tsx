@@ -1,6 +1,10 @@
 import { useEffect, useState, ReactNode, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
+// Module-level flag: resets on page refresh, persists during SPA navigation
+let heroAnimationSeen = false;
+export const markHeroAnimationSeen = () => { heroAnimationSeen = true; };
+export const hasHeroAnimationBeenSeen = () => heroAnimationSeen;
 interface ScrollExpandMediaProps {
   mediaType?: 'video' | 'image';
   mediaSrc: string;
