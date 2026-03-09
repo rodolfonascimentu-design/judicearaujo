@@ -195,6 +195,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "forbes.subtitle": "Global Partnership",
     "forbes.title": "A global network\nfor extraordinary properties",
     "forbes.desc": "Judice & Araujo is part of Forbes Global Properties, an international network that brings together some of the most prestigious real estate firms in the world.",
+    "forbes.cta": "Discover the partnership",
     "forbes.reach": "International reach",
     "forbes.network": "Global luxury network",
     "forbes.networkDesc": "Selected partners in the most prestigious markets worldwide.",
