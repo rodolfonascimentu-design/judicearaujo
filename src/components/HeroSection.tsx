@@ -187,6 +187,7 @@ const HeroOverlayContent = () => {
    ══════════════════════════════════════════════════════════ */
 const HeroSection = () => {
   const [heroProgress, setHeroProgress] = useState(0);
+  const shouldSkip = sessionStorage.getItem('heroAnimationSeen') === '1';
 
   const handleScrollProgress = useCallback((progress: number) => {
     setHeroProgress(progress);
@@ -198,12 +199,13 @@ const HeroSection = () => {
 
   return (
     <div className="relative">
-      <HeroLogos heroProgress={heroProgress} />
+      <HeroLogos heroProgress={heroProgress} skipAnimation={shouldSkip} />
       <ScrollExpandMedia
         mediaType="video"
         mediaSrc={VIDEO_SRC}
         overlayContent={<HeroOverlayContent />}
         onScrollProgress={handleScrollProgress}
+        skipAnimation={shouldSkip}
       />
     </div>
   );
