@@ -36,25 +36,22 @@ interface MapViewProps {
   onHoverPin: (id: string | null) => void;
 }
 
-const defaultIcon = L.icon({
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-const highlightedIcon = L.icon({
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-  iconSize: [35, 57],
-  iconAnchor: [17, 57],
-  popupAnchor: [1, -48],
-  shadowSize: [57, 57],
-});
+// Custom SVG pin using institutional green
+const createPinIcon = (highlighted: boolean) => {
+  const size = highlighted ? 38 : 28;
+  const color = "hsl(171,100%,12%)";
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${Math.round(size * 1.4)}" viewBox="0 0 24 34">
+    <path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 22 12 22s12-13 12-22C24 5.4 18.6 0 12 0z" fill="${color}" opacity="${highlighted ? 1 : 0.85}"/>
+    <circle cx="12" cy="12" r="5" fill="white" opacity="0.9"/>
+  </svg>`;
+  return L.divIcon({
+    html: svg,
+    className: "custom-pin",
+    iconSize: [size, Math.round(size * 1.4)],
+    iconAnchor: [size / 2, Math.round(size * 1.4)],
+    popupAnchor: [0, -Math.round(size * 1.2)],
+  });
+};
 
 const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
   const mapRef = useRef<L.Map | null>(null);
@@ -95,21 +92,30 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
     markersRef.current.clear();
 
     properties.forEach((prop) => {
-      const marker = L.marker(prop.coords, { icon: defaultIcon }).addTo(map);
+      const marker = L.marker(prop.coords, { icon: createPinIcon(false) }).addTo(map);
 
       marker.bindPopup(`
-        <div style="width:220px;cursor:pointer" class="map-popup-card" data-id="${prop.id}">
-          <img src="${prop.image}" alt="${prop.title}" style="width:100%;height:112px;object-fit:cover;border-radius:3px;margin-bottom:8px" />
-          <h4 style="font-family:Montserrat,sans-serif;font-size:13px;font-weight:600;margin:0 0 2px;line-height:1.3">${prop.title}</h4>
-          <p style="font-family:Montserrat,sans-serif;font-size:11px;color:#666;margin:0 0 4px">${prop.neighborhood}</p>
-          <p style="font-family:Montserrat,sans-serif;font-size:13px;font-weight:600;color:hsl(171,100%,12%);margin:0 0 8px">${prop.price}</p>
-          <div style="font-family:Montserrat,sans-serif;font-size:10px;color:#999;display:flex;gap:12px">
-            <span>${prop.bedrooms} quartos</span>
-            <span>${prop.area} m²</span>
-            <span>${prop.parking} vagas</span>
+        <div style="width:200px;cursor:pointer;position:relative;margin:-14px -20px -14px -20px;" class="map-popup-card" data-id="${prop.id}">
+          <div style="position:relative">
+            <img src="${prop.image}" alt="${prop.title}" style="width:100%;height:140px;object-fit:cover;display:block;" />
+          </div>
+          <div style="padding:10px 14px 12px">
+            <h4 style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:600;margin:0 0 2px;line-height:1.3">${prop.title}</h4>
+            <p style="font-family:Montserrat,sans-serif;font-size:10px;color:#888;margin:0 0 4px">${prop.neighborhood}</p>
+            <p style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:500;color:hsl(171,100%,12%);margin:0 0 6px">${prop.price}</p>
+            <div style="font-family:Montserrat,sans-serif;font-size:9px;color:#aaa;display:flex;gap:10px">
+              <span>${prop.bedrooms} quartos</span>
+              <span>${prop.area} m²</span>
+              <span>${prop.parking} vagas</span>
+            </div>
           </div>
         </div>
-      `);
+      `, {
+        closeButton: true,
+        className: "custom-map-popup",
+        maxWidth: 200,
+        minWidth: 200,
+      });
 
       marker.on("mouseover", () => onHoverPin(prop.id));
       marker.on("mouseout", () => onHoverPin(null));
@@ -125,16 +131,55 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
   // Update highlighted marker icon
   useEffect(() => {
     markersRef.current.forEach((marker, id) => {
-      marker.setIcon(id === highlightedId ? highlightedIcon : defaultIcon);
+      marker.setIcon(createPinIcon(id === highlightedId));
     });
   }, [highlightedId]);
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full h-[600px] lg:h-[700px] rounded-[4px] overflow-hidden border border-border"
-      style={{ zIndex: 1 }}
-    />
+    <>
+      <style>{`
+        .custom-pin { background: none !important; border: none !important; }
+        .custom-map-popup .leaflet-popup-content-wrapper {
+          border-radius: 6px;
+          box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+          padding: 0;
+          overflow: hidden;
+        }
+        .custom-map-popup .leaflet-popup-content {
+          margin: 0;
+          line-height: 1;
+        }
+        .custom-map-popup .leaflet-popup-close-button {
+          z-index: 10;
+          top: 6px !important;
+          right: 6px !important;
+          width: 22px;
+          height: 22px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0,0,0,0.35);
+          backdrop-filter: blur(4px);
+          border-radius: 50%;
+          color: white !important;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 1;
+          text-align: center;
+        }
+        .custom-map-popup .leaflet-popup-close-button:hover {
+          background: rgba(0,0,0,0.55);
+        }
+        .custom-map-popup .leaflet-popup-tip {
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+      `}</style>
+      <div
+        ref={containerRef}
+        className="w-full h-[600px] lg:h-[700px] rounded-[4px] overflow-hidden border border-border"
+        style={{ zIndex: 1 }}
+      />
+    </>
   );
 };
 
