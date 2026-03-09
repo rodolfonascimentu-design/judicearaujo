@@ -2,6 +2,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import forbesLogo from "@/assets/Forbes_Global_Properties-2.png";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 import parallax1 from "@/assets/parallax-1.jpg";
 import parallax2 from "@/assets/parallax-2.jpg";
@@ -15,6 +17,7 @@ const galleryImages = [parallax1, parallax2, parallax3, parallax4, parallax5, pa
 
 const PropertyManagement = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -93,6 +96,25 @@ const PropertyManagement = () => {
             </motion.div>
           ))}
         </div>
+      </motion.div>
+
+      {/* CTA Button */}
+      <motion.div
+        className="pb-20 md:pb-28 flex justify-center relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-40px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <motion.button
+          onClick={() => navigate("/forbes")}
+          className="group flex items-center gap-3 px-8 py-3.5 rounded-full border border-white/30 text-primary-foreground font-sans text-[12px] font-semibold tracking-[0.15em] uppercase transition-colors duration-300 hover:bg-white/10"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+        >
+          {t("forbes.cta")}
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </motion.button>
       </motion.div>
     </motion.section>
   );
