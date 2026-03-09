@@ -2,6 +2,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import forbesLogo from "@/assets/Forbes_Global_Properties-2.png";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 import parallax1 from "@/assets/parallax-1.jpg";
 import parallax2 from "@/assets/parallax-2.jpg";
