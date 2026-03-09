@@ -349,6 +349,9 @@ const translations: Record<Lang, Record<string, string>> = {
     "farms.subtitle": "Selección Exclusiva",
     "farms.title": "Haciendas Exclusivas",
 
+    "highend.title": "Los mejores inmuebles de alto nivel de Río de Janeiro",
+    "highend.subtitle": "Una selección curada de los inmuebles más extraordinarios disponibles en la ciudad",
+
     "pm.title": "Administración de Inmuebles",
     "pm.subtitle": "Algunos patrimonios merecen más que gestión. Merecen curaduría.",
     "pm.intro": "Cada inmueble lleva una historia, una inversión y un legado. Administrarlo exige sensibilidad para comprender su verdadero valor y estrategia para preservarlo y ampliarlo con el tiempo.",
