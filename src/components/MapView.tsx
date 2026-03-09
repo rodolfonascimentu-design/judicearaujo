@@ -177,11 +177,12 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
           box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
       `}</style>
-      <div
-        ref={containerRef}
-        className="w-full h-[600px] lg:h-[700px] rounded-[4px] overflow-hidden border border-border"
-        style={{ zIndex: 1 }}
-      />
+      <div className="w-full h-[600px] lg:h-[700px] rounded-[4px] border border-border" style={{ zIndex: 1 }}>
+        <div
+          ref={containerRef}
+          className="w-full h-full"
+        />
+      </div>
     </>
   );
 };
