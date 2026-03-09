@@ -259,7 +259,7 @@ const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
       />
       <motion.div
         className="mx-4 bg-cream/60"
-        style={{ width: "1.5px", height: "80px" }}
+        style={{ width: "1.5px", height: "34px" }}
         initial={{ opacity: 0, scaleY: 0 }}
         animate={{ opacity: barVisible ? 1 : 0, scaleY: barVisible ? 1 : 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
