@@ -11,7 +11,7 @@ import PropertyGallery from "@/components/property-detail/PropertyGallery";
 import PropertyFeatures from "@/components/property-detail/PropertyFeatures";
 import PropertyLocation from "@/components/property-detail/PropertyLocation";
 import PropertyNeighborhood from "@/components/property-detail/PropertyNeighborhood";
-import PropertyNearby from "@/components/property-detail/PropertyNearby";
+
 import PropertyContact from "@/components/property-detail/PropertyContact";
 import PropertySimilar from "@/components/property-detail/PropertySimilar";
 
