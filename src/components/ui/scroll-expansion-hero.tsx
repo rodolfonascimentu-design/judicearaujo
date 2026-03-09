@@ -179,18 +179,19 @@ const ScrollExpandMedia = ({
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
             {/* Scroll hint - appears after logo animation */}
             <motion.div
-              className="absolute bottom-12 flex-col gap-3 flex items-center justify-end"
-              animate={{ opacity: showContent ? 0 : pageReady && scrollProgress === 0 ? 0.85 : 0 }}
+              className="absolute bottom-12 flex flex-col items-center"
+              animate={{ opacity: showContent ? 0 : pageReady && scrollProgress === 0 ? 0.7 : 0 }}
               transition={{ duration: 0.5 }}>
               
               <motion.div
-                className="w-px h-12 bg-cream/60"
-                animate={{ scaleY: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
-              
-              <p className="text-cream/70 font-sans text-[11px] tracking-[0.3em] uppercase">
-                Scroll
-              </p>
+                className="w-5 h-9 rounded-full border-[1.5px] border-cream/50 flex items-start justify-center pt-1.5"
+              >
+                <motion.div
+                  className="w-[3px] h-[7px] rounded-full bg-cream/60"
+                  animate={{ y: [0, 10, 0], opacity: [1, 0.3, 1] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </motion.div>
             </motion.div>
 
             {/* Overlay content (search etc.) - appears after full expansion */}
