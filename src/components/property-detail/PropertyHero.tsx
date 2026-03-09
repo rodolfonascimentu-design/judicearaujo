@@ -127,26 +127,6 @@ const PropertyHero = ({ property }: Props) => {
           <p className="font-sans text-xs text-white/60 mb-1">{property.priceLabel}</p>
           <p className="font-display text-2xl md:text-3xl text-white mb-8">{property.price}</p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={`https://wa.me/${property.agent.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white text-foreground px-6 py-3 rounded-full text-xs font-sans font-medium tracking-[0.1em] uppercase hover:bg-white/90 transition-colors"
-            >
-              <MessageCircle className="w-4 h-4" />
-              WhatsApp
-            </a>
-            <button className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md text-white px-6 py-3 rounded-full text-xs font-sans font-medium tracking-[0.1em] uppercase hover:bg-white/25 transition-colors border border-white/20">
-              <Info className="w-4 h-4" />
-              Solicitar Informações
-            </button>
-            <button className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md text-white px-6 py-3 rounded-full text-xs font-sans font-medium tracking-[0.1em] uppercase hover:bg-white/25 transition-colors border border-white/20">
-              <Share2 className="w-4 h-4" />
-              Compartilhar
-            </button>
-          </div>
         </div>
       </motion.div>
 

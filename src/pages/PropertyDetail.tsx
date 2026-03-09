@@ -11,7 +11,7 @@ import PropertyGallery from "@/components/property-detail/PropertyGallery";
 import PropertyFeatures from "@/components/property-detail/PropertyFeatures";
 import PropertyLocation from "@/components/property-detail/PropertyLocation";
 import PropertyNeighborhood from "@/components/property-detail/PropertyNeighborhood";
-import PropertyNearby from "@/components/property-detail/PropertyNearby";
+
 import PropertyContact from "@/components/property-detail/PropertyContact";
 import PropertySimilar from "@/components/property-detail/PropertySimilar";
 
@@ -48,7 +48,7 @@ const PropertyDetail = () => {
         <PropertyFeatures property={property} />
         <PropertyLocation property={property} />
         <PropertyNeighborhood property={property} />
-        <PropertyNearby property={property} />
+        
         <PropertyContact />
         <PropertySimilar property={property} />
       </main>
