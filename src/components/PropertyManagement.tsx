@@ -39,7 +39,7 @@ const PropertyManagement = () => {
 
       {/* Forbes content — logo from left, text from right */}
       <motion.div className="pt-28 lg:pt-36 pb-14 lg:pb-16 px-6 lg:px-12 relative z-10" style={{ y: sectionY }}>
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start justify-center gap-10 md:gap-16 md:pt-2">
+        <div className="max-w-6xl mx-auto flex flex-col items-center md:flex-row md:items-start justify-center gap-10 md:gap-16 md:pt-2">
           {/* Logo — enters from left */}
           <motion.div
             className="flex-shrink-0 md:mt-1"
