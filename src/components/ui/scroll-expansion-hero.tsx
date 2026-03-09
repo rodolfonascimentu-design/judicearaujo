@@ -1,4 +1,4 @@
-import { useEffect, useState, ReactNode } from 'react';
+import { useEffect, useState, ReactNode, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 interface ScrollExpandMediaProps {
@@ -9,6 +9,7 @@ interface ScrollExpandMediaProps {
   children?: ReactNode;
   overlayContent?: ReactNode;
   onScrollProgress?: (progress: number) => void;
+  skipAnimation?: boolean;
 }
 
 const ScrollExpandMedia = ({
@@ -18,16 +19,18 @@ const ScrollExpandMedia = ({
   title,
   children,
   overlayContent,
-  onScrollProgress
+  onScrollProgress,
+  skipAnimation = false,
 }: ScrollExpandMediaProps) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [showContent, setShowContent] = useState(false);
-  const [mediaFullyExpanded, setMediaFullyExpanded] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(skipAnimation ? 1 : 0);
+  const [showContent, setShowContent] = useState(skipAnimation);
+  const [mediaFullyExpanded, setMediaFullyExpanded] = useState(skipAnimation);
   const [touchStartY, setTouchStartY] = useState(0);
-  const [pageReady, setPageReady] = useState(false);
+  const [pageReady, setPageReady] = useState(skipAnimation);
   const [contentFadeOut, setContentFadeOut] = useState(1);
 
   useEffect(() => {
+    if (skipAnimation) return;
     setScrollProgress(0);
     setShowContent(false);
     setMediaFullyExpanded(false);
@@ -37,7 +40,33 @@ const ScrollExpandMedia = ({
     onScrollProgress?.(scrollProgress);
   }, [scrollProgress, onScrollProgress]);
 
+  const handleClickExpand = useCallback(() => {
+    if (mediaFullyExpanded) return;
+    let start: number | null = null;
+    const startProgress = scrollProgress;
+    const duration = 600;
+    const animate = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const newProgress = startProgress + (1 - startProgress) * eased;
+      setScrollProgress(newProgress);
+      if (t < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setScrollProgress(1);
+        setMediaFullyExpanded(true);
+        setShowContent(true);
+        sessionStorage.setItem('heroAnimationSeen', '1');
+      }
+    };
+    requestAnimationFrame(animate);
+  }, [mediaFullyExpanded, scrollProgress]);
+
   useEffect(() => {
+    if (skipAnimation) return;
+
     const handleWheel = (e: WheelEvent) => {
       if (mediaFullyExpanded && e.deltaY < 0 && window.scrollY <= 5) {
         setMediaFullyExpanded(false);
@@ -46,14 +75,17 @@ const ScrollExpandMedia = ({
       } else if (!mediaFullyExpanded) {
         e.preventDefault();
         const scrollDelta = e.deltaY * 0.0009;
-        const newProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1);
-        setScrollProgress(newProgress);
-        if (newProgress >= 1) {
-          setMediaFullyExpanded(true);
-          setShowContent(true);
-        } else {
-          setShowContent(false);
-        }
+        setScrollProgress(prev => {
+          const newProgress = Math.min(Math.max(prev + scrollDelta, 0), 1);
+          if (newProgress >= 1) {
+            setMediaFullyExpanded(true);
+            setShowContent(true);
+            sessionStorage.setItem('heroAnimationSeen', '1');
+          } else {
+            setShowContent(false);
+          }
+          return newProgress;
+        });
       }
     };
 
@@ -74,14 +106,17 @@ const ScrollExpandMedia = ({
         e.preventDefault();
         const scrollFactor = deltaY < 0 ? 0.008 : 0.005;
         const scrollDelta = deltaY * scrollFactor;
-        const newProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1);
-        setScrollProgress(newProgress);
-        if (newProgress >= 1) {
-          setMediaFullyExpanded(true);
-          setShowContent(true);
-        } else {
-          setShowContent(false);
-        }
+        setScrollProgress(prev => {
+          const newProgress = Math.min(Math.max(prev + scrollDelta, 0), 1);
+          if (newProgress >= 1) {
+            setMediaFullyExpanded(true);
+            setShowContent(true);
+            sessionStorage.setItem('heroAnimationSeen', '1');
+          } else {
+            setShowContent(false);
+          }
+          return newProgress;
+        });
         setTouchStartY(touchY);
       }
     };
@@ -105,15 +140,14 @@ const ScrollExpandMedia = ({
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [scrollProgress, mediaFullyExpanded, touchStartY]);
+  }, [scrollProgress, mediaFullyExpanded, touchStartY, skipAnimation]);
 
   useEffect(() => {
+    if (skipAnimation) return;
     const timer = setTimeout(() => setPageReady(true), 800);
     return () => clearTimeout(timer);
-  }, []);
+  }, [skipAnimation]);
 
-  // Fade-out H1/search as user scrolls down after expansion
-  // Dead zone: first 150px of scroll = fully visible, then fades over next 150px
   useEffect(() => {
     if (!mediaFullyExpanded) {
       setContentFadeOut(1);
@@ -139,7 +173,6 @@ const ScrollExpandMedia = ({
     <div className="relative">
       <section className="relative h-screen overflow-hidden">
         <div className="relative h-screen flex flex-col">
-          {/* Background video - stays fixed */}
           <div className="fixed inset-0 -z-10 overflow-hidden">
             {mediaType === 'video' ?
             <video
@@ -159,11 +192,8 @@ const ScrollExpandMedia = ({
               }}
               controls={false}
               disablePictureInPicture /> :
-
-
             <img src={mediaSrc} alt={title || ''} className="w-full h-full object-cover scale-110" />
             }
-            {/* Overlay - 15% brighter than before (was 0.5/0.82, now 0.35/0.67) */}
             <motion.div
               className="absolute inset-0"
               style={{ backgroundColor: 'hsl(var(--charcoal))' }}
@@ -172,17 +202,17 @@ const ScrollExpandMedia = ({
                   ? 0.30
                   : 0.45 - scrollProgress * 0.15,
               }}
-              transition={{ duration: 0.8 }} />
-            
+              transition={{ duration: skipAnimation ? 0 : 0.8 }} />
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center relative z-10">
-            {/* Scroll hint - appears after logo animation */}
+            {/* Scroll hint - clickable */}
             <motion.div
-              className="absolute bottom-12 flex flex-col items-center"
+              className="absolute bottom-12 flex flex-col items-center cursor-pointer"
               animate={{ opacity: showContent ? 0 : pageReady && scrollProgress === 0 ? 0.7 : 0 }}
-              transition={{ duration: 0.5 }}>
-              
+              transition={{ duration: 0.5 }}
+              onClick={handleClickExpand}
+            >
               <motion.div
                 className="w-5 h-9 rounded-full border-[1.5px] border-cream/50 flex items-start justify-center pt-1.5"
               >
@@ -194,33 +224,28 @@ const ScrollExpandMedia = ({
               </motion.div>
             </motion.div>
 
-            {/* Overlay content (search etc.) - appears after full expansion */}
             {overlayContent &&
             <motion.div
               className="absolute inset-0 z-20 flex items-center justify-center px-6"
-              initial={{ opacity: 0 }}
+              initial={{ opacity: skipAnimation ? 1 : 0 }}
               animate={{ opacity: showContent ? contentFadeOut : 0 }}
               transition={{ duration: 0.3, delay: 0 }}
               style={{ pointerEvents: showContent && contentFadeOut > 0.1 ? 'auto' : 'none' }}>
-              
                 {overlayContent}
               </motion.div>
             }
 
-            {/* Post-expansion content */}
             <motion.section
               className="flex flex-col w-full px-8 py-10 md:px-16 lg:py-20"
               initial={{ opacity: 0 }}
               animate={{ opacity: showContent ? 1 : 0 }}
               transition={{ duration: 0.7 }}>
-              
               {children}
             </motion.section>
           </div>
         </div>
       </section>
     </div>);
-
 };
 
 export default ScrollExpandMedia;
