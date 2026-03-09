@@ -17,6 +17,7 @@ const galleryImages = [parallax1, parallax2, parallax3, parallax4, parallax5, pa
 
 const PropertyManagement = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
