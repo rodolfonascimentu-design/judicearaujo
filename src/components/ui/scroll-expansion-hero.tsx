@@ -1,6 +1,10 @@
 import { useEffect, useState, ReactNode, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
+// Module-level flag: resets on page refresh, persists during SPA navigation
+let heroAnimationSeen = false;
+export const markHeroAnimationSeen = () => { heroAnimationSeen = true; };
+export const hasHeroAnimationBeenSeen = () => heroAnimationSeen;
 interface ScrollExpandMediaProps {
   mediaType?: 'video' | 'image';
   mediaSrc: string;
@@ -58,7 +62,7 @@ const ScrollExpandMedia = ({
         setScrollProgress(1);
         setMediaFullyExpanded(true);
         setShowContent(true);
-        sessionStorage.setItem('heroAnimationSeen', '1');
+        markHeroAnimationSeen();
       }
     };
     requestAnimationFrame(animate);
@@ -80,7 +84,7 @@ const ScrollExpandMedia = ({
           if (newProgress >= 1) {
             setMediaFullyExpanded(true);
             setShowContent(true);
-            sessionStorage.setItem('heroAnimationSeen', '1');
+            markHeroAnimationSeen();
           } else {
             setShowContent(false);
           }
@@ -111,7 +115,7 @@ const ScrollExpandMedia = ({
           if (newProgress >= 1) {
             setMediaFullyExpanded(true);
             setShowContent(true);
-            sessionStorage.setItem('heroAnimationSeen', '1');
+            markHeroAnimationSeen();
           } else {
             setShowContent(false);
           }

@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
+import ScrollExpandMedia, { hasHeroAnimationBeenSeen } from "@/components/ui/scroll-expansion-hero";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import jaLogoWhite from "@/assets/logo-ja-white.png";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -187,9 +187,8 @@ const HeroOverlayContent = () => {
    ══════════════════════════════════════════════════════════ */
 const HeroSection = () => {
   const [heroProgress, setHeroProgress] = useState(0);
-  // Only skip on desktop (md+), always show animation on mobile
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const shouldSkip = !isMobile && sessionStorage.getItem('heroAnimationSeen') === '1';
+  const shouldSkip = !isMobile && hasHeroAnimationBeenSeen();
 
   const handleScrollProgress = useCallback((progress: number) => {
     setHeroProgress(progress);
