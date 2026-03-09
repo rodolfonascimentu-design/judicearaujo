@@ -48,7 +48,6 @@ const PropertyDetail = () => {
         <PropertyFeatures property={property} />
         <PropertyLocation property={property} />
         <PropertyNeighborhood property={property} />
-        
         <PropertyContact />
         <PropertySimilar property={property} />
       </main>
