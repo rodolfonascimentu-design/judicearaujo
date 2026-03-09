@@ -141,10 +141,10 @@ const HeroOverlayContent = () => {
             </motion.button>
           </div>
 
-          {/* Mobile layout - LARGER input area */}
-          <div className="md:hidden px-4 py-5 space-y-5">
-            <div className="text-left">
-              <p className="text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-2"
+          {/* Mobile layout - same as desktop, single row */}
+          <div className="md:hidden flex items-center px-4 py-3.5 gap-3">
+            <div className="flex-1 text-left min-w-0">
+              <p className="text-[9px] font-sans font-medium tracking-[0.2em] uppercase mb-1"
                 style={{ color: "hsl(var(--charcoal) / 0.45)" }}>
                 {t("hero.searchLabel")}
               </p>
@@ -152,25 +152,28 @@ const HeroOverlayContent = () => {
                 value={searchQuery}
                 onChange={setSearchQuery}
                 onSelect={(v) => { setSearchQuery(v); }}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder={t("hero.searchPlaceholderMobile")}
                 className="w-full"
-                inputClassName="w-full bg-transparent text-[16px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25 py-2"
+                inputClassName="w-full bg-transparent text-[15px] font-sans font-light tracking-wide focus:outline-none placeholder:text-charcoal/25"
               />
             </div>
             <motion.button
-              className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl text-[12px] font-sans font-semibold tracking-[0.18em] uppercase text-primary-foreground bg-primary"
+              className="group flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-primary"
               onClick={handleSearch}
               style={{
                 boxShadow: "0 4px 14px -2px hsl(var(--primary) / 0.4)",
               }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }}
+              whileHover={{
+                scale: 1.1,
+                rotate: 8,
+                boxShadow: "0 6px 20px -2px hsl(var(--gold) / 0.6)",
+                backgroundColor: "hsl(var(--gold))",
+              }}
+              whileTap={{ scale: 0.93, rotate: -4 }}
+              transition={{ type: "spring", stiffness: 400, damping: 18 }}
             >
-              <Search className="w-4 h-4" style={{ color: "hsl(var(--gold))" }} />
-              {t("hero.searchButton")}
+              <Search className="w-[18px] h-[18px] text-white transition-transform duration-300 group-hover:scale-110" />
             </motion.button>
           </div>
         </div>
