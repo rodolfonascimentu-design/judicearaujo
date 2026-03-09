@@ -129,10 +129,12 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
     });
   }, [properties, navigate, onHoverPin]);
 
-  // Update highlighted marker icon
+  // Update highlighted marker icon (skip if popup is open to avoid closing it)
   useEffect(() => {
     markersRef.current.forEach((marker, id) => {
-      marker.setIcon(createPinIcon(id === highlightedId));
+      if (!marker.isPopupOpen()) {
+        marker.setIcon(createPinIcon(id === highlightedId));
+      }
     });
   }, [highlightedId]);
 
