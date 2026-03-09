@@ -54,10 +54,10 @@ const PropertyManagement = () => {
     <section className="bg-primary relative overflow-hidden">
       {/* Forbes content — logo from left, text from right, meet in center side by side */}
       <div className="pt-28 lg:pt-36 pb-10 lg:pb-14 px-6 lg:px-12">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
-          {/* Logo — enters from left */}
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start justify-center gap-10 md:gap-16 md:pt-2">
+          {/* Logo — enters from left, aligned to top with divider */}
           <motion.div
-            className="flex-shrink-0"
+            className="flex-shrink-0 md:mt-1"
             initial={{ opacity: 0, x: -80 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false, margin: "-80px" }}
@@ -68,7 +68,7 @@ const PropertyManagement = () => {
 
           {/* Divider */}
           <motion.div
-            className="hidden md:block w-px h-24 bg-primary-foreground/20"
+            className="hidden md:block w-px h-24 bg-white mt-1"
             initial={{ opacity: 0, scaleY: 0 }}
             whileInView={{ opacity: 1, scaleY: 1 }}
             viewport={{ once: false, margin: "-80px" }}
