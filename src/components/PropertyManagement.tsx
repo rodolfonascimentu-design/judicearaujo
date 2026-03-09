@@ -97,6 +97,25 @@ const PropertyManagement = () => {
           ))}
         </div>
       </motion.div>
+
+      {/* CTA Button */}
+      <motion.div
+        className="pb-20 md:pb-28 flex justify-center relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-40px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <motion.button
+          onClick={() => navigate("/forbes")}
+          className="group flex items-center gap-3 px-8 py-3.5 rounded-full border border-white/30 text-primary-foreground font-sans text-[12px] font-semibold tracking-[0.15em] uppercase transition-colors duration-300 hover:bg-white/10"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+        >
+          {t("forbes.cta")}
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </motion.button>
+      </motion.div>
     </motion.section>
   );
 };
