@@ -166,7 +166,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     "nav.launches": "New Developments",
     "nav.evaluate": "Evaluate Property",
-    "nav.blog": "Blog",
+    "nav.blog": "Property Management",
     "nav.back": "Back to listings",
 
     "exclusive.subtitle": "Exclusive Selection",
