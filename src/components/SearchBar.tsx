@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, ArrowUpDown, SlidersHorizontal, Bookmark } from "lucide-react";
+import { Search, ArrowUpDown, SlidersHorizontal, Map, LayoutGrid } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
 
@@ -8,9 +8,11 @@ interface SearchBarProps {
   count: number;
   location: string;
   type: string;
+  viewMode: "list" | "map";
+  onToggleView: () => void;
 }
 
-const SearchBar = ({ count, location, type }: SearchBarProps) => {
+const SearchBar = ({ count, location, type, viewMode, onToggleView }: SearchBarProps) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [query, setQuery] = useState(location);
@@ -21,6 +23,10 @@ const SearchBar = ({ count, location, type }: SearchBarProps) => {
     const term = (q || query).trim() || "Barra da Tijuca";
     navigate(`/imoveis?q=${encodeURIComponent(term)}&type=${type}`);
   };
+
+  // SEO-formatted count text
+  const countText = count === 1 ? "1 imóvel" : `${count} imóveis`;
+  const seoText = `${countText} | ${typeLabel.toLowerCase() === "venda" ? "à venda" : typeLabel.toLowerCase() === "locação" ? "para locação" : "para temporada"} | ${location} | Rio de Janeiro - RJ`;
 
   return (
     <div>
@@ -50,9 +56,21 @@ const SearchBar = ({ count, location, type }: SearchBarProps) => {
               <SlidersHorizontal className="w-3.5 h-3.5" />
               {t("search.filter")}
             </button>
-            <button className="flex items-center gap-1.5 px-3 py-2 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
-              <Bookmark className="w-3.5 h-3.5" />
-              {t("search.save")}
+            <button
+              onClick={onToggleView}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+            >
+              {viewMode === "list" ? (
+                <>
+                  <Map className="w-3.5 h-3.5" />
+                  {t("search.viewMap")}
+                </>
+              ) : (
+                <>
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  {t("search.viewList")}
+                </>
+              )}
             </button>
           </div>
         </div>
@@ -67,17 +85,29 @@ const SearchBar = ({ count, location, type }: SearchBarProps) => {
             <SlidersHorizontal className="w-3.5 h-3.5" />
             {t("search.filter")}
           </button>
-          <button className="flex items-center gap-1.5 px-3 py-2 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
-            <Bookmark className="w-3.5 h-3.5" />
-            {t("search.save")}
+          <button
+            onClick={onToggleView}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+          >
+            {viewMode === "list" ? (
+              <>
+                <Map className="w-3.5 h-3.5" />
+                {t("search.viewMap")}
+              </>
+            ) : (
+              <>
+                <LayoutGrid className="w-3.5 h-3.5" />
+                {t("search.viewList")}
+              </>
+            )}
           </button>
         </div>
       </div>
 
-      {/* Results count below the bar */}
+      {/* SEO results count */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-8 pb-2">
         <p className="font-sans text-xs tracking-wide text-muted-foreground font-light">
-          {count} {t("search.resultsLabel")} {typeLabel.toLowerCase()} {t("search.inLocation")} {location}
+          {seoText}
         </p>
       </div>
     </div>

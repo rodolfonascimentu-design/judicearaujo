@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
 import SearchPropertyCard from "@/components/SearchPropertyCard";
 import PropertyCardSkeleton from "@/components/PropertyCardSkeleton";
+import MapView, { neighborhoodCoords } from "@/components/MapView";
+import type { MapProperty } from "@/components/MapView";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 import property1 from "@/assets/property-1.jpg";
@@ -29,35 +31,49 @@ const tagOptions = [
   ["Lançamento"],
 ];
 
-const allProperties = Array.from({ length: 24 }, (_, i) => ({
-  id: `prop-${i}`,
-  image: images[i % images.length],
-  title: [
-    "Cobertura Duplex Vista Mar",
-    "Apartamento Jardim Botânico",
-    "Penthouse Leblon",
-    "Casa Contemporânea Gávea",
-    "Apartamento Ipanema Frontal",
-    "Villa Exclusiva São Conrado",
-    "Cobertura Linear Lagoa",
-    "Apartamento Barra Premium",
-    "Casa Design Joá",
-    "Penthouse Vidigal Panorâmico",
-    "Apartamento Humaitá Clássico",
-    "Cobertura Flamengo Vista Baía",
-  ][i % 12],
-  neighborhood: [
-    "Barra da Tijuca", "Jardim Botânico", "Leblon", "Gávea",
-    "Ipanema", "São Conrado", "Lagoa", "Barra da Tijuca",
-    "Joá", "Vidigal", "Humaitá", "Flamengo",
-  ][i % 12],
-  price: `R$ ${(3 + (i % 8) * 1.5).toFixed(1).replace(".", ",")} milhões`,
-  bedrooms: 3 + (i % 3),
-  area: 180 + (i % 6) * 50,
-  parking: 2 + (i % 3),
-  type: ["Apartamento", "Cobertura", "Casa", "Penthouse"][i % 4],
-  tags: tagOptions[i % tagOptions.length],
-}));
+const neighborhoods = [
+  "Barra da Tijuca", "Jardim Botânico", "Leblon", "Gávea",
+  "Ipanema", "São Conrado", "Lagoa", "Barra da Tijuca",
+  "Joá", "Vidigal", "Humaitá", "Flamengo",
+];
+
+const allProperties = Array.from({ length: 24 }, (_, i) => {
+  const nbh = neighborhoods[i % 12];
+  const coords = neighborhoodCoords[nbh] || [-22.98, -43.23];
+  // Add slight offset to avoid overlapping pins
+  const jitteredCoords: [number, number] = [
+    coords[0] + (Math.random() - 0.5) * 0.008,
+    coords[1] + (Math.random() - 0.5) * 0.008,
+  ];
+  return {
+    id: `prop-${i}`,
+    image: images[i % images.length],
+    images: [images[i % images.length], images[(i + 1) % images.length], images[(i + 2) % images.length]],
+    title: [
+      "Cobertura Duplex Vista Mar",
+      "Apartamento Jardim Botânico",
+      "Penthouse Leblon",
+      "Casa Contemporânea Gávea",
+      "Apartamento Ipanema Frontal",
+      "Villa Exclusiva São Conrado",
+      "Cobertura Linear Lagoa",
+      "Apartamento Barra Premium",
+      "Casa Design Joá",
+      "Penthouse Vidigal Panorâmico",
+      "Apartamento Humaitá Clássico",
+      "Cobertura Flamengo Vista Baía",
+    ][i % 12],
+    neighborhood: nbh,
+    price: `R$ ${(3 + (i % 8) * 1.5).toFixed(1).replace(".", ",")} milhões`,
+    bedrooms: 3 + (i % 3),
+    area: 180 + (i % 6) * 50,
+    parking: 2 + (i % 3),
+    type: ["Apartamento", "Cobertura", "Casa", "Penthouse"][i % 4],
+    tags: tagOptions[i % tagOptions.length],
+    hasVideo: i % 3 === 0,
+    coords: jitteredCoords,
+  };
+});
 
 const INITIAL_COUNT = 9;
 const LOAD_MORE = 6;
@@ -71,11 +87,17 @@ const Properties = () => {
   const [items, setItems] = useState(allProperties.slice(0, INITIAL_COUNT));
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [viewMode, setViewMode] = useState<"list" | "map">("list");
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const typeLabel = type === "locacao" ? "Locação" : type === "temporada" ? "Temporada" : "Venda";
-    document.title = `Imóveis para ${typeLabel} em ${query} — Judice & Araujo`;
+    document.title = `${allProperties.length} Imóveis para ${typeLabel} em ${query} | Rio de Janeiro - RJ — Judice & Araujo`;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      meta.setAttribute("content", `Encontre ${allProperties.length} imóveis de luxo para ${typeLabel.toLowerCase()} em ${query}, Rio de Janeiro - RJ. Judice & Araujo, membro Forbes Global Properties.`);
+    }
   }, [query, type]);
 
   useEffect(() => {
@@ -106,12 +128,33 @@ const Properties = () => {
     return () => observer.disconnect();
   }, [loadMore]);
 
+  const toggleView = () => setViewMode((v) => (v === "list" ? "map" : "list"));
+
+  // Map properties with coords
+  const mapProperties: MapProperty[] = allProperties.map((p) => ({
+    id: p.id,
+    image: p.image,
+    title: p.title,
+    neighborhood: p.neighborhood,
+    price: p.price,
+    bedrooms: p.bedrooms,
+    area: p.area,
+    parking: p.parking,
+    coords: p.coords,
+  }));
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
       <div className="h-20" aria-hidden="true" />
 
-      <SearchBar count={allProperties.length} location={query} type={type} />
+      <SearchBar
+        count={allProperties.length}
+        location={query}
+        type={type}
+        viewMode={viewMode}
+        onToggleView={toggleView}
+      />
 
       <main className="max-w-7xl mx-auto px-6 lg:px-12 pt-6 pb-12 bg-white">
         {loading ? (
@@ -120,11 +163,23 @@ const Properties = () => {
               <PropertyCardSkeleton key={i} />
             ))}
           </div>
+        ) : viewMode === "map" ? (
+          <MapView
+            properties={mapProperties}
+            highlightedId={hoveredId}
+            onHoverPin={setHoveredId}
+          />
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
               {items.map((prop, i) => (
-                <SearchPropertyCard key={prop.id} {...prop} index={i} />
+                <SearchPropertyCard
+                  key={prop.id}
+                  {...prop}
+                  index={i}
+                  highlighted={hoveredId === prop.id}
+                  onHover={setHoveredId}
+                />
               ))}
             </div>
 
