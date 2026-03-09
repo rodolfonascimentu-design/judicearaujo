@@ -214,22 +214,26 @@ const HeroSection = () => {
 /* ══════════════════════════════════════════════════════════
    Scroll-driven logo animation
    ══════════════════════════════════════════════════════════ */
-const HeroLogos = ({ heroProgress }: { heroProgress: number }) => {
+const HeroLogos = ({ heroProgress, skipAnimation = false }: { heroProgress: number; skipAnimation?: boolean }) => {
   const [pastHero, setPastHero] = useState(false);
-  const [barVisible, setBarVisible] = useState(false);
-  const [logosVisible, setLogosVisible] = useState(false);
+  const [barVisible, setBarVisible] = useState(skipAnimation);
+  const [logosVisible, setLogosVisible] = useState(skipAnimation);
 
   useEffect(() => {
+    if (skipAnimation) return;
     const t1 = setTimeout(() => setBarVisible(true), 1000);
     const t2 = setTimeout(() => setLogosVisible(true), 1800);
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
+  }, [skipAnimation]);
 
   useEffect(() => {
     const onScroll = () => setPastHero(window.scrollY > window.innerHeight - 80);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // When skipping, logos should be hidden since hero is already expanded
+  if (skipAnimation) return null;
 
   const p = heroProgress;
   const scaleT = clamp(p / 0.6);
