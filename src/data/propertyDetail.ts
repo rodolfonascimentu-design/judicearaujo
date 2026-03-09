@@ -10,6 +10,12 @@ import exclusive3 from "@/assets/exclusive-3.jpg";
 import exclusive4 from "@/assets/exclusive-4.jpg";
 import highlightBeachfront from "@/assets/highlight-beachfront.jpg";
 import highlightPenthouse from "@/assets/highlight-penthouse.jpg";
+import test1 from "@/assets/test-1.jpg";
+import test2 from "@/assets/test-2.jpg";
+import test3 from "@/assets/test-3.jpg";
+import test4 from "@/assets/test-4.jpg";
+import test5 from "@/assets/test-5.jpg";
+import test6 from "@/assets/test-6.jpg";
 
 export interface PropertyUnit {
   type: string;
@@ -90,14 +96,12 @@ export const mockProperty: PropertyDetailData = {
   bathrooms: 5,
   parking: 6,
   images: [
-    property1,
-    property2,
-    property3,
-    exclusive1,
-    exclusive2,
-    property4,
-    highlightBeachfront,
-    highlightPenthouse,
+    test1,
+    test2,
+    test3,
+    test4,
+    test5,
+    test6,
   ],
   description: [
     "Situada em uma das localizações mais privilegiadas do Rio de Janeiro, esta residência é um verdadeiro refúgio de sofisticação e exclusividade. Com 520m² de área construída e um terreno generoso que se abre para uma vista panorâmica da Praia do Joá e da Pedra da Gávea, a propriedade oferece uma experiência de moradia incomparável.",
