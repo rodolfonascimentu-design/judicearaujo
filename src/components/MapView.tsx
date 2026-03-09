@@ -38,18 +38,19 @@ interface MapViewProps {
 
 // Custom SVG pin using institutional green
 const createPinIcon = (highlighted: boolean) => {
-  const size = highlighted ? 38 : 28;
+  const size = highlighted ? 36 : 28;
+  const height = Math.round(size * 1.4);
   const color = "hsl(171,100%,12%)";
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${Math.round(size * 1.4)}" viewBox="0 0 24 34">
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${height}" viewBox="0 0 24 34">
     <path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 22 12 22s12-13 12-22C24 5.4 18.6 0 12 0z" fill="${color}" opacity="${highlighted ? 1 : 0.85}"/>
     <circle cx="12" cy="12" r="5" fill="white" opacity="0.9"/>
   </svg>`;
   return L.divIcon({
     html: svg,
     className: "custom-pin",
-    iconSize: [size, Math.round(size * 1.4)],
-    iconAnchor: [size / 2, Math.round(size * 1.4)],
-    popupAnchor: [0, -Math.round(size * 1.2)],
+    iconSize: [size, height],
+    iconAnchor: [size / 2, height],
+    popupAnchor: [0, -height + 4],
   });
 };
 
@@ -95,14 +96,14 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
       const marker = L.marker(prop.coords, { icon: createPinIcon(false) }).addTo(map);
 
       marker.bindPopup(`
-        <div style="width:200px;cursor:pointer;position:relative;margin:-14px -20px -14px -20px;" class="map-popup-card" data-id="${prop.id}">
+        <div style="width:240px;cursor:pointer;position:relative;" class="map-popup-card" data-id="${prop.id}">
           <div style="position:relative">
-            <img src="${prop.image}" alt="${prop.title}" style="width:100%;height:140px;object-fit:cover;display:block;" />
+            <img src="${prop.image}" alt="${prop.title}" style="width:100%;height:150px;object-fit:cover;display:block;" />
           </div>
-          <div style="padding:10px 14px 12px">
-            <h4 style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:600;margin:0 0 2px;line-height:1.3">${prop.title}</h4>
-            <p style="font-family:Montserrat,sans-serif;font-size:10px;color:#888;margin:0 0 4px">${prop.neighborhood}</p>
-            <p style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:500;color:hsl(171,100%,12%);margin:0 0 6px">${prop.price}</p>
+          <div style="padding:12px 14px 14px">
+            <h4 style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:600;margin:0 0 3px;line-height:1.3">${prop.title}</h4>
+            <p style="font-family:Montserrat,sans-serif;font-size:10px;color:#888;margin:0 0 5px">${prop.neighborhood}</p>
+            <p style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:500;color:hsl(171,100%,12%);margin:0 0 8px">${prop.price}</p>
             <div style="font-family:Montserrat,sans-serif;font-size:9px;color:#aaa;display:flex;gap:10px">
               <span>${prop.bedrooms} quartos</span>
               <span>${prop.area} m²</span>
@@ -113,8 +114,8 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
       `, {
         closeButton: true,
         className: "custom-map-popup",
-        maxWidth: 200,
-        minWidth: 200,
+        maxWidth: 260,
+        minWidth: 240,
       });
 
       marker.on("mouseover", () => onHoverPin(prop.id));
@@ -128,10 +129,12 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
     });
   }, [properties, navigate, onHoverPin]);
 
-  // Update highlighted marker icon
+  // Update highlighted marker icon (skip if popup is open to avoid closing it)
   useEffect(() => {
     markersRef.current.forEach((marker, id) => {
-      marker.setIcon(createPinIcon(id === highlightedId));
+      if (!marker.isPopupOpen()) {
+        marker.setIcon(createPinIcon(id === highlightedId));
+      }
     });
   }, [highlightedId]);
 
@@ -174,11 +177,12 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
           box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
       `}</style>
-      <div
-        ref={containerRef}
-        className="w-full h-[600px] lg:h-[700px] rounded-[4px] overflow-hidden border border-border"
-        style={{ zIndex: 1 }}
-      />
+      <div className="w-full h-[600px] lg:h-[700px] rounded-[4px] border border-border" style={{ zIndex: 1 }}>
+        <div
+          ref={containerRef}
+          className="w-full h-full"
+        />
+      </div>
     </>
   );
 };
