@@ -205,13 +205,16 @@ const ScrollExpandMedia = ({
               transition={{ duration: skipAnimation ? 0 : 0.8 }} />
           </div>
 
-          <div className="flex-1 flex flex-col items-center justify-center relative z-10">
-            {/* Scroll hint - clickable */}
+          <div
+            className="flex-1 flex flex-col items-center justify-center relative z-10"
+            onClick={!mediaFullyExpanded ? handleClickExpand : undefined}
+            style={{ cursor: !mediaFullyExpanded ? 'pointer' : undefined }}
+          >
+            {/* Scroll hint */}
             <motion.div
-              className="absolute bottom-12 flex flex-col items-center cursor-pointer"
+              className="absolute bottom-12 flex flex-col items-center pointer-events-none"
               animate={{ opacity: showContent ? 0 : pageReady && scrollProgress === 0 ? 0.7 : 0 }}
               transition={{ duration: 0.5 }}
-              onClick={handleClickExpand}
             >
               <motion.div
                 className="w-5 h-9 rounded-full border-[1.5px] border-cream/50 flex items-start justify-center pt-1.5"
