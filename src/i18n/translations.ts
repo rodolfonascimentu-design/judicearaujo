@@ -15,7 +15,7 @@ const translations: Record<Lang, Record<string, string>> = {
     // Navbar
     "nav.launches": "Lançamentos",
     "nav.evaluate": "Avaliar Imóvel",
-    "nav.blog": "Blog",
+    "nav.blog": "Administração de Imóveis",
     "nav.back": "Voltar para listagem",
 
     // Exclusive Gallery
@@ -60,6 +60,10 @@ const translations: Record<Lang, Record<string, string>> = {
     // Farms
     "farms.subtitle": "Seleção Exclusiva",
     "farms.title": "Fazendas Exclusivas",
+
+    // High End Carousel
+    "highend.title": "Os melhores imóveis de alto padrão do Rio de Janeiro",
+    "highend.subtitle": "Uma curadoria dos imóveis mais extraordinários disponíveis na cidade",
 
     // Property Management
     "pm.title": "Administração de Imóveis",
@@ -166,7 +170,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     "nav.launches": "New Developments",
     "nav.evaluate": "Evaluate Property",
-    "nav.blog": "Blog",
+    "nav.blog": "Property Management",
     "nav.back": "Back to listings",
 
     "exclusive.subtitle": "Exclusive Selection",
@@ -205,6 +209,9 @@ const translations: Record<Lang, Record<string, string>> = {
 
     "farms.subtitle": "Exclusive Selection",
     "farms.title": "Exclusive Farms",
+
+    "highend.title": "The finest luxury properties in Rio de Janeiro",
+    "highend.subtitle": "A curated selection of the most extraordinary properties available in the city",
 
     "pm.title": "Property Management",
     "pm.subtitle": "Some assets deserve more than management. They deserve curation.",
@@ -302,7 +309,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     "nav.launches": "Lanzamientos",
     "nav.evaluate": "Evaluar Inmueble",
-    "nav.blog": "Blog",
+    "nav.blog": "Administración de Inmuebles",
     "nav.back": "Volver a la lista",
 
     "exclusive.subtitle": "Selección Exclusiva",
@@ -341,6 +348,9 @@ const translations: Record<Lang, Record<string, string>> = {
 
     "farms.subtitle": "Selección Exclusiva",
     "farms.title": "Haciendas Exclusivas",
+
+    "highend.title": "Los mejores inmuebles de alto nivel de Río de Janeiro",
+    "highend.subtitle": "Una selección curada de los inmuebles más extraordinarios disponibles en la ciudad",
 
     "pm.title": "Administración de Inmuebles",
     "pm.subtitle": "Algunos patrimonios merecen más que gestión. Merecen curaduría.",

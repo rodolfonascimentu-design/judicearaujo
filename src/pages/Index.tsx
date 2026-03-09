@@ -8,9 +8,8 @@ import InstitutionalCTA from "@/components/InstitutionalCTA";
 import ForbesPartnership from "@/components/ForbesPartnership";
 import BlogPreview from "@/components/BlogPreview";
 import Testimonials from "@/components/Testimonials";
-import FarmsGallery from "@/components/FarmsGallery";
+import HighEndCarousel from "@/components/HighEndCarousel";
 import PropertyManagement from "@/components/PropertyManagement";
-import OfficeLocations from "@/components/OfficeLocations";
 import Footer from "@/components/Footer";
 import Newsletter from "@/components/Newsletter";
 
@@ -42,10 +41,9 @@ const Index = () => {
         <FeaturedCarousel />
         <ForbesPartnership />
         <Testimonials />
-        <FarmsGallery />
+        <HighEndCarousel />
         <PropertyManagement />
         <BlogPreview />
-        <OfficeLocations />
         <Newsletter />
       </main>
       <Footer />
