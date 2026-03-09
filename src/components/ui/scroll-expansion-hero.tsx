@@ -115,7 +115,7 @@ const ScrollExpandMedia = ({
           if (newProgress >= 1) {
             setMediaFullyExpanded(true);
             setShowContent(true);
-            sessionStorage.setItem('heroAnimationSeen', '1');
+            markHeroAnimationSeen();
           } else {
             setShowContent(false);
           }
