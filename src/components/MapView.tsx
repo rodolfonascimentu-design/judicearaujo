@@ -38,18 +38,19 @@ interface MapViewProps {
 
 // Custom SVG pin using institutional green
 const createPinIcon = (highlighted: boolean) => {
-  const size = highlighted ? 38 : 28;
+  const size = highlighted ? 36 : 28;
+  const height = Math.round(size * 1.4);
   const color = "hsl(171,100%,12%)";
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${Math.round(size * 1.4)}" viewBox="0 0 24 34">
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${height}" viewBox="0 0 24 34">
     <path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 22 12 22s12-13 12-22C24 5.4 18.6 0 12 0z" fill="${color}" opacity="${highlighted ? 1 : 0.85}"/>
     <circle cx="12" cy="12" r="5" fill="white" opacity="0.9"/>
   </svg>`;
   return L.divIcon({
     html: svg,
     className: "custom-pin",
-    iconSize: [size, Math.round(size * 1.4)],
-    iconAnchor: [size / 2, Math.round(size * 1.4)],
-    popupAnchor: [0, -Math.round(size * 1.2)],
+    iconSize: [size, height],
+    iconAnchor: [size / 2, height],
+    popupAnchor: [0, -height + 4],
   });
 };
 
