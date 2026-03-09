@@ -43,6 +43,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "forbes.subtitle": "Parceria Global",
     "forbes.title": "Uma rede global\npara imóveis extraordinários",
     "forbes.desc": "A Judice & Araujo faz parte da Forbes Global Properties, uma rede internacional que reúne algumas das mais prestigiadas imobiliárias do mundo.",
+    "forbes.cta": "Conheça a parceria",
     "forbes.reach": "Alcance internacional",
     "forbes.network": "Rede global de luxo",
     "forbes.networkDesc": "Parceiros selecionados nos mercados mais prestigiados do mundo.",
