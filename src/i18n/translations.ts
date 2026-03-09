@@ -302,7 +302,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     "nav.launches": "Lanzamientos",
     "nav.evaluate": "Evaluar Inmueble",
-    "nav.blog": "Blog",
+    "nav.blog": "Administración de Inmuebles",
     "nav.back": "Volver a la lista",
 
     "exclusive.subtitle": "Selección Exclusiva",
