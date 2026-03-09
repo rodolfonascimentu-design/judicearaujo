@@ -84,7 +84,7 @@ const SearchPropertyCard = ({
 
   return (
     <motion.div
-      className={`group cursor-pointer transition-all duration-300 ${highlighted ? "ring-2 ring-primary/40 rounded-lg" : ""}`}
+      className="group cursor-pointer transition-all duration-300"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
