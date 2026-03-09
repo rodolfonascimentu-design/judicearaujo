@@ -104,15 +104,16 @@
 
 @layer utilities {
   .font-serif {
-    font-family: 'DM Serif Display', Georgia, serif;
+    font-family: 'Montserrat', system-ui, sans-serif;
   }
 
   .font-display {
-    font-family: 'DM Serif Display', Georgia, serif;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    font-weight: 700;
   }
 
   .font-sans {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Montserrat', system-ui, sans-serif;
   }
 
   .text-gold {
