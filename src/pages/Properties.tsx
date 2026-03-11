@@ -5,7 +5,7 @@ import { Bed, Maximize, Car, Video } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
-import soldIllustration from "@/assets/sold-illustration.png";
+import soldCtaBg from "@/assets/sold-cta-bg.jpg";
 import SearchPropertyCard from "@/components/SearchPropertyCard";
 import PropertyCardSkeleton from "@/components/PropertyCardSkeleton";
 import MapView, { neighborhoodCoords } from "@/components/MapView";
