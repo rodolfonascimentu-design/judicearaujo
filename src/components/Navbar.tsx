@@ -96,9 +96,9 @@ const Navbar = () => {
               onClick={(e) => {
                 e.preventDefault();
                 if (isHomePage) {
-                  window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'smooth' });
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
-                  window.location.href = '/?search=1';
+                  navigate('/');
                 }
               }}
               className="flex-shrink-0 flex items-center gap-2 transition-all duration-500 cursor-pointer"

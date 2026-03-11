@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ExclusiveGallery from "@/components/ExclusiveGallery";
@@ -14,22 +13,16 @@ import Footer from "@/components/Footer";
 import Newsletter from "@/components/Newsletter";
 
 const Index = () => {
-  const location = useLocation();
 
   useEffect(() => {
     document.title = "Judice & Araujo — Imóveis de Luxo no Rio de Janeiro";
     document.querySelector('meta[name="description"]')?.setAttribute("content", "Imóveis de luxo exclusivos nos endereços mais prestigiados do Rio de Janeiro. Leblon, Ipanema, Lagoa, Gávea e Jardim Botânico. Membro exclusivo Forbes Global Properties.");
   }, []);
 
+  // On SPA return, ensure we start at top with search visible (animation already skipped)
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    if (params.get("search") === "1") {
-      setTimeout(() => {
-        window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'auto' });
-      }, 100);
-      window.history.replaceState({}, '', '/');
-    }
-  }, [location.search]);
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen overflow-x-hidden">
