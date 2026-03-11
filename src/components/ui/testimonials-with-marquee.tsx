@@ -43,6 +43,7 @@ export function TestimonialsSection({
           </h2>
           <p className={cn(
             "font-sans text-sm max-w-lg font-light tracking-wide",
+            compact && "lg:whitespace-nowrap",
             isDark ? "text-primary-foreground/60" : "text-muted-foreground"
           )}>
             {description}
