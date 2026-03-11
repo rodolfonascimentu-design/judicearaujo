@@ -317,6 +317,9 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.evaluate": "Evaluar Inmueble",
     "nav.blog": "Administración de Inmuebles",
     "nav.back": "Volver a la lista",
+    "nav.blogPost": "Blog",
+    "nav.about": "Quiénes Somos",
+    "nav.contact": "Contacto",
 
     "exclusive.subtitle": "Selección Exclusiva",
     "exclusive.title": "Inmuebles Exclusivos",
