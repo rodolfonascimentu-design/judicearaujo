@@ -169,7 +169,7 @@ const Navbar = () => {
 
                   {/* Font size controls */}
                   <div className={`flex items-center gap-1 rounded-[4px] px-1 border ${
-                    showGreen ? "border-foreground/10" : "border-cream/20"
+                    showGreen ? "border-foreground/10" : "border-white/30"
                   }`}>
                     <button
                       onClick={() => adjustFont(-5)}
