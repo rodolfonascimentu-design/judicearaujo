@@ -49,8 +49,10 @@ const PropertyDetail = () => {
         <PropertyDescription property={property} />
         <PropertyGallery property={property} />
         <PropertyFeatures property={property} />
+        <PropertyConstructionStatus property={property} />
+        <PropertyTypologies property={property} />
+        <PropertyVideo property={property} />
         <PropertyLocation property={property} />
-        <PropertyNeighborhood property={property} />
         <PropertyContact />
         <PropertySimilar property={property} />
       </main>
