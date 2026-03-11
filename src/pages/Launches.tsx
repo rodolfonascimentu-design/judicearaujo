@@ -167,6 +167,7 @@ const Launches = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "Rio de Janeiro";
   const { t } = useLanguage();
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const [items, setItems] = useState(allLaunches.slice(0, INITIAL_COUNT));
   const [loading, setLoading] = useState(true);
