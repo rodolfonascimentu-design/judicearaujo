@@ -215,7 +215,8 @@ const Launches = () => {
       <Navbar />
       <div className="h-20" aria-hidden="true" />
 
-      <LaunchSearchBar count={allLaunches.length} location={query} />
+      <LaunchSearchBar count={allLaunches.length} location={query} onOpenFilters={() => setFiltersOpen(true)} />
+      <LaunchFilters open={filtersOpen} onOpenChange={setFiltersOpen} />
 
       <main className="max-w-7xl mx-auto px-6 lg:px-12 pt-6 pb-12 bg-white">
         {loading ? (
