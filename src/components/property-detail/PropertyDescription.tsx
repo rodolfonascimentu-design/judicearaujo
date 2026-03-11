@@ -18,16 +18,18 @@ const PropertyDescription = ({ property }: Props) => {
           transition={{ duration: 0.8 }}
         >
           <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-4">
-            Sobre o Imóvel
+            {property.status === "launch" ? "Sobre o Lançamento" : "Sobre o Imóvel"}
           </p>
           <h2 className="font-display text-2xl md:text-4xl text-foreground mb-8 leading-[1.2]">
-            Uma residência que redefine o conceito de exclusividade.
+            {property.status === "launch"
+              ? `Conheça o ${property.name}`
+              : "Uma residência que redefine o conceito de exclusividade."}
           </h2>
           <div className="space-y-6">
             {property.description.map((p, i) => (
               <motion.p
                 key={i}
-                className="font-sans text-sm md:text-base text-muted-foreground leading-[1.9]"
+                className="font-sans text-sm md:text-base text-muted-foreground leading-[1.9] whitespace-pre-line"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: "-40px" }}
