@@ -79,9 +79,9 @@ const Navbar = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 ${mobileOpen ? 'z-[110]' : 'z-50'}`}
         style={{
-          background: showGreen ? "rgba(255,255,255,0.95)" : "transparent",
-          backdropFilter: showGreen ? "blur(12px)" : "none",
-          boxShadow: showGreen ? "0 4px 30px rgba(0,0,0,0.08)" : "none",
+          background: mobileOpen ? "hsl(var(--primary))" : (showGreen ? "rgba(255,255,255,0.95)" : "transparent"),
+          backdropFilter: mobileOpen ? "none" : (showGreen ? "blur(12px)" : "none"),
+          boxShadow: mobileOpen ? "none" : (showGreen ? "0 4px 30px rgba(0,0,0,0.08)" : "none"),
           transition: "all 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
         initial={{ y: -100 }}
@@ -100,15 +100,16 @@ const Navbar = () => {
                 } else {
                   navigate('/');
                 }
+                setMobileOpen(false);
               }}
               className="flex-shrink-0 flex items-center gap-2 transition-all duration-500 cursor-pointer"
               style={{
-                opacity: isExpanded ? 1 : 0,
-                pointerEvents: isExpanded ? "auto" : "none",
+                opacity: isExpanded || mobileOpen ? 1 : 0,
+                pointerEvents: isExpanded || mobileOpen ? "auto" : "none",
               }}
             >
               <div className="flex items-center gap-2">
-                {showGreen ? (
+                {showGreen && !mobileOpen ? (
                   <>
                     <img src={logoJaBlack} alt="Judice & Araujo" className="h-[26px] lg:h-[30px] w-auto" />
                     <div className="w-px h-8 bg-foreground/20" />
