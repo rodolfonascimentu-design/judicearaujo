@@ -216,10 +216,9 @@ const translations: Record<Lang, Record<string, string>> = {
 
     "pm.title": "Property Management",
     "pm.subtitle": "Some assets deserve more than management. They deserve curation.",
-    "pm.intro": "Every property carries a history, an investment and a legacy. Managing it requires sensitivity to understand its true value and strategy to preserve and enhance it over time.",
-    "pm.narrative1": "At Judice & Araujo, each property is treated with attention to detail and a focus on results.",
-    "pm.narrative2": "Our team manages the entire property with discretion and precision, from careful tenant selection to financial, legal and operational management.",
-    "pm.narrative3": "More than managing, we connect exceptional properties with the right people. This ensures peace of mind for the owner and the constant appreciation of the asset.",
+    "pm.intro": "Each property represents more than an asset. It is part of a legacy.",
+    "pm.narrative1": "At Judice & Araujo, we conduct property management with discretion, strategy and absolute attention to detail. From careful tenant selection to financial, legal and operational management, each step is handled with precision.",
+    "pm.narrative2": "Thus, we connect extraordinary properties with the right people, preserving the value of the asset and offering peace of mind to property owners.",
     "pm.quote1": "Great properties are not just assets.",
     "pm.quote2": "They are legacies that span generations.",
     "pm.cta": "Request a confidential evaluation",
