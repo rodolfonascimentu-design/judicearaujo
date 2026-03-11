@@ -269,7 +269,13 @@ const Navbar = () => {
                   <motion.a
                     key={link.href + link.label}
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => {
+                      if (link.href.startsWith("/")) {
+                        e.preventDefault();
+                        navigate(link.href);
+                      }
+                      setMobileOpen(false);
+                    }}
                     className="font-display text-[18px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase whitespace-nowrap"
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
