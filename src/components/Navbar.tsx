@@ -121,7 +121,7 @@ const Navbar = () => {
                       className={`text-[11px] font-sans font-medium tracking-[0.2em] uppercase transition-colors duration-500 ease-in-out ${
                         showGreen
                           ? "text-foreground/70 hover:text-foreground"
-                          : "text-cream/70 hover:text-cream"
+                          : "text-white/80 hover:text-white"
                       }`}
                     >
                       {link.label}
