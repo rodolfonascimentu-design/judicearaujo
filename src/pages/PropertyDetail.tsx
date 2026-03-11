@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { MessageCircle, ArrowLeft } from "lucide-react";
 import { mockProperty } from "@/data/propertyDetail";
@@ -17,13 +17,28 @@ import PropertyVideo from "@/components/property-detail/PropertyVideo";
 
 import PropertyContact from "@/components/property-detail/PropertyContact";
 
+import property1 from "@/assets/property-1.jpg";
+import property2 from "@/assets/property-2.jpg";
+import property3 from "@/assets/property-3.jpg";
+import property4 from "@/assets/property-4.jpg";
+import property5 from "@/assets/property-5.jpg";
+import property6 from "@/assets/property-6.jpg";
+import exclusive1 from "@/assets/exclusive-1.jpg";
+import exclusive2 from "@/assets/exclusive-2.jpg";
+
+const regularImages = [property1, property2, property3, property4, property5, property6, exclusive1, exclusive2];
+
 const PropertyDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const property = mockProperty;
   const { t } = useLanguage();
   const isFromLaunches = searchParams.get("from") === "launches";
+
+  const property = useMemo(() => {
+    if (isFromLaunches) return mockProperty;
+    return { ...mockProperty, images: regularImages };
+  }, [isFromLaunches]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
