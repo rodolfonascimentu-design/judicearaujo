@@ -355,10 +355,9 @@ const translations: Record<Lang, Record<string, string>> = {
 
     "pm.title": "Administración de Inmuebles",
     "pm.subtitle": "Algunos patrimonios merecen más que gestión. Merecen curaduría.",
-    "pm.intro": "Cada inmueble lleva una historia, una inversión y un legado. Administrarlo exige sensibilidad para comprender su verdadero valor y estrategia para preservarlo y ampliarlo con el tiempo.",
-    "pm.narrative1": "En Judice & Araujo, cada propiedad es tratada con atención al detalle y enfoque en resultados.",
-    "pm.narrative2": "Nuestro equipo conduce toda la gestión del inmueble con discreción y precisión, desde la selección cuidadosa de inquilinos hasta la administración financiera, jurídica y operacional.",
-    "pm.narrative3": "Más que administrar, conectamos propiedades excepcionales con las personas adecuadas. Así garantizamos tranquilidad al propietario y la valorización constante del patrimonio.",
+    "pm.intro": "Cada inmueble representa más que un patrimonio. Es parte de un legado.",
+    "pm.narrative1": "En Judice & Araujo, conducimos la gestión de propiedades con discreción, estrategia y atención absoluta a los detalles. Desde la selección cuidadosa de inquilinos hasta la administración financiera, jurídica y operacional, cada paso es tratado con precisión.",
+    "pm.narrative2": "Así conectamos propiedades extraordinarias con las personas adecuadas, preservando el valor del patrimonio y ofreciendo tranquilidad a los propietarios.",
     "pm.quote1": "Los grandes inmuebles no son solo bienes.",
     "pm.quote2": "Son activos que atraviesan generaciones.",
     "pm.cta": "Solicitar una evaluación confidencial",
