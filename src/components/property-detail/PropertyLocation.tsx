@@ -10,7 +10,7 @@ interface Props {
 const PropertyLocation = ({ property }: Props) => {
   const [showMap, setShowMap] = useState(false);
   const mapSrc = `https://maps.google.com/maps?q=${property.mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed&maptype=roadmap`;
-  const staticPreview = `https://maps.googleapis.com/maps/api/staticmap?center=${property.mapQuery}&zoom=14&size=800x450&scale=2&maptype=roadmap&style=feature:all|saturation:-80|lightness:10&format=png`;
+  const staticPreview = `/src/assets/mapa-placeholder.jpg`;
 
   return (
     <section className="py-20 md:py-28 px-6 md:px-16 bg-background">
