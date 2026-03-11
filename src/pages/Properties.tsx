@@ -253,18 +253,27 @@ const Properties = () => {
                     />
                     {/* CTA card */}
                     <motion.div
-                      className="flex flex-col items-center justify-center rounded-[4px] border border-dashed border-border p-8 min-h-[340px] cursor-pointer group hover:border-primary/40 transition-colors"
+                      className="relative overflow-hidden rounded-[4px] min-h-[340px] cursor-pointer group"
                       whileHover={{ y: -4 }}
                       onClick={() => navigate("/imoveis?status=vendidos")}
                     >
                       <img
-                        src={soldIllustration}
+                        src={images[1]}
                         alt="Ver mais imóveis vendidos"
-                        className="w-36 h-36 object-contain mb-6 opacity-80 group-hover:opacity-100 transition-opacity"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-sans text-sm font-medium tracking-wide shadow-lg group-hover:bg-primary/90 transition-colors">
-                        Ver mais imóveis vendidos
-                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/30 to-foreground/10 group-hover:from-foreground/80 group-hover:via-foreground/40 transition-all duration-500" />
+                      <div className="relative z-10 flex flex-col items-center justify-center h-full min-h-[340px] px-8 text-center">
+                        <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-background/70 mb-2">
+                          Imóveis Vendidos
+                        </p>
+                        <p className="font-sans text-xs text-background/50 max-w-[220px] mb-6 leading-relaxed">
+                          Conheça alguns imóveis já negociados pela Judice & Araujo
+                        </p>
+                        <span className="inline-flex items-center gap-2 px-6 py-3 rounded-[4px] bg-background/95 text-foreground font-sans text-xs font-medium tracking-[0.12em] uppercase backdrop-blur-sm group-hover:bg-background transition-colors">
+                          Ver imóveis vendidos
+                        </span>
+                      </div>
                     </motion.div>
                   </div>
                 </div>
