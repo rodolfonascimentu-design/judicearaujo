@@ -159,7 +159,10 @@ const Properties = () => {
         type={type}
         viewMode={viewMode}
         onToggleView={toggleView}
+        onOpenFilters={() => setFiltersOpen(true)}
       />
+
+      <PropertyFilters open={filtersOpen} onOpenChange={setFiltersOpen} />
 
       <main className="max-w-7xl mx-auto px-6 lg:px-12 pt-6 pb-12 bg-white">
         {loading ? (
