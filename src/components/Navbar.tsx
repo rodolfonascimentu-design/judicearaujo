@@ -28,6 +28,15 @@ const Navbar = () => {
     { label: t("nav.blog"), href: "#blog" },
   ];
 
+  const mobileNavLinks = [
+    { label: t("nav.launches"), href: "#lancamentos" },
+    { label: t("nav.evaluate"), href: "#avaliar" },
+    { label: t("nav.blog"), href: "#administracao" },
+    { label: t("nav.blogPost"), href: "#blog" },
+    { label: t("nav.about"), href: "#quem-somos" },
+    { label: t("nav.contact"), href: "#contato" },
+  ];
+
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
@@ -46,6 +55,16 @@ const Navbar = () => {
   useEffect(() => {
     document.documentElement.style.fontSize = `${fontSize}%`;
   }, [fontSize]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   const adjustFont = (delta: number) => {
     setFontSize((prev) => Math.min(130, Math.max(80, prev + delta)));
@@ -76,10 +95,8 @@ const Navbar = () => {
               onClick={(e) => {
                 e.preventDefault();
                 if (isHomePage) {
-                  // Already on home — scroll to search area
                   window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'smooth' });
                 } else {
-                  // Navigate to home with search flag
                   window.location.href = '/?search=1';
                 }
               }}
@@ -189,10 +206,10 @@ const Navbar = () => {
                   </div>
             </div>
 
-            {/* Mobile menu button — X is now green */}
+            {/* Mobile hamburger / X button */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`lg:hidden relative w-7 h-7 flex flex-col items-center justify-center transition-all duration-500 ${showGreen ? "text-foreground" : "text-cream"}`}
+              className="lg:hidden relative w-8 h-8 flex flex-col items-center justify-center transition-all duration-500"
               style={{
                 opacity: isExpanded ? 1 : 0,
                 pointerEvents: isExpanded ? "auto" : "none",
@@ -200,72 +217,107 @@ const Navbar = () => {
               aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
             >
               <motion.span
-                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : showGreen ? "bg-foreground" : "bg-cream"}`}
-                animate={mobileOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -4 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
+                className="absolute block h-[2px] w-6 rounded-full bg-white"
+                animate={mobileOpen
+                  ? { rotate: 45, y: 0, backgroundColor: "#ffffff" }
+                  : { rotate: 0, y: -5, backgroundColor: showGreen ? "#1a1a1a" : "#ffffff" }
+                }
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
               />
               <motion.span
-                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : showGreen ? "bg-foreground" : "bg-cream"}`}
-                animate={mobileOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-                transition={{ duration: 0.25, ease: "easeInOut" }}
+                className="absolute block h-[2px] w-6 rounded-full"
+                animate={mobileOpen
+                  ? { opacity: 0, scaleX: 0, backgroundColor: "#ffffff" }
+                  : { opacity: 1, scaleX: 1, backgroundColor: showGreen ? "#1a1a1a" : "#ffffff" }
+                }
+                transition={{ duration: 0.3, ease: "easeInOut" }}
               />
               <motion.span
-                className={`absolute block h-[1.5px] w-5 rounded-full ${mobileOpen ? "bg-primary" : showGreen ? "bg-foreground" : "bg-cream"}`}
-                animate={mobileOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 4 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
+                className="absolute block h-[2px] w-6 rounded-full bg-white"
+                animate={mobileOpen
+                  ? { rotate: -45, y: 0, backgroundColor: "#ffffff" }
+                  : { rotate: 0, y: 5, backgroundColor: showGreen ? "#1a1a1a" : "#ffffff" }
+                }
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
               />
             </button>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile overlay — logo removed, X is green */}
+      {/* Mobile fullscreen overlay */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="fixed inset-0 z-[100] bg-primary flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[100] bg-primary flex flex-col"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           >
-            <div className="flex flex-col items-center gap-8">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="font-display text-xl text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.1em] uppercase"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  {link.label}
-                </motion.a>
-              ))}
-              <div className="flex gap-4 mt-4">
+            {/* Navigation links — centered vertically */}
+            <div className="flex-1 flex flex-col items-center justify-center px-8">
+              <nav className="flex flex-col items-center gap-7">
+                {mobileNavLinks.map((link, i) => (
+                  <motion.a
+                    key={link.href + link.label}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="font-display text-[22px] text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase"
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + i * 0.06, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+              </nav>
+            </div>
+
+            {/* Bottom controls */}
+            <motion.div
+              className="pb-10 px-8 flex flex-col items-center gap-6"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            >
+              {/* Language selector */}
+              <div className="flex items-center gap-6">
                 {languages.map((l) => (
                   <button
                     key={l}
                     onClick={() => setLang(l)}
-                    className={`text-xs font-sans tracking-[0.15em] uppercase transition-colors ${
-                      l === lang ? "text-primary-foreground" : "text-primary-foreground/40"
+                    className={`text-sm font-sans tracking-[0.2em] uppercase transition-colors py-2 px-1 min-w-[44px] min-h-[44px] flex items-center justify-center ${
+                      l === lang ? "text-primary-foreground font-medium" : "text-primary-foreground/35 hover:text-primary-foreground/60"
                     }`}
                   >
                     {l}
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-3 mt-2">
-                <button onClick={() => adjustFont(-5)} className="text-primary-foreground/50 hover:text-primary-foreground p-2">
-                  <Minus className="w-4 h-4" />
+
+              {/* Separator */}
+              <div className="w-12 h-px bg-primary-foreground/15" />
+
+              {/* Font size controls */}
+              <div className="flex items-center gap-5">
+                <button
+                  onClick={() => adjustFont(-5)}
+                  className="text-primary-foreground/40 hover:text-primary-foreground transition-colors p-3 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                  aria-label="Diminuir fonte"
+                >
+                  <Minus className="w-5 h-5" />
                 </button>
-                <span className="text-xs font-sans text-primary-foreground/40 tracking-wider">Aa</span>
-                <button onClick={() => adjustFont(5)} className="text-primary-foreground/50 hover:text-primary-foreground p-2">
-                  <Plus className="w-4 h-4" />
+                <span className="text-sm font-sans text-primary-foreground/30 tracking-wider select-none">Aa</span>
+                <button
+                  onClick={() => adjustFont(5)}
+                  className="text-primary-foreground/40 hover:text-primary-foreground transition-colors p-3 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                  aria-label="Aumentar fonte"
+                >
+                  <Plus className="w-5 h-5" />
                 </button>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
