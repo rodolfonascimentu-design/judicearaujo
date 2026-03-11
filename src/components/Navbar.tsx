@@ -263,7 +263,7 @@ const Navbar = () => {
                     key={link.href + link.label}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="font-display text-lg text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase whitespace-nowrap"
+                    className="font-display text-[18px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase whitespace-nowrap"
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.06, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
