@@ -181,7 +181,7 @@ const Navbar = () => {
                     <span className={`text-[9px] font-sans tracking-wider uppercase w-5 text-center ${showGreen ? "text-foreground/40" : "text-white/50"}`}>A</span>
                     <button
                       onClick={() => adjustFont(5)}
-                      className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-cream/50 hover:text-cream"}`}
+                      className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-white/60 hover:text-white"}`}
                       aria-label="Aumentar fonte"
                     >
                       <Plus className="w-3 h-3" />
