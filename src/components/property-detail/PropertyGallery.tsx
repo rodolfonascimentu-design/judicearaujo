@@ -79,26 +79,60 @@ const PropertyGallery = ({ property, isFromLaunches = false }: Props) => {
         </motion.div>
       </div>
 
-      {/* Photos horizontal scroll — no vertical scrolling */}
-      <div className="flex gap-4 overflow-x-auto overflow-y-hidden scrollbar-thin px-6 md:px-16 pb-4">
-        {property.images.map((img, i) => (
-          <motion.button
-            key={i}
-            onClick={() => openLightbox(i)}
-            className="relative flex-shrink-0 w-72 md:w-96 h-52 md:h-64 rounded-[4px] overflow-hidden group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: i * 0.06 }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <img src={img} alt={`Foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500 flex items-center justify-center">
-              <Eye className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-          </motion.button>
-        ))}
-      </div>
+      {/* Launch gallery — horizontal scroll */}
+      {isFromLaunches ? (
+        <div className="flex gap-4 overflow-x-auto overflow-y-hidden scrollbar-thin px-6 md:px-16 pb-4">
+          {property.images.map((img, i) => (
+            <motion.button
+              key={i}
+              onClick={() => openLightbox(i)}
+              className="relative flex-shrink-0 w-72 md:w-96 h-52 md:h-64 rounded-[4px] overflow-hidden group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <img src={img} alt={`Foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500 flex items-center justify-center">
+                <Eye className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            </motion.button>
+          ))}
+        </div>
+      ) : (
+        /* Regular property gallery — mosaic grid */
+        <div className="px-6 md:px-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+            {property.images.slice(0, 5).map((img, i) => (
+              <motion.button
+                key={i}
+                onClick={() => openLightbox(i)}
+                className={`relative rounded-[4px] overflow-hidden group ${
+                  i === 0 ? "col-span-2 row-span-2 aspect-[4/3]" : "aspect-[4/3]"
+                }`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ scale: 1.01 }}
+              >
+                <img src={img} alt={`Foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
+                  <Eye className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                {i === 4 && property.images.length > 5 && (
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <span className="text-white font-sans text-sm font-medium tracking-wide">
+                      +{property.images.length - 5} fotos
+                    </span>
+                  </div>
+                )}
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Lightbox */}
       <AnimatePresence>
