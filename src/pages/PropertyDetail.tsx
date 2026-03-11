@@ -20,8 +20,10 @@ import PropertyContact from "@/components/property-detail/PropertyContact";
 const PropertyDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const property = mockProperty;
   const { t } = useLanguage();
+  const isFromLaunches = searchParams.get("from") === "launches";
 
   useEffect(() => {
     window.scrollTo(0, 0);
