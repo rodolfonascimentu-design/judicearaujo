@@ -6,6 +6,11 @@ let heroAnimationSeen = false;
 export const markHeroAnimationSeen = () => { heroAnimationSeen = true; };
 export const hasHeroAnimationBeenSeen = () => heroAnimationSeen;
 
+// Reset flag on Vite HMR so animation replays during development
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => { heroAnimationSeen = false; });
+}
+
 interface ScrollExpandMediaProps {
   mediaType?: 'video' | 'image';
   mediaSrc: string;
