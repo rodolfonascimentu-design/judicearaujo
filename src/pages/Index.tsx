@@ -13,7 +13,6 @@ import Footer from "@/components/Footer";
 import Newsletter from "@/components/Newsletter";
 
 const Index = () => {
-  const location = useLocation();
 
   useEffect(() => {
     document.title = "Judice & Araujo — Imóveis de Luxo no Rio de Janeiro";
