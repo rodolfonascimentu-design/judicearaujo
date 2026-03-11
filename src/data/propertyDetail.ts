@@ -52,6 +52,18 @@ export interface SimilarProperty {
   type: string;
 }
 
+export interface PropertyTypology {
+  image: string;
+  title: string;
+  area?: number;
+  bedrooms?: number;
+}
+
+export interface PropertyVideoData {
+  url: string;
+  thumbnail: string;
+}
+
 export interface PropertyDetailData {
   id: string;
   type: string;
@@ -73,6 +85,8 @@ export interface PropertyDetailData {
   units: PropertyUnit[];
   constructionStage: number; // 0-3
   constructionStages: string[];
+  typologies?: PropertyTypology[];
+  video?: PropertyVideoData;
   mapQuery: string;
   neighborhoodDescription: string[];
   neighborhoodImage: string;
@@ -141,6 +155,16 @@ export const mockProperty: PropertyDetailData = {
   ],
   constructionStage: 1,
   constructionStages: ["Não iniciada", "Estrutura", "Acabamento", "Pronto"],
+  typologies: [
+    { image: test1, title: "Apartamento 2 Quartos", area: 75, bedrooms: 2 },
+    { image: test2, title: "Apartamento 3 Quartos", area: 120, bedrooms: 3 },
+    { image: test3, title: "Cobertura Duplex", area: 250, bedrooms: 4 },
+    { image: test4, title: "Garden com Terraço", area: 180, bedrooms: 3 },
+  ],
+  video: {
+    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    thumbnail: test5,
+  },
   mapQuery: "Estrada+do+Joá+3200+Rio+de+Janeiro+RJ",
   neighborhoodDescription: [
     "O Joá é um dos endereços mais exclusivos e preservados do Rio de Janeiro. Encravado entre a Pedra da Gávea e o mar, o bairro combina a exuberância da Mata Atlântica com a sofisticação de residências de altíssimo padrão. É o refúgio perfeito para quem busca privacidade absoluta sem abrir mão da proximidade com a Barra da Tijuca e São Conrado.",
