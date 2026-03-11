@@ -125,6 +125,10 @@ export const mockProperty: PropertyDetailData = {
   suites: 4,
   bathrooms: 5,
   parking: 6,
+  bedroomsRange: "1 a 2",
+  bathroomsRange: "1 a 2",
+  areaRange: "37 a 73",
+  parkingRange: "1",
   images: [
     soho1,
     soho2,

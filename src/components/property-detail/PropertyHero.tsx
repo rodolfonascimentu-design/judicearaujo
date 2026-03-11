@@ -48,12 +48,21 @@ const PropertyHero = ({ property }: Props) => {
     return () => clearTimeout(timer);
   }, []);
 
-  const specs = [
-    { icon: Maximize, value: `${property.area} m²` },
-    { icon: BedDouble, value: `${property.suites} suítes` },
-    { icon: Bath, value: `${property.bathrooms} banheiros` },
-    { icon: Car, value: `${property.parking} vagas` },
-  ];
+  const isLaunch = property.status === "launch";
+
+  const specs = isLaunch
+    ? [
+        { icon: Maximize, value: `${property.areaRange || property.area} m²` },
+        { icon: BedDouble, value: `${property.bedroomsRange || property.suites} quartos` },
+        { icon: Bath, value: `${property.bathroomsRange || property.bathrooms} banheiros` },
+        { icon: Car, value: `${property.parkingRange || property.parking} vagas` },
+      ]
+    : [
+        { icon: Maximize, value: `${property.area} m²` },
+        { icon: BedDouble, value: `${property.suites} suítes` },
+        { icon: Bath, value: `${property.bathrooms} banheiros` },
+        { icon: Car, value: `${property.parking} vagas` },
+      ];
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
