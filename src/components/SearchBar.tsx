@@ -10,6 +10,7 @@ interface SearchBarProps {
   type: string;
   viewMode: "list" | "map";
   onToggleView: () => void;
+  onOpenFilters?: () => void;
 }
 
 const SearchBar = ({ count, location, type, viewMode, onToggleView }: SearchBarProps) => {
