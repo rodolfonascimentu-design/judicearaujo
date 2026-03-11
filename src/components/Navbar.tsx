@@ -133,7 +133,7 @@ const Navbar = () => {
                     <button
                       onClick={() => setLangOpen(!langOpen)}
                       className={`flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-colors ${
-                        showGreen ? "text-foreground/70 hover:text-foreground" : "text-cream/70 hover:text-cream"
+                        showGreen ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"
                       }`}
                     >
                       {lang}
