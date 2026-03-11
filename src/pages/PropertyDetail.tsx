@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { MessageCircle, ArrowLeft } from "lucide-react";
 import { mockProperty } from "@/data/propertyDetail";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -20,8 +20,10 @@ import PropertyContact from "@/components/property-detail/PropertyContact";
 const PropertyDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const property = mockProperty;
   const { t } = useLanguage();
+  const isFromLaunches = searchParams.get("from") === "launches";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -48,7 +50,7 @@ const PropertyDetail = () => {
         <PropertyDescription property={property} />
         <PropertyGallery property={property} />
         <PropertyFeatures property={property} />
-        {property.status === "launch" && (
+        {isFromLaunches && property.status === "launch" && (
           <>
             <PropertyConstructionStatus property={property} />
             <PropertyTypologies property={property} />

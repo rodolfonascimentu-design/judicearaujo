@@ -65,7 +65,7 @@ const LaunchPropertyCard = ({
     setClicked(true);
     setTimeout(() => {
       setClicked(false);
-      navigate(`/imovel/${id}`);
+      navigate(`/imovel/${id}?from=launches`);
     }, 300);
   };
 
