@@ -152,7 +152,7 @@ const PropertyFilters = ({ open, onOpenChange }: PropertyFiltersProps) => {
 
         {/* Scrollable content */}
         <ScrollArea className="flex-1">
-          <div className="px-6 py-5">
+          <div className="px-6 py-5" data-filters-panel>
             {/* 1. Localização — always open, no accordion */}
             <div className="border-b border-border pb-5 mb-0">
               <p className="font-sans text-xs font-medium tracking-[0.08em] uppercase text-foreground py-4">
