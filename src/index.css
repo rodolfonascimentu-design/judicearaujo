@@ -156,13 +156,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Force white background on system UI areas */
+html, body {
+  background-color: #ffffff !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--cream));
+  background: #ffffff;
 }
 
 ::-webkit-scrollbar-thumb {
