@@ -174,8 +174,8 @@ export const mockProperty: PropertyDetailData = {
     { image: tipologia4, title: "Tipo 3 – Apto 03", area: 42, bedrooms: 1 },
   ],
   video: {
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    thumbnail: test5,
+    url: "https://www.youtube.com/watch?v=HxUmYJ5FUyU",
+    thumbnail: soho5,
   },
   mapQuery: "Estrada+do+Joá+3200+Rio+de+Janeiro+RJ",
   neighborhoodDescription: [
