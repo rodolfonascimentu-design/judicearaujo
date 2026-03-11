@@ -16,6 +16,10 @@ import test3 from "@/assets/test-3.jpg";
 import test4 from "@/assets/test-4.jpg";
 import test5 from "@/assets/test-5.jpg";
 import test6 from "@/assets/test-6.jpg";
+import tipologia1 from "@/assets/tipologia-1.jpg";
+import tipologia2 from "@/assets/tipologia-2.jpg";
+import tipologia3 from "@/assets/tipologia-3.jpg";
+import tipologia4 from "@/assets/tipologia-4.jpg";
 
 export interface PropertyUnit {
   type: string;
@@ -156,10 +160,10 @@ export const mockProperty: PropertyDetailData = {
   constructionStage: 1,
   constructionStages: ["Não iniciada", "Estrutura", "Acabamento", "Pronto"],
   typologies: [
-    { image: test1, title: "Apartamento 2 Quartos", area: 75, bedrooms: 2 },
-    { image: test2, title: "Apartamento 3 Quartos", area: 120, bedrooms: 3 },
-    { image: test3, title: "Cobertura Duplex", area: 250, bedrooms: 4 },
-    { image: test4, title: "Garden com Terraço", area: 180, bedrooms: 3 },
+    { image: tipologia1, title: "Garden – Aptos 102 e 104", area: 56, bedrooms: 1 },
+    { image: tipologia2, title: "Tipo 1 – Apto 01", area: 73, bedrooms: 2 },
+    { image: tipologia3, title: "Tipo 2 – Aptos 02 e 04", area: 37, bedrooms: 1 },
+    { image: tipologia4, title: "Tipo 3 – Apto 03", area: 42, bedrooms: 1 },
   ],
   video: {
     url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
