@@ -65,27 +65,25 @@ const PropertyTypologies = ({ property }: Props) => {
       </div>
 
       <div className="px-6 md:px-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
           {typologies.map((typo, i) => (
             <motion.button
               key={i}
               onClick={() => openLightbox(i)}
-            className="group text-left rounded-[4px] overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              className="group relative aspect-[4/3] rounded-[4px] overflow-hidden hover:shadow-lg transition-shadow duration-300"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px]">
-                <img
-                  src={typo.image}
-                  alt={typo.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
-                  <Maximize className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+              <img
+                src={typo.image}
+                alt={typo.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
+                <Maximize className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             </motion.button>
           ))}
