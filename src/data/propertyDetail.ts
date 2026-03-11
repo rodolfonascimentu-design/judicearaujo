@@ -52,6 +52,18 @@ export interface SimilarProperty {
   type: string;
 }
 
+export interface PropertyTypology {
+  image: string;
+  title: string;
+  area?: number;
+  bedrooms?: number;
+}
+
+export interface PropertyVideoData {
+  url: string;
+  thumbnail: string;
+}
+
 export interface PropertyDetailData {
   id: string;
   type: string;
@@ -73,6 +85,8 @@ export interface PropertyDetailData {
   units: PropertyUnit[];
   constructionStage: number; // 0-3
   constructionStages: string[];
+  typologies?: PropertyTypology[];
+  video?: PropertyVideoData;
   mapQuery: string;
   neighborhoodDescription: string[];
   neighborhoodImage: string;
