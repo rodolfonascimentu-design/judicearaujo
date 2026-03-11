@@ -4,11 +4,12 @@ interface SectionHeaderProps {
   title: string;
   subtitle?: string;
   light?: boolean;
+  compact?: boolean;
 }
 
-const SectionHeader = ({ title, subtitle, light }: SectionHeaderProps) => (
+const SectionHeader = ({ title, subtitle, light, compact }: SectionHeaderProps) => (
   <motion.div
-    className="text-center mb-20"
+    className={`text-center ${compact ? 'mb-10 lg:mb-12' : 'mb-20'}`}
     initial={{ opacity: 0, y: 24 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: false, margin: "-80px" }}
@@ -26,7 +27,7 @@ const SectionHeader = ({ title, subtitle, light }: SectionHeaderProps) => (
       <p
         className={`font-sans text-sm md:text-base max-w-xl mx-auto font-light tracking-wide ${
           light ? "text-cream/50" : "text-muted-foreground"
-        }`}
+        } ${compact ? 'lg:whitespace-nowrap' : ''}`}
       >
         {subtitle}
       </p>

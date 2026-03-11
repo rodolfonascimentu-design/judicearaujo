@@ -40,7 +40,7 @@ const ExclusiveGallery = () => {
   return (
     <section ref={sectionRef} className="py-32 lg:py-44 bg-[#FDFDFD] overflow-hidden">
       <motion.div style={{ opacity }} className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16 lg:mb-24">
+        <div className="text-center mb-10 lg:mb-12">
           <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-muted-foreground mb-4 font-medium">
             {t("exclusive.subtitle")}
           </p>

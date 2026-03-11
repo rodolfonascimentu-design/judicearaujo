@@ -22,6 +22,7 @@ const FeaturedProperties = () => (
       <SectionHeader
         title="Imóveis em Destaque"
         subtitle="Uma seleção exclusiva dos imóveis mais desejados do Rio de Janeiro"
+        compact
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
         {properties.map((property, i) => (

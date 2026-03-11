@@ -23,6 +23,7 @@ const Testimonials = () => {
       description={t("testimonials.desc")}
       testimonials={testimonials}
       className="bg-[#FEFBF1]"
+      compact
     />
   );
 };
