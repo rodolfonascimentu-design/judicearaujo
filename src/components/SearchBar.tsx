@@ -13,7 +13,7 @@ interface SearchBarProps {
   onOpenFilters?: () => void;
 }
 
-const SearchBar = ({ count, location, type, viewMode, onToggleView }: SearchBarProps) => {
+const SearchBar = ({ count, location, type, viewMode, onToggleView, onOpenFilters }: SearchBarProps) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [query, setQuery] = useState(location);
