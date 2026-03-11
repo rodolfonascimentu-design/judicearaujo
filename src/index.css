@@ -172,3 +172,12 @@ html {
   background: hsl(var(--gold));
   border-radius: 2px;
 }
+
+/* Force white inputs inside the property filters panel */
+[data-filters-panel] input,
+[data-filters-panel] .flex input {
+  background-color: #ffffff !important;
+  border-color: #e5e5e5 !important;
+  border-radius: 6px !important;
+  color: hsl(0 0% 15%) !important;
+}
