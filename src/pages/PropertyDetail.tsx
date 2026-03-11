@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { MessageCircle, ArrowLeft } from "lucide-react";
 import { mockProperty } from "@/data/propertyDetail";
 import { useLanguage } from "@/i18n/LanguageContext";
