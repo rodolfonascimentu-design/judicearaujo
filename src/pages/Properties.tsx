@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Bed, Maximize, Car, Video } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
+import soldIllustration from "@/assets/sold-illustration.png";
 import SearchPropertyCard from "@/components/SearchPropertyCard";
 import PropertyCardSkeleton from "@/components/PropertyCardSkeleton";
 import MapView, { neighborhoodCoords } from "@/components/MapView";
