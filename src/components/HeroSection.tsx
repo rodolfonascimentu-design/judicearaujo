@@ -188,7 +188,7 @@ const HeroOverlayContent = () => {
         <div className="relative w-[26px] h-[42px] rounded-full border-2 border-white/60">
           {/* Animated scroll wheel */}
           <motion.div
-            className="absolute left-1/2 -translate-x-1/2 top-[8px] w-[3px] h-[8px] rounded-full bg-white/80"
+            className="absolute left-0 right-0 mx-auto top-[8px] w-[3px] h-[8px] rounded-full bg-white/80"
             animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
             transition={{
               duration: 2,
