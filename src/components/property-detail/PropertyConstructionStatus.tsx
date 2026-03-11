@@ -45,9 +45,9 @@ const PropertyConstructionStatus = ({ property }: Props) => {
           className="relative"
         >
           {/* Connecting line — desktop */}
-          <div className="hidden md:block absolute top-10 left-[calc(12.5%)] right-[calc(12.5%)] h-[2px] bg-border rounded-full" />
+          <div className="hidden md:block absolute top-10 left-[calc(12.5%+40px)] right-[calc(12.5%+40px)] h-[2px] bg-border rounded-full" />
           <motion.div
-            className="hidden md:block absolute top-10 left-[calc(12.5%)] h-[2px] bg-primary rounded-full origin-left"
+            className="hidden md:block absolute top-10 left-[calc(12.5%+40px)] h-[2px] bg-primary rounded-full origin-left"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: false }}
