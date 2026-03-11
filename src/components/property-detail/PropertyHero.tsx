@@ -16,9 +16,10 @@ import { PropertyDetailData } from "@/data/propertyDetail";
 
 interface Props {
   property: PropertyDetailData;
+  isFromLaunches?: boolean;
 }
 
-const PropertyHero = ({ property }: Props) => {
+const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 40 });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isReady, setIsReady] = useState(false);
@@ -48,7 +49,7 @@ const PropertyHero = ({ property }: Props) => {
     return () => clearTimeout(timer);
   }, []);
 
-  const isLaunch = property.status === "launch";
+  const isLaunch = isFromLaunches && property.status === "launch";
 
   const specs = isLaunch
     ? [
