@@ -53,7 +53,7 @@ const FeaturedCarousel = () => {
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="py-32 lg:py-44 bg-[#FDFDFD] overflow-hidden">
+    <section className="py-16 md:py-32 lg:py-44 bg-[#FDFDFD] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <SectionHeader
           title={t("featured.title")}
