@@ -9,8 +9,6 @@ interface Props {
 
 const PropertyTypologies = ({ property }: Props) => {
   const typologies = property.typologies;
-  if (!typologies || typologies.length === 0) return null;
-
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
