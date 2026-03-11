@@ -9,7 +9,7 @@ interface LaunchSearchBarProps {
   onOpenFilters?: () => void;
 }
 
-const LaunchSearchBar = ({ count, location }: LaunchSearchBarProps) => {
+const LaunchSearchBar = ({ count, location, onOpenFilters }: LaunchSearchBarProps) => {
   const { t } = useLanguage();
 
   const countText = `${count} lançamentos`;
