@@ -16,7 +16,6 @@ import PropertyTypologies from "@/components/property-detail/PropertyTypologies"
 import PropertyVideo from "@/components/property-detail/PropertyVideo";
 
 import PropertyContact from "@/components/property-detail/PropertyContact";
-import PropertySimilar from "@/components/property-detail/PropertySimilar";
 
 const PropertyDetail = () => {
   const { id } = useParams();
@@ -55,7 +54,6 @@ const PropertyDetail = () => {
         <PropertyLocation property={property} />
         <PropertyNeighborhood property={property} />
         <PropertyContact />
-        <PropertySimilar property={property} />
       </main>
 
       <Footer />
