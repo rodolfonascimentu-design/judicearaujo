@@ -11,6 +11,7 @@ import PropertyCardSkeleton from "@/components/PropertyCardSkeleton";
 import MapView, { neighborhoodCoords } from "@/components/MapView";
 import type { MapProperty } from "@/components/MapView";
 import { useLanguage } from "@/i18n/LanguageContext";
+import PropertyFilters from "@/components/PropertyFilters";
 
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
