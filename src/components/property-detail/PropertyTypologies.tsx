@@ -70,7 +70,7 @@ const PropertyTypologies = ({ property }: Props) => {
             <motion.button
               key={i}
               onClick={() => openLightbox(i)}
-              className="group text-left rounded-[4px] overflow-hidden border border-border bg-card hover:shadow-lg transition-shadow duration-300"
+            className="group text-left rounded-[4px] overflow-hidden hover:shadow-lg transition-shadow duration-300"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, margin: "-40px" }}

@@ -118,9 +118,14 @@ const PropertyHero = ({ property }: Props) => {
           </p>
 
           {/* Name */}
-          <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-white mb-6 leading-[1.1]">
-            {property.name}
+          <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-white mb-2 leading-[1.1]">
+            {property.status === "launch" ? property.name.split(" ")[0] : property.name}
           </h1>
+          {property.status === "launch" && (
+            <p className="font-sans text-sm md:text-lg text-white/70 mb-6 tracking-wide">
+              {property.neighborhood}, {property.city}/{property.city === "Rio de Janeiro" ? "RJ" : ""}
+            </p>
+          )}
 
           {/* Quick specs */}
           <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-6">
