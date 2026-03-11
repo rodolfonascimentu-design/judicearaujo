@@ -78,8 +78,8 @@ const PropertyGallery = ({ property }: Props) => {
         </motion.div>
       </div>
 
-      {/* Photos horizontal scroll */}
-      <div className="flex gap-4 overflow-x-auto scrollbar-thin px-6 md:px-16 pb-4">
+      {/* Photos horizontal scroll — no vertical scrolling */}
+      <div className="flex gap-4 overflow-x-auto overflow-y-hidden scrollbar-thin px-6 md:px-16 pb-4">
         {property.images.map((img, i) => (
           <motion.button
             key={i}

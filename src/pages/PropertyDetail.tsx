@@ -54,15 +54,6 @@ const PropertyDetail = () => {
 
       <Footer />
 
-      <a
-        href={`https://wa.me/${property.agent.whatsapp}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 md:hidden w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:bg-primary/90 transition-colors"
-        aria-label="WhatsApp"
-      >
-        <MessageCircle className="w-6 h-6" />
-      </a>
     </div>
   );
 };

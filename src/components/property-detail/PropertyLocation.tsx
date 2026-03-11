@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, ExternalLink } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
 
 interface Props {
@@ -7,8 +8,9 @@ interface Props {
 }
 
 const PropertyLocation = ({ property }: Props) => {
-  // Dark/elegant map style using Stamen Toner-lite via Stadia Maps
+  const [showMap, setShowMap] = useState(false);
   const mapSrc = `https://maps.google.com/maps?q=${property.mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed&maptype=roadmap`;
+  const staticPreview = `https://maps.googleapis.com/maps/api/staticmap?center=${property.mapQuery}&zoom=14&size=800x450&scale=2&maptype=roadmap&style=feature:all|saturation:-80|lightness:10&format=png`;
 
   return (
     <section className="py-20 md:py-28 px-6 md:px-16 bg-background">
@@ -39,31 +41,40 @@ const PropertyLocation = ({ property }: Props) => {
           viewport={{ once: false, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          {/* Dark overlay filter on the map */}
-          <div className="relative">
-            <iframe
-              title="Localização do imóvel"
-              src={mapSrc}
-              className="w-full h-[350px] md:h-[450px] border-0 grayscale contrast-[1.1] brightness-[0.85] saturate-[0.2]"
-              loading="lazy"
-              allowFullScreen
-            />
-            {/* Subtle vignette overlay */}
-            <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_60px_rgba(0,0,0,0.15)] rounded-lg" />
-          </div>
+          {showMap ? (
+            <div className="relative">
+              <iframe
+                title="Localização do imóvel"
+                src={mapSrc}
+                className="w-full h-[350px] md:h-[450px] border-0 grayscale contrast-[1.1] brightness-[0.85] saturate-[0.2]"
+                allowFullScreen
+              />
+              <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_60px_rgba(0,0,0,0.15)] rounded-lg" />
+            </div>
+          ) : (
+            <button
+              onClick={() => setShowMap(true)}
+              className="relative w-full h-[350px] md:h-[450px] bg-muted rounded-lg overflow-hidden group cursor-pointer"
+            >
+              {/* Static placeholder background */}
+              <div className="absolute inset-0 bg-muted">
+                <img
+                  src={staticPreview}
+                  alt="Mapa da localização"
+                  className="w-full h-full object-cover grayscale opacity-60"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
+              </div>
+              {/* Centered CTA */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-sans text-sm font-medium tracking-wide shadow-lg group-hover:bg-primary/90 transition-colors">
+                  <MapPin className="w-4 h-4" />
+                  Ver no mapa
+                </span>
+              </div>
+            </button>
+          )}
         </motion.div>
-
-        <div className="mt-6 flex justify-end">
-          <a
-            href={`https://www.google.com/maps/search/?api=1&query=${property.mapQuery}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-sans text-xs tracking-[0.1em] uppercase text-primary hover:text-primary/80 transition-colors"
-          >
-            Abrir no Google Maps
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-        </div>
       </div>
     </section>
   );
