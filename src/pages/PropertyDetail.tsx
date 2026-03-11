@@ -46,9 +46,9 @@ const PropertyDetail = () => {
       </div>
 
       <main>
-        <PropertyHero property={property} />
+        <PropertyHero property={property} isFromLaunches={isFromLaunches} />
         <PropertyDescription property={property} />
-        <PropertyGallery property={property} />
+        <PropertyGallery property={property} isFromLaunches={isFromLaunches} />
         <PropertyFeatures property={property} />
         {isFromLaunches && property.status === "launch" && (
           <>

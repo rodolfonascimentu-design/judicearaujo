@@ -49,7 +49,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
     return () => clearTimeout(timer);
   }, []);
 
-  const isLaunch = property.status === "launch";
+  const isLaunch = isFromLaunches && property.status === "launch";
 
   const specs = isLaunch
     ? [
