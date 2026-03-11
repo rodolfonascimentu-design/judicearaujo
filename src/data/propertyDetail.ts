@@ -20,6 +20,13 @@ import tipologia1 from "@/assets/tipologia-1.jpg";
 import tipologia2 from "@/assets/tipologia-2.jpg";
 import tipologia3 from "@/assets/tipologia-3.jpg";
 import tipologia4 from "@/assets/tipologia-4.jpg";
+import soho1 from "@/assets/soho-1.jpg";
+import soho2 from "@/assets/soho-2.jpg";
+import soho3 from "@/assets/soho-3.jpg";
+import soho4 from "@/assets/soho-4.jpg";
+import soho5 from "@/assets/soho-5.jpg";
+import soho6 from "@/assets/soho-6.jpg";
+import soho7 from "@/assets/soho-7.jpg";
 
 export interface PropertyUnit {
   type: string;
