@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ScrollExpandMedia, { hasHeroAnimationBeenSeen } from "@/components/ui/scroll-expansion-hero";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import jaLogoWhite from "@/assets/logo-ja-white.png";
+import scrollMouseIcon from "@/assets/scroll-mouse-icon.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
 
