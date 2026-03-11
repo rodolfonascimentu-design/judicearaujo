@@ -158,9 +158,6 @@ html {
 }
 
 /* System bar color handled by meta theme-color in index.html */
-html {
-  background-color: #ffffff;
-}
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
