@@ -6,6 +6,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 interface LaunchSearchBarProps {
   count: number;
   location: string;
+  onOpenFilters?: () => void;
 }
 
 const LaunchSearchBar = ({ count, location }: LaunchSearchBarProps) => {
