@@ -13,6 +13,7 @@ const languages: Lang[] = ["PT", "EN", "ES"];
 
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
