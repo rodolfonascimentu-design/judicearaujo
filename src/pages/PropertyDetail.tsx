@@ -23,10 +23,12 @@ import property3 from "@/assets/property-3.jpg";
 import property4 from "@/assets/property-4.jpg";
 import property5 from "@/assets/property-5.jpg";
 import property6 from "@/assets/property-6.jpg";
+import property7 from "@/assets/property-7.jpg";
+import property8 from "@/assets/property-8.jpg";
 import exclusive1 from "@/assets/exclusive-1.jpg";
 import exclusive2 from "@/assets/exclusive-2.jpg";
 
-const regularImages = [property1, property2, property3, property4, property5, property6, exclusive1, exclusive2];
+const regularImages = [property1, property2, property3, property4, property5, property6, property7, property8, exclusive1, exclusive2];
 
 const PropertyDetail = () => {
   const { id } = useParams();
