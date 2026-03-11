@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import LaunchSearchBar from "@/components/LaunchSearchBar";
 import LaunchPropertyCard from "@/components/LaunchPropertyCard";
 import PropertyCardSkeleton from "@/components/PropertyCardSkeleton";
+import LaunchFilters from "@/components/LaunchFilters";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -166,6 +167,7 @@ const Launches = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "Rio de Janeiro";
   const { t } = useLanguage();
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const [items, setItems] = useState(allLaunches.slice(0, INITIAL_COUNT));
   const [loading, setLoading] = useState(true);
@@ -213,7 +215,8 @@ const Launches = () => {
       <Navbar />
       <div className="h-20" aria-hidden="true" />
 
-      <LaunchSearchBar count={allLaunches.length} location={query} />
+      <LaunchSearchBar count={allLaunches.length} location={query} onOpenFilters={() => setFiltersOpen(true)} />
+      <LaunchFilters open={filtersOpen} onOpenChange={setFiltersOpen} />
 
       <main className="max-w-7xl mx-auto px-6 lg:px-12 pt-6 pb-12 bg-white">
         {loading ? (
