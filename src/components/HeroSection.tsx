@@ -194,8 +194,8 @@ const HeroOverlayContent = () => {
             }
           }}
         >
-          <div className="w-14 h-14 rounded-full border border-white/40 flex items-center justify-center bg-charcoal/20 backdrop-blur-sm group-hover:bg-charcoal/30 transition-all">
-            <img src={scrollMouseIcon} alt="Scroll down" className="w-7 h-7 opacity-80" />
+          <div className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center bg-charcoal/20 backdrop-blur-sm group-hover:bg-charcoal/30 transition-all">
+            <Mouse className="w-5 h-5 text-white" />
           </div>
         </motion.div>
       </motion.div>
