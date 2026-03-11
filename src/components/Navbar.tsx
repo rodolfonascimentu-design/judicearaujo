@@ -255,17 +255,17 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           >
-            {/* Navigation links — centered vertically */}
-            <div className="flex-1 flex flex-col items-center justify-center px-8">
-              <nav className="flex flex-col items-center gap-7">
+            {/* Navigation links — left-aligned, centered vertically */}
+            <div className="flex-1 flex flex-col justify-center px-10">
+              <nav className="flex flex-col gap-6">
                 {mobileNavLinks.map((link, i) => (
                   <motion.a
                     key={link.href + link.label}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="font-display text-[22px] text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase"
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    className="font-display text-lg text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase whitespace-nowrap"
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.06, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                   >
                     {link.label}
