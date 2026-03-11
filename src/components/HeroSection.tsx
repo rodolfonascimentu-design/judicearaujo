@@ -51,37 +51,39 @@ const HeroOverlayContent = () => {
 
       {/* Tabs */}
       <motion.div
-        className="flex items-center gap-1 mb-3"
+        className="flex items-center gap-1 mb-4 rounded-xl px-1.5 py-1.5"
+        style={{
+          background: "rgba(255, 255, 255, 0.15)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          boxShadow: "0 4px 20px -4px rgba(0,0,0,0.15)",
+        }}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25, duration: 0.5 }}
       >
-        {searchTypes.map((type, i) => (
-          <motion.button
-            key={type.key}
-            onClick={() => setActiveType(type.key)}
-            className="relative px-5 py-2 text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-colors duration-300"
-            style={{
-              color:
-                activeType === type.key
-                  ? "hsl(var(--gold))"
-                  : "rgba(255,255,255,0.5)",
-            }}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 + i * 0.05, duration: 0.4 }}
-          >
-            {activeType === type.key && (
-              <motion.div
-                layoutId="searchTabPill"
-                className="absolute bottom-0 left-0 right-0 mx-auto h-[2px] w-8 rounded-full"
-                style={{ background: "hsl(var(--gold))" }}
-                transition={{ type: "spring", stiffness: 400, damping: 30 }}
-              />
-            )}
-            <span className="relative z-10">{type.label}</span>
-          </motion.button>
-        ))}
+        {searchTypes.map((type, i) => {
+          const isActive = activeType === type.key;
+          return (
+            <motion.button
+              key={type.key}
+              onClick={() => setActiveType(type.key)}
+              className="relative px-5 py-2 rounded-lg text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-all duration-200"
+              style={{
+                color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
+                background: isActive ? "hsl(var(--primary))" : "transparent",
+                boxShadow: isActive ? "0 2px 10px -2px hsl(var(--primary) / 0.5)" : "none",
+              }}
+              whileHover={!isActive ? { backgroundColor: "rgba(255,255,255,0.12)" } : {}}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 + i * 0.05, duration: 0.4 }}
+            >
+              <span className="relative z-10">{type.label}</span>
+            </motion.button>
+          );
+        })}
       </motion.div>
 
       {/* Search container */}
