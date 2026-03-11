@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ScrollExpandMedia, { hasHeroAnimationBeenSeen } from "@/components/ui/scroll-expansion-hero";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import jaLogoWhite from "@/assets/logo-ja-white.png";
@@ -9,10 +9,6 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 const VIDEO_SRC = "/videos/RJ.mp4";
-
-/* ── helper ── */
-const clamp = (v: number) => Math.min(1, Math.max(0, v));
-const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 /* ══════════════════════════════════════════════════════════
    Search bar overlay – appears after full hero expansion
@@ -141,7 +137,7 @@ const HeroOverlayContent = () => {
             </motion.button>
           </div>
 
-          {/* Mobile layout - same as desktop, single row */}
+          {/* Mobile layout */}
           <div className="md:hidden flex items-center px-4 py-3.5 gap-3">
             <div className="flex-1 text-left min-w-0">
               <p className="text-[9px] font-sans font-medium tracking-[0.2em] uppercase mb-1"
@@ -187,8 +183,7 @@ const HeroOverlayContent = () => {
    ══════════════════════════════════════════════════════════ */
 const HeroSection = () => {
   const [heroProgress, setHeroProgress] = useState(0);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const shouldSkip = !isMobile && hasHeroAnimationBeenSeen();
+  const shouldSkip = hasHeroAnimationBeenSeen();
 
   const handleScrollProgress = useCallback((progress: number) => {
     setHeroProgress(progress);
@@ -200,7 +195,7 @@ const HeroSection = () => {
 
   return (
     <div className="relative">
-      <HeroLogos heroProgress={heroProgress} skipAnimation={shouldSkip} />
+      <HeroLogos skipAnimation={shouldSkip} />
       <ScrollExpandMedia
         mediaType="video"
         mediaSrc={VIDEO_SRC}
@@ -213,73 +208,59 @@ const HeroSection = () => {
 };
 
 /* ══════════════════════════════════════════════════════════
-   Scroll-driven logo animation
+   Auto-timed logo animation – fades out automatically
    ══════════════════════════════════════════════════════════ */
-const HeroLogos = ({ heroProgress, skipAnimation = false }: { heroProgress: number; skipAnimation?: boolean }) => {
-  const [pastHero, setPastHero] = useState(false);
-  const [barVisible, setBarVisible] = useState(skipAnimation);
-  const [logosVisible, setLogosVisible] = useState(skipAnimation);
+const HeroLogos = ({ skipAnimation = false }: { skipAnimation?: boolean }) => {
+  const [barVisible, setBarVisible] = useState(false);
+  const [logosVisible, setLogosVisible] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     if (skipAnimation) return;
     const t1 = setTimeout(() => setBarVisible(true), 1000);
     const t2 = setTimeout(() => setLogosVisible(true), 1800);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    // Start fading out logos ~1s before the hero expands (at 4.8s)
+    const t3 = setTimeout(() => setFadeOut(true), 3800);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [skipAnimation]);
 
-  useEffect(() => {
-    const onScroll = () => setPastHero(window.scrollY > window.innerHeight - 80);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // When skipping, logos should be hidden since hero is already expanded
   if (skipAnimation) return null;
 
-  const p = heroProgress;
-  const scaleT = clamp(p / 0.6);
-  const scale = lerp(1.3, 1.0, scaleT);
-  const moveT = clamp(p / 0.8);
-  const topVh = lerp(42, 2.5, moveT);
-  const proximityFade = topVh <= 30 ? clamp((30 - topVh) / 28) : 0;
-  const fadeOutOpacity = 1 - proximityFade;
-  const isVisible = barVisible && !pastHero && heroProgress < 0.98;
-  const finalOpacity = isVisible ? fadeOutOpacity : 0;
-
   return (
-    <div
-      className="fixed left-1/2 z-[45] flex items-center justify-center pointer-events-none w-max"
-      style={{
-        transform: `translateX(-50%) scale(${scale})`,
-        top: `${topVh}vh`,
-        opacity: finalOpacity,
-        transition: "opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
-      }}
-    >
-      <motion.img
-        src={jaLogoWhite}
-        alt="Judice & Araujo"
-        className="h-[30px] lg:h-[34px] w-auto"
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : 40 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-      />
-      <motion.div
-        className="mx-4 bg-cream/60"
-        style={{ width: "1.5px", height: "34px" }}
-        initial={{ opacity: 0, scaleY: 0 }}
-        animate={{ opacity: barVisible ? 1 : 0, scaleY: barVisible ? 1 : 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      />
-      <motion.img
-        src={forbesLogoWhite}
-        alt="Forbes Global Properties"
-        className="h-[30px] lg:h-[35px] w-auto"
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : -40 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-      />
-    </div>
+    <AnimatePresence>
+      {!fadeOut && (
+        <motion.div
+          className="fixed left-1/2 top-[42vh] z-[45] flex items-center justify-center pointer-events-none w-max"
+          style={{ transform: 'translateX(-50%)' }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          <motion.img
+            src={jaLogoWhite}
+            alt="Judice & Araujo"
+            className="h-[30px] lg:h-[34px] w-auto"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : 40 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+          />
+          <motion.div
+            className="mx-4 bg-cream/60"
+            style={{ width: "1.5px", height: "34px" }}
+            initial={{ opacity: 0, scaleY: 0 }}
+            animate={{ opacity: barVisible ? 1 : 0, scaleY: barVisible ? 1 : 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          />
+          <motion.img
+            src={forbesLogoWhite}
+            alt="Forbes Global Properties"
+            className="h-[30px] lg:h-[35px] w-auto"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : -40 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
