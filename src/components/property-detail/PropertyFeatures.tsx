@@ -1,12 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  BedDouble, Shirt, Sun, UtensilsCrossed, Tv, ChefHat, Flame, Building2, Cpu, Zap,
-  Dumbbell, Waves, Baby, TreePine, PartyPopper, ChefHat as Gourmet, Shield, ShieldCheck, Plane, Trophy,
-} from "lucide-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
-
-const internalIcons = [BedDouble, Shirt, Sun, UtensilsCrossed, Tv, ChefHat, Flame, Building2, Cpu, Zap];
-const condoIcons = [Dumbbell, Waves, Baby, TreePine, PartyPopper, Gourmet, Shield, ShieldCheck, Plane, Trophy];
 
 interface Props {
   property: PropertyDetailData;
@@ -38,22 +31,19 @@ const PropertyFeatures = ({ property }: Props) => {
               Interno
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {property.internalFeatures.map((feat, i) => {
-                const Icon = internalIcons[i % internalIcons.length];
-                return (
-                  <motion.div
-                    key={feat}
-                    className="flex items-center gap-3 py-3 border-b border-border"
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-40px" }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                  >
-                    <Icon className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="font-sans text-sm text-foreground">{feat}</span>
-                  </motion.div>
-                );
-              })}
+              {property.internalFeatures.map((feat, i) => (
+                <motion.div
+                  key={feat}
+                  className="flex items-center gap-3 py-3 border-b border-border"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                  <span className="font-sans text-sm text-foreground">{feat}</span>
+                </motion.div>
+              ))}
             </div>
           </div>
 
@@ -63,22 +53,19 @@ const PropertyFeatures = ({ property }: Props) => {
               Condomínio
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {property.condoFeatures.map((feat, i) => {
-                const Icon = condoIcons[i % condoIcons.length];
-                return (
-                  <motion.div
-                    key={feat}
-                    className="flex items-center gap-3 py-3 border-b border-border"
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-40px" }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                  >
-                    <Icon className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="font-sans text-sm text-foreground">{feat}</span>
-                  </motion.div>
-                );
-              })}
+              {property.condoFeatures.map((feat, i) => (
+                <motion.div
+                  key={feat}
+                  className="flex items-center gap-3 py-3 border-b border-border"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                  <span className="font-sans text-sm text-foreground">{feat}</span>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
