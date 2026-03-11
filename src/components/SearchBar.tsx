@@ -53,7 +53,10 @@ const SearchBar = ({ count, location, type, viewMode, onToggleView, onOpenFilter
               <ArrowUpDown className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{t("search.sort")}</span>
             </button>
-            <button className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 rounded-[4px] text-[9px] sm:text-[10px] font-sans font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+            <button
+              onClick={onOpenFilters}
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 rounded-[4px] text-[9px] sm:text-[10px] font-sans font-medium tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+            >
               <SlidersHorizontal className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{t("search.filter")}</span>
             </button>
