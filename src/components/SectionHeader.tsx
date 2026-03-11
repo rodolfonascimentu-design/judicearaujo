@@ -9,7 +9,7 @@ interface SectionHeaderProps {
 
 const SectionHeader = ({ title, subtitle, light, compact }: SectionHeaderProps) => (
   <motion.div
-    className={`text-center ${compact ? 'mb-10 lg:mb-12' : 'mb-20'}`}
+    className={`text-center ${compact ? 'mb-6 md:mb-10 lg:mb-12' : 'mb-10 md:mb-20'}`}
     initial={{ opacity: 0, y: 24 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: false, margin: "-80px" }}
