@@ -89,6 +89,11 @@ export interface PropertyDetailData {
   suites: number;
   bathrooms: number;
   parking: number;
+  // Range strings for launches (e.g. "1 a 2")
+  bedroomsRange?: string;
+  bathroomsRange?: string;
+  areaRange?: string;
+  parkingRange?: string;
   images: string[];
   description: string[];
   internalFeatures: string[];
