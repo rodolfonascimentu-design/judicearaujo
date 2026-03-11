@@ -175,30 +175,27 @@ const HeroOverlayContent = () => {
         </div>
       </motion.div>
 
-      {/* Scroll down indicator */}
+      {/* Scroll down indicator - positioned near bottom fold */}
       <motion.div
-        className="mt-8 md:mt-10"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.0, duration: 0.6 }}
+        className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-30"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
       >
         <motion.div
-          className="flex flex-col items-center gap-2 cursor-pointer"
-          onClick={() => window.scrollTo({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
-          animate={{ y: [0, 8, 0] }}
+          className="flex flex-col items-center gap-2 cursor-pointer group"
+          onClick={() => window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'smooth' })}
+          animate={{ y: [0, 10, 0] }}
           transition={{
             y: {
-              duration: 2,
+              duration: 2.5,
               repeat: Infinity,
               ease: "easeInOut"
             }
           }}
         >
-          <span className="text-[10px] font-sans font-medium tracking-[0.2em] uppercase text-white/70">
-            Scroll
-          </span>
-          <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors">
-            <ChevronDown className="w-5 h-5 text-white" />
+          <div className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center bg-charcoal/20 backdrop-blur-sm group-hover:bg-charcoal/30 transition-all">
+            <ChevronsDown className="w-6 h-6 text-white" />
           </div>
         </motion.div>
       </motion.div>
