@@ -36,15 +36,17 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <ExclusiveGallery />
-        <InstitutionalCTA />
-        <FeaturedCarousel />
-        <ForbesPartnership />
-        <Testimonials />
-        <HighEndCarousel />
-        <PropertyManagement />
-        <BlogPreview />
-        <Newsletter />
+        <div className="bg-background relative z-10">
+          <ExclusiveGallery />
+          <InstitutionalCTA />
+          <FeaturedCarousel />
+          <ForbesPartnership />
+          <Testimonials />
+          <HighEndCarousel />
+          <PropertyManagement />
+          <BlogPreview />
+          <Newsletter />
+        </div>
       </main>
       <Footer />
     </div>
