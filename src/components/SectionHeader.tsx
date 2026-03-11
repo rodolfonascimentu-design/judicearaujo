@@ -22,7 +22,7 @@ const SectionHeader = ({ title, subtitle, light, compact }: SectionHeaderProps) 
     >
       {title}
     </h2>
-    <div className="w-10 h-px bg-primary mx-auto mt-7 mb-5" />
+    <div className="w-10 h-px bg-primary mx-auto mt-4 mb-3 md:mt-7 md:mb-5" />
     {subtitle && (
       <p
         className={`font-sans text-sm md:text-base max-w-xl mx-auto font-light tracking-wide ${
