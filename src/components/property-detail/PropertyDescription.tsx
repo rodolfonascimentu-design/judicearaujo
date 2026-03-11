@@ -21,9 +21,16 @@ const PropertyDescription = ({ property }: Props) => {
             {property.status === "launch" ? "Sobre o Lançamento" : "Sobre o Imóvel"}
           </p>
           <h2 className="font-display text-2xl md:text-4xl text-foreground mb-8 leading-[1.2]">
-            {property.status === "launch"
-              ? `Conheça o ${property.name}`
-              : "Uma residência que redefine o conceito de exclusividade."}
+            {property.status === "launch" ? (
+              <>
+                Soho<br />
+                <span className="text-muted-foreground text-lg md:text-2xl font-sans font-light">
+                  Gávea, Rio de Janeiro/RJ
+                </span>
+              </>
+            ) : (
+              "Uma residência que redefine o conceito de exclusividade."
+            )}
           </h2>
           <div className="space-y-6">
             {property.description.map((p, i) => (
