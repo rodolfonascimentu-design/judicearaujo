@@ -29,7 +29,7 @@ const Navbar = () => {
   ];
 
   const mobileNavLinks = [
-    { label: t("nav.launches"), href: "#lancamentos" },
+    { label: t("nav.launches"), href: "/lancamentos" },
     { label: t("nav.evaluate"), href: "#avaliar" },
     { label: t("nav.blog"), href: "#administracao" },
     { label: t("nav.blogPost"), href: "#blog" },
