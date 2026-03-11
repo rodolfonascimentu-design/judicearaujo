@@ -3,14 +3,17 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import logoJaBlack from "@/assets/logo-ja-black.png";
 import logoForbesBlack from "@/assets/forbes-global-black.png";
 
-const neighborhoods = ["Leblon", "Ipanema", "Lagoa", "Gávea", "Jardim Botânico", "São Conrado"];
-
 const Footer = () => {
   const { t } = useLanguage();
 
-  const footerLinks = [
-    t("footer.properties"), t("footer.buy"), t("footer.rent"),
-    t("footer.about"), t("footer.blog"), t("footer.contactLink"),
+  const navigationLinks = [
+    "Avaliar Imóvel",
+    "Blog",
+    "Quem Somos",
+    "Financiamento",
+    "Trabalhe Conosco",
+    "Contato",
+    "Mapa do Site",
   ];
 
   return (
@@ -23,31 +26,27 @@ const Footer = () => {
             <div className="w-px h-10 bg-foreground/20" />
             <img src={logoForbesBlack} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
             <div>
               <h4 className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-foreground/40 mb-8">{t("footer.navigation")}</h4>
               <ul className="space-y-3.5">
-                {footerLinks.map((link) => (
+                {navigationLinks.map((link) => (
                   <li key={link}><a href="#" className="group font-sans text-xs text-foreground/60 hover:text-primary transition-all duration-300 font-light tracking-wide inline-flex items-center gap-1"><span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">{link}</span></a></li>
                 ))}
               </ul>
             </div>
             <div>
-              <h4 className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-foreground/40 mb-8">{t("footer.neighborhoods")}</h4>
-              <ul className="space-y-3.5">
-                {neighborhoods.map((n) => (
-                  <li key={n}><a href="#" className="group font-sans text-xs text-foreground/60 hover:text-primary transition-all duration-300 font-light tracking-wide inline-flex items-center gap-1"><span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">{n}</span></a></li>
-                ))}
-              </ul>
-            </div>
-            <div>
               <h4 className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-foreground/40 mb-8">{t("footer.contact")}</h4>
-              <div className="space-y-3.5 font-sans text-xs text-foreground/60 font-light tracking-wide">
-                <p className="hover:text-primary transition-colors duration-300 cursor-default">Rua Dias Ferreira, 417</p>
-                <p className="hover:text-primary transition-colors duration-300 cursor-default">Leblon, Rio de Janeiro</p>
-                <p className="hover:text-primary transition-colors duration-300 cursor-default">CEP 22431-050</p>
-                <a href="tel:+552125129900" className="block pt-2 hover:text-primary transition-colors duration-300">(21) 2512-9900</a>
-                <a href="mailto:contato@judicearaujo.com.br" className="block hover:text-primary transition-colors duration-300">contato@judicearaujo.com.br</a>
+              <div className="space-y-4 font-sans text-xs text-foreground/60 font-light tracking-wide">
+                <div>
+                  <p className="font-medium text-foreground/70 mb-1">Imóveis prontos (ou avulsos)</p>
+                  <p className="hover:text-primary transition-colors duration-300 cursor-default">Zona Sul, Itaipava e Barra</p>
+                  <a href="tel:+5521995020861" className="block hover:text-primary transition-colors duration-300">(21) 99502.0861</a>
+                </div>
+                <div className="pt-2">
+                  <p className="font-medium text-foreground/70 mb-1">Imóveis Lançamentos</p>
+                  <a href="tel:+5521995113331" className="block hover:text-primary transition-colors duration-300">(21) 99511.3331</a>
+                </div>
               </div>
             </div>
             <div>
