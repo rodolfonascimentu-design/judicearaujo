@@ -113,10 +113,10 @@ export interface PropertyDetailData {
 
 export const mockProperty: PropertyDetailData = {
   id: "mar-azul-ii",
-  type: "Casa",
+  type: "Apartamento",
   status: "launch",
-  name: "Condomínio Mar Azul II",
-  neighborhood: "Joá",
+  name: "Soho",
+  neighborhood: "Gávea",
   city: "Rio de Janeiro",
   address: "Estrada do Joá, 3.200 – Joá, Rio de Janeiro – RJ",
   price: "R$ 4.200.000",
