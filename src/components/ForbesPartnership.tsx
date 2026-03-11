@@ -23,7 +23,7 @@ const ForbesPartnership = () => {
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal text-primary-foreground leading-[1.2] tracking-[-0.02em] mb-8 whitespace-pre-line">{t("pm.subtitle")}</h2>
             <p className="font-sans text-sm md:text-base text-primary-foreground/60 max-w-md font-light leading-[1.8] tracking-wide mb-6">{t("pm.intro")}</p>
             <div className="space-y-3">
-              {[t("pm.narrative1"), t("pm.narrative2"), t("pm.narrative3")].map((text, i) => (
+              {[t("pm.narrative1"), t("pm.narrative2")].map((text, i) => (
                 <motion.p key={i} className="font-sans text-[14px] text-primary-foreground/50 font-light leading-[1.85] tracking-wide" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, margin: "-60px" }} transition={{ duration: 0.5, delay: 0.3 + i * 0.08 }}>
                   {text}
                 </motion.p>
