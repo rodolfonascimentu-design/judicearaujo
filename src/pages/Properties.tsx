@@ -214,6 +214,61 @@ const Properties = () => {
                 </p>
               </motion.div>
             )}
+
+            {/* Sold properties section */}
+            {items.length >= allProperties.length && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="border-t border-border pt-14 mt-4">
+                  <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-6">
+                    Imóveis vendidos
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
+                    {/* Sold card 1 */}
+                    <SoldPropertyCard
+                      image={images[2]}
+                      type="Apartamento"
+                      title="Rua Rainha Guilhermina"
+                      neighborhood="Leblon"
+                      bedrooms={3}
+                      area={183}
+                      parking={2}
+                      hasVideo
+                    />
+                    {/* Sold card 2 */}
+                    <SoldPropertyCard
+                      image={images[4]}
+                      type="Apartamento"
+                      title="Avenida Visconde De Albuquerque"
+                      neighborhood="Leblon"
+                      bedrooms={2}
+                      area={111}
+                      parking={1}
+                      hasVideo={false}
+                    />
+                    {/* CTA card */}
+                    <motion.div
+                      className="flex flex-col items-center justify-center rounded-[4px] border border-dashed border-border p-8 min-h-[340px] cursor-pointer group hover:border-primary/40 transition-colors"
+                      whileHover={{ y: -4 }}
+                      onClick={() => navigate("/imoveis?status=vendidos")}
+                    >
+                      <img
+                        src={soldIllustration}
+                        alt="Ver mais imóveis vendidos"
+                        className="w-36 h-36 object-contain mb-6 opacity-80 group-hover:opacity-100 transition-opacity"
+                      />
+                      <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-sans text-sm font-medium tracking-wide shadow-lg group-hover:bg-primary/90 transition-colors">
+                        Ver mais imóveis vendidos
+                      </span>
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </>
         )}
       </main>
@@ -222,5 +277,60 @@ const Properties = () => {
     </div>
   );
 };
+
+/* Sold property card (simplified, no interaction) */
+const SoldPropertyCard = ({
+  image,
+  type,
+  title,
+  neighborhood,
+  bedrooms,
+  area,
+  parking,
+  hasVideo,
+}: {
+  image: string;
+  type: string;
+  title: string;
+  neighborhood: string;
+  bedrooms: number;
+  area: number;
+  parking: number;
+  hasVideo: boolean;
+}) => (
+  <div className="group">
+    <div className="relative overflow-hidden rounded-[4px] aspect-[4/3] mb-5">
+      <img
+        src={image}
+        alt={title}
+        loading="lazy"
+        className="w-full h-full object-cover grayscale opacity-70"
+      />
+      {hasVideo && (
+        <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-charcoal/30 backdrop-blur-md flex items-center justify-center">
+          <Video className="w-3.5 h-3.5 text-cream" />
+        </div>
+      )}
+    </div>
+    <p className="font-sans text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-1">{type}</p>
+    <h3 className="font-display text-base font-medium text-foreground mb-1 tracking-[-0.01em]">{title}</h3>
+    <p className="font-sans text-xs text-muted-foreground mb-3">{neighborhood}</p>
+    <div className="flex items-center gap-5 text-muted-foreground text-xs font-sans tracking-wide font-light mb-3">
+      <span className="flex items-center gap-1.5">
+        <Bed className="w-3.5 h-3.5" />
+        {bedrooms} quartos
+      </span>
+      <span className="flex items-center gap-1.5">
+        <Maximize className="w-3.5 h-3.5" />
+        {area}m²
+      </span>
+      <span className="flex items-center gap-1.5">
+        <Car className="w-3.5 h-3.5" />
+        {parking} {parking === 1 ? "vaga" : "vagas"}
+      </span>
+    </div>
+    <p className="font-sans text-sm font-semibold text-foreground">Imóvel vendido</p>
+  </div>
+);
 
 export default Properties;
