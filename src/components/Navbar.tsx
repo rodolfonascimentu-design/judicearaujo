@@ -143,7 +143,7 @@ const Navbar = () => {
                       {langOpen && (
                         <motion.div
                           className={`absolute top-full mt-2 right-0 backdrop-blur-md rounded-[4px] overflow-hidden ${
-                            showGreen ? "bg-white/95 border border-foreground/10" : "bg-white/10 border border-cream/20"
+                          showGreen ? "bg-white/95 border border-foreground/10" : "bg-white/10 border border-white/20"
                           }`}
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
