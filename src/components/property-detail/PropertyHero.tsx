@@ -79,20 +79,20 @@ const PropertyHero = ({ property }: Props) => {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
 
-      {/* Navigation arrows - desktop */}
+      {/* Navigation arrows - all devices */}
       <button
         onClick={() => emblaApi?.scrollPrev()}
-        className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white/20 transition-colors"
+        className="flex absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white/20 transition-colors"
         aria-label="Previous"
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
       </button>
       <button
         onClick={() => emblaApi?.scrollNext()}
-        className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white/20 transition-colors"
+        className="flex absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white/20 transition-colors"
         aria-label="Next"
       >
-        <ChevronRight className="w-5 h-5" />
+        <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
       </button>
 
       {/* Content overlay */}
