@@ -93,6 +93,7 @@ const Properties = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [viewMode, setViewMode] = useState<"list" | "map">("list");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
