@@ -11,6 +11,7 @@ import PropertyCardSkeleton from "@/components/PropertyCardSkeleton";
 import MapView, { neighborhoodCoords } from "@/components/MapView";
 import type { MapProperty } from "@/components/MapView";
 import { useLanguage } from "@/i18n/LanguageContext";
+import PropertyFilters from "@/components/PropertyFilters";
 
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
@@ -92,6 +93,7 @@ const Properties = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [viewMode, setViewMode] = useState<"list" | "map">("list");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -157,7 +159,10 @@ const Properties = () => {
         type={type}
         viewMode={viewMode}
         onToggleView={toggleView}
+        onOpenFilters={() => setFiltersOpen(true)}
       />
+
+      <PropertyFilters open={filtersOpen} onOpenChange={setFiltersOpen} />
 
       <main className="max-w-7xl mx-auto px-6 lg:px-12 pt-6 pb-12 bg-white">
         {loading ? (
