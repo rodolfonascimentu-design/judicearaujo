@@ -16,6 +16,10 @@ import test3 from "@/assets/test-3.jpg";
 import test4 from "@/assets/test-4.jpg";
 import test5 from "@/assets/test-5.jpg";
 import test6 from "@/assets/test-6.jpg";
+import tipologia1 from "@/assets/tipologia-1.jpg";
+import tipologia2 from "@/assets/tipologia-2.jpg";
+import tipologia3 from "@/assets/tipologia-3.jpg";
+import tipologia4 from "@/assets/tipologia-4.jpg";
 
 export interface PropertyUnit {
   type: string;
