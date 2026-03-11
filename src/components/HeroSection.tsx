@@ -1,4 +1,4 @@
-import { Search, ChevronDown } from "lucide-react";
+import { Search, ChevronsDown } from "lucide-react";
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
