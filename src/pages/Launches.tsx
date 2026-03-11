@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import LaunchSearchBar from "@/components/LaunchSearchBar";
 import LaunchPropertyCard from "@/components/LaunchPropertyCard";
 import PropertyCardSkeleton from "@/components/PropertyCardSkeleton";
+import LaunchFilters from "@/components/LaunchFilters";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 
