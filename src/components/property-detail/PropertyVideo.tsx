@@ -9,9 +9,9 @@ interface Props {
 
 const PropertyVideo = ({ property }: Props) => {
   const video = property.video;
-  if (!video) return null;
-
   const [playing, setPlaying] = useState(false);
+
+  if (!video) return null;
 
   const getEmbedUrl = (url: string) => {
     // YouTube
