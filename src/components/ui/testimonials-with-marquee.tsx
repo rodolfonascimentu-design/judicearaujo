@@ -17,14 +17,18 @@ export function TestimonialsSection({
   title,
   description,
   testimonials,
-  className 
+  className,
+  compact
 }: TestimonialsSectionProps) {
   const isDark = className?.includes('bg-primary')
 
   return (
     <section className={cn("py-32 lg:py-44 overflow-hidden", className)}>
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="flex flex-col items-center gap-4 text-center mb-16 lg:mb-24">
+        <div className={cn(
+          "flex flex-col items-center gap-4 text-center",
+          compact ? "mb-10 lg:mb-12" : "mb-16 lg:mb-24"
+        )}>
           <p className={cn(
             "font-sans text-[10px] tracking-[0.35em] uppercase font-medium mb-2",
             isDark ? "text-primary-foreground/50" : "text-muted-foreground"

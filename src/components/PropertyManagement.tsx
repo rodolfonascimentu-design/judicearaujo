@@ -80,7 +80,7 @@ const PropertyManagement = () => {
       </motion.div>
 
       {/* Gallery — scroll-driven horizontal drift + staggered entry */}
-      <motion.div className="pb-20 md:pb-28 overflow-hidden relative z-10" style={{ x: galleryX }}>
+      <motion.div className="pb-10 md:pb-14 overflow-hidden relative z-10" style={{ x: galleryX }}>
         <div className="flex gap-4 overflow-x-auto scrollbar-thin px-6 md:px-16 pb-4">
           {galleryImages.map((img, i) => (
             <motion.div
