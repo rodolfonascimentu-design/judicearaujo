@@ -20,6 +20,13 @@ import tipologia1 from "@/assets/tipologia-1.jpg";
 import tipologia2 from "@/assets/tipologia-2.jpg";
 import tipologia3 from "@/assets/tipologia-3.jpg";
 import tipologia4 from "@/assets/tipologia-4.jpg";
+import soho1 from "@/assets/soho-1.jpg";
+import soho2 from "@/assets/soho-2.jpg";
+import soho3 from "@/assets/soho-3.jpg";
+import soho4 from "@/assets/soho-4.jpg";
+import soho5 from "@/assets/soho-5.jpg";
+import soho6 from "@/assets/soho-6.jpg";
+import soho7 from "@/assets/soho-7.jpg";
 
 export interface PropertyUnit {
   type: string;
@@ -114,12 +121,13 @@ export const mockProperty: PropertyDetailData = {
   bathrooms: 5,
   parking: 6,
   images: [
-    test1,
-    test2,
-    test3,
-    test4,
-    test5,
-    test6,
+    soho1,
+    soho2,
+    soho3,
+    soho4,
+    soho5,
+    soho6,
+    soho7,
   ],
   description: [
     "Situada em uma das localizações mais privilegiadas do Rio de Janeiro, esta residência é um verdadeiro refúgio de sofisticação e exclusividade. Com 520m² de área construída e um terreno generoso que se abre para uma vista panorâmica da Praia do Joá e da Pedra da Gávea, a propriedade oferece uma experiência de moradia incomparável.",
