@@ -136,6 +136,12 @@ const Navbar = () => {
                     <a
                       key={link.href}
                       href={link.href}
+                      onClick={(e) => {
+                        if (link.href.startsWith("/")) {
+                          e.preventDefault();
+                          navigate(link.href);
+                        }
+                      }}
                       className={`text-[11px] font-sans font-medium tracking-[0.2em] uppercase transition-colors duration-500 ease-in-out ${
                         showGreen
                           ? "text-foreground/70 hover:text-foreground"
