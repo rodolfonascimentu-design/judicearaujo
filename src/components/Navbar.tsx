@@ -276,7 +276,7 @@ const Navbar = () => {
 
             {/* Bottom controls */}
             <motion.div
-              className="pb-10 px-8 flex flex-col items-center gap-6"
+              className="pb-10 px-10 flex flex-col items-start gap-6"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
