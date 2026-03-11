@@ -23,7 +23,7 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
 
   const navLinks = [
-    { label: t("nav.launches"), href: "#lancamentos" },
+    { label: t("nav.launches"), href: "/lancamentos" },
     { label: t("nav.evaluate"), href: "#avaliar" },
     { label: t("nav.blog"), href: "#blog" },
   ];
