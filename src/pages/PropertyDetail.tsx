@@ -50,7 +50,7 @@ const PropertyDetail = () => {
         <PropertyDescription property={property} />
         <PropertyGallery property={property} />
         <PropertyFeatures property={property} />
-        {property.status === "launch" && (
+        {isFromLaunches && property.status === "launch" && (
           <>
             <PropertyConstructionStatus property={property} />
             <PropertyTypologies property={property} />
