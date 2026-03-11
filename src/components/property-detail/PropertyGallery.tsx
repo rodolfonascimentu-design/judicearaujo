@@ -5,9 +5,10 @@ import { PropertyDetailData } from "@/data/propertyDetail";
 
 interface Props {
   property: PropertyDetailData;
+  isFromLaunches?: boolean;
 }
 
-const PropertyGallery = ({ property }: Props) => {
+const PropertyGallery = ({ property, isFromLaunches = false }: Props) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
