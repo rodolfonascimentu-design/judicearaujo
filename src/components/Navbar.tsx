@@ -121,7 +121,7 @@ const Navbar = () => {
                       className={`text-[11px] font-sans font-medium tracking-[0.2em] uppercase transition-colors duration-500 ease-in-out ${
                         showGreen
                           ? "text-foreground/70 hover:text-foreground"
-                          : "text-cream/70 hover:text-cream"
+                          : "text-white/80 hover:text-white"
                       }`}
                     >
                       {link.label}
@@ -133,7 +133,7 @@ const Navbar = () => {
                     <button
                       onClick={() => setLangOpen(!langOpen)}
                       className={`flex items-center gap-1 text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-colors ${
-                        showGreen ? "text-foreground/70 hover:text-foreground" : "text-cream/70 hover:text-cream"
+                        showGreen ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"
                       }`}
                     >
                       {lang}
@@ -143,7 +143,7 @@ const Navbar = () => {
                       {langOpen && (
                         <motion.div
                           className={`absolute top-full mt-2 right-0 backdrop-blur-md rounded-[4px] overflow-hidden ${
-                            showGreen ? "bg-white/95 border border-foreground/10" : "bg-white/10 border border-cream/20"
+                          showGreen ? "bg-white/95 border border-foreground/10" : "bg-white/10 border border-white/20"
                           }`}
                           initial={{ opacity: 0, y: -4 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -156,7 +156,7 @@ const Navbar = () => {
                               className={`block w-full px-5 py-2 text-[11px] font-sans tracking-[0.15em] uppercase text-left transition-colors ${
                                 showGreen
                                   ? (l === lang ? "text-foreground bg-foreground/5" : "text-foreground/50 hover:text-foreground hover:bg-foreground/5")
-                                  : (l === lang ? "text-cream bg-cream/10" : "text-cream/50 hover:text-cream hover:bg-cream/10")
+                                  : (l === lang ? "text-white bg-white/10" : "text-white/50 hover:text-white hover:bg-white/10")
                               }`}
                             >
                               {l}
@@ -169,19 +169,19 @@ const Navbar = () => {
 
                   {/* Font size controls */}
                   <div className={`flex items-center gap-1 rounded-[4px] px-1 border ${
-                    showGreen ? "border-foreground/10" : "border-cream/20"
+                    showGreen ? "border-foreground/10" : "border-white/30"
                   }`}>
                     <button
                       onClick={() => adjustFont(-5)}
-                      className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-cream/50 hover:text-cream"}`}
+                      className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-white/60 hover:text-white"}`}
                       aria-label="Diminuir fonte"
                     >
                       <Minus className="w-3 h-3" />
                     </button>
-                    <span className={`text-[9px] font-sans tracking-wider uppercase w-5 text-center ${showGreen ? "text-foreground/40" : "text-cream/40"}`}>A</span>
+                    <span className={`text-[9px] font-sans tracking-wider uppercase w-5 text-center ${showGreen ? "text-foreground/40" : "text-white/50"}`}>A</span>
                     <button
                       onClick={() => adjustFont(5)}
-                      className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-cream/50 hover:text-cream"}`}
+                      className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-white/60 hover:text-white"}`}
                       aria-label="Aumentar fonte"
                     >
                       <Plus className="w-3 h-3" />
