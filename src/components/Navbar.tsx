@@ -156,7 +156,7 @@ const Navbar = () => {
                               className={`block w-full px-5 py-2 text-[11px] font-sans tracking-[0.15em] uppercase text-left transition-colors ${
                                 showGreen
                                   ? (l === lang ? "text-foreground bg-foreground/5" : "text-foreground/50 hover:text-foreground hover:bg-foreground/5")
-                                  : (l === lang ? "text-cream bg-cream/10" : "text-cream/50 hover:text-cream hover:bg-cream/10")
+                                  : (l === lang ? "text-white bg-white/10" : "text-white/50 hover:text-white hover:bg-white/10")
                               }`}
                             >
                               {l}
