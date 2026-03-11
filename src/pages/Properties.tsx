@@ -258,16 +258,16 @@ const Properties = () => {
                       onClick={() => navigate("/imoveis?status=vendidos")}
                     >
                       <img
-                        src={images[1]}
+                        src={soldCtaBg}
                         alt="Ver mais imóveis vendidos"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/30 to-foreground/10 group-hover:from-foreground/80 group-hover:via-foreground/40 transition-all duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/50 to-foreground/20 group-hover:from-foreground/85 group-hover:via-foreground/55 transition-all duration-500" />
                       <div className="relative z-10 flex flex-col items-center justify-center h-full min-h-[340px] px-8 text-center">
-                        <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-background/70 mb-2">
+                        <p className="font-sans text-[11px] font-semibold tracking-[0.25em] uppercase text-background/90 mb-2">
                           Imóveis Vendidos
                         </p>
-                        <p className="font-sans text-xs text-background/50 max-w-[220px] mb-6 leading-relaxed">
+                        <p className="font-sans text-xs font-medium text-background/70 max-w-[220px] mb-6 leading-relaxed">
                           Conheça alguns imóveis já negociados pela Judice & Araujo
                         </p>
                         <span className="inline-flex items-center gap-2 px-6 py-3 rounded-[4px] bg-background/95 text-foreground font-sans text-xs font-medium tracking-[0.12em] uppercase backdrop-blur-sm group-hover:bg-background transition-colors">
