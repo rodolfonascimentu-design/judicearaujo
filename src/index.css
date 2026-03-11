@@ -156,9 +156,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Force white background on system UI areas */
-html, body {
-  background-color: #ffffff !important;
+/* System bar color handled by meta theme-color in index.html */
+html {
+  background-color: #ffffff;
 }
 
 /* Custom scrollbar */
