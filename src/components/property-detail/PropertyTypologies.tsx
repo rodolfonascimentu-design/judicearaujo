@@ -24,12 +24,12 @@ const PropertyTypologies = ({ property }: Props) => {
   }, []);
 
   const goNext = useCallback(() => {
-    setLightboxIndex((i) => (i + 1) % typologies.length);
-  }, [typologies.length]);
+    setLightboxIndex((i) => (i + 1) % (typologies?.length || 1));
+  }, [typologies?.length]);
 
   const goPrev = useCallback(() => {
-    setLightboxIndex((i) => (i - 1 + typologies.length) % typologies.length);
-  }, [typologies.length]);
+    setLightboxIndex((i) => (i - 1 + (typologies?.length || 1)) % (typologies?.length || 1));
+  }, [typologies?.length]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
