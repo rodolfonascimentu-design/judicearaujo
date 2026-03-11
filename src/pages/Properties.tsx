@@ -81,6 +81,7 @@ const INITIAL_COUNT = 9;
 const LOAD_MORE = 6;
 
 const Properties = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "Barra da Tijuca";
   const type = searchParams.get("type") || "venda";
