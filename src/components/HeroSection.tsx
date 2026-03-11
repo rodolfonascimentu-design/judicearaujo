@@ -175,29 +175,28 @@ const HeroOverlayContent = () => {
         </div>
       </motion.div>
 
-      {/* Scroll down indicator - positioned near bottom fold */}
+      {/* Scroll down indicator - minimal mouse icon with animated scroll wheel */}
       <motion.div
-        className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-30"
+        className="absolute bottom-10 md:bottom-14 left-1/2 -translate-x-1/2 z-30 cursor-pointer"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: 0.6 }}
+        whileHover={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
+        onClick={() => window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'smooth' })}
       >
-        <motion.div
-          className="flex flex-col items-center gap-2 cursor-pointer group"
-          onClick={() => window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'smooth' })}
-          animate={{ y: [0, 10, 0] }}
-          transition={{
-            y: {
-              duration: 2.5,
+        {/* Mouse outline */}
+        <div className="relative w-[26px] h-[42px] rounded-full border-2 border-white/60">
+          {/* Animated scroll wheel */}
+          <motion.div
+            className="absolute left-1/2 -translate-x-1/2 top-[8px] w-[3px] h-[8px] rounded-full bg-white/80"
+            animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
+            transition={{
+              duration: 2,
               repeat: Infinity,
               ease: "easeInOut"
-            }
-          }}
-        >
-          <div className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center bg-charcoal/20 backdrop-blur-sm group-hover:bg-charcoal/30 transition-all">
-            <Mouse className="w-5 h-5 text-white" />
-          </div>
-        </motion.div>
+            }}
+          />
+        </div>
       </motion.div>
     </div>
   );
