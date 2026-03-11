@@ -69,16 +69,14 @@ const HeroOverlayContent = () => {
             <motion.button
               key={type.key}
               onClick={() => setActiveType(type.key)}
-              className="relative px-5 py-2 rounded-lg text-[11px] font-sans font-semibold tracking-[0.15em] uppercase transition-all duration-200"
-              style={{
-                color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
-                background: isActive ? "hsl(var(--primary))" : "transparent",
-                boxShadow: isActive ? "0 2px 10px -2px hsl(var(--primary) / 0.5)" : "none",
+              className="relative px-5 py-2 rounded-lg text-[11px] font-sans font-semibold tracking-[0.15em] uppercase"
+              animate={{
+                color: isActive ? "#ffffff" : "rgba(255,255,255,0.6)",
+                backgroundColor: isActive ? "hsl(var(--primary))" : "rgba(255,255,255,0)",
+                boxShadow: isActive ? "0 2px 10px -2px hsl(var(--primary) / 0.5)" : "0 0 0 0 transparent",
               }}
               whileHover={!isActive ? { backgroundColor: "rgba(255,255,255,0.12)" } : {}}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + i * 0.05, duration: 0.4 }}
+              transition={{ duration: 0.2 }}
             >
               <span className="relative z-10">{type.label}</span>
             </motion.button>
