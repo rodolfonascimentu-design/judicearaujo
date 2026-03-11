@@ -42,8 +42,8 @@ export function TestimonialsSection({
             {title}
           </h2>
           <p className={cn(
-            "font-sans text-sm max-w-lg font-light tracking-wide",
-            compact && "lg:whitespace-nowrap",
+            "font-sans text-sm font-light tracking-wide",
+            compact ? "max-w-none lg:whitespace-nowrap" : "max-w-lg",
             isDark ? "text-primary-foreground/60" : "text-muted-foreground"
           )}>
             {description}
