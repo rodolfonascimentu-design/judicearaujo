@@ -57,6 +57,7 @@ const HighEndCarousel = () => {
         <SectionHeader
           title={t("highend.title")}
           subtitle={t("highend.subtitle")}
+          compact
         />
       </div>
 
