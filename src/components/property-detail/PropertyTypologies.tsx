@@ -76,7 +76,7 @@ const PropertyTypologies = ({ property }: Props) => {
               viewport={{ once: false, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[4px]">
                 <img
                   src={typo.image}
                   alt={typo.title}
@@ -85,25 +85,6 @@ const PropertyTypologies = ({ property }: Props) => {
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
                   <Maximize className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              </div>
-              <div className="p-4">
-                <h3 className="font-display text-sm md:text-base text-foreground mb-1">
-                  {typo.title}
-                </h3>
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  {typo.area && (
-                    <span className="flex items-center gap-1 text-xs font-sans">
-                      <Maximize className="w-3 h-3" />
-                      {typo.area} m²
-                    </span>
-                  )}
-                  {typo.bedrooms && (
-                    <span className="flex items-center gap-1 text-xs font-sans">
-                      <BedDouble className="w-3 h-3" />
-                      {typo.bedrooms} quartos
-                    </span>
-                  )}
                 </div>
               </div>
             </motion.button>
