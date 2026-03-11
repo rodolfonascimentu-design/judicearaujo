@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Minus, Plus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJaBlack from "@/assets/logo-ja-black.png";
@@ -13,6 +13,7 @@ const languages: Lang[] = ["PT", "EN", "ES"];
 
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -23,13 +24,13 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
 
   const navLinks = [
-    { label: t("nav.launches"), href: "#lancamentos" },
+    { label: t("nav.launches"), href: "/lancamentos" },
     { label: t("nav.evaluate"), href: "#avaliar" },
     { label: t("nav.blog"), href: "#blog" },
   ];
 
   const mobileNavLinks = [
-    { label: t("nav.launches"), href: "#lancamentos" },
+    { label: t("nav.launches"), href: "/lancamentos" },
     { label: t("nav.evaluate"), href: "#avaliar" },
     { label: t("nav.blog"), href: "#administracao" },
     { label: t("nav.blogPost"), href: "#blog" },
@@ -135,6 +136,12 @@ const Navbar = () => {
                     <a
                       key={link.href}
                       href={link.href}
+                      onClick={(e) => {
+                        if (link.href.startsWith("/")) {
+                          e.preventDefault();
+                          navigate(link.href);
+                        }
+                      }}
                       className={`text-[11px] font-sans font-medium tracking-[0.2em] uppercase transition-colors duration-500 ease-in-out ${
                         showGreen
                           ? "text-foreground/70 hover:text-foreground"
@@ -262,7 +269,13 @@ const Navbar = () => {
                   <motion.a
                     key={link.href + link.label}
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => {
+                      if (link.href.startsWith("/")) {
+                        e.preventDefault();
+                        navigate(link.href);
+                      }
+                      setMobileOpen(false);
+                    }}
                     className="font-display text-[18px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase whitespace-nowrap"
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}

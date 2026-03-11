@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
+import Launches from "./pages/Launches";
 import PropertyDetail from "./pages/PropertyDetail";
 import NotFound from "./pages/NotFound";
 
@@ -21,6 +22,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/imoveis" element={<Properties />} />
+            <Route path="/lancamentos" element={<Launches />} />
             <Route path="/imovel/:id" element={<PropertyDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
