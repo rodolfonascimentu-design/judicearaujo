@@ -42,6 +42,8 @@ const PropertyTypologies = ({ property }: Props) => {
     return () => window.removeEventListener("keydown", handleKey);
   }, [lightboxOpen, closeLightbox, goNext, goPrev]);
 
+  if (!typologies || typologies.length === 0) return null;
+
   return (
     <section className="py-20 md:py-28 bg-background overflow-hidden">
       <div className="px-6 md:px-16 mb-12">
