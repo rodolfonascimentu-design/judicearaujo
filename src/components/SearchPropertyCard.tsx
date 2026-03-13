@@ -12,6 +12,8 @@ interface SearchPropertyCardProps {
   neighborhood: string;
   street?: string;
   price: string;
+  totalPrice?: string;
+  transactionType?: string;
   bedrooms: number;
   area: number;
   parking: number;
