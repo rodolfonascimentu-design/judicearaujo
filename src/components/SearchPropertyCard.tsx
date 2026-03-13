@@ -157,7 +157,14 @@ const SearchPropertyCard = ({
         {type} | {neighborhood}
       </h3>
       <p className="font-sans text-xs text-muted-foreground mb-1.5">{street || title}</p>
-      <p className="font-sans text-sm font-medium text-primary mb-3">{price}</p>
+      {transactionType === "locacao" && totalPrice ? (
+        <div className="mb-3">
+          <p className="font-sans text-sm font-medium text-primary">Aluguel {price}</p>
+          <p className="font-sans text-[11px] text-muted-foreground">Total {totalPrice}</p>
+        </div>
+      ) : (
+        <p className="font-sans text-sm font-medium text-primary mb-3">{price}</p>
+      )}
       <div className="flex items-center gap-5 text-muted-foreground text-xs font-sans tracking-wide font-light">
         <span className="flex items-center gap-1.5">
           <Bed className="w-3.5 h-3.5" />

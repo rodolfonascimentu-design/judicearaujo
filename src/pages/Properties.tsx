@@ -149,6 +149,8 @@ const Properties = () => {
     image: p.image,
     title: p.title,
     neighborhood: p.neighborhood,
+    street: p.street,
+    type: p.type,
     price: p.price,
     bedrooms: p.bedrooms,
     area: p.area,
