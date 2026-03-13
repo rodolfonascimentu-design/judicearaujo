@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Info, Share2, Calculator, ArrowRight, TrendingUp } from "lucide-react";
+import { MessageCircle, Share2, Calculator, ArrowRight, TrendingUp } from "lucide-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Props {
   property: PropertyDetailData;
