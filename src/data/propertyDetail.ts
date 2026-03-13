@@ -77,29 +77,34 @@ export interface PropertyVideoData {
 
 export interface PropertyDetailData {
   id: string;
+  code: string;
   type: string;
   status: "launch" | "ready" | "construction";
+  transaction: "Venda" | "Locação";
   name: string;
   neighborhood: string;
   city: string;
+  state: string;
   address: string;
   price: string;
   priceLabel: string;
+  condoFee?: string;
+  iptu?: string;
   area: number;
   suites: number;
   bathrooms: number;
   parking: number;
-  // Range strings for launches (e.g. "1 a 2")
   bedroomsRange?: string;
   bathroomsRange?: string;
   areaRange?: string;
   parkingRange?: string;
+  launchTypes?: string[];
   images: string[];
   description: string[];
   internalFeatures: string[];
   condoFeatures: string[];
   units: PropertyUnit[];
-  constructionStage: number; // 0-3
+  constructionStage: number;
   constructionStages: string[];
   typologies?: PropertyTypology[];
   video?: PropertyVideoData;
