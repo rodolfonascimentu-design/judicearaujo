@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Info, Share2, Calculator, ArrowRight, TrendingUp } from "lucide-react";
+import { MessageCircle, Share2, Calculator, ArrowRight, TrendingUp } from "lucide-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Props {
   property: PropertyDetailData;
@@ -10,6 +11,7 @@ interface Props {
 
 const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
   const isNormal = !isLaunch;
+  const isMobile = useIsMobile();
 
   return (
     <section className="py-10 md:py-14 px-6 lg:px-12 bg-background">
@@ -153,20 +155,18 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
               {/* CTA buttons */}
               <div className="space-y-3">
-                <a
-                  href={`https://wa.me/${property.agent.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-2.5 w-full bg-primary text-primary-foreground py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.4)]"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  WhatsApp
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
-                </a>
-                <button className="group flex items-center justify-center gap-2.5 w-full border border-border text-foreground py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300">
-                  <Info className="w-4 h-4" />
-                  Solicitar Informações
-                </button>
+                {!isMobile && (
+                  <a
+                    href={`https://wa.me/${property.agent.whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-center gap-2.5 w-full bg-primary text-primary-foreground py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.4)]"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    Fale com a gente
+                    <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                  </a>
+                )}
                 <button className="group flex items-center justify-center gap-2 w-full text-muted-foreground py-2.5 text-xs font-sans font-medium tracking-[0.1em] uppercase hover:text-foreground transition-colors duration-300">
                   <Share2 className="w-3.5 h-3.5" />
                   Compartilhar
@@ -175,8 +175,11 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
               {/* Financing */}
               <div className="relative bg-muted/30 rounded-lg p-5 -mx-1">
-                <p className="font-sans text-xs text-muted-foreground mb-3 leading-relaxed">
+                <p className="font-sans text-sm font-semibold text-foreground mb-1.5 leading-relaxed">
                   Que tal financiar a compra deste imóvel?
+                </p>
+                <p className="font-sans text-xs text-muted-foreground mb-4 leading-relaxed">
+                  Faça uma simulação do parcelamento comparando os bancos
                 </p>
                 <button className="group flex items-center justify-center gap-2.5 w-full bg-foreground text-background py-3 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-foreground/90 transition-all duration-300">
                   <Calculator className="w-4 h-4" />
@@ -184,6 +187,19 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
                   <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                 </button>
               </div>
+
+              {/* Fixed mobile WhatsApp FAB */}
+              {isMobile && (
+                <a
+                  href={`https://wa.me/${property.agent.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-2.5 bg-primary text-primary-foreground py-4 text-xs font-sans font-medium tracking-[0.12em] uppercase shadow-[0_-4px_20px_-4px_hsl(var(--foreground)/0.15)]"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Fale com a gente
+                </a>
+              )}
             </div>
           </motion.div>
         </div>

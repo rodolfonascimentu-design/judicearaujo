@@ -50,7 +50,7 @@ const PropertyAgent = ({ property }: Props) => {
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full text-xs font-sans font-medium tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
           >
             <MessageCircle className="w-4 h-4" />
-            WhatsApp
+            Fale com a gente
           </a>
         </motion.div>
       </div>
