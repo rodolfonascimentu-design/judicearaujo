@@ -73,17 +73,29 @@ const PropertyDetail = () => {
     document.title = `${property.type} ${property.neighborhood} ${property.city} | Judice & Araujo`;
   }, [id, property.type, property.neighborhood, property.city]);
 
-  // Show FAB when scrolled past hero, hide when back at top
+  // Show FAB only when scrolled past hero AND contact section is not visible
   useEffect(() => {
+    if (!isMobile) { setShowFab(false); return; }
+
+    let heroVisible = true;
+    let contactVisible = false;
+
     const heroObs = new IntersectionObserver(
-      ([entry]) => { setShowFab(!entry.isIntersecting); },
+      ([entry]) => { heroVisible = entry.isIntersecting; update(); },
+      { threshold: 0 }
+    );
+    const contactObs = new IntersectionObserver(
+      ([entry]) => { contactVisible = entry.isIntersecting; update(); },
       { threshold: 0 }
     );
 
-    if (heroRef.current) heroObs.observe(heroRef.current);
+    function update() { setShowFab(!heroVisible && !contactVisible); }
 
-    return () => { heroObs.disconnect(); };
-  }, []);
+    if (heroRef.current) heroObs.observe(heroRef.current);
+    if (contactRef.current) contactObs.observe(contactRef.current);
+
+    return () => { heroObs.disconnect(); contactObs.disconnect(); };
+  }, [isMobile]);
 
   return (
     <div className="min-h-screen bg-background property-detail-page overflow-x-hidden">
