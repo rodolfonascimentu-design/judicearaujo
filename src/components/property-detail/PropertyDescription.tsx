@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MessageCircle, Share2, Calculator, ArrowRight, TrendingUp } from "lucide-react";
+// cache-bust
 import { PropertyDetailData } from "@/data/propertyDetail";
 import { useIsMobile } from "@/hooks/use-mobile";
 
