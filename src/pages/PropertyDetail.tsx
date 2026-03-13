@@ -38,7 +38,7 @@ const regularImages = [property1, property2, property3, property4, property5, pr
 
 const PropertyDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  
   const [searchParams] = useSearchParams();
   const { t } = useLanguage();
   const isFromLaunches = searchParams.get("from") === "launches";
