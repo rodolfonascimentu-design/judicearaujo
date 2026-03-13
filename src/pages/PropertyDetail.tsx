@@ -44,7 +44,12 @@ const PropertyDetail = () => {
   
   const [searchParams] = useSearchParams();
   const { t } = useLanguage();
+  const isMobile = useIsMobile();
   const isFromLaunches = searchParams.get("from") === "launches";
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+  const [showFab, setShowFab] = useState(false);
 
   const property = useMemo(() => {
     if (isFromLaunches) return mockProperty;
@@ -67,6 +72,30 @@ const PropertyDetail = () => {
     window.scrollTo(0, 0);
     document.title = `${property.type} ${property.neighborhood} ${property.city} | Judice & Araujo`;
   }, [id, property.type, property.neighborhood, property.city]);
+
+  // Show FAB only when scrolled past hero AND contact section is not visible
+  useEffect(() => {
+    if (!isMobile) { setShowFab(false); return; }
+
+    let heroVisible = true;
+    let contactVisible = false;
+
+    const heroObs = new IntersectionObserver(
+      ([entry]) => { heroVisible = entry.isIntersecting; update(); },
+      { threshold: 0 }
+    );
+    const contactObs = new IntersectionObserver(
+      ([entry]) => { contactVisible = entry.isIntersecting; update(); },
+      { threshold: 0 }
+    );
+
+    function update() { setShowFab(!heroVisible && !contactVisible); }
+
+    if (heroRef.current) heroObs.observe(heroRef.current);
+    if (contactRef.current) contactObs.observe(contactRef.current);
+
+    return () => { heroObs.disconnect(); contactObs.disconnect(); };
+  }, [isMobile]);
 
   return (
     <div className="min-h-screen bg-background property-detail-page overflow-x-hidden">
