@@ -23,6 +23,8 @@ interface MapProperty {
   image: string;
   title: string;
   neighborhood: string;
+  street?: string;
+  type?: string;
   price: string;
   bedrooms: number;
   area: number;
