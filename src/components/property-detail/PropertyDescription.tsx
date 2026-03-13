@@ -128,7 +128,13 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
               {/* Price */}
               <div>
-                <p className="font-sans text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-2">{property.priceLabel}</p>
+                <p className="font-sans text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-2">
+                  {isNormal
+                    ? property.transaction === "Locação"
+                      ? "Valor de aluguel"
+                      : "Valor de venda"
+                    : property.priceLabel}
+                </p>
                 <p className="font-display text-3xl text-foreground">{property.price}</p>
               </div>
 
