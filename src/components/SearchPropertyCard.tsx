@@ -33,6 +33,8 @@ const SearchPropertyCard = ({
   neighborhood,
   street,
   price,
+  totalPrice,
+  transactionType,
   bedrooms,
   area,
   parking,
