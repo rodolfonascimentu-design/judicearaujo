@@ -12,7 +12,7 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
   const isNormal = !isLaunch;
 
   return (
-    <section className="py-20 md:py-28 px-6 md:px-16 bg-background">
+    <section className="py-16 md:py-24 px-6 md:px-16 bg-background">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
         {/* Left — editorial description */}
         <motion.div
@@ -92,14 +92,14 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
               )}
 
               {/* High demand indicator */}
-              <div className="flex items-center gap-2 bg-background border border-border rounded-md px-3 py-2.5 shadow-sm">
+              <div className="flex items-center gap-2.5 px-1 py-1">
                 <motion.div
-                  animate={{ scale: [1, 1.15, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
                 >
                   <TrendingUp className="w-3.5 h-3.5 text-primary flex-shrink-0" />
                 </motion.div>
-                <span className="font-sans text-xs text-foreground/80">
+                <span className="font-sans text-[11px] text-muted-foreground tracking-wide">
                   Este imóvel está com alta procura
                 </span>
               </div>
