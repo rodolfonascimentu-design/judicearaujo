@@ -29,6 +29,7 @@ const SearchPropertyCard = ({
   images = [],
   title,
   neighborhood,
+  street,
   price,
   bedrooms,
   area,
