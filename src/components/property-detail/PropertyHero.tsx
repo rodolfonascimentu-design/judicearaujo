@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ChevronLeft,
   ChevronRight,
@@ -7,9 +7,6 @@ import {
   BedDouble,
   Bath,
   Car,
-  MessageCircle,
-  Info,
-  Share2,
 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
@@ -33,11 +30,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
     if (!emblaApi) return;
     emblaApi.on("select", onSelect);
     onSelect();
-
-    // Auto-play
-    const interval = setInterval(() => {
-      emblaApi.scrollNext();
-    }, 5000);
+    const interval = setInterval(() => emblaApi.scrollNext(), 5000);
     return () => {
       clearInterval(interval);
       emblaApi.off("select", onSelect);
@@ -65,6 +58,11 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
         { icon: Car, value: `${property.parking} vagas` },
       ];
 
+  // Hero top line
+  const topLine = isLaunch && property.launchTypes
+    ? property.launchTypes.join(" • ")
+    : `${property.type} à ${property.transaction.toLowerCase()}`;
+
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Slideshow */}
@@ -89,7 +87,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
 
-      {/* Navigation arrows - all devices */}
+      {/* Navigation arrows */}
       <button
         onClick={() => emblaApi?.scrollPrev()}
         className="flex absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white/20 transition-colors"
@@ -113,20 +111,23 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
         transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <div className="max-w-7xl mx-auto">
-          {/* Type & Location */}
+          {/* Top line */}
           <p className="font-sans text-[10px] md:text-xs tracking-[0.25em] uppercase text-white/70 mb-2">
-            {property.type} &nbsp;·&nbsp; {property.neighborhood}, {property.city}
+            {topLine}
           </p>
 
-          {/* Name */}
-          <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-white mb-2 leading-[1.1]">
-            {property.status === "launch" ? property.name.split(" ")[0] : property.name}
-          </h1>
-          {property.status === "launch" && (
-            <p className="font-sans text-sm md:text-lg text-white/70 mb-6 tracking-wide">
-              {property.neighborhood}, {property.city}/{property.city === "Rio de Janeiro" ? "RJ" : ""}
-            </p>
-          )}
+          {/* Main title */}
+          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl text-white mb-2 leading-[1.1]">
+            {isLaunch ? property.name : property.neighborhood}
+          </h2>
+
+          {/* Location line */}
+          <p className="font-sans text-sm md:text-lg text-white/70 mb-6 tracking-wide">
+            {isLaunch
+              ? `${property.neighborhood}, ${property.city}/${property.state}`
+              : `${property.city}/${property.state}`
+            }
+          </p>
 
           {/* Quick specs */}
           <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-6">
@@ -137,8 +138,6 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
               </span>
             ))}
           </div>
-
-
         </div>
       </motion.div>
 

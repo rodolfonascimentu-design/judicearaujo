@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
-import { MessageCircle, ArrowLeft } from "lucide-react";
+import { useParams, useNavigate, useSearchParams, Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { mockProperty } from "@/data/propertyDetail";
 import { useLanguage } from "@/i18n/LanguageContext";
 import Navbar from "@/components/Navbar";
@@ -14,8 +14,15 @@ import PropertyNeighborhood from "@/components/property-detail/PropertyNeighborh
 import PropertyConstructionStatus from "@/components/property-detail/PropertyConstructionStatus";
 import PropertyTypologies from "@/components/property-detail/PropertyTypologies";
 import PropertyVideo from "@/components/property-detail/PropertyVideo";
-
 import PropertyContact from "@/components/property-detail/PropertyContact";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
 
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
@@ -39,27 +46,77 @@ const PropertyDetail = () => {
 
   const property = useMemo(() => {
     if (isFromLaunches) return mockProperty;
-    return { ...mockProperty, images: regularImages };
+    return { ...mockProperty, images: regularImages, status: "ready" as const };
   }, [isFromLaunches]);
 
+  const isLaunch = isFromLaunches && property.status === "launch";
+
+  // Dynamic H1 text
+  const h1Text = useMemo(() => {
+    if (isLaunch) {
+      return `${property.name} — ${property.neighborhood}, ${property.city}/${property.state}`;
+    }
+    const quartos = property.suites;
+    return `${property.type} à ${property.transaction.toLowerCase()} com ${quartos} quartos, ${property.area}m² — ${property.neighborhood}, ${property.city}/${property.state}`;
+  }, [property, isLaunch]);
+
+  // SEO title
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = `${property.name} — ${property.neighborhood} | Judice & Araujo`;
-  }, [id, property.name, property.neighborhood]);
+    document.title = `${property.type} ${property.neighborhood} ${property.city} | Judice & Araujo`;
+  }, [id, property.type, property.neighborhood, property.city]);
 
   return (
     <div className="min-h-screen bg-background property-detail-page overflow-x-hidden">
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-4">
-        <button
-          onClick={() => navigate(-1)}
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          aria-label={t("nav.back")}
-        >
-          <ArrowLeft className="w-4 h-4" />
-          {t("nav.back")}
-        </button>
+      {/* Breadcrumb */}
+      <div className="container mx-auto px-4 pt-4 pb-2">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/" className="text-muted-foreground hover:text-foreground text-xs font-sans">
+                  Início
+                </Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/imoveis" className="text-muted-foreground hover:text-foreground text-xs font-sans">
+                  {property.transaction}
+                </Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/imoveis" className="text-muted-foreground hover:text-foreground text-xs font-sans">
+                  {property.neighborhood}, {property.city} - {property.state}
+                </Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
+            <BreadcrumbItem>
+              <BreadcrumbPage className="text-foreground text-xs font-sans font-medium">
+                {property.type}
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+
+      {/* Dynamic H1 + Property Code */}
+      <div className="container mx-auto px-4 pb-4">
+        <div className="flex items-start justify-between gap-4">
+          <h1 className="font-display text-lg md:text-2xl lg:text-3xl text-foreground leading-tight max-w-4xl">
+            {h1Text}
+          </h1>
+          <span className="font-sans text-xs text-muted-foreground whitespace-nowrap mt-1.5">
+            Cód. {property.code}
+          </span>
+        </div>
       </div>
 
       <main>
@@ -67,7 +124,7 @@ const PropertyDetail = () => {
         <PropertyDescription property={property} />
         <PropertyGallery property={property} isFromLaunches={isFromLaunches} />
         <PropertyFeatures property={property} />
-        {isFromLaunches && property.status === "launch" && (
+        {isLaunch && (
           <>
             <PropertyConstructionStatus property={property} />
             <PropertyTypologies property={property} />
@@ -80,7 +137,6 @@ const PropertyDetail = () => {
       </main>
 
       <Footer />
-
     </div>
   );
 };
