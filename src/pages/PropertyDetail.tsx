@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useSearchParams, Link } from "react-router-dom";
 import { mockProperty } from "@/data/propertyDetail";
 import { useLanguage } from "@/i18n/LanguageContext";
