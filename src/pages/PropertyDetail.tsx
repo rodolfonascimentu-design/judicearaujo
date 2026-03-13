@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useParams, useNavigate, useSearchParams, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useParams, useSearchParams, Link } from "react-router-dom";
 import { mockProperty } from "@/data/propertyDetail";
 import { useLanguage } from "@/i18n/LanguageContext";
 import Navbar from "@/components/Navbar";
