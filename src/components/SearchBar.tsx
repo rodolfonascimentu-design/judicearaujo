@@ -1,8 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Search, ArrowUpDown, SlidersHorizontal, Map, LayoutGrid } from "lucide-react";
+import { ArrowUpDown, SlidersHorizontal, Map, LayoutGrid } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 interface SearchBarProps {
   count: number;

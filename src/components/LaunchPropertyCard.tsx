@@ -99,19 +99,6 @@ const LaunchPropertyCard = ({
           <div className="absolute inset-0 bg-muted animate-pulse" />
         )}
 
-        {/* Image indicators */}
-        {allImages.length > 1 && isHovered && (
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-            {allImages.map((_, i) => (
-              <div
-                key={i}
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  i === currentImageIndex ? "bg-white scale-110" : "bg-white/40"
-                }`}
-              />
-            ))}
-          </div>
-        )}
 
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex items-center justify-center">
