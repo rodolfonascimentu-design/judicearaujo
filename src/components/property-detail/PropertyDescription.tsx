@@ -63,6 +63,19 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
         {/* Right — sticky conversion card */}
         <div className="lg:sticky lg:top-24 self-start">
+          {/* Property code — above the card */}
+          {isNormal && (
+            <motion.p
+              className="font-sans text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-3 text-right"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              Cód. {property.code}
+            </motion.p>
+          )}
+
           <motion.div
             className="relative overflow-hidden bg-card border border-border/50 rounded-lg p-0 shadow-[0_8px_40px_-12px_hsl(var(--foreground)/0.08)]"
             initial={{ opacity: 0, y: 30 }}
@@ -74,12 +87,8 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
             <div className="h-1 w-full bg-primary" />
 
             <div className="p-8 space-y-6">
-              {/* Property code for normal properties (replaces status badge) */}
-              {isNormal ? (
-                <span className="inline-block font-sans text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-                  Cód. {property.code}
-                </span>
-              ) : (
+              {/* Status badge — launches only */}
+              {!isNormal && (
                 <motion.span
                   className="inline-block font-sans text-[10px] tracking-[0.2em] uppercase px-4 py-1.5 rounded-full bg-primary/8 text-primary font-medium border border-primary/15"
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -92,14 +101,22 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
               )}
 
               {/* High demand indicator */}
-              <div className="flex items-center gap-2.5 px-1 py-1">
+              <div className="flex items-center gap-3 py-1">
                 <motion.div
-                  animate={{ y: [0, -3, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
+                  animate={{ 
+                    y: [0, -4, 0],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{ 
+                    duration: 2.5, 
+                    repeat: Infinity, 
+                    ease: "easeInOut", 
+                    repeatDelay: 2 
+                  }}
                 >
-                  <TrendingUp className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                  <TrendingUp className="w-4 h-4 text-primary flex-shrink-0" />
                 </motion.div>
-                <span className="font-sans text-[11px] text-muted-foreground tracking-wide">
+                <span className="font-sans text-xs text-foreground/80 tracking-wide">
                   Este imóvel está com alta procura
                 </span>
               </div>
