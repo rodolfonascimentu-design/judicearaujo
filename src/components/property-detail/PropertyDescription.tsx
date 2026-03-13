@@ -103,26 +103,28 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
                 </motion.span>
               )}
 
-              {/* High demand indicator */}
-              <div className="flex items-center gap-3 py-1">
-                <motion.div
-                  animate={{ 
-                    y: [0, -4, 0],
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{ 
-                    duration: 2.5, 
-                    repeat: Infinity, 
-                    ease: "easeInOut", 
-                    repeatDelay: 2 
-                  }}
-                >
-                  <TrendingUp className="w-4 h-4 text-primary flex-shrink-0" />
-                </motion.div>
-                <span className="font-sans text-xs text-foreground/80 tracking-wide">
-                  Este imóvel está com alta procura
-                </span>
-              </div>
+              {/* High demand indicator — only for normal properties */}
+              {isNormal && (
+                <div className="flex items-center gap-3 py-1">
+                  <motion.div
+                    animate={{ 
+                      y: [0, -4, 0],
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{ 
+                      duration: 2.5, 
+                      repeat: Infinity, 
+                      ease: "easeInOut", 
+                      repeatDelay: 2 
+                    }}
+                  >
+                    <TrendingUp className="w-4 h-4 text-primary flex-shrink-0" />
+                  </motion.div>
+                  <span className="font-sans text-xs text-foreground/80 tracking-wide">
+                    Este imóvel está com alta procura
+                  </span>
+                </div>
+              )}
 
               {/* Price */}
               <div>
