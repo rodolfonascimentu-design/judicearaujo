@@ -189,18 +189,6 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
                 </button>
               </div>
 
-              {/* Fixed mobile WhatsApp FAB */}
-              {isMobile && (
-                <a
-                  href={`https://wa.me/${property.agent.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-2.5 bg-primary text-primary-foreground py-4 text-xs font-sans font-medium tracking-[0.12em] uppercase shadow-[0_-4px_20px_-4px_hsl(var(--foreground)/0.15)]"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  Fale com a gente
-                </a>
-              )}
             </div>
           </motion.div>
         </div>
