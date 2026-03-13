@@ -12,15 +12,8 @@ interface SearchBarProps {
 
 const SearchBar = ({ count, location, type, viewMode, onToggleView, onOpenFilters }: SearchBarProps) => {
   const { t } = useLanguage();
-  const navigate = useNavigate();
-  const [query, setQuery] = useState(location);
 
   const typeLabel = t(`search.type.${type}`) || type;
-
-  const handleSearch = (q?: string) => {
-    const term = (q || query).trim() || "Barra da Tijuca";
-    navigate(`/imoveis?q=${encodeURIComponent(term)}&type=${type}`);
-  };
 
   // SEO-formatted count text
   const countText = count === 1 ? "1 imóvel" : `${count} imóveis`;
