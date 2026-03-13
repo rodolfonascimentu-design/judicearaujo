@@ -40,10 +40,15 @@ const neighborhoods = [
   "Joá", "Vidigal", "Humaitá", "Flamengo",
 ];
 
+const streets = [
+  "Rua Lucio de Mendonça", "Rua Jardim Botânico", "Rua Barão da Torre", "Rua Marquês de São Vicente",
+  "Rua Prudente de Morais", "Estrada da Gávea", "Rua Epitácio Pessoa", "Avenida Lúcio Costa",
+  "Estrada do Joá", "Avenida Vidigal", "Rua Humaitá", "Praia do Flamengo",
+];
+
 const allProperties = Array.from({ length: 24 }, (_, i) => {
   const nbh = neighborhoods[i % 12];
   const coords = neighborhoodCoords[nbh] || [-22.98, -43.23];
-  // Add slight offset to avoid overlapping pins
   const jitteredCoords: [number, number] = [
     coords[0] + (Math.random() - 0.5) * 0.008,
     coords[1] + (Math.random() - 0.5) * 0.008,
@@ -67,6 +72,7 @@ const allProperties = Array.from({ length: 24 }, (_, i) => {
       "Cobertura Flamengo Vista Baía",
     ][i % 12],
     neighborhood: nbh,
+    street: streets[i % 12],
     price: `R$ ${(3 + (i % 8) * 1.5).toFixed(1).replace(".", ",")} milhões`,
     bedrooms: 3 + (i % 3),
     area: 180 + (i % 6) * 50,
