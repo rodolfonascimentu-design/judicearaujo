@@ -10,6 +10,7 @@ interface SearchPropertyCardProps {
   images?: string[];
   title: string;
   neighborhood: string;
+  street?: string;
   price: string;
   bedrooms: number;
   area: number;
@@ -28,6 +29,7 @@ const SearchPropertyCard = ({
   images = [],
   title,
   neighborhood,
+  street,
   price,
   bedrooms,
   area,
@@ -113,19 +115,6 @@ const SearchPropertyCard = ({
           <div className="absolute inset-0 bg-muted animate-pulse" />
         )}
 
-        {/* Image indicators */}
-        {allImages.length > 1 && isHovered && (
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-            {allImages.map((_, i) => (
-              <div
-                key={i}
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  i === currentImageIndex ? "bg-white scale-110" : "bg-white/40"
-                }`}
-              />
-            ))}
-          </div>
-        )}
 
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/40 transition-all duration-500 flex items-center justify-center">
@@ -161,9 +150,9 @@ const SearchPropertyCard = ({
 
       {/* Info */}
       <h3 className="font-display text-base font-medium text-foreground mb-1 tracking-[-0.01em] group-hover:text-primary transition-colors duration-300">
-        {title}
+        {type} | {neighborhood}
       </h3>
-      <p className="font-sans text-xs text-muted-foreground mb-1.5">{neighborhood}</p>
+      <p className="font-sans text-xs text-muted-foreground mb-1.5">{street || title}</p>
       <p className="font-sans text-sm font-medium text-primary mb-3">{price}</p>
       <div className="flex items-center gap-5 text-muted-foreground text-xs font-sans tracking-wide font-light">
         <span className="flex items-center gap-1.5">
