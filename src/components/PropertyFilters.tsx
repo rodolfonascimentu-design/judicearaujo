@@ -117,12 +117,6 @@ const PropertyFilters = ({ open, onOpenChange }: PropertyFiltersProps) => {
               <span className="sr-only">Fechar</span>
             </button>
           </div>
-          <button
-            onClick={clearAll}
-            className="font-sans text-[10px] tracking-[0.12em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-200 mt-1"
-          >
-            Limpar filtros
-          </button>
         </div>
 
         {/* Tabs */}
