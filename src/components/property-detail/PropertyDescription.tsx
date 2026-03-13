@@ -12,7 +12,7 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
   const isNormal = !isLaunch;
 
   return (
-    <section className="py-16 md:py-24 px-6 md:px-16 bg-background">
+    <section className="py-10 md:py-14 px-6 md:px-16 bg-background">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
         {/* Left — editorial description */}
         <motion.div
