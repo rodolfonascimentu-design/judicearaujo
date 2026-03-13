@@ -333,9 +333,8 @@ const SoldPropertyCard = ({
         </div>
       )}
     </div>
-    <p className="font-sans text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-1">{type}</p>
-    <h3 className="font-display text-base font-medium text-foreground mb-1 tracking-[-0.01em]">{title}</h3>
-    <p className="font-sans text-xs text-muted-foreground mb-3">{neighborhood}</p>
+    <h3 className="font-display text-base font-medium text-foreground mb-1 tracking-[-0.01em]">{type} | {neighborhood}</h3>
+    <p className="font-sans text-xs text-muted-foreground mb-3">{title}</p>
     <div className="flex items-center gap-5 text-muted-foreground text-xs font-sans tracking-wide font-light mb-3">
       <span className="flex items-center gap-1.5">
         <Bed className="w-3.5 h-3.5" />
