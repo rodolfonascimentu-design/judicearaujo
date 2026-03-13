@@ -74,6 +74,8 @@ const allProperties = Array.from({ length: 24 }, (_, i) => {
     neighborhood: nbh,
     street: streets[i % 12],
     price: `R$ ${(3 + (i % 8) * 1.5).toFixed(1).replace(".", ",")} milhões`,
+    rentalPrice: `R$ ${(8 + (i % 5) * 2).toFixed(0)}.000`,
+    rentalTotal: `R$ ${(12 + (i % 5) * 3).toFixed(0)}.000`,
     bedrooms: 3 + (i % 3),
     area: 180 + (i % 6) * 50,
     parking: 2 + (i % 3),
