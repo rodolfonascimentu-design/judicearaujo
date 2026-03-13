@@ -77,29 +77,34 @@ export interface PropertyVideoData {
 
 export interface PropertyDetailData {
   id: string;
+  code: string;
   type: string;
   status: "launch" | "ready" | "construction";
+  transaction: "Venda" | "Locação";
   name: string;
   neighborhood: string;
   city: string;
+  state: string;
   address: string;
   price: string;
   priceLabel: string;
+  condoFee?: string;
+  iptu?: string;
   area: number;
   suites: number;
   bathrooms: number;
   parking: number;
-  // Range strings for launches (e.g. "1 a 2")
   bedroomsRange?: string;
   bathroomsRange?: string;
   areaRange?: string;
   parkingRange?: string;
+  launchTypes?: string[];
   images: string[];
   description: string[];
   internalFeatures: string[];
   condoFeatures: string[];
   units: PropertyUnit[];
-  constructionStage: number; // 0-3
+  constructionStage: number;
   constructionStages: string[];
   typologies?: PropertyTypology[];
   video?: PropertyVideoData;
@@ -113,14 +118,19 @@ export interface PropertyDetailData {
 
 export const mockProperty: PropertyDetailData = {
   id: "mar-azul-ii",
+  code: "12023332",
   type: "Apartamento",
   status: "launch",
+  transaction: "Venda",
   name: "Soho",
   neighborhood: "Gávea",
   city: "Rio de Janeiro",
+  state: "RJ",
   address: "Estrada do Joá, 3.200 – Joá, Rio de Janeiro – RJ",
   price: "R$ 4.200.000",
   priceLabel: "A partir de",
+  condoFee: "R$ 2.609",
+  iptu: "R$ 1.005",
   area: 520,
   suites: 4,
   bathrooms: 5,
@@ -129,6 +139,7 @@ export const mockProperty: PropertyDetailData = {
   bathroomsRange: "1 a 2",
   areaRange: "37 a 73",
   parkingRange: "1",
+  launchTypes: ["Apartamentos", "Coberturas", "Studios"],
   images: [
     soho1,
     soho2,

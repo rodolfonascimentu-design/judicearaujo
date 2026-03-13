@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Info, Share2, Calculator, ArrowRight } from "lucide-react";
+import { MessageCircle, Info, Share2, Calculator, ArrowRight, TrendingUp } from "lucide-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
 
 interface Props {
@@ -23,9 +23,9 @@ const PropertyDescription = ({ property }: Props) => {
           <h2 className="font-display text-2xl md:text-4xl text-foreground mb-8 leading-[1.2]">
             {property.status === "launch" ? (
               <>
-                Soho<br />
+                {property.name}<br />
                 <span className="text-muted-foreground text-lg md:text-2xl font-sans font-light">
-                  Gávea, Rio de Janeiro/RJ
+                  {property.neighborhood}, {property.city}/{property.state}
                 </span>
               </>
             ) : (
@@ -72,11 +72,40 @@ const PropertyDescription = ({ property }: Props) => {
                 {property.status === "launch" ? "Lançamento" : property.status === "construction" ? "Em obras" : "Pronto para morar"}
               </motion.span>
 
+              {/* High demand indicator */}
+              <div className="flex items-center gap-2 bg-accent/50 border border-border/50 rounded-md px-3 py-2.5">
+                <TrendingUp className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                <span className="font-sans text-xs text-foreground/80">
+                  Este imóvel está com alta procura
+                </span>
+              </div>
+
               {/* Price */}
               <div>
                 <p className="font-sans text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-2">{property.priceLabel}</p>
                 <p className="font-display text-3xl text-foreground">{property.price}</p>
               </div>
+
+              {/* Condo & IPTU */}
+              {(property.condoFee || property.iptu) && (
+                <div className="space-y-2">
+                  {property.condoFee && (
+                    <div className="flex items-center justify-between">
+                      <span className="font-sans text-xs text-muted-foreground">Condomínio</span>
+                      <span className="font-sans text-xs text-foreground">{property.condoFee}</span>
+                    </div>
+                  )}
+                  {property.iptu && (
+                    <div className="flex items-center justify-between">
+                      <span className="font-sans text-xs text-muted-foreground">IPTU (mensal)</span>
+                      <span className="font-sans text-xs text-foreground">{property.iptu}</span>
+                    </div>
+                  )}
+                  <p className="font-sans text-[10px] text-muted-foreground/70 mt-1">
+                    Valores sujeitos a alteração sem aviso prévio.
+                  </p>
+                </div>
+              )}
 
               {/* Divider */}
               <div className="h-px bg-border" />
