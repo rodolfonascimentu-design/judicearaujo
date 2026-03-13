@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useParams, useNavigate, useSearchParams, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useParams, useSearchParams, Link } from "react-router-dom";
 import { mockProperty } from "@/data/propertyDetail";
 import { useLanguage } from "@/i18n/LanguageContext";
 import Navbar from "@/components/Navbar";
@@ -39,7 +38,7 @@ const regularImages = [property1, property2, property3, property4, property5, pr
 
 const PropertyDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  
   const [searchParams] = useSearchParams();
   const { t } = useLanguage();
   const isFromLaunches = searchParams.get("from") === "launches";
@@ -70,58 +69,49 @@ const PropertyDetail = () => {
     <div className="min-h-screen bg-background property-detail-page overflow-x-hidden">
       <Navbar />
 
-      {/* Breadcrumb */}
-      <div className="container mx-auto px-4 pt-4 pb-2">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/" className="text-muted-foreground hover:text-foreground text-xs font-sans">
-                  Início
-                </Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/imoveis" className="text-muted-foreground hover:text-foreground text-xs font-sans">
-                  {property.transaction}
-                </Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/imoveis" className="text-muted-foreground hover:text-foreground text-xs font-sans">
-                  {property.neighborhood}, {property.city} - {property.state}
-                </Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
-            <BreadcrumbItem>
-              <BreadcrumbPage className="text-foreground text-xs font-sans font-medium">
-                {property.type}
-              </BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
-
-      {/* Dynamic H1 + Property Code */}
-      <div className="container mx-auto px-4 pb-4">
-        <div className="flex items-start justify-between gap-4">
-          <h1 className="font-display text-lg md:text-2xl lg:text-3xl text-foreground leading-tight max-w-4xl">
-            {h1Text}
-          </h1>
-          <span className="font-sans text-xs text-muted-foreground whitespace-nowrap mt-1.5">
-            Cód. {property.code}
-          </span>
-        </div>
-      </div>
-
       <main>
         <PropertyHero property={property} isFromLaunches={isFromLaunches} />
-        <PropertyDescription property={property} />
+
+        {/* Breadcrumb — below gallery, above description */}
+        {!isLaunch && (
+          <div className="max-w-6xl mx-auto px-6 md:px-16 pt-8 pb-2">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/" className="text-muted-foreground hover:text-foreground text-xs font-sans">
+                      Início
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/imoveis" className="text-muted-foreground hover:text-foreground text-xs font-sans">
+                      {property.transaction}
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/imoveis" className="text-muted-foreground hover:text-foreground text-xs font-sans">
+                      {property.neighborhood}, {property.city} - {property.state}
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="text-foreground text-xs font-sans font-medium">
+                    {property.type}
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        )}
+
+        <PropertyDescription property={property} isLaunch={isLaunch} h1Text={h1Text} />
         <PropertyGallery property={property} isFromLaunches={isFromLaunches} />
         <PropertyFeatures property={property} />
         {isLaunch && (

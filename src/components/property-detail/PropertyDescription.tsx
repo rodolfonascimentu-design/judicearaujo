@@ -4,9 +4,13 @@ import { PropertyDetailData } from "@/data/propertyDetail";
 
 interface Props {
   property: PropertyDetailData;
+  isLaunch?: boolean;
+  h1Text?: string;
 }
 
-const PropertyDescription = ({ property }: Props) => {
+const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
+  const isNormal = !isLaunch;
+
   return (
     <section className="py-20 md:py-28 px-6 md:px-16 bg-background">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
@@ -20,18 +24,27 @@ const PropertyDescription = ({ property }: Props) => {
           <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-4">
             {property.status === "launch" ? "Sobre o Lançamento" : "Sobre o Imóvel"}
           </p>
-          <h2 className="font-display text-2xl md:text-4xl text-foreground mb-8 leading-[1.2]">
-            {property.status === "launch" ? (
-              <>
-                {property.name}<br />
-                <span className="text-muted-foreground text-lg md:text-2xl font-sans font-light">
-                  {property.neighborhood}, {property.city}/{property.state}
-                </span>
-              </>
-            ) : (
-              "Uma residência que redefine o conceito de exclusividade."
-            )}
-          </h2>
+
+          {/* H1 dynamic — replaces old static title for normal properties */}
+          {isNormal && h1Text ? (
+            <h1 className="font-display text-2xl md:text-4xl text-foreground mb-8 leading-[1.2]">
+              {h1Text}
+            </h1>
+          ) : (
+            <h2 className="font-display text-2xl md:text-4xl text-foreground mb-8 leading-[1.2]">
+              {property.status === "launch" ? (
+                <>
+                  {property.name}<br />
+                  <span className="text-muted-foreground text-lg md:text-2xl font-sans font-light">
+                    {property.neighborhood}, {property.city}/{property.state}
+                  </span>
+                </>
+              ) : (
+                "Uma residência que redefine o conceito de exclusividade."
+              )}
+            </h2>
+          )}
+
           <div className="space-y-6">
             {property.description.map((p, i) => (
               <motion.p
@@ -61,20 +74,31 @@ const PropertyDescription = ({ property }: Props) => {
             <div className="h-1 w-full bg-primary" />
 
             <div className="p-8 space-y-6">
-              {/* Status badge */}
-              <motion.span
-                className="inline-block font-sans text-[10px] tracking-[0.2em] uppercase px-4 py-1.5 rounded-full bg-primary/8 text-primary font-medium border border-primary/15"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.4, delay: 0.4 }}
-              >
-                {property.status === "launch" ? "Lançamento" : property.status === "construction" ? "Em obras" : "Pronto para morar"}
-              </motion.span>
+              {/* Property code for normal properties (replaces status badge) */}
+              {isNormal ? (
+                <span className="inline-block font-sans text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+                  Cód. {property.code}
+                </span>
+              ) : (
+                <motion.span
+                  className="inline-block font-sans text-[10px] tracking-[0.2em] uppercase px-4 py-1.5 rounded-full bg-primary/8 text-primary font-medium border border-primary/15"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                >
+                  {property.status === "launch" ? "Lançamento" : property.status === "construction" ? "Em obras" : "Pronto para morar"}
+                </motion.span>
+              )}
 
               {/* High demand indicator */}
-              <div className="flex items-center gap-2 bg-accent/50 border border-border/50 rounded-md px-3 py-2.5">
-                <TrendingUp className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+              <div className="flex items-center gap-2 bg-background border border-border rounded-md px-3 py-2.5 shadow-sm">
+                <motion.div
+                  animate={{ scale: [1, 1.15, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <TrendingUp className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                </motion.div>
                 <span className="font-sans text-xs text-foreground/80">
                   Este imóvel está com alta procura
                 </span>
