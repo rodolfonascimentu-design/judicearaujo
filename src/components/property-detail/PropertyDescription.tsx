@@ -13,7 +13,7 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
   return (
     <section className="py-10 md:py-14 px-6 lg:px-12 bg-background">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
         {/* Left — editorial description */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
