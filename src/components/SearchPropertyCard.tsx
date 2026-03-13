@@ -10,6 +10,7 @@ interface SearchPropertyCardProps {
   images?: string[];
   title: string;
   neighborhood: string;
+  street?: string;
   price: string;
   bedrooms: number;
   area: number;
