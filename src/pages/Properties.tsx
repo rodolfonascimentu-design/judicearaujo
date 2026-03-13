@@ -189,9 +189,12 @@ const Properties = () => {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
               {items.map((prop, i) => (
-                <SearchPropertyCard
+              <SearchPropertyCard
                   key={prop.id}
                   {...prop}
+                  price={type === "locacao" ? prop.rentalPrice : prop.price}
+                  totalPrice={type === "locacao" ? prop.rentalTotal : undefined}
+                  transactionType={type}
                   index={i}
                   highlighted={hoveredId === prop.id}
                   onHover={setHoveredId}
