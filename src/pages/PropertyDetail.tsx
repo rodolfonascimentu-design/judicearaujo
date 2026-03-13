@@ -102,7 +102,9 @@ const PropertyDetail = () => {
       <Navbar />
 
       <main>
-        <PropertyHero property={property} isFromLaunches={isFromLaunches} />
+        <div ref={heroRef}>
+          <PropertyHero property={property} isFromLaunches={isFromLaunches} />
+        </div>
 
         {/* Breadcrumb — below gallery, above description */}
         {!isLaunch && (
@@ -155,8 +157,29 @@ const PropertyDetail = () => {
         )}
         <PropertyLocation property={property} />
         <PropertyNeighborhood property={property} />
-        <PropertyContact />
+        <div ref={contactRef}>
+          <PropertyContact />
+        </div>
       </main>
+
+      {/* Fixed mobile WhatsApp FAB */}
+      <AnimatePresence>
+        {showFab && (
+          <motion.a
+            href={`https://wa.me/${property.agent.whatsapp}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-2.5 bg-primary text-primary-foreground py-4 text-xs font-sans font-medium tracking-[0.12em] uppercase shadow-[0_-4px_20px_-4px_hsl(var(--foreground)/0.15)]"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <MessageCircle className="w-4 h-4" />
+            Fale com a gente
+          </motion.a>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>
