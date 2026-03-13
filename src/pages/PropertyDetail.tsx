@@ -72,7 +72,47 @@ const PropertyDetail = () => {
 
       <main>
         <PropertyHero property={property} isFromLaunches={isFromLaunches} />
-        <PropertyDescription property={property} />
+
+        {/* Breadcrumb — below gallery, above description */}
+        {!isLaunch && (
+          <div className="max-w-6xl mx-auto px-6 md:px-16 pt-8 pb-2">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/" className="text-muted-foreground hover:text-foreground text-xs font-sans">
+                      Início
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/imoveis" className="text-muted-foreground hover:text-foreground text-xs font-sans">
+                      {property.transaction}
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/imoveis" className="text-muted-foreground hover:text-foreground text-xs font-sans">
+                      {property.neighborhood}, {property.city} - {property.state}
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="text-muted-foreground/50 text-xs">&gt;</BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="text-foreground text-xs font-sans font-medium">
+                    {property.type}
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        )}
+
+        <PropertyDescription property={property} isLaunch={isLaunch} h1Text={h1Text} />
         <PropertyGallery property={property} isFromLaunches={isFromLaunches} />
         <PropertyFeatures property={property} />
         {isLaunch && (
