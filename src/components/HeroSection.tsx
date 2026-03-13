@@ -138,7 +138,7 @@ const HeroOverlayContent = () => {
           </div>
 
           {/* Mobile layout */}
-          <div className="md:hidden flex items-center px-1.5 py-3.5 gap-3">
+          <div className="md:hidden flex items-center px-4 py-3.5 gap-3">
             <div className="flex-1 text-left min-w-0">
               <p className="text-[9px] font-sans font-medium tracking-[0.2em] uppercase mb-1"
                 style={{ color: "hsl(var(--charcoal) / 0.45)" }}>
