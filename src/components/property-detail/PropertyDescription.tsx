@@ -132,13 +132,13 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
                 <p className="font-display text-3xl text-foreground">{property.price}</p>
               </div>
 
-              {/* Condo & IPTU */}
-              {(property.condoFee || property.iptu) && (
+              {/* Condo & IPTU — only for normal properties */}
+              {isNormal && (property.condoFee || property.iptu) && (
                 <div className="space-y-2">
                   {property.condoFee && (
                     <div className="flex items-center justify-between">
                       <span className="font-sans text-xs text-muted-foreground">Condomínio</span>
-                      <span className="font-sans text-xs text-foreground">{property.condoFee}</span>
+                      <span className="font-sans text-xs text-    foreground">{property.condoFee}</span>
                     </div>
                   )}
                   {property.iptu && (
