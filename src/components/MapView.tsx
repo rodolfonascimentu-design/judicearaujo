@@ -23,6 +23,8 @@ interface MapProperty {
   image: string;
   title: string;
   neighborhood: string;
+  street?: string;
+  type?: string;
   price: string;
   bedrooms: number;
   area: number;
@@ -101,8 +103,8 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
             <img src="${prop.image}" alt="${prop.title}" style="width:100%;height:150px;object-fit:cover;display:block;" />
           </div>
           <div style="padding:12px 14px 14px">
-            <h4 style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:600;margin:0 0 3px;line-height:1.3">${prop.title}</h4>
-            <p style="font-family:Montserrat,sans-serif;font-size:10px;color:#888;margin:0 0 5px">${prop.neighborhood}</p>
+            <h4 style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:600;margin:0 0 3px;line-height:1.3">${prop.type || ""} | ${prop.neighborhood}</h4>
+            <p style="font-family:Montserrat,sans-serif;font-size:10px;color:#888;margin:0 0 5px">${prop.street || prop.title}</p>
             <p style="font-family:Montserrat,sans-serif;font-size:12px;font-weight:500;color:hsl(171,100%,12%);margin:0 0 8px">${prop.price}</p>
             <div style="font-family:Montserrat,sans-serif;font-size:9px;color:#aaa;display:flex;gap:10px">
               <span>${prop.bedrooms} quartos</span>
@@ -177,7 +179,7 @@ const MapView = ({ properties, highlightedId, onHoverPin }: MapViewProps) => {
           box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
       `}</style>
-      <div className="w-full h-[600px] lg:h-[700px] rounded-[4px] border border-border" style={{ zIndex: 1 }}>
+      <div className="w-full h-[600px] lg:h-[700px] rounded-[4px] border border-border relative z-0">
         <div
           ref={containerRef}
           className="w-full h-full"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
+import mapaPlaceholder from "@/assets/mapa-placeholder.jpg";
 
 interface Props {
   property: PropertyDetailData;
@@ -10,7 +11,6 @@ interface Props {
 const PropertyLocation = ({ property }: Props) => {
   const [showMap, setShowMap] = useState(false);
   const mapSrc = `https://maps.google.com/maps?q=${property.mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed&maptype=roadmap`;
-  const staticPreview = `/src/assets/mapa-placeholder.jpg`;
 
   return (
     <section className="py-20 md:py-28 px-6 md:px-16 bg-background">
@@ -56,20 +56,17 @@ const PropertyLocation = ({ property }: Props) => {
               onClick={() => setShowMap(true)}
               className="relative w-full h-[350px] md:h-[450px] bg-muted rounded-lg overflow-hidden group cursor-pointer"
             >
-              {/* Static placeholder background */}
               <div className="absolute inset-0 bg-muted">
                 <img
-                  src={staticPreview}
+                  src={mapaPlaceholder}
                   alt="Mapa da localização"
                   className="w-full h-full object-cover grayscale opacity-60"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 />
               </div>
-              {/* Centered CTA */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-sans text-sm font-medium tracking-wide shadow-lg group-hover:bg-primary/90 transition-colors">
                   <MapPin className="w-4 h-4" />
-                  Ver no mapa
+                  Abrir mapa
                 </span>
               </div>
             </button>

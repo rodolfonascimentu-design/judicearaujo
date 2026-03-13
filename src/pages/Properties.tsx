@@ -74,6 +74,8 @@ const allProperties = Array.from({ length: 24 }, (_, i) => {
     neighborhood: nbh,
     street: streets[i % 12],
     price: `R$ ${(3 + (i % 8) * 1.5).toFixed(1).replace(".", ",")} milhões`,
+    rentalPrice: `R$ ${(8 + (i % 5) * 2).toFixed(0)}.000`,
+    rentalTotal: `R$ ${(12 + (i % 5) * 3).toFixed(0)}.000`,
     bedrooms: 3 + (i % 3),
     area: 180 + (i % 6) * 50,
     parking: 2 + (i % 3),
@@ -147,6 +149,8 @@ const Properties = () => {
     image: p.image,
     title: p.title,
     neighborhood: p.neighborhood,
+    street: p.street,
+    type: p.type,
     price: p.price,
     bedrooms: p.bedrooms,
     area: p.area,
@@ -187,9 +191,12 @@ const Properties = () => {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14">
               {items.map((prop, i) => (
-                <SearchPropertyCard
+              <SearchPropertyCard
                   key={prop.id}
                   {...prop}
+                  price={type === "locacao" ? prop.rentalPrice : prop.price}
+                  totalPrice={type === "locacao" ? prop.rentalTotal : undefined}
+                  transactionType={type}
                   index={i}
                   highlighted={hoveredId === prop.id}
                   onHover={setHoveredId}
