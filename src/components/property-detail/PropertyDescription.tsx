@@ -11,6 +11,7 @@ interface Props {
 
 const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
   const isNormal = !isLaunch;
+  const isMobile = useIsMobile();
 
   return (
     <section className="py-10 md:py-14 px-6 lg:px-12 bg-background">
