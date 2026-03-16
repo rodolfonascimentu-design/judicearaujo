@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
   Building2,
   TrendingUp,
   ShieldCheck,
@@ -31,6 +30,7 @@ import heroImg from "@/assets/gestao-hero.jpg";
 import interiorImg from "@/assets/gestao-interior.jpg";
 import aerialImg from "@/assets/gestao-aerial.jpg";
 import terraceImg from "@/assets/gestao-terrace.jpg";
+import parceriasImg from "@/assets/parcerias-hero.jpg";
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
 import property3 from "@/assets/property-3.jpg";
@@ -70,6 +70,19 @@ const C = {
   gold: "hsl(39 55% 58%)",
   goldLight: "hsl(39 55% 68%)",
   goldBg: "hsl(39 55% 58% / 0.12)",
+};
+
+/* ── glass card style helpers ── */
+const glassLight = {
+  background: "rgba(255,255,255,0.55)",
+  backdropFilter: "blur(16px)",
+  WebkitBackdropFilter: "blur(16px)",
+};
+
+const glassDark = {
+  background: "rgba(255,255,255,0.08)",
+  backdropFilter: "blur(16px)",
+  WebkitBackdropFilter: "blur(16px)",
 };
 
 /* ── data ── */
@@ -163,18 +176,6 @@ const SectionLabel = ({ text, light = false }: { text: string; light?: boolean }
   </p>
 );
 
-/* ── Card hover helper ── */
-const cardHover = {
-  onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => {
-    (e.currentTarget as HTMLElement).style.borderColor = C.accentBorder;
-    (e.currentTarget as HTMLElement).style.boxShadow = C.accentShadow;
-  },
-  onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => {
-    (e.currentTarget as HTMLElement).style.borderColor = C.cardBorder;
-    (e.currentTarget as HTMLElement).style.boxShadow = "none";
-  },
-};
-
 const GestaoAtivos = () => {
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
   const [focused, setFocused] = useState<string | null>(null);
@@ -209,7 +210,7 @@ const GestaoAtivos = () => {
       <main>
 
         {/* ═══════════════════════════════════════════════════════════
-            HERO — unchanged
+            HERO
         ═══════════════════════════════════════════════════════════ */}
         <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
           <img
@@ -232,7 +233,7 @@ const GestaoAtivos = () => {
               Judice & Araujo · Desde 1975
             </motion.p>
             <motion.h1
-              className="font-display text-4xl md:text-5xl lg:text-[3.8rem] font-light tracking-[-0.02em] leading-[1.06] mb-8"
+              className="font-display text-4xl md:text-5xl lg:text-[3.8rem] font-light tracking-[-0.02em] leading-[1.06] mb-10"
               style={{ color: "#ffffff" }}
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
@@ -241,8 +242,8 @@ const GestaoAtivos = () => {
               Gestão de Ativos Imobiliários
             </motion.h1>
             <motion.p
-              className="font-display text-lg md:text-xl font-light tracking-wide mb-14"
-              style={{ color: "rgba(255,255,255,0.55)" }}
+              className="font-sans text-xl md:text-2xl font-light tracking-wide mb-14"
+              style={{ color: "rgba(255,255,255,0.50)" }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.25 }}
@@ -251,7 +252,7 @@ const GestaoAtivos = () => {
             </motion.p>
             <motion.a
               href="#contato"
-              className="inline-flex items-center gap-3 px-11 py-4 rounded-full font-sans text-[11px] font-medium tracking-[0.18em] uppercase transition-all duration-300"
+              className="inline-flex items-center px-12 py-4 rounded-full font-sans text-[11px] font-medium tracking-[0.18em] uppercase transition-all duration-300"
               style={{ background: "#ffffff", color: C.dark }}
               whileHover={{ scale: 1.04, boxShadow: "0 8px 30px -8px rgba(255,255,255,0.3)" }}
               whileTap={{ scale: 0.97 }}
@@ -260,13 +261,12 @@ const GestaoAtivos = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               Agendar uma conversa
-              <ArrowRight className="w-4 h-4" />
             </motion.a>
           </div>
         </section>
 
         {/* ═══════════════════════════════════════════════════════════
-            SEÇÃO 2 — SOBRE O SERVIÇO (two columns: text left, image right)
+            SEÇÃO 2 — SOBRE O SERVIÇO
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -302,7 +302,7 @@ const GestaoAtivos = () => {
         <Divider />
 
         {/* ═══════════════════════════════════════════════════════════
-            SEÇÃO 3 — O QUE É GESTÃO DE ATIVOS (text flows left-aligned)
+            SEÇÃO 3 — O QUE É GESTÃO DE ATIVOS — glass cards
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.sectionAlt }}>
           <div className="max-w-5xl mx-auto text-center">
@@ -320,13 +320,13 @@ const GestaoAtivos = () => {
               {assetCards.map((card, i) => (
                 <motion.div
                   key={card.title}
-                  className="rounded-2xl p-8 text-center transition-all duration-500 cursor-default"
-                  style={{ background: "#ffffff", border: `1px solid ${C.cardBorder}` }}
-                  {...cardHover}
+                  className="group rounded-2xl p-8 text-center transition-all duration-500 cursor-default"
+                  style={glassLight}
+                  whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
                   {...stagger(i)}
                 >
                   <div
-                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5"
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
                     style={{ background: C.accentLight }}
                   >
                     <card.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
@@ -353,7 +353,7 @@ const GestaoAtivos = () => {
         <ImageBreak src={aerialImg} alt="Vista aérea do Leblon e Ipanema" height="h-[50vh]" />
 
         {/* ═══════════════════════════════════════════════════════════
-            EXPERTISE
+            EXPERTISE — glass cards + smaller bairro cards
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
           <div className="max-w-6xl mx-auto text-center">
@@ -374,12 +374,14 @@ const GestaoAtivos = () => {
               {expertiseCards.map((card, i) => (
                 <motion.div
                   key={card.label}
-                  className="rounded-lg p-8 transition-all duration-500 cursor-default"
-                  style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
-                  {...cardHover}
+                  className="group rounded-2xl p-8 transition-all duration-500 cursor-default"
+                  style={glassLight}
+                  whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
                   {...stagger(i)}
                 >
-                  <card.icon className="w-5 h-5 mb-5 mx-auto" style={{ color: C.accent }} strokeWidth={1.5} />
+                  <div className="mx-auto w-12 h-12 rounded-full flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3" style={{ background: C.accentLight }}>
+                    <card.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                  </div>
                   <p className="font-sans text-sm tracking-wide leading-relaxed" style={{ color: C.heading }}>
                     {card.label}
                   </p>
@@ -394,29 +396,26 @@ const GestaoAtivos = () => {
               </p>
             </motion.div>
 
-            {/* SEÇÃO 4 — BAIRROS with images */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 max-w-4xl mx-auto mb-10">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 max-w-4xl mx-auto mb-10">
               {bairros.map((b, i) => (
                 <motion.div
                   key={b.name}
-                  className="group relative rounded-lg overflow-hidden cursor-default aspect-[4/3] transition-all duration-500"
-                  style={{ border: `1px solid ${C.cardBorder}` }}
-                  {...cardHover}
+                  className="group relative rounded-xl overflow-hidden cursor-default aspect-square transition-all duration-500"
+                  whileHover={{ y: -4, boxShadow: "0 12px 30px -8px rgba(0,0,0,0.2)" }}
                   {...stagger(i)}
                 >
                   <img
                     src={b.img}
                     alt={b.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
                   <div
                     className="absolute inset-0 transition-opacity duration-500"
-                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 60%)" }}
+                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.05) 50%)" }}
                   />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 flex items-center justify-center gap-3">
-                    <MapPin className="w-4 h-4 flex-shrink-0 text-white/70" strokeWidth={1.5} />
-                    <span className="font-display text-sm font-medium tracking-wide text-white">
+                  <div className="absolute bottom-0 left-0 right-0 p-2 flex items-center justify-center">
+                    <span className="font-display text-[11px] font-medium tracking-wide text-white">
                       {b.name}
                     </span>
                   </div>
@@ -436,13 +435,13 @@ const GestaoAtivos = () => {
         <ImageBreak src={terraceImg} alt="Terraço de cobertura com vista para o Rio" height="h-[45vh]" />
 
         {/* ═══════════════════════════════════════════════════════════
-            SEÇÃO 5 — ATENDIMENTO PERSONALIZADO (text flows continuously)
+            ATENDIMENTO PERSONALIZADO — glass cards, tighter spacing
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
           <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
               <SectionLabel text="Relacionamento" />
-              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mt-8 mb-14" style={{ color: C.heading }}>
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mt-6 mb-8" style={{ color: C.heading }}>
                 Atendimento personalizado
               </h2>
               <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-2 max-w-3xl mx-auto" style={{ color: C.body }}>
@@ -451,17 +450,17 @@ const GestaoAtivos = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 my-14 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 my-10 max-w-4xl mx-auto">
               {serviceCards.map((card, i) => (
                 <motion.div
                   key={card.label}
-                  className="relative group rounded-xl p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
-                  style={{ background: C.accentLight, border: `1px solid ${C.cardBorder}` }}
-                  whileHover={{ y: -4, boxShadow: `0 12px 32px -8px ${C.accent}30` }}
+                  className="group relative rounded-2xl p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
+                  style={glassLight}
+                  whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
                   {...stagger(i)}
                 >
                   <div
-                    className="mx-auto w-14 h-14 rounded-full flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-110"
+                    className="mx-auto w-14 h-14 rounded-full flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
                     style={{ background: C.accent }}
                   >
                     <card.icon className="w-6 h-6 text-white" strokeWidth={1.5} />
@@ -483,12 +482,12 @@ const GestaoAtivos = () => {
         <Divider />
 
         {/* ═══════════════════════════════════════════════════════════
-            SEÇÃO 6 — INTELIGÊNCIA DE MERCADO (text flows left-aligned)
+            INTELIGÊNCIA DE MERCADO — glass cards (no borders)
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.accent }}>
           <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
-              <SectionLabel text="Dados e análise" />
+              <SectionLabel text="Dados e análise" light />
               <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mt-8 mb-14 text-white">
                 Inteligência de mercado e análise de performance
               </h2>
@@ -498,12 +497,12 @@ const GestaoAtivos = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-14 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 my-14 max-w-4xl mx-auto">
               {marketCards.map((card, i) => (
                 <motion.div
                   key={card.title}
-                  className="group relative rounded-xl p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
-                  style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", backdropFilter: "blur(12px)" }}
+                  className="group relative rounded-2xl p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
+                  style={glassDark}
                   whileHover={{ y: -6, boxShadow: "0 16px 40px -10px rgba(0,0,0,0.3)" }}
                   {...stagger(i)}
                 >
@@ -536,7 +535,7 @@ const GestaoAtivos = () => {
         <ImageBreak src={interiorImg} alt="Interior de apartamento de alto padrão" height="h-[50vh]" />
 
         {/* ═══════════════════════════════════════════════════════════
-            SEÇÃO 7 — ADMINISTRAÇÃO COMPLETA (closing text flows after list)
+            ADMINISTRAÇÃO COMPLETA — unchanged per user request
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
           <div className="max-w-5xl mx-auto text-center">
@@ -582,132 +581,153 @@ const GestaoAtivos = () => {
         <Divider />
 
         {/* ═══════════════════════════════════════════════════════════
-            SEÇÃO 8 — INVESTIDORES (green bg, gold card accents)
+            PARCERIAS ESTRATÉGICAS — left-aligned + image right
         ═══════════════════════════════════════════════════════════ */}
-        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.accent }}>
-          <div className="max-w-5xl mx-auto text-center">
-            <motion.div {...fadeUp}>
-              <SectionLabel text="Parcerias estratégicas" light />
-              <h2
-                className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-8"
-                style={{ color: "#ffffff" }}
-              >
-                Gestão para investidores, Wealth Managers e Family Offices
-              </h2>
-              <p
-                className="font-sans text-[15px] font-light leading-[2.1] tracking-wide max-w-2xl mx-auto mb-8"
-                style={{ color: "rgba(255,255,255,0.6)" }}
-              >
-                A Judice & Araujo também atua em parceria com gestores de patrimônio, bancos e family offices, oferecendo suporte especializado na gestão de ativos imobiliários pertencentes a seus clientes.
-              </p>
-              <p
-                className="font-sans text-[15px] font-light leading-[2.1] tracking-wide max-w-2xl mx-auto mb-16"
-                style={{ color: "rgba(255,255,255,0.6)" }}
-              >
-                Nosso papel é complementar a estratégia patrimonial desses investidores, oferecendo uma gestão imobiliária profissional que combine:
-              </p>
-            </motion.div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-3xl mx-auto">
-              {investorCards.map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  className="flex flex-col items-center gap-4 py-9 px-5 rounded-2xl transition-all duration-500"
-                  style={{
-                    border: `1px solid ${C.goldLight}`,
-                    background: "rgba(255,255,255,0.06)",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.12)";
-                    (e.currentTarget as HTMLElement).style.borderColor = C.gold;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.06)";
-                    (e.currentTarget as HTMLElement).style.borderColor = C.goldLight;
-                  }}
-                  {...stagger(i)}
+        <section className="relative overflow-hidden" style={{ background: C.accent }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Left content */}
+            <div className="py-28 lg:py-40 px-6 lg:px-12 xl:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]">
+              <motion.div {...fadeUp} className="max-w-xl">
+                <SectionLabel text="Parcerias estratégicas" light />
+                <h2
+                  className="font-display text-2xl md:text-3xl lg:text-[2.3rem] tracking-[-0.02em] leading-[1.22] mb-14"
+                  style={{ color: "#ffffff" }}
                 >
-                  <item.icon className="w-5 h-5" style={{ color: C.gold }} strokeWidth={1.5} />
-                  <span className="font-sans text-xs tracking-wide text-center" style={{ color: "rgba(255,255,255,0.8)" }}>
-                    {item.label}
-                  </span>
-                </motion.div>
-              ))}
+                  Gestão para investidores, Wealth Managers e Family Offices
+                </h2>
+                <p
+                  className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6"
+                  style={{ color: "rgba(255,255,255,0.6)" }}
+                >
+                  A Judice & Araujo também atua em parceria com gestores de patrimônio, bancos e family offices, oferecendo suporte especializado na gestão de ativos imobiliários pertencentes a seus clientes.
+                </p>
+                <p
+                  className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-12"
+                  style={{ color: "rgba(255,255,255,0.6)" }}
+                >
+                  Nosso papel é complementar a estratégia patrimonial desses investidores, oferecendo uma gestão imobiliária profissional que combine:
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-2 gap-4 max-w-md">
+                {investorCards.map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    className="group flex flex-col items-center gap-4 py-8 px-5 rounded-2xl transition-all duration-500 cursor-default"
+                    style={glassDark}
+                    whileHover={{ y: -4, boxShadow: "0 16px 40px -10px rgba(0,0,0,0.3)" }}
+                    {...stagger(i)}
+                  >
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6" style={{ background: C.gold }}>
+                      <item.icon className="w-4 h-4" style={{ color: C.accent }} strokeWidth={1.5} />
+                    </div>
+                    <span className="font-sans text-xs tracking-wide text-center text-white/80">
+                      {item.label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
+
+            {/* Right — full-bleed image */}
+            <motion.div
+              className="relative min-h-[50vh] lg:min-h-full"
+              initial={{ opacity: 0, x: 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, margin: "-60px" }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            >
+              <img
+                src={parceriasImg}
+                alt="Reunião de parcerias estratégicas"
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to right, hsl(171 100% 12% / 0.3) 0%, transparent 40%)" }} />
+            </motion.div>
           </div>
         </section>
 
         {/* ═══════════════════════════════════════════════════════════
-            SEÇÃO 9 — CONFIANÇA E SERIEDADE (two-column layout)
+            VALORES — centralized, glass cards
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-            {/* Left — text */}
+          <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
               <SectionLabel text="Nossos valores" />
               <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
                 Confiança e seriedade
               </h2>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-left" style={{ color: C.body }}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 max-w-3xl mx-auto" style={{ color: C.body }}>
                 Ao confiar a gestão do seu imóvel à Judice & Araujo, o proprietário conta com uma empresa com quase cinco décadas de atuação no mercado imobiliário.
               </p>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-10 text-left" style={{ color: C.body }}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-10 max-w-3xl mx-auto" style={{ color: C.body }}>
                 Nossa reputação foi construída com base em valores claros:
               </p>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide text-left" style={{ color: C.body }}>
-                Esses princípios orientam todas as decisões relacionadas aos imóveis sob nossa gestão.
-              </p>
             </motion.div>
-            {/* Right — value cards */}
-            <div className="grid grid-cols-2 gap-5 lg:mt-10">
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-3xl mx-auto mb-10">
               {valuesCards.map((v, i) => (
                 <motion.div
                   key={v.label}
-                  className="flex flex-col items-center gap-4 py-10 px-5 rounded-2xl transition-all duration-500 cursor-default"
-                  style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
-                  {...cardHover}
+                  className="group flex flex-col items-center gap-4 py-10 px-5 rounded-2xl transition-all duration-500 cursor-default"
+                  style={glassLight}
+                  whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
                   {...stagger(i)}
                 >
-                  <v.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3" style={{ background: C.accentLight }}>
+                    <v.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                  </div>
                   <span className="font-display text-sm font-medium tracking-wide text-center" style={{ color: C.heading }}>
                     {v.label}
                   </span>
                 </motion.div>
               ))}
             </div>
+
+            <motion.p {...fadeUp} className="font-sans text-[15px] font-light leading-[2.1] tracking-wide max-w-3xl mx-auto" style={{ color: C.body }}>
+              Esses princípios orientam todas as decisões relacionadas aos imóveis sob nossa gestão.
+            </motion.p>
           </div>
         </section>
 
         <Divider />
 
         {/* ═══════════════════════════════════════════════════════════
-            SEÇÃO FINAL — FORMULÁRIO (green institutional bg)
+            CONTATO — white background, clean, animated
         ═══════════════════════════════════════════════════════════ */}
-        <section id="contato" className="py-28 md:py-40 px-6 md:px-16" style={{ background: C.accent }}>
+        <section id="contato" className="py-28 md:py-40 px-6 md:px-16" style={{ background: "#ffffff" }}>
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
               {/* Left */}
               <motion.div {...fadeUp} className="lg:sticky lg:top-32 self-start">
-                <SectionLabel text="Contato" light />
-                <h2 className="font-display text-3xl md:text-4xl mb-8 leading-[1.15]" style={{ color: "#ffffff" }}>
+                <SectionLabel text="Contato" />
+                <h2 className="font-display text-3xl md:text-4xl mb-8 leading-[1.15]" style={{ color: C.heading }}>
                   Fale com nossa equipe
                 </h2>
-                <p className="font-sans text-[15px] font-light leading-[2] mb-10" style={{ color: "rgba(255,255,255,0.6)" }}>
+                <p className="font-sans text-[15px] font-light leading-[2] mb-10" style={{ color: C.body }}>
                   Se você possui um imóvel de alto padrão e deseja uma gestão profissional, estratégica e confiável, entre em contato com a Judice & Araujo para conhecer melhor nosso serviço de Gestão de Ativos Imobiliários.
                 </p>
                 <div className="hidden lg:block">
-                  <div className="w-16 h-px" style={{ background: "rgba(255,255,255,0.2)" }} />
+                  <div className="w-16 h-px" style={{ background: C.line }} />
                 </div>
               </motion.div>
 
               {/* Right — form */}
               <motion.form
                 onSubmit={handleSubmit}
-                className="rounded-2xl p-8 md:p-10"
+                className="group/form rounded-2xl p-8 md:p-10 transition-all duration-700"
                 style={{
-                  background: "#ffffff",
-                  boxShadow: "0 8px 40px -12px hsl(0 0% 7% / 0.15)",
+                  background: C.sectionAlt,
+                  boxShadow: "0 4px 20px -8px rgba(0,0,0,0.06)",
                 }}
-                {...fadeUp}
+                whileHover={{
+                  boxShadow: "0 12px 40px -12px rgba(0,62,52,0.10)",
+                }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-60px" }}
+                transition={{ duration: 0.85, ease: "easeOut" }}
               >
                 <div className="space-y-8">
                   {fields.map((field) => (
@@ -763,7 +783,6 @@ const GestaoAtivos = () => {
                 >
                   <Send className="w-4 h-4" />
                   Agendar uma conversa
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                 </motion.button>
               </motion.form>
             </div>
