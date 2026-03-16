@@ -437,47 +437,67 @@ const GestaoAtivos = () => {
         <ImageBreak src={terraceImg} alt="Terraço de cobertura com vista para o Rio" height="h-[45vh]" />
 
         {/* ═══════════════════════════════════════════════════════════
-            ATENDIMENTO PERSONALIZADO — glass cards, tighter spacing
+            ATENDIMENTO PERSONALIZADO — split layout with image
         ═══════════════════════════════════════════════════════════ */}
-        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
-          <div className="max-w-5xl mx-auto text-center">
-            <motion.div {...fadeUp}>
-              <SectionLabel text="Relacionamento" />
-              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mt-6 mb-8" style={{ color: C.heading }}>
-                Atendimento personalizado
-              </h2>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-2 max-w-3xl mx-auto" style={{ color: C.body }}>
-                Cada imóvel sob gestão recebe um acompanhamento individualizado.
-                {" "}Nosso serviço foi estruturado para oferecer aos proprietários:
-              </p>
-            </motion.div>
+        <section className="relative overflow-hidden" style={{ background: "#ffffff" }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Left content */}
+            <div className="py-28 lg:py-40 px-6 lg:px-12 xl:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]">
+              <motion.div {...fadeUp} className="max-w-xl">
+                <SectionLabel text="Relacionamento" />
+                <h2 className="font-display text-2xl md:text-3xl lg:text-[2.3rem] tracking-[-0.02em] leading-[1.22] mb-10" style={{ color: C.heading }}>
+                  Atendimento personalizado
+                </h2>
+                <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-10" style={{ color: C.body }}>
+                  Cada imóvel sob gestão recebe um acompanhamento individualizado.
+                  {" "}Nosso serviço foi estruturado para oferecer aos proprietários:
+                </p>
+              </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 my-10 max-w-4xl mx-auto">
-              {serviceCards.map((card, i) => (
-                <motion.div
-                  key={card.label}
-                  className="group relative rounded-2xl p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
-                  style={glassLight}
-                  whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
-                  {...stagger(i)}
-                >
-                  <div
-                    className="mx-auto w-14 h-14 rounded-full flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
-                    style={{ background: C.accent }}
+              <div className="grid grid-cols-1 gap-4 max-w-md mb-10">
+                {serviceCards.map((card, i) => (
+                  <motion.div
+                    key={card.label}
+                    className="group relative flex items-center gap-5 rounded-2xl p-6 transition-all duration-500 cursor-default overflow-hidden"
+                    style={glassLight}
+                    whileHover={{ y: -3, boxShadow: "0 16px 40px -10px rgba(0,62,52,0.12)" }}
+                    {...stagger(i)}
                   >
-                    <card.icon className="w-6 h-6 text-white" strokeWidth={1.5} />
-                  </div>
-                  <span className="font-sans text-sm font-medium tracking-wide leading-relaxed block" style={{ color: C.heading }}>
-                    {card.label}
-                  </span>
-                  <div className="absolute bottom-0 left-0 right-0 h-[3px] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100" style={{ background: C.accent }} />
-                </motion.div>
-              ))}
+                    <div
+                      className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+                      style={{ background: C.accent }}
+                    >
+                      <card.icon className="w-5 h-5 text-white" strokeWidth={1.5} />
+                    </div>
+                    <span className="font-sans text-sm font-medium tracking-wide leading-relaxed" style={{ color: C.heading }}>
+                      {card.label}
+                    </span>
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100" style={{ background: C.accent }} />
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.p {...fadeUp} className="font-sans text-base font-semibold leading-[2.1] tracking-wide max-w-md" style={{ color: C.body }}>
+                Entendemos que cada cliente possui objetivos patrimoniais distintos, e por isso nosso trabalho é sempre conduzido de forma personalizada e estratégica.
+              </motion.p>
             </div>
 
-            <motion.p {...fadeUp} className="font-sans text-base font-semibold leading-[2.1] tracking-wide max-w-3xl mx-auto" style={{ color: C.body }}>
-              Entendemos que cada cliente possui objetivos patrimoniais distintos, e por isso nosso trabalho é sempre conduzido de forma personalizada e estratégica.
-            </motion.p>
+            {/* Right — full-bleed image */}
+            <motion.div
+              className="relative min-h-[50vh] lg:min-h-full"
+              initial={{ opacity: 0, x: 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, margin: "-60px" }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            >
+              <img
+                src={relacionamentoImg}
+                alt="Atendimento personalizado ao cliente"
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(255,255,255,0.15) 0%, transparent 40%)" }} />
+            </motion.div>
           </div>
         </section>
 
