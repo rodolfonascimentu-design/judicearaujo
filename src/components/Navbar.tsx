@@ -26,13 +26,13 @@ const Navbar = () => {
   const navLinks = [
     { label: t("nav.launches"), href: "/lancamentos" },
     { label: t("nav.evaluate"), href: "#avaliar" },
-    { label: t("nav.blog"), href: "#blog" },
+    { label: t("nav.blog"), href: "/gestao-de-ativos-imobiliarios" },
   ];
 
   const mobileNavLinks = [
     { label: t("nav.launches"), href: "/lancamentos" },
     { label: t("nav.evaluate"), href: "#avaliar" },
-    { label: t("nav.blog"), href: "#administracao" },
+    { label: t("nav.blog"), href: "/gestao-de-ativos-imobiliarios" },
     { label: t("nav.blogPost"), href: "#blog" },
     { label: t("nav.about"), href: "#quem-somos" },
     { label: t("nav.contact"), href: "#contato" },
