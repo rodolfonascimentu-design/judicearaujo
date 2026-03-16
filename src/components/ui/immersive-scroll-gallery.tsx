@@ -32,7 +32,7 @@ const ImmersiveScrollGallery: React.FC<iImmersiveScrollGalleryProps> = ({
 
   const { scrollYProgress } = useScroll({
     target: container,
-    offset: ["start start", "end end"],
+    offset: ["start start", "end start"],
   });
 
   const scale4 = useTransform(scrollYProgress, [0, 1], [1, 5]);
