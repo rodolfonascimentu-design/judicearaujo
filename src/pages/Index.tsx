@@ -31,9 +31,9 @@ const Index = () => {
         <HeroSection />
         <div className="bg-background relative z-10">
           <ExclusiveGallery />
-          <InstitutionalCTA />
-          <FeaturedCarousel />
           <ForbesPartnership />
+          <FeaturedCarousel />
+          <InstitutionalCTA />
           <Testimonials />
           <HighEndCarousel />
           <PropertyManagement />
