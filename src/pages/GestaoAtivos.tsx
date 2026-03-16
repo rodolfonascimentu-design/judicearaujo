@@ -8,14 +8,14 @@ const fadeUp = {
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-60px" },
-  transition: { duration: 0.8, ease: "easeOut" },
+  transition: { duration: 0.8, ease: "easeOut" as const },
 };
 
 const staggerChild = (delay: number) => ({
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-40px" },
-  transition: { duration: 0.6, delay, ease: "easeOut" },
+  transition: { duration: 0.6, delay, ease: "easeOut" as const },
 });
 
 const BulletList = ({ items }: { items: string[] }) => (
