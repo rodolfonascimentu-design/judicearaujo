@@ -37,7 +37,7 @@ const stagger = (i: number) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: false, margin: "-60px" },
-  transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" as const },
+  transition: { duration: 0.6, delay: i * 0.12, ease: "easeOut" as const },
 });
 
 /* ── data ── */
@@ -101,21 +101,29 @@ const GestaoAtivos = () => {
     { key: "email" as const, type: "email", label: "Seu melhor e-mail", required: true },
   ];
 
+  /* elegant thin divider */
+  const Divider = () => (
+    <div className="flex items-center justify-center py-2">
+      <div className="w-16 h-px" style={{ background: "hsl(0 0% 78%)" }} />
+    </div>
+  );
+
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background">
+    <div className="min-h-screen overflow-x-hidden" style={{ background: "#ffffff" }}>
       <Navbar />
       <main>
         {/* ═══════════════ HERO ═══════════════ */}
-        <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
           <img
             src={heroImg}
             alt="Interior de apartamento de alto padrão no Rio de Janeiro"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-foreground/60" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(18,18,18,0.55) 0%, rgba(18,18,18,0.7) 100%)" }} />
           <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-12 text-center">
             <motion.p
-              className="font-sans text-[10px] tracking-[0.4em] uppercase text-white/50 mb-6 font-medium"
+              className="font-sans text-[10px] tracking-[0.45em] uppercase mb-8 font-medium"
+              style={{ color: "rgba(255,255,255,0.45)" }}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -123,7 +131,8 @@ const GestaoAtivos = () => {
               Judice & Araujo
             </motion.p>
             <motion.h1
-              className="font-display text-4xl md:text-5xl lg:text-6xl font-normal text-white tracking-[-0.02em] leading-[1.1] mb-6"
+              className="font-display text-4xl md:text-5xl lg:text-[3.5rem] font-light tracking-[-0.02em] leading-[1.08] mb-7"
+              style={{ color: "#ffffff" }}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
@@ -131,7 +140,8 @@ const GestaoAtivos = () => {
               Gestão de Ativos Imobiliários
             </motion.h1>
             <motion.p
-              className="font-display text-lg md:text-xl text-white/65 font-light tracking-wide mb-10"
+              className="font-display text-lg md:text-xl font-light tracking-wide mb-12"
+              style={{ color: "rgba(255,255,255,0.6)" }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -140,8 +150,12 @@ const GestaoAtivos = () => {
             </motion.p>
             <motion.a
               href="#contato"
-              className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-white text-foreground font-sans text-[11px] font-semibold tracking-[0.15em] uppercase transition-all duration-300 hover:bg-white/90 hover:shadow-[0_8px_30px_-8px_rgba(255,255,255,0.3)]"
-              whileHover={{ scale: 1.04 }}
+              className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-sans text-[11px] font-semibold tracking-[0.15em] uppercase transition-all duration-300"
+              style={{
+                background: "#ffffff",
+                color: "#121212",
+              }}
+              whileHover={{ scale: 1.04, boxShadow: "0 8px 30px -8px rgba(255,255,255,0.25)" }}
               whileTap={{ scale: 0.97 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -153,19 +167,31 @@ const GestaoAtivos = () => {
           </div>
         </section>
 
-        {/* ═══════════════ HIGHLIGHTS (4 CARDS) ═══════════════ */}
-        <section className="py-20 lg:py-28 px-6 lg:px-12 bg-background">
+        {/* ═══════════════ HIGHLIGHTS ═══════════════ */}
+        <section className="py-24 lg:py-32 px-6 lg:px-12" style={{ background: "#fafafa" }}>
           <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {highlights.map((h, i) => (
               <motion.div
                 key={h.value}
-                className="group relative bg-background border border-border/60 rounded-xl p-8 text-center transition-all duration-500 hover:border-primary/30 hover:shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.12)]"
+                className="group relative rounded-xl p-8 text-center transition-all duration-500"
+                style={{
+                  background: "#ffffff",
+                  border: "1px solid hsl(0 0% 90%)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.25)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 40px -12px hsl(171 100% 12% / 0.08)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 90%)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                }}
                 {...stagger(i)}
               >
-                <p className="font-display text-2xl md:text-3xl text-primary mb-3 tracking-tight">
+                <p className="font-display text-2xl md:text-3xl mb-3 tracking-tight" style={{ color: "hsl(171 100% 12%)" }}>
                   {h.value}
                 </p>
-                <p className="font-sans text-xs text-muted-foreground tracking-wide leading-relaxed">
+                <p className="font-sans text-xs tracking-wide leading-relaxed" style={{ color: "hsl(0 0% 45%)" }}>
                   {h.label}
                 </p>
               </motion.div>
@@ -173,20 +199,22 @@ const GestaoAtivos = () => {
           </div>
         </section>
 
+        <Divider />
+
         {/* ═══════════════ O QUE É GESTÃO ═══════════════ */}
-        <section className="py-24 lg:py-32 px-6 lg:px-12 bg-muted/30">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
+        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "#ffffff" }}>
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <motion.div {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-primary mb-4 font-medium">
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium" style={{ color: "hsl(171 100% 12%)" }}>
                 Nosso serviço
               </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl text-foreground tracking-[-0.02em] leading-[1.2] mb-6">
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-8" style={{ color: "hsl(0 0% 10%)" }}>
                 O que é Gestão de Ativos Imobiliários
               </h2>
-              <p className="font-sans text-sm md:text-base text-muted-foreground font-light leading-[1.9] tracking-wide mb-4">
+              <p className="font-sans text-sm md:text-[15px] font-light leading-[2] tracking-wide mb-5" style={{ color: "hsl(0 0% 40%)" }}>
                 A gestão de ativos imobiliários é uma abordagem profissional em que o imóvel é tratado como um ativo patrimonial, acompanhado continuamente para maximizar seu potencial.
               </p>
-              <p className="font-sans text-sm md:text-base text-muted-foreground font-light leading-[1.9] tracking-wide">
+              <p className="font-sans text-sm md:text-[15px] font-light leading-[2] tracking-wide" style={{ color: "hsl(0 0% 40%)" }}>
                 Na Judice & Araujo, cada imóvel é analisado dentro de seu contexto de mercado, considerando localização, tipologia, demanda e benchmarks imobiliários.
               </p>
             </motion.div>
@@ -194,14 +222,26 @@ const GestaoAtivos = () => {
               {assetCards.map((card, i) => (
                 <motion.div
                   key={card.title}
-                  className="group bg-background border border-border/50 rounded-xl p-7 transition-all duration-500 hover:border-primary/25 hover:shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.1)]"
+                  className="group rounded-xl p-7 transition-all duration-500"
+                  style={{
+                    background: "#fafafa",
+                    border: "1px solid hsl(0 0% 91%)",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.2)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 40px -12px hsl(171 100% 12% / 0.07)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 91%)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                  }}
                   {...stagger(i)}
                 >
-                  <card.icon className="w-6 h-6 text-primary mb-4" strokeWidth={1.5} />
-                  <h3 className="font-display text-sm font-medium text-foreground mb-2 tracking-wide">
+                  <card.icon className="w-6 h-6 mb-4" style={{ color: "hsl(171 100% 12%)" }} strokeWidth={1.5} />
+                  <h3 className="font-display text-sm font-medium mb-2 tracking-wide" style={{ color: "hsl(0 0% 10%)" }}>
                     {card.title}
                   </h3>
-                  <p className="font-sans text-xs text-muted-foreground leading-relaxed">
+                  <p className="font-sans text-xs leading-relaxed" style={{ color: "hsl(0 0% 50%)" }}>
                     {card.desc}
                   </p>
                 </motion.div>
@@ -210,29 +250,43 @@ const GestaoAtivos = () => {
           </div>
         </section>
 
+        <Divider />
+
         {/* ═══════════════ BAIRROS ═══════════════ */}
-        <section className="py-24 lg:py-32 px-6 lg:px-12 bg-background">
+        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "#fafafa" }}>
           <div className="max-w-6xl mx-auto">
-            <motion.div className="text-center mb-16" {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-primary mb-4 font-medium">
+            <motion.div className="text-center mb-20" {...fadeUp}>
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium" style={{ color: "hsl(171 100% 12%)" }}>
                 Áreas de atuação
               </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl text-foreground tracking-[-0.02em] leading-[1.2] mb-4">
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-5" style={{ color: "hsl(0 0% 10%)" }}>
                 Bairros de atuação
               </h2>
-              <p className="font-sans text-sm text-muted-foreground font-light max-w-xl mx-auto leading-relaxed">
+              <p className="font-sans text-sm font-light max-w-xl mx-auto leading-relaxed" style={{ color: "hsl(0 0% 45%)" }}>
                 Nossa equipe acompanha de perto a dinâmica dos bairros mais valorizados do Rio de Janeiro.
               </p>
             </motion.div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
               {bairros.map((b, i) => (
                 <motion.div
                   key={b}
-                  className="group flex flex-col items-center justify-center py-8 px-4 rounded-xl border border-border/50 bg-background transition-all duration-500 hover:border-primary/30 hover:shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.1)]"
+                  className="group flex flex-col items-center justify-center py-10 px-4 rounded-xl transition-all duration-500"
+                  style={{
+                    background: "#ffffff",
+                    border: "1px solid hsl(0 0% 90%)",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.25)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 40px -12px hsl(171 100% 12% / 0.08)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 90%)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                  }}
                   {...stagger(i)}
                 >
-                  <MapPin className="w-5 h-5 text-primary/60 mb-3 group-hover:text-primary transition-colors duration-300" strokeWidth={1.5} />
-                  <span className="font-sans text-xs font-medium text-foreground tracking-wide text-center">
+                  <MapPin className="w-5 h-5 mb-3 transition-colors duration-300" style={{ color: "hsl(171 100% 12% / 0.5)" }} strokeWidth={1.5} />
+                  <span className="font-display text-sm font-medium tracking-wide text-center" style={{ color: "hsl(0 0% 15%)" }}>
                     {b}
                   </span>
                 </motion.div>
@@ -241,17 +295,19 @@ const GestaoAtivos = () => {
           </div>
         </section>
 
+        <Divider />
+
         {/* ═══════════════ INTELIGÊNCIA DE MERCADO ═══════════════ */}
-        <section className="py-24 lg:py-32 px-6 lg:px-12 bg-muted/30">
+        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "#ffffff" }}>
           <div className="max-w-6xl mx-auto">
-            <motion.div className="text-center mb-16" {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-primary mb-4 font-medium">
+            <motion.div className="text-center mb-20" {...fadeUp}>
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium" style={{ color: "hsl(171 100% 12%)" }}>
                 Dados e análise
               </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl text-foreground tracking-[-0.02em] leading-[1.2] mb-4">
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-5" style={{ color: "hsl(0 0% 10%)" }}>
                 Inteligência de mercado
               </h2>
-              <p className="font-sans text-sm text-muted-foreground font-light max-w-xl mx-auto leading-relaxed">
+              <p className="font-sans text-sm font-light max-w-xl mx-auto leading-relaxed" style={{ color: "hsl(0 0% 45%)" }}>
                 Acompanhamento contínuo da performance do ativo com benchmarks e relatórios periódicos.
               </p>
             </motion.div>
@@ -259,13 +315,28 @@ const GestaoAtivos = () => {
               {marketCards.map((card, i) => (
                 <motion.div
                   key={card.title}
-                  className="group bg-background border border-border/50 rounded-xl p-8 text-center transition-all duration-500 hover:border-primary/25 hover:shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.1)]"
+                  className="group rounded-xl p-8 text-center transition-all duration-500"
+                  style={{
+                    background: "#fafafa",
+                    border: "1px solid hsl(0 0% 91%)",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.2)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 40px -12px hsl(171 100% 12% / 0.07)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 91%)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                  }}
                   {...stagger(i)}
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/5 mb-5 group-hover:bg-primary/10 transition-colors duration-300">
-                    <card.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                  <div
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6 transition-colors duration-300"
+                    style={{ background: "hsl(171 100% 12% / 0.06)" }}
+                  >
+                    <card.icon className="w-5 h-5" style={{ color: "hsl(171 100% 12%)" }} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display text-sm font-medium text-foreground tracking-wide leading-snug">
+                  <h3 className="font-display text-sm font-medium tracking-wide leading-snug" style={{ color: "hsl(0 0% 12%)" }}>
                     {card.title}
                   </h3>
                 </motion.div>
@@ -274,17 +345,19 @@ const GestaoAtivos = () => {
           </div>
         </section>
 
+        <Divider />
+
         {/* ═══════════════ ADMINISTRAÇÃO COMPLETA ═══════════════ */}
-        <section className="py-24 lg:py-32 px-6 lg:px-12 bg-background">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
+        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "#fafafa" }}>
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <motion.div {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-primary mb-4 font-medium">
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium" style={{ color: "hsl(171 100% 12%)" }}>
                 Serviço completo
               </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl text-foreground tracking-[-0.02em] leading-[1.2] mb-6">
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-8" style={{ color: "hsl(0 0% 10%)" }}>
                 Administração completa da locação
               </h2>
-              <p className="font-sans text-sm md:text-base text-muted-foreground font-light leading-[1.9] tracking-wide">
+              <p className="font-sans text-sm md:text-[15px] font-light leading-[2] tracking-wide" style={{ color: "hsl(0 0% 40%)" }}>
                 A Judice & Araujo realiza toda a gestão operacional do imóvel, do posicionamento à manutenção do relacionamento com inquilinos.
               </p>
             </motion.div>
@@ -292,13 +365,28 @@ const GestaoAtivos = () => {
               {adminSteps.map((step, i) => (
                 <motion.div
                   key={step.label}
-                  className="group flex items-center gap-5 py-5 px-6 rounded-xl border border-border/40 bg-background transition-all duration-500 hover:border-primary/25 hover:shadow-[0_4px_20px_-8px_hsl(var(--primary)/0.08)]"
+                  className="group flex items-center gap-5 py-5 px-6 rounded-xl transition-all duration-500"
+                  style={{
+                    background: "#ffffff",
+                    border: "1px solid hsl(0 0% 91%)",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.2)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px -8px hsl(171 100% 12% / 0.06)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 91%)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                  }}
                   {...stagger(i)}
                 >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-300">
-                    <step.icon className="w-4.5 h-4.5 text-primary" strokeWidth={1.5} />
+                  <div
+                    className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-300"
+                    style={{ background: "hsl(171 100% 12% / 0.06)" }}
+                  >
+                    <step.icon className="w-[18px] h-[18px]" style={{ color: "hsl(171 100% 12%)" }} strokeWidth={1.5} />
                   </div>
-                  <span className="font-sans text-sm text-foreground tracking-wide">
+                  <span className="font-sans text-sm tracking-wide" style={{ color: "hsl(0 0% 18%)" }}>
                     {step.label}
                   </span>
                 </motion.div>
@@ -307,23 +395,28 @@ const GestaoAtivos = () => {
           </div>
         </section>
 
+        <Divider />
+
         {/* ═══════════════ INVESTIDORES & FAMILY OFFICES ═══════════════ */}
-        <section className="py-24 lg:py-32 px-6 lg:px-12 bg-primary">
+        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "hsl(171 100% 12%)" }}>
           <div className="max-w-5xl mx-auto text-center">
             <motion.p
-              className="font-sans text-[10px] tracking-[0.3em] uppercase text-primary-foreground/40 mb-4 font-medium"
+              className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium"
+              style={{ color: "rgba(255,255,255,0.35)" }}
               {...fadeUp}
             >
               Parcerias estratégicas
             </motion.p>
             <motion.h2
-              className="font-display text-2xl md:text-3xl lg:text-4xl text-primary-foreground tracking-[-0.02em] leading-[1.2] mb-6"
+              className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-7"
+              style={{ color: "#ffffff" }}
               {...fadeUp}
             >
               Gestão para investidores e family offices
             </motion.h2>
             <motion.p
-              className="font-sans text-sm md:text-base text-primary-foreground/55 font-light leading-[1.9] tracking-wide max-w-2xl mx-auto mb-12"
+              className="font-sans text-sm md:text-[15px] font-light leading-[2] tracking-wide max-w-2xl mx-auto mb-14"
+              style={{ color: "rgba(255,255,255,0.5)" }}
               {...fadeUp}
             >
               Atuamos em parceria com gestores de patrimônio, bancos e family offices, oferecendo suporte especializado na gestão de ativos imobiliários.
@@ -337,11 +430,21 @@ const GestaoAtivos = () => {
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
-                  className="flex flex-col items-center gap-3 py-6 px-4 rounded-xl border border-primary-foreground/10 bg-primary-foreground/5 transition-all duration-500 hover:bg-primary-foreground/10"
+                  className="flex flex-col items-center gap-4 py-8 px-4 rounded-xl transition-all duration-500"
+                  style={{
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "rgba(255,255,255,0.04)",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
+                  }}
                   {...stagger(i)}
                 >
-                  <item.icon className="w-5 h-5 text-primary-foreground/60" strokeWidth={1.5} />
-                  <span className="font-sans text-xs text-primary-foreground/70 tracking-wide text-center">
+                  <item.icon className="w-5 h-5" style={{ color: "rgba(255,255,255,0.55)" }} strokeWidth={1.5} />
+                  <span className="font-sans text-xs tracking-wide text-center" style={{ color: "rgba(255,255,255,0.65)" }}>
                     {item.label}
                   </span>
                 </motion.div>
@@ -351,7 +454,7 @@ const GestaoAtivos = () => {
         </section>
 
         {/* ═══════════════ FORMULÁRIO DE CONTATO ═══════════════ */}
-        <section id="contato" className="py-24 md:py-32 px-6 md:px-16 bg-background">
+        <section id="contato" className="py-28 md:py-36 px-6 md:px-16" style={{ background: "#ffffff" }}>
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
               {/* Left */}
@@ -359,38 +462,48 @@ const GestaoAtivos = () => {
                 {...fadeUp}
                 className="lg:sticky lg:top-32 self-start"
               >
-                <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-4">
+                <p className="font-sans text-[10px] tracking-[0.25em] uppercase mb-5" style={{ color: "hsl(0 0% 50%)" }}>
                   Contato
                 </p>
-                <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6 leading-[1.15]">
+                <h2 className="font-display text-3xl md:text-4xl mb-7 leading-[1.15]" style={{ color: "hsl(0 0% 10%)" }}>
                   Fale com nossa equipe
                 </h2>
-                <p className="font-sans text-sm text-muted-foreground leading-[1.8] mb-8">
+                <p className="font-sans text-sm leading-[1.9] mb-8" style={{ color: "hsl(0 0% 45%)" }}>
                   Se você possui um imóvel de alto padrão e deseja uma gestão profissional, estratégica e confiável, entre em contato com a Judice & Araujo.
                 </p>
                 <div className="hidden lg:block">
-                  <div className="w-16 h-px bg-primary/30" />
+                  <div className="w-16 h-px" style={{ background: "hsl(171 100% 12% / 0.25)" }} />
                 </div>
               </motion.div>
 
               {/* Right — form */}
               <motion.form
                 onSubmit={handleSubmit}
-                className="bg-background rounded-lg p-8 md:p-10 shadow-[0_8px_40px_-12px_hsl(var(--foreground)/0.06)] border border-border/30"
+                className="rounded-lg p-8 md:p-10"
+                style={{
+                  background: "#ffffff",
+                  boxShadow: "0 8px 40px -12px hsl(0 0% 7% / 0.06)",
+                  border: "1px solid hsl(0 0% 92%)",
+                }}
                 {...fadeUp}
               >
-                <div className="space-y-6">
+                <div className="space-y-7">
                   {fields.map((field) => (
                     <div key={field.key} className="relative">
                       <label
                         className={`absolute left-0 transition-all duration-300 font-sans pointer-events-none ${
                           focused === field.key || form[field.key]
-                            ? "text-[10px] tracking-[0.15em] uppercase text-primary -top-1"
-                            : "text-sm text-muted-foreground top-3"
+                            ? "text-[10px] tracking-[0.15em] uppercase -top-1"
+                            : "text-sm top-3"
                         }`}
+                        style={{
+                          color: focused === field.key || form[field.key]
+                            ? "hsl(171 100% 12%)"
+                            : "hsl(0 0% 50%)",
+                        }}
                       >
                         {field.label}
-                        {field.required && <span className="text-primary ml-0.5">*</span>}
+                        {field.required && <span style={{ color: "hsl(171 100% 12%)" }} className="ml-0.5">*</span>}
                       </label>
                       <input
                         type={field.type}
@@ -399,19 +512,23 @@ const GestaoAtivos = () => {
                         onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
                         onFocus={() => setFocused(field.key)}
                         onBlur={() => setFocused(null)}
-                        className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors duration-300"
+                        className="w-full bg-transparent border-b-2 px-0 pt-5 pb-2 font-sans text-sm focus:outline-none transition-colors duration-300"
+                        style={{
+                          color: "hsl(0 0% 10%)",
+                          borderColor: focused === field.key ? "hsl(171 100% 12%)" : "hsl(0 0% 88%)",
+                        }}
                       />
                     </div>
                   ))}
                 </div>
 
-                <p className="font-sans text-[10px] text-muted-foreground leading-relaxed mt-6 mb-6">
+                <p className="font-sans text-[10px] leading-relaxed mt-7 mb-7" style={{ color: "hsl(0 0% 55%)" }}>
                   Ao informar meus dados concordo com a{" "}
-                  <a href="#" className="underline hover:text-primary transition-colors">
+                  <a href="#" className="underline transition-colors" style={{ color: "hsl(0 0% 40%)" }}>
                     Política de Privacidade
                   </a>{" "}
                   e{" "}
-                  <a href="#" className="underline hover:text-primary transition-colors">
+                  <a href="#" className="underline transition-colors" style={{ color: "hsl(0 0% 40%)" }}>
                     Termos de Uso
                   </a>
                   .
@@ -419,8 +536,12 @@ const GestaoAtivos = () => {
 
                 <motion.button
                   type="submit"
-                  className="group inline-flex items-center gap-2.5 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.4)]"
-                  whileHover={{ scale: 1.02 }}
+                  className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase transition-all duration-300"
+                  style={{
+                    background: "hsl(171 100% 12%)",
+                    color: "#ffffff",
+                  }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 4px 20px -4px hsl(171 100% 12% / 0.35)" }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Send className="w-4 h-4" />
