@@ -356,30 +356,30 @@ const GestaoAtivos = () => {
             EXPERTISE
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
-          <div className="max-w-6xl mx-auto">
-            <motion.div className="max-w-3xl mb-20" {...fadeUp}>
+          <div className="max-w-6xl mx-auto text-center">
+            <motion.div className="max-w-3xl mx-auto mb-10" {...fadeUp}>
               <SectionLabel text="Tradição e expertise" />
               <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
                 Expertise no mercado de alto padrão
               </h2>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-left" style={{ color: C.body }}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
                 A Judice & Araujo é uma empresa familiar fundada em 1975, reconhecida por sua atuação no mercado imobiliário de alto padrão do Rio de Janeiro.
               </p>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide text-left" style={{ color: C.body }}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
                 Ao longo de décadas, construímos uma reputação baseada em:
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-24">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
               {expertiseCards.map((card, i) => (
                 <motion.div
                   key={card.label}
-                  className="rounded-2xl p-8 transition-all duration-500 cursor-default"
+                  className="rounded-lg p-8 transition-all duration-500 cursor-default"
                   style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
                   {...cardHover}
                   {...stagger(i)}
                 >
-                  <card.icon className="w-5 h-5 mb-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                  <card.icon className="w-5 h-5 mb-5 mx-auto" style={{ color: C.accent }} strokeWidth={1.5} />
                   <p className="font-sans text-sm tracking-wide leading-relaxed" style={{ color: C.heading }}>
                     {card.label}
                   </p>
@@ -388,18 +388,18 @@ const GestaoAtivos = () => {
             </div>
 
             {/* Bairros */}
-            <motion.div className="max-w-3xl mb-14" {...fadeUp}>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide text-left" style={{ color: C.body }}>
+            <motion.div className="max-w-4xl mx-auto mb-10" {...fadeUp}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
                 Nossa equipe acompanha de perto a dinâmica dos bairros mais valorizados da cidade, incluindo, mas não se limitando a:
               </p>
             </motion.div>
 
             {/* SEÇÃO 4 — BAIRROS with images */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 max-w-4xl mb-14">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 max-w-4xl mx-auto mb-10">
               {bairros.map((b, i) => (
                 <motion.div
                   key={b.name}
-                  className="group relative rounded-2xl overflow-hidden cursor-default aspect-[4/3] transition-all duration-500"
+                  className="group relative rounded-lg overflow-hidden cursor-default aspect-[4/3] transition-all duration-500"
                   style={{ border: `1px solid ${C.cardBorder}` }}
                   {...cardHover}
                   {...stagger(i)}
@@ -414,7 +414,7 @@ const GestaoAtivos = () => {
                     className="absolute inset-0 transition-opacity duration-500"
                     style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 60%)" }}
                   />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 flex items-center gap-3">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 flex items-center justify-center gap-3">
                     <MapPin className="w-4 h-4 flex-shrink-0 text-white/70" strokeWidth={1.5} />
                     <span className="font-display text-sm font-medium tracking-wide text-white">
                       {b.name}
@@ -424,8 +424,8 @@ const GestaoAtivos = () => {
               ))}
             </div>
 
-            <motion.div className="max-w-3xl" {...fadeUp}>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide text-left" style={{ color: C.body }}>
+            <motion.div className="max-w-4xl mx-auto" {...fadeUp}>
+              <p className="font-sans text-base font-semibold leading-[2.1] tracking-wide" style={{ color: C.heading }}>
                 Essa expertise permite posicionar cada imóvel de forma adequada dentro do mercado premium.
               </p>
             </motion.div>
