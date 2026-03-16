@@ -107,6 +107,7 @@ const jaAccess = [
   "uma audiência global altamente qualificada",
   "exposição internacional através da marca Forbes",
   "uma rede de imobiliárias líderes em seus mercados",
+  "compradores de alto poder aquisitivo ao redor do mundo",
 ];
 
 /* ── Gallery Images (6 photos) ── */
