@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { Shield, Users, TrendingUp } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 const ForbesPartnership = () => {
   const { t } = useLanguage();
