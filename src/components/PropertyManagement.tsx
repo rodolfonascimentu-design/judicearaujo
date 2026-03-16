@@ -48,7 +48,7 @@ const PropertyManagement = () => {
             viewport={{ once: false, margin: "-80px" }}
             transition={{ duration: 0.9, ease: "easeOut" }}
           >
-            <img src={forbesLogo} alt="Forbes Global Properties" className="h-20 md:h-24 lg:h-28 object-contain mx-auto" />
+            <img src={forbesLogo} alt="Forbes Global Properties" className="h-20 md:h-24 lg:h-28 object-contain mx-auto" loading="lazy" decoding="async" fetchPriority="low" />
           </motion.div>
 
           {/* Title */}
@@ -107,7 +107,7 @@ const PropertyManagement = () => {
               viewport={{ once: false, margin: "-40px" }}
               transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
             >
-              <img src={img} alt={`Foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+              <img src={img} alt={`Foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async" fetchPriority="low" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
             </motion.div>
           ))}
