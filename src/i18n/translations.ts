@@ -43,10 +43,12 @@ const translations: Record<Lang, Record<string, string>> = {
     "cta.evaluateNote": "Avaliação rápida e confidencial.",
 
     // Forbes Partnership
-    "forbes.subtitle": "Parceria Global",
-    "forbes.title": "Uma rede global\npara imóveis extraordinários",
-    "forbes.desc": "A Judice & Araujo faz parte da Forbes Global Properties, uma rede internacional que reúne algumas das mais prestigiadas imobiliárias do mundo.",
-    "forbes.cta": "Conheça a parceria",
+    "forbes.subtitle": "Forbes Global Properties",
+    "forbes.title": "A rede internacional que conecta compradores e vendedores dos imóveis mais excepcionais do mundo.",
+    "forbes.desc1": "A Forbes Global Properties, rede internacional formada por algumas das mais prestigiadas imobiliárias do mercado de alto padrão, chegou ao Brasil e escolheu a Judice & Araujo para representá-la com exclusividade no Rio de Janeiro.",
+    "forbes.desc2": "Criada em parceria com a Forbes, uma das marcas de mídia mais respeitadas do mundo, a plataforma reúne propriedades extraordinárias e conecta compradores e vendedores a uma audiência global de alto poder aquisitivo.",
+    "forbes.desc3": "Com acesso à audiência internacional da Forbes e a uma rede selecionada de imobiliárias líderes em seus mercados, a Judice & Araujo leva os imóveis de seus clientes a um novo patamar de visibilidade e abre as portas do mercado internacional para compradores e vendedores.",
+    "forbes.cta": "Saiba mais sobre a Forbes Global Properties",
     "forbes.reach": "Alcance internacional",
     "forbes.network": "Rede global de luxo",
     "forbes.networkDesc": "Parceiros selecionados nos mercados mais prestigiados do mundo.",
