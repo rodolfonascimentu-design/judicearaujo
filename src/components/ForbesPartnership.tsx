@@ -35,7 +35,7 @@ const ForbesPartnership = () => {
               <p className="font-display text-lg md:text-xl text-primary-foreground leading-snug">{t("pm.quote1")}</p>
               <p className="font-display text-lg md:text-xl text-primary-foreground leading-snug mt-1">{t("pm.quote2")}</p>
             </motion.div>
-            <motion.button className="mt-10 px-10 py-4 rounded-full text-[12px] font-sans font-semibold tracking-[0.15em] uppercase bg-primary-foreground text-primary transition-shadow duration-300 hover:shadow-[0_6px_20px_-4px_hsl(var(--primary)/0.4)]" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, margin: "-40px" }} transition={{ duration: 0.5, delay: 0.6 }}>
+            <motion.button onClick={() => navigate("/gestao-de-ativos-imobiliarios")} className="mt-10 px-10 py-4 rounded-full text-[12px] font-sans font-semibold tracking-[0.15em] uppercase bg-primary-foreground text-primary transition-shadow duration-300 hover:shadow-[0_6px_20px_-4px_hsl(var(--primary)/0.4)]" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, margin: "-40px" }} transition={{ duration: 0.5, delay: 0.6 }}>
               {t("pm.cta")}
             </motion.button>
           </motion.div>
