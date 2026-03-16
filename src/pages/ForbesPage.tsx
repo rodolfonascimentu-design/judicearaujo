@@ -188,7 +188,7 @@ const ForbesPage = () => {
             loop
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            src="/videos/RJ.mp4"
+            src="/videos/forbes-hero.mp4"
           />
           <div className="absolute inset-0 bg-black/45" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,63,52,0.2) 0%, transparent 40%, rgba(0,0,0,0.5) 100%)" }} />
