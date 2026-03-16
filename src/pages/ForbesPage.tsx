@@ -110,7 +110,7 @@ const jaAccess = [
 ];
 
 /* ── Gallery Images (6 photos) ── */
-const galleryImages = [property1, property2, property3, property4, property5, property6];
+const galleryImages = [forbesGallery1, forbesGallery2, forbesGallery3, forbesGallery4, forbesGallery5, forbesGallery6];
 
 /* ── Document Images for Lightbox ── */
 const docImages = [
