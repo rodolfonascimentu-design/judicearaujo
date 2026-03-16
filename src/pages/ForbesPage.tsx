@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence, useInView, animate } from "framer-motion";
-import { Send, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Send, ArrowRight, ChevronLeft, ChevronRight, X, Maximize } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -29,11 +29,6 @@ const stagger = (i: number) => ({
   ...fadeUp,
   transition: { ...fadeUp.transition, delay: 0.1 + i * 0.08 },
 } as any);
-
-const C = {
-  accent: "hsl(var(--primary))",
-  accentRaw: "#003F34",
-};
 
 const glassCardWhite = {
   background: "linear-gradient(135deg, rgba(0,63,52,0.06) 0%, rgba(0,63,52,0.02) 100%)",
@@ -123,11 +118,51 @@ const galleryProperties = [
   { image: property6, title: "Refúgio à Beira-Mar", neighborhood: "São Conrado" },
 ];
 
+/* ── Document Images for Lightbox ── */
+const docImages = [
+  { src: docImg1, alt: "Forbes Global Properties — Visão editorial" },
+  { src: chartImg, alt: "Forbes Global Properties — Alcance de mídia" },
+];
+
 /* ══════════════════════════════════════════════════════════ */
 
 const ForbesPage = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [focused, setFocused] = useState<string | null>(null);
+
+  /* Lightbox for doc images */
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+    document.body.style.overflow = "hidden";
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false);
+    document.body.style.overflow = "";
+  }, []);
+
+  const goNextLB = useCallback(() => {
+    setLightboxIndex((i) => (i + 1) % docImages.length);
+  }, []);
+
+  const goPrevLB = useCallback(() => {
+    setLightboxIndex((i) => (i - 1 + docImages.length) % docImages.length);
+  }, []);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (!lightboxOpen) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") goNextLB();
+      if (e.key === "ArrowLeft") goPrevLB();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [lightboxOpen, closeLightbox, goNextLB, goPrevLB]);
 
   /* Gallery carousel */
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", loop: true, skipSnaps: false });
@@ -167,7 +202,7 @@ const ForbesPage = () => {
   ] as const;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
       <main>
         {/* ─── HERO — Video + Logo Animation ─── */}
@@ -205,7 +240,7 @@ const ForbesPage = () => {
         </section>
 
         {/* ─── INTRO — White ─── */}
-        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-background">
+        <section className="py-28 lg:py-36 px-6 lg:px-12 bg-white">
           <div className="max-w-4xl mx-auto text-center">
             <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-10 font-medium">
               Forbes Global Properties
@@ -226,7 +261,7 @@ const ForbesPage = () => {
         </section>
 
         {/* ─── GALLERY CAROUSEL — White ─── */}
-        <section className="pb-28 lg:pb-40 bg-background">
+        <section className="pb-24 lg:pb-32 bg-white">
           <div className="relative px-6 lg:px-12">
             <div className="max-w-6xl mx-auto">
               <div className="flex items-center justify-between mb-8">
@@ -288,10 +323,23 @@ const ForbesPage = () => {
         <section className="py-28 lg:py-40 px-6 lg:px-12 bg-primary">
           <div className="max-w-5xl mx-auto">
             <motion.div {...fadeUp} className="text-center mb-20">
-              <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-primary-foreground/60 mb-8 font-medium">A força da marca</p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-primary-foreground leading-[1.2] mb-8">
-                A força da marca Forbes
-              </h2>
+              <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-primary-foreground/60 mb-10 font-medium">A força da marca</p>
+              
+              {/* Forbes logo instead of text title */}
+              <motion.div
+                className="flex justify-center mb-10"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: false, margin: "-80px" }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              >
+                <img
+                  src={forbesLogoWhite}
+                  alt="Forbes Global Properties"
+                  className="h-[40px] md:h-[50px] lg:h-[60px] w-auto"
+                />
+              </motion.div>
+
               <div className="w-12 h-px bg-primary-foreground/30 mx-auto mb-10" />
               <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto mb-6">
                 A Forbes é uma das marcas de mídia mais reconhecidas globalmente no universo de negócios, empreendedorismo e nos mercado de luxo.
@@ -326,11 +374,11 @@ const ForbesPage = () => {
               })}
             </div>
 
-            {/* Pull quote */}
+            {/* Pull quote — smaller */}
             <motion.div {...fadeUp} className="text-center">
-              <div className="max-w-3xl mx-auto">
+              <div className="max-w-2xl mx-auto">
                 <motion.blockquote
-                  className="font-display text-sm md:text-base lg:text-lg font-normal text-primary-foreground/60 leading-[1.6] italic"
+                  className="font-display text-xs md:text-sm font-normal text-primary-foreground/50 leading-[1.6] italic"
                   {...stagger(0)}
                 >
                   "Essa visibilidade global cria um poderoso efeito de marca, ampliando o alcance das propriedades apresentadas através da Forbes Global Properties."
@@ -408,18 +456,37 @@ const ForbesPage = () => {
           </div>
         </section>
 
-        {/* ─── CHART IMAGE — White ─── */}
-        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-background">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              className="overflow-hidden rounded-lg"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: "-80px" }}
-              transition={{ duration: 0.8 }}
-            >
-              <img src={chartImg} alt="Forbes Global Properties media reach chart" className="w-full h-auto object-contain" />
+        {/* ─── DOCUMENT IMAGES GALLERY — White ─── */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-white">
+          <div className="max-w-5xl mx-auto">
+            <motion.div {...fadeUp} className="text-center mb-12">
+              <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground font-medium">
+                Documentação
+              </p>
             </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {docImages.map((img, i) => (
+                <motion.button
+                  key={i}
+                  onClick={() => openLightbox(i)}
+                  className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, margin: "-40px" }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 flex items-center justify-center">
+                    <Maximize className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg" />
+                  </div>
+                </motion.button>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -463,7 +530,7 @@ const ForbesPage = () => {
         </section>
 
         {/* ─── APRESENTE SUA PROPRIEDADE + CONTACT FORM — White ─── */}
-        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-background">
+        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-white">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
               {/* Left — editorial intro */}
@@ -491,7 +558,7 @@ const ForbesPage = () => {
               {/* Right — form */}
               <motion.form
                 onSubmit={handleSubmit}
-                className="bg-background rounded-lg p-8 md:p-10"
+                className="rounded-lg p-8 md:p-10"
                 style={glassCardWhite}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -567,6 +634,55 @@ const ForbesPage = () => {
         </section>
       </main>
       <Footer />
+
+      {/* ─── LIGHTBOX ─── */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <button
+              onClick={goPrevLB}
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={goNextLB}
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            <div className="flex flex-col items-center max-w-[90vw] max-h-[85vh]">
+              <motion.img
+                key={lightboxIndex}
+                src={docImages[lightboxIndex].src}
+                alt={docImages[lightboxIndex].alt}
+                className="max-w-full max-h-[80vh] object-contain rounded-[4px]"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+
+            <p className="absolute bottom-6 left-1/2 -translate-x-1/2 font-sans text-xs text-white/50 tracking-widest">
+              {lightboxIndex + 1} / {docImages.length}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
