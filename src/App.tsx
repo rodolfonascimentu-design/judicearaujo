@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Properties from "./pages/Properties";
 import Launches from "./pages/Launches";
 import PropertyDetail from "./pages/PropertyDetail";
+import GestaoAtivos from "./pages/GestaoAtivos";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
