@@ -25,6 +25,7 @@ const App = () => (
             <Route path="/imoveis" element={<Properties />} />
             <Route path="/lancamentos" element={<Launches />} />
             <Route path="/imovel/:id" element={<PropertyDetail />} />
+            <Route path="/gestao-de-ativos-imobiliarios" element={<GestaoAtivos />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
