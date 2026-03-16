@@ -63,6 +63,9 @@ const ExclusiveGallery = () => {
                     src={current.image}
                     alt={current.title}
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                     initial={{ opacity: 0, scale: 1.02 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
