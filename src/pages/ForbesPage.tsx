@@ -196,12 +196,17 @@ const ForbesPage = () => {
             <ForbesHeroLogos />
           </div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          {/* Scroll indicator — clickable */}
+          <motion.button
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3.6 }}
+            onClick={() => {
+              const intro = document.getElementById("forbes-intro");
+              if (intro) intro.scrollIntoView({ behavior: "smooth" });
+            }}
+            aria-label="Scroll para baixo"
           >
             <div className="w-6 h-10 rounded-full border-2 border-white/40 flex items-start justify-center pt-2">
               <motion.div
@@ -210,7 +215,7 @@ const ForbesPage = () => {
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
               />
             </div>
-          </motion.div>
+          </motion.button>
         </section>
 
         {/* ─── INTRO — White ─── */}
