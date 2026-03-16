@@ -272,9 +272,8 @@ const ForbesPage = () => {
             </motion.div>
 
             <motion.div {...fadeUp} className="text-center mb-16">
-            <motion.div {...fadeUp} className="text-center mb-20">
-              <div className="w-12 h-px bg-primary-foreground/30 mx-auto mb-10" />
-              <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto mb-6">
+              <div className="w-12 h-px bg-primary-foreground/30 mx-auto mb-8" />
+              <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto mb-4">
                 A Forbes é uma das marcas de mídia mais reconhecidas globalmente no universo de negócios, empreendedorismo e nos mercado de luxo.
               </p>
               <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto">
