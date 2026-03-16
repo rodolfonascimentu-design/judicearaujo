@@ -485,52 +485,50 @@ const GestaoAtivos = () => {
         {/* ═══════════════════════════════════════════════════════════
             SEÇÃO 6 — INTELIGÊNCIA DE MERCADO (text flows left-aligned)
         ═══════════════════════════════════════════════════════════ */}
-        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.sectionAlt }}>
-          <div className="max-w-6xl mx-auto">
-            <motion.div className="max-w-3xl mb-20" {...fadeUp}>
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.accent }}>
+          <div className="max-w-5xl mx-auto text-center">
+            <motion.div {...fadeUp}>
               <SectionLabel text="Dados e análise" />
-              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mt-8 mb-14 text-white">
                 Inteligência de mercado e análise de performance
               </h2>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-left" style={{ color: C.body }}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-2 max-w-3xl mx-auto text-white/80">
                 Um dos diferenciais da Judice & Araujo é o acompanhamento contínuo da performance do ativo imobiliário.
-              </p>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide text-left" style={{ color: C.body }}>
-                Utilizamos benchmarks e dados de mercado para analisar:
+                {" "}Utilizamos benchmarks e dados de mercado para analisar:
               </p>
             </motion.div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-20">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-14 max-w-4xl mx-auto">
               {marketCards.map((card, i) => (
                 <motion.div
                   key={card.title}
-                  className="group rounded-2xl p-8 text-center transition-all duration-500 cursor-default"
-                  style={{ background: "#ffffff", border: `1px solid ${C.cardBorder}` }}
-                  {...cardHover}
+                  className="group relative rounded-xl p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
+                  style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", backdropFilter: "blur(12px)" }}
+                  whileHover={{ y: -6, boxShadow: "0 16px 40px -10px rgba(0,0,0,0.3)" }}
                   {...stagger(i)}
                 >
                   <div
-                    className="inline-flex items-center justify-center rounded-xl mb-6"
-                    style={{ background: C.accentLight, width: 52, height: 52 }}
+                    className="mx-auto w-14 h-14 rounded-full flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6"
+                    style={{ background: C.gold }}
                   >
-                    <card.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                    <card.icon className="w-6 h-6" style={{ color: C.accent }} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display text-sm font-medium tracking-wide leading-snug" style={{ color: C.heading }}>
+                  <h3 className="font-display text-sm font-medium tracking-wide leading-snug text-white">
                     {card.title}
                   </h3>
+                  <div className="absolute bottom-0 left-0 right-0 h-[3px] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100" style={{ background: C.gold }} />
                 </motion.div>
               ))}
             </div>
-            {/* Continuation — left-aligned flowing text */}
-            <div className="max-w-3xl">
-              <motion.div {...fadeUp}>
-                <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-left" style={{ color: C.body }}>
-                  Essas análises são apresentadas aos proprietários em relatórios periódicos que permitem acompanhar o desempenho do imóvel de forma clara e estruturada.
-                </p>
-                <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide text-left" style={{ color: C.body }}>
-                  Esse modelo aproxima a gestão imobiliária da lógica utilizada na gestão de ativos financeiros, trazendo maior transparência e previsibilidade.
-                </p>
-              </motion.div>
-            </div>
+
+            <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-4 text-white/80">
+                Essas análises são apresentadas aos proprietários em relatórios periódicos que permitem acompanhar o desempenho do imóvel de forma clara e estruturada.
+              </p>
+              <p className="font-sans text-base font-semibold leading-[2.1] tracking-wide text-white">
+                Esse modelo aproxima a gestão imobiliária da lógica utilizada na gestão de ativos financeiros, trazendo maior transparência e previsibilidade.
+              </p>
+            </motion.div>
           </div>
         </section>
 
