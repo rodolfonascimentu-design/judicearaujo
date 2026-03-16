@@ -48,7 +48,7 @@ const PropertyManagement = () => {
             viewport={{ once: false, margin: "-80px" }}
             transition={{ duration: 0.9, ease: "easeOut" }}
           >
-            <img src={forbesLogo} alt="Forbes Global Properties" className="h-20 md:h-24 lg:h-28 object-contain mx-auto" />
+            <img src={forbesLogo} alt="Forbes Global Properties" className="h-20 md:h-24 lg:h-28 object-contain mx-auto" loading="lazy" decoding="async" fetchPriority="low" />
           </motion.div>
 
           {/* Title */}
