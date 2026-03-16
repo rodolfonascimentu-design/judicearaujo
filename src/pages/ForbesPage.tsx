@@ -245,69 +245,67 @@ const ForbesPage = () => {
           <ParallaxScrollSecond images={galleryImages} className="h-[32rem] md:h-[40rem]" />
         </section>
 
-        {/* ─── A FORÇA DA MARCA — Green with ContainerScroll ─── */}
+        {/* ─── A FORÇA DA MARCA — Green ─── */}
         <section className="bg-primary overflow-hidden">
+          {/* ContainerScroll — only the Forbes logo with parallax */}
           <ContainerScroll
             titleComponent={
-              <div className="text-center">
-                <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-primary-foreground/60 mb-8 font-medium">
-                  A força da marca
-                </p>
-                <img
-                  src={forbesLogoWhite}
-                  alt="Forbes Global Properties"
-                  className="h-[50px] md:h-[70px] lg:h-[90px] w-auto mx-auto"
-                />
-              </div>
+              <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-primary-foreground/60 mb-8 font-medium">
+                A força da marca
+              </p>
             }
           >
-            {/* Inside the "card" — stats + text */}
-            <div className="h-full w-full overflow-y-auto p-6 md:p-10 flex flex-col justify-center bg-primary rounded-2xl">
-              <div className="max-w-4xl mx-auto w-full">
-                <div className="text-center mb-10">
-                  <div className="w-12 h-px bg-primary-foreground/30 mx-auto mb-8" />
-                  <p className="font-sans text-sm md:text-base font-light text-primary-foreground/70 leading-[1.9] tracking-wide mb-4">
-                    A Forbes é uma das marcas de mídia mais reconhecidas globalmente no universo de negócios, empreendedorismo e nos mercado de luxo.
-                  </p>
-                  <p className="font-sans text-sm md:text-base font-light text-primary-foreground/70 leading-[1.9] tracking-wide">
-                    Com mais de um século de história e presença internacional consolidada, a Forbes alcança uma audiência global altamente qualificada.
-                  </p>
-                </div>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 mb-8">
-                  {forbesStats.map((stat, i) => {
-                    const counterDelay = (forbesStats.length - 1 - i) * 0.15;
-                    return (
-                      <motion.div
-                        key={stat.label}
-                        className="text-center p-4 md:p-5 rounded-2xl border border-white/10"
-                        style={glassCardDark}
-                        {...stagger(i)}
-                        whileHover={{ y: -6, scale: 1.03, transition: { duration: 0.3 } }}
-                      >
-                        <p className="font-display text-xl md:text-2xl font-medium mb-1 text-primary-foreground">
-                          {stat.decimal ? (
-                            <DecimalCounter value={stat.numericValue} suffix={stat.suffix} delay={counterDelay} />
-                          ) : (
-                            <AnimatedCounter value={stat.numericValue} suffix={stat.suffix} delay={counterDelay} />
-                          )}
-                        </p>
-                        <p className="font-sans text-[10px] md:text-xs font-light text-primary-foreground/50 tracking-wide">{stat.label}</p>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-
-                {/* Pull quote */}
-                <div className="text-center">
-                  <blockquote className="font-display text-xs md:text-sm font-normal text-primary-foreground/50 leading-[1.6] italic max-w-2xl mx-auto">
-                    "Essa visibilidade global cria um poderoso efeito de marca, ampliando o alcance das propriedades apresentadas através da Forbes Global Properties."
-                  </blockquote>
-                </div>
-              </div>
-            </div>
+            <img
+              src={forbesLogoWhite}
+              alt="Forbes Global Properties"
+              className="h-[80px] md:h-[120px] lg:h-[160px] w-auto mx-auto"
+            />
           </ContainerScroll>
+
+          {/* Content below the parallax logo */}
+          <div className="max-w-5xl mx-auto px-6 lg:px-12 pb-28 lg:pb-40">
+            <motion.div {...fadeUp} className="text-center mb-20">
+              <div className="w-12 h-px bg-primary-foreground/30 mx-auto mb-10" />
+              <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto mb-6">
+                A Forbes é uma das marcas de mídia mais reconhecidas globalmente no universo de negócios, empreendedorismo e nos mercado de luxo.
+              </p>
+              <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto">
+                Com mais de um século de história e presença internacional consolidada, a Forbes alcança uma audiência global altamente qualificada.
+              </p>
+            </motion.div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-8 mb-16">
+              {forbesStats.map((stat, i) => {
+                const counterDelay = (forbesStats.length - 1 - i) * 0.15;
+                return (
+                  <motion.div
+                    key={stat.label}
+                    className="text-center p-6 rounded-2xl border border-white/10"
+                    style={glassCardDark}
+                    {...stagger(i)}
+                    whileHover={{ y: -6, scale: 1.03, transition: { duration: 0.3 } }}
+                  >
+                    <p className="font-display text-2xl md:text-3xl font-medium mb-2 text-primary-foreground">
+                      {stat.decimal ? (
+                        <DecimalCounter value={stat.numericValue} suffix={stat.suffix} delay={counterDelay} />
+                      ) : (
+                        <AnimatedCounter value={stat.numericValue} suffix={stat.suffix} delay={counterDelay} />
+                      )}
+                    </p>
+                    <p className="font-sans text-xs md:text-sm font-light text-primary-foreground/50 tracking-wide">{stat.label}</p>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Pull quote */}
+            <motion.div {...fadeUp} className="text-center">
+              <blockquote className="font-display text-xs md:text-sm font-normal text-primary-foreground/50 leading-[1.6] italic max-w-2xl mx-auto">
+                "Essa visibilidade global cria um poderoso efeito de marca, ampliando o alcance das propriedades apresentadas através da Forbes Global Properties."
+              </blockquote>
+            </motion.div>
+          </div>
         </section>
 
         {/* ─── YOUTUBE VIDEO — Green ─── */}
