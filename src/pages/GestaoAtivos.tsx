@@ -305,17 +305,18 @@ const GestaoAtivos = () => {
             SEÇÃO 3 — O QUE É GESTÃO DE ATIVOS (text flows left-aligned)
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.sectionAlt }}>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-start">
+          <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
               <SectionLabel text="Nosso serviço" />
-              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mt-8 mb-14" style={{ color: C.heading }}>
                 O que é a Gestão de Ativos Imobiliários
               </h2>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-left" style={{ color: C.body }}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-16 max-w-3xl mx-auto" style={{ color: C.body }}>
                 A gestão de ativos imobiliários é uma abordagem profissional em que o imóvel é tratado como um ativo patrimonial, acompanhado de forma contínua para maximizar:
               </p>
             </motion.div>
-            <div className="grid grid-cols-2 gap-5">
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
               {assetCards.map((card, i) => (
                 <motion.div
                   key={card.title}
@@ -336,14 +337,12 @@ const GestaoAtivos = () => {
                 </motion.div>
               ))}
             </div>
-          </div>
-          {/* Continuation text — left-aligned, flowing naturally */}
-          <div className="max-w-6xl mx-auto mt-16">
-            <motion.div {...fadeUp} className="max-w-3xl">
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-left" style={{ color: C.body }}>
+
+            <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
                 Na Judice & Araujo, cada imóvel é analisado dentro de seu contexto de mercado, considerando fatores como localização, tipologia, demanda e benchmarks imobiliários.
               </p>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide text-left" style={{ color: C.body }}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
                 Essa visão permite que decisões relacionadas à locação sejam tomadas de forma estratégica e informada, sempre alinhadas aos interesses do proprietário.
               </p>
             </motion.div>
