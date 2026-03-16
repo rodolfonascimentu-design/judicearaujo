@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const ForbesPartnership = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const pillars = [
     { icon: Shield, title: t("pm.pillar1"), description: t("pm.pillar1Desc") },
