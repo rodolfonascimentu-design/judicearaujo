@@ -32,9 +32,9 @@ const SearchBar = ({ count, location, type, viewMode, onToggleView, onOpenFilter
                 <span className="hidden sm:inline">{t("search.sort")}</span>
               </button>
               <div className="absolute right-0 top-full mt-1 w-44 bg-white border border-border rounded-[4px] shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <button className="w-full text-left px-4 py-2.5 text-[11px] font-sans text-foreground hover:bg-green-50 hover:text-green-700 transition-colors rounded-t-[4px]">Mais recentes</button>
-                <button className="w-full text-left px-4 py-2.5 text-[11px] font-sans text-foreground hover:bg-green-50 hover:text-green-700 transition-colors">Maior preço</button>
-                <button className="w-full text-left px-4 py-2.5 text-[11px] font-sans text-foreground hover:bg-green-50 hover:text-green-700 transition-colors rounded-b-[4px]">Menor preço</button>
+                <button className="w-full text-left px-4 py-2.5 text-[11px] font-sans text-foreground hover:bg-primary/5 hover:text-primary transition-colors rounded-t-[4px]">Mais recentes</button>
+                <button className="w-full text-left px-4 py-2.5 text-[11px] font-sans text-foreground hover:bg-primary/5 hover:text-primary transition-colors">Maior preço</button>
+                <button className="w-full text-left px-4 py-2.5 text-[11px] font-sans text-foreground hover:bg-primary/5 hover:text-primary transition-colors rounded-b-[4px]">Menor preço</button>
               </div>
             </div>
             <button
