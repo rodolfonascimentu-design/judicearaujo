@@ -426,6 +426,9 @@ const ForbesPage = () => {
                     </motion.li>
                   ))}
                 </ul>
+                <p className="font-sans text-base font-light text-primary-foreground/70 leading-[1.9] tracking-wide mt-8">
+                  Essa parceria também permite que nossos clientes acessem os imóveis mais incríveis do mercado internacional de alto padrão, com discrição e segurança.
+                </p>
               </motion.div>
 
               <motion.div
