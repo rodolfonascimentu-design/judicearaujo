@@ -3,8 +3,7 @@ import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 import { Send, ArrowRight, ChevronLeft, ChevronRight, X, Maximize } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ParallaxScrollSecond } from "@/components/ui/parallax-scroll";
-import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import ImmersiveScrollGallery from "@/components/ui/immersive-scroll-gallery";
 
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import jaLogoWhite from "@/assets/logo-ja-white.png";
@@ -197,12 +196,17 @@ const ForbesPage = () => {
             <ForbesHeroLogos />
           </div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          {/* Scroll indicator — clickable */}
+          <motion.button
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3.6 }}
+            onClick={() => {
+              const intro = document.getElementById("forbes-intro");
+              if (intro) intro.scrollIntoView({ behavior: "smooth" });
+            }}
+            aria-label="Scroll para baixo"
           >
             <div className="w-6 h-10 rounded-full border-2 border-white/40 flex items-start justify-center pt-2">
               <motion.div
@@ -211,11 +215,11 @@ const ForbesPage = () => {
                 transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
               />
             </div>
-          </motion.div>
+          </motion.button>
         </section>
 
         {/* ─── INTRO — White ─── */}
-        <section className="py-20 lg:py-28 px-6 lg:px-12 bg-white">
+        <section id="forbes-intro" className="py-20 lg:py-28 px-6 lg:px-12 bg-white">
           <div className="max-w-4xl mx-auto text-center">
             <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-10 font-medium">
               Forbes Global Properties
@@ -235,38 +239,41 @@ const ForbesPage = () => {
           </div>
         </section>
 
-        {/* ─── PARALLAX GALLERY — White ─── */}
+        {/* ─── IMMERSIVE SCROLL GALLERY — White ─── */}
         <section className="bg-white">
-          <div className="max-w-6xl mx-auto px-6 lg:px-12">
-            <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground font-medium mb-6 text-center">
+          <div className="max-w-6xl mx-auto px-6 lg:px-12 pb-4">
+            <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground font-medium mb-2 text-center">
               Portfólio exclusivo
             </motion.p>
           </div>
-          <ParallaxScrollSecond images={galleryImages} className="h-[32rem] md:h-[40rem]" />
+          <ImmersiveScrollGallery
+            images={galleryImages.map((src) => ({ src, scale: null }))}
+          />
         </section>
 
         {/* ─── A FORÇA DA MARCA — Green ─── */}
-        <section className="bg-primary overflow-hidden">
-          {/* ContainerScroll — only the Forbes logo with parallax */}
-          <ContainerScroll
-            titleComponent={
-              <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-primary-foreground/60 mb-8 font-medium">
+        <section className="bg-primary py-24 lg:py-36 px-6 lg:px-12">
+          <div className="max-w-5xl mx-auto">
+            {/* Title + Forbes Logo */}
+            <motion.div {...fadeUp} className="text-center mb-16">
+              <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-primary-foreground/60 mb-10 font-medium">
                 A força da marca
               </p>
-            }
-          >
-            <img
-              src={forbesLogoWhite}
-              alt="Forbes Global Properties"
-              className="h-[80px] md:h-[120px] lg:h-[160px] w-auto mx-auto"
-            />
-          </ContainerScroll>
+              <motion.img
+                src={forbesLogoWhite}
+                alt="Forbes Global Properties"
+                className="h-[60px] md:h-[80px] lg:h-[100px] w-auto mx-auto"
+                initial={{ opacity: 0, scale: 0.85 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: false, margin: "-80px" }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              />
 
-          {/* Content below the parallax logo */}
-          <div className="max-w-5xl mx-auto px-6 lg:px-12 pb-28 lg:pb-40">
-            <motion.div {...fadeUp} className="text-center mb-20">
-              <div className="w-12 h-px bg-primary-foreground/30 mx-auto mb-10" />
-              <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto mb-6">
+            </motion.div>
+
+            <motion.div {...fadeUp} className="text-center mb-16">
+              <div className="w-12 h-px bg-primary-foreground/30 mx-auto mb-8" />
+              <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto mb-4">
                 A Forbes é uma das marcas de mídia mais reconhecidas globalmente no universo de negócios, empreendedorismo e nos mercado de luxo.
               </p>
               <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto">
