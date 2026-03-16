@@ -10,12 +10,13 @@ import jaLogoWhite from "@/assets/logo-ja-white.png";
 import docImg1 from "@/assets/forbes-doc-1.jpg";
 import chartImg from "@/assets/forbes-chart.jpg";
 
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
+import forbesGallery1 from "@/assets/forbes-gallery-1.jpg";
+import forbesGallery2 from "@/assets/forbes-gallery-2.jpg";
+import forbesGallery3 from "@/assets/forbes-gallery-3.jpg";
+import forbesGallery4 from "@/assets/forbes-gallery-4.jpg";
+import forbesGallery5 from "@/assets/forbes-gallery-5.jpg";
+import forbesGallery6 from "@/assets/forbes-gallery-6.jpg";
 import property4 from "@/assets/property-4.jpg";
-import property5 from "@/assets/property-5.jpg";
-import property6 from "@/assets/property-6.jpg";
 
 /* ── Helpers ── */
 const fadeUp = {
@@ -109,7 +110,7 @@ const jaAccess = [
 ];
 
 /* ── Gallery Images (6 photos) ── */
-const galleryImages = [property1, property2, property3, property4, property5, property6];
+const galleryImages = [forbesGallery1, forbesGallery2, forbesGallery3, forbesGallery4, forbesGallery5, forbesGallery6];
 
 /* ── Document Images for Lightbox ── */
 const docImages = [
@@ -176,7 +177,7 @@ const ForbesPage = () => {
   ] as const;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
       <main>
         {/* ─── HERO — Video + Logo Animation ─── */}
@@ -187,7 +188,7 @@ const ForbesPage = () => {
             loop
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            src="/videos/RJ.mp4"
+            src="/videos/forbes-hero.mp4"
           />
           <div className="absolute inset-0 bg-black/45" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,63,52,0.2) 0%, transparent 40%, rgba(0,0,0,0.5) 100%)" }} />
