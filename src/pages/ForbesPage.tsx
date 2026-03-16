@@ -3,8 +3,7 @@ import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 import { Send, ArrowRight, ChevronLeft, ChevronRight, X, Maximize } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ParallaxScrollSecond } from "@/components/ui/parallax-scroll";
-import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import ImmersiveScrollGallery from "@/components/ui/immersive-scroll-gallery";
 
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import jaLogoWhite from "@/assets/logo-ja-white.png";
