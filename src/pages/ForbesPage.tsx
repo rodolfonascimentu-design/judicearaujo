@@ -25,7 +25,7 @@ const fadeUp = {
 const stagger = (i: number) => ({
   ...fadeUp,
   transition: { ...fadeUp.transition, delay: 0.1 + i * 0.08 },
-});
+} as any);
 
 const C = {
   accent: "#003F34",
