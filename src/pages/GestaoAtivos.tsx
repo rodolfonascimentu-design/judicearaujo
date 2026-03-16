@@ -75,9 +75,10 @@ const C = {
 
 /* ── glass card style helpers ── */
 const glassLight = {
-  background: "rgba(255,255,255,0.55)",
+  background: "linear-gradient(135deg, rgba(0,63,52,0.06) 0%, rgba(0,63,52,0.02) 100%)",
   backdropFilter: "blur(16px)",
   WebkitBackdropFilter: "blur(16px)",
+  boxShadow: "0 4px 24px -4px rgba(0,63,52,0.08), inset 0 1px 0 rgba(255,255,255,0.8)",
 };
 
 const glassDark = {
