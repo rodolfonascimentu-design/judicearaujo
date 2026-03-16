@@ -10,12 +10,13 @@ import jaLogoWhite from "@/assets/logo-ja-white.png";
 import docImg1 from "@/assets/forbes-doc-1.jpg";
 import chartImg from "@/assets/forbes-chart.jpg";
 
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
+import forbesGallery1 from "@/assets/forbes-gallery-1.jpg";
+import forbesGallery2 from "@/assets/forbes-gallery-2.jpg";
+import forbesGallery3 from "@/assets/forbes-gallery-3.jpg";
+import forbesGallery4 from "@/assets/forbes-gallery-4.jpg";
+import forbesGallery5 from "@/assets/forbes-gallery-5.jpg";
+import forbesGallery6 from "@/assets/forbes-gallery-6.jpg";
 import property4 from "@/assets/property-4.jpg";
-import property5 from "@/assets/property-5.jpg";
-import property6 from "@/assets/property-6.jpg";
 
 /* ── Helpers ── */
 const fadeUp = {
