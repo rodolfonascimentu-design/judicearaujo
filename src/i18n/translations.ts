@@ -69,15 +69,15 @@ const translations: Record<Lang, Record<string, string>> = {
     "highend.title": "Os melhores imóveis de alto padrão do Rio de Janeiro",
     "highend.subtitle": "Uma curadoria dos imóveis mais extraordinários disponíveis na cidade",
 
-    // Property Management
-    "pm.title": "Administração de Imóveis",
-    "pm.subtitle": "Alguns patrimônios merecem mais do que gestão. Merecem curadoria.",
-    "pm.intro": "Cada imóvel representa mais do que um patrimônio. É parte de um legado.",
-    "pm.narrative1": "Na Judice & Araujo, conduzimos a gestão de propriedades com discrição, estratégia e atenção absoluta aos detalhes. Desde a seleção criteriosa de locatários até a administração financeira, jurídica e operacional, cada etapa é tratada com precisão.",
-    "pm.narrative2": "Assim, conectamos propriedades extraordinárias às pessoas certas, preservando o valor do patrimônio e oferecendo tranquilidade aos proprietários.",
+    // Property Management / Gestão de Ativos
+    "pm.title": "Gestão de Ativos Imobiliários",
+    "pm.subtitle": "Administração estratégica para proprietários que tratam seus imóveis como patrimônio.",
+    "pm.intro": "A Judice & Araujo oferece um serviço exclusivo de Gestão de Ativos Imobiliários, voltado para proprietários que desejam administrar seus imóveis com o mesmo nível de profissionalismo aplicado a outros investimentos.",
+    "pm.narrative1": "Com expertise no mercado de alto padrão, atendimento personalizado e profundo conhecimento do mercado carioca, acompanhamos cada imóvel de forma estratégica, buscando preservar seu valor e maximizar seu potencial de rentabilidade.",
+    "pm.narrative2": "Mais do que administrar uma locação, nossa atuação envolve visão patrimonial, inteligência de mercado e acompanhamento constante do ativo.",
     "pm.quote1": "Grandes imóveis não são apenas bens.",
     "pm.quote2": "São ativos que atravessam gerações.",
-    "pm.cta": "Solicitar uma avaliação confidencial",
+    "pm.cta": "Saiba mais sobre Gestão de Ativos",
     "pm.pillar1": "Discrição Absoluta",
     "pm.pillar1Desc": "Gestão conduzida com total confidencialidade e cuidado.",
     "pm.pillar2": "Seleção Estratégica",
