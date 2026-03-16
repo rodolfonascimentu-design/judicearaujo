@@ -1,15 +1,21 @@
-import { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence, useInView, useMotionValue, useTransform, animate } from "framer-motion";
-import { Send, ArrowRight } from "lucide-react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { motion, AnimatePresence, useInView, animate } from "framer-motion";
+import { Send, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
 import jaLogoWhite from "@/assets/logo-ja-white.png";
-import heroImg from "@/assets/forbes-hero.jpg";
 import docImg1 from "@/assets/forbes-doc-1.jpg";
-import parallax1 from "@/assets/parallax-1.jpg";
-import parallax4 from "@/assets/parallax-4.jpg";
+import chartImg from "@/assets/forbes-chart.jpg";
+
+import property1 from "@/assets/property-1.jpg";
+import property2 from "@/assets/property-2.jpg";
+import property3 from "@/assets/property-3.jpg";
+import property4 from "@/assets/property-4.jpg";
+import property5 from "@/assets/property-5.jpg";
+import property6 from "@/assets/property-6.jpg";
 
 /* ── Helpers ── */
 const fadeUp = {
@@ -25,15 +31,22 @@ const stagger = (i: number) => ({
 } as any);
 
 const C = {
-  accent: "#003F34",
-  accentLight: "rgba(0,63,52,0.06)",
+  accent: "hsl(var(--primary))",
+  accentRaw: "#003F34",
 };
 
-const glassCard = {
+const glassCardWhite = {
   background: "linear-gradient(135deg, rgba(0,63,52,0.06) 0%, rgba(0,63,52,0.02) 100%)",
   backdropFilter: "blur(16px)",
   WebkitBackdropFilter: "blur(16px)",
   boxShadow: "0 4px 24px -4px rgba(0,63,52,0.08), inset 0 1px 0 rgba(255,255,255,0.8)",
+};
+
+const glassCardDark = {
+  background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
+  backdropFilter: "blur(16px)",
+  WebkitBackdropFilter: "blur(16px)",
+  boxShadow: "0 4px 24px -4px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)",
 };
 
 /* ── Counter Component ── */
@@ -43,17 +56,13 @@ const AnimatedCounter = ({ value, suffix = "", delay = 0 }: { value: number; suf
   const [displayed, setDisplayed] = useState("0");
 
   useEffect(() => {
-    if (!isInView) {
-      setDisplayed("0");
-      return;
-    }
+    if (!isInView) { setDisplayed("0"); return; }
     const controls = animate(0, value, {
       duration: 2.2,
       delay,
       ease: "easeOut",
       onUpdate: (v) => {
         if (value >= 1000) {
-          // format with dot separator for thousands
           setDisplayed(Math.floor(v).toLocaleString("pt-BR"));
         } else {
           setDisplayed(Math.floor(v).toString());
@@ -66,19 +75,7 @@ const AnimatedCounter = ({ value, suffix = "", delay = 0 }: { value: number; suf
   return <span ref={ref}>{displayed}{suffix}</span>;
 };
 
-/* ── Stats Data ── */
-const forbesStats = [
-  { numericValue: 167, suffix: "M+", label: "audiência global" },
-  { numericValue: 5.6, suffix: "M+", label: "leitores da revista", decimal: true },
-  { numericValue: 100, suffix: "M+", label: "alcance nas redes sociais" },
-  { numericValue: 49, suffix: "", label: "edições internacionais" },
-  { numericValue: 81, suffix: "", label: "países" },
-  { numericValue: 31, suffix: "", label: "idiomas" },
-  { numericValue: 100, suffix: "+", label: "anos de história" },
-  { numericValue: 100, suffix: "+", label: "eventos globais por ano" },
-];
-
-/* ── Animated Decimal Counter ── */
+/* ── Decimal Counter ── */
 const DecimalCounter = ({ value, suffix = "", delay = 0 }: { value: number; suffix?: string; delay?: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: false, margin: "-80px" });
@@ -98,16 +95,16 @@ const DecimalCounter = ({ value, suffix = "", delay = 0 }: { value: number; suff
   return <span ref={ref}>{displayed}{suffix}</span>;
 };
 
-/* ── Media Reach Data ── */
-const brandReach = [
-  { brand: "Forbes / Forbes Global Properties", value: 78.8 },
-  { brand: "Berkshire Hathaway / BHHS", value: 10.7 },
-  { brand: "Sotheby's / Sotheby's Int. Real Estate", value: 4.3 },
-  { brand: "Christie's / Christie's Int. Real Estate", value: 3.2 },
-  { brand: "Coldwell Banker", value: 1.0 },
-  { brand: "Savills", value: 0.9 },
-  { brand: "Knight Frank", value: 0.8 },
-  { brand: "Engel & Völkers", value: 0.2 },
+/* ── Stats Data ── */
+const forbesStats = [
+  { numericValue: 167, suffix: "M+", label: "audiência global" },
+  { numericValue: 5.6, suffix: "M+", label: "leitores da revista", decimal: true },
+  { numericValue: 100, suffix: "M+", label: "alcance nas redes sociais" },
+  { numericValue: 49, suffix: "", label: "edições internacionais" },
+  { numericValue: 81, suffix: "", label: "países" },
+  { numericValue: 31, suffix: "", label: "idiomas" },
+  { numericValue: 100, suffix: "+", label: "anos de história" },
+  { numericValue: 100, suffix: "+", label: "eventos globais por ano" },
 ];
 
 const jaAccess = [
@@ -116,11 +113,40 @@ const jaAccess = [
   "uma rede de imobiliárias líderes em seus mercados",
 ];
 
+/* ── Gallery Properties ── */
+const galleryProperties = [
+  { image: property1, title: "Cobertura Duplex com Vista Mar", neighborhood: "Leblon" },
+  { image: property2, title: "Apartamento Frente Mar", neighborhood: "Ipanema" },
+  { image: property3, title: "Casa com Jardim à Beira da Lagoa", neighborhood: "Lagoa" },
+  { image: property4, title: "Mansão Contemporânea", neighborhood: "Gávea" },
+  { image: property5, title: "Villa Tropical Exclusiva", neighborhood: "Jardim Botânico" },
+  { image: property6, title: "Refúgio à Beira-Mar", neighborhood: "São Conrado" },
+];
+
 /* ══════════════════════════════════════════════════════════ */
 
 const ForbesPage = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [focused, setFocused] = useState<string | null>(null);
+
+  /* Gallery carousel */
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", loop: true, skipSnaps: false });
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+
+  const onSelectGallery = useCallback(() => {
+    if (!emblaApi) return;
+    setCanPrev(emblaApi.canScrollPrev());
+    setCanNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelectGallery();
+    emblaApi.on("select", onSelectGallery);
+    emblaApi.on("reInit", onSelectGallery);
+    return () => { emblaApi.off("select", onSelectGallery); };
+  }, [emblaApi, onSelectGallery]);
 
   useEffect(() => {
     document.title = "Forbes Global Properties — Judice & Araujo";
@@ -144,40 +170,29 @@ const ForbesPage = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main>
-        {/* ─── HERO ─── */}
-        <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-          <img src={heroImg} alt="Rio de Janeiro luxury coastline" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,63,52,0.3) 0%, transparent 40%, rgba(0,0,0,0.6) 100%)" }} />
+        {/* ─── HERO — Video + Logo Animation ─── */}
+        <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/videos/RJ.mp4"
+          />
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,63,52,0.2) 0%, transparent 40%, rgba(0,0,0,0.5) 100%)" }} />
 
           <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-            {/* Logo animation like index — JA | Forbes */}
             <ForbesHeroLogos />
-
-            <motion.h1
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-white tracking-[-0.02em] leading-[1.2] mb-6 mt-16"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 2.8 }}
-            >
-              Forbes Global Properties
-            </motion.h1>
-            <motion.p
-              className="font-sans text-base md:text-lg lg:text-xl font-light text-white/80 leading-[1.6] tracking-wide max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 3.0 }}
-            >
-              Conectando o mercado imobiliário de alto padrão do Rio de Janeiro a uma audiência global.
-            </motion.p>
           </div>
 
-          {/* Scroll indicator — mouse outline like index */}
+          {/* Scroll indicator */}
           <motion.div
             className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 3.4 }}
+            transition={{ delay: 3.6 }}
           >
             <div className="w-6 h-10 rounded-full border-2 border-white/40 flex items-start justify-center pt-2">
               <motion.div
@@ -189,7 +204,7 @@ const ForbesPage = () => {
           </motion.div>
         </section>
 
-        {/* ─── INTRO ─── */}
+        {/* ─── INTRO — White ─── */}
         <section className="py-28 lg:py-40 px-6 lg:px-12 bg-background">
           <div className="max-w-4xl mx-auto text-center">
             <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-10 font-medium">
@@ -210,67 +225,112 @@ const ForbesPage = () => {
           </div>
         </section>
 
-        {/* ─── FULL-WIDTH IMAGE BREAK ─── */}
-        <div className="w-full h-[50vh] md:h-[60vh] overflow-hidden">
-          <motion.img
-            src={parallax1}
-            alt="Propriedade de luxo"
-            className="w-full h-full object-cover"
-            initial={{ scale: 1.1 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: false }}
-            transition={{ duration: 1.4, ease: "easeOut" }}
-          />
-        </div>
+        {/* ─── GALLERY CAROUSEL — White ─── */}
+        <section className="pb-28 lg:pb-40 bg-background">
+          <div className="relative px-6 lg:px-12">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex items-center justify-between mb-8">
+                <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground font-medium">
+                  Portfólio exclusivo
+                </motion.p>
+                <div className="hidden md:flex items-center gap-2">
+                  <button
+                    onClick={() => emblaApi?.scrollPrev()}
+                    disabled={!canPrev}
+                    className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-30"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => emblaApi?.scrollNext()}
+                    disabled={!canNext}
+                    className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-30"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
 
-        {/* ─── A FORÇA DA MARCA FORBES ─── */}
-        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-background">
+              <div ref={emblaRef} className="overflow-hidden">
+                <div className="flex -ml-4">
+                  {galleryProperties.map((prop, i) => (
+                    <div key={i} className="min-w-0 shrink-0 grow-0 basis-[85%] sm:basis-[60%] md:basis-[40%] lg:basis-[33.333%] pl-4">
+                      <motion.div
+                        className="group relative rounded-[4px] overflow-hidden cursor-pointer"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, margin: "-40px" }}
+                        transition={{ duration: 0.5, delay: i * 0.06 }}
+                      >
+                        <div className="aspect-[4/3] overflow-hidden">
+                          <img
+                            src={prop.image}
+                            alt={prop.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                          <p className="font-display text-sm text-white font-medium">{prop.title}</p>
+                          <p className="font-sans text-xs text-white/70 mt-1">{prop.neighborhood}</p>
+                        </div>
+                      </motion.div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── A FORÇA DA MARCA — Green ─── */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-primary">
           <div className="max-w-5xl mx-auto">
             <motion.div {...fadeUp} className="text-center mb-20">
-              <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-8 font-medium">A força da marca</p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
+              <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-primary-foreground/60 mb-8 font-medium">A força da marca</p>
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-primary-foreground leading-[1.2] mb-8">
                 A força da marca Forbes
               </h2>
-              <div className="w-12 h-px bg-primary mx-auto mb-10" />
-              <p className="font-sans text-base md:text-lg font-light text-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto mb-6">
+              <div className="w-12 h-px bg-primary-foreground/30 mx-auto mb-10" />
+              <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto mb-6">
                 A Forbes é uma das marcas de mídia mais reconhecidas globalmente no universo de negócios, empreendedorismo e nos mercado de luxo.
               </p>
-              <p className="font-sans text-base md:text-lg font-light text-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto">
+              <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto">
                 Com mais de um século de história e presença internacional consolidada, a Forbes alcança uma audiência global altamente qualificada.
               </p>
             </motion.div>
 
-            {/* Stats Grid with counter animation & glass cards */}
+            {/* Stats Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-8 mb-16">
               {forbesStats.map((stat, i) => {
-                // Counter delays: start from right (index 7) to left (index 0)
                 const counterDelay = (forbesStats.length - 1 - i) * 0.15;
                 return (
                   <motion.div
                     key={stat.label}
-                    className="text-center p-6 rounded-2xl"
-                    style={glassCard}
+                    className="text-center p-6 rounded-2xl border border-white/10"
+                    style={glassCardDark}
                     {...stagger(i)}
                     whileHover={{ y: -6, scale: 1.03, transition: { duration: 0.3 } }}
                   >
-                    <p className="font-display text-2xl md:text-3xl font-medium mb-2" style={{ color: C.accent }}>
+                    <p className="font-display text-2xl md:text-3xl font-medium mb-2 text-primary-foreground">
                       {stat.decimal ? (
                         <DecimalCounter value={stat.numericValue} suffix={stat.suffix} delay={counterDelay} />
                       ) : (
                         <AnimatedCounter value={stat.numericValue} suffix={stat.suffix} delay={counterDelay} />
                       )}
                     </p>
-                    <p className="font-sans text-xs md:text-sm font-light text-foreground/60 tracking-wide">{stat.label}</p>
+                    <p className="font-sans text-xs md:text-sm font-light text-primary-foreground/50 tracking-wide">{stat.label}</p>
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* Pull quote — smaller text */}
+            {/* Pull quote */}
             <motion.div {...fadeUp} className="text-center">
               <div className="max-w-3xl mx-auto">
                 <motion.blockquote
-                  className="font-display text-sm md:text-base lg:text-lg font-normal text-foreground/70 leading-[1.6] italic"
+                  className="font-display text-sm md:text-base lg:text-lg font-normal text-primary-foreground/60 leading-[1.6] italic"
                   {...stagger(0)}
                 >
                   "Essa visibilidade global cria um poderoso efeito de marca, ampliando o alcance das propriedades apresentadas através da Forbes Global Properties."
@@ -280,11 +340,11 @@ const ForbesPage = () => {
           </div>
         </section>
 
-        {/* ─── YOUTUBE VIDEO ─── */}
-        <section className="py-0 bg-background">
-          <div className="max-w-5xl mx-auto px-6 lg:px-12">
+        {/* ─── YOUTUBE VIDEO — Green ─── */}
+        <section className="py-20 lg:py-28 px-6 lg:px-12 bg-primary">
+          <div className="max-w-5xl mx-auto">
             <motion.div
-              className="relative aspect-video rounded-[4px] overflow-hidden bg-muted"
+              className="relative aspect-video rounded-[4px] overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, margin: "-80px" }}
@@ -302,20 +362,20 @@ const ForbesPage = () => {
           </div>
         </section>
 
-        {/* ─── CURADORIA INTERNACIONAL ─── */}
-        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-background">
+        {/* ─── CURADORIA INTERNACIONAL — Dark ─── */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#1a1a1a" }}>
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
               <motion.div {...fadeUp}>
-                <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-8 font-medium">Curadoria Internacional</p>
-                <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
+                <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-white/40 mb-8 font-medium">Curadoria Internacional</p>
+                <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-white leading-[1.2] mb-8">
                   Apresentando as propriedades mais excepcionais do mundo
                 </h2>
-                <div className="w-12 h-px bg-primary mb-8" />
-                <p className="font-sans text-base font-light text-foreground/70 leading-[1.9] tracking-wide mb-8">
+                <div className="w-12 h-px bg-white/20 mb-8" />
+                <p className="font-sans text-base font-light text-white/60 leading-[1.9] tracking-wide mb-8">
                   A plataforma da Forbes Global Properties apresenta uma seleção de imóveis extraordinários, que passam por um rigoroso processo de curadoria.
                 </p>
-                <p className="font-sans text-base font-light text-foreground/70 leading-[1.9] tracking-wide mb-8">
+                <p className="font-sans text-base font-light text-white/60 leading-[1.9] tracking-wide mb-8">
                   Cada propriedade é apresentada com:
                 </p>
                 <ul className="space-y-4 mb-8">
@@ -325,110 +385,84 @@ const ForbesPage = () => {
                     "distribuição digital para uma audiência global",
                   ].map((item, i) => (
                     <motion.li key={i} className="flex items-start gap-3" {...stagger(i)}>
-                      <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: C.accent }} />
-                      <span className="font-sans text-sm md:text-base font-light text-foreground/70 leading-[1.8] tracking-wide">{item}</span>
+                      <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-white/40" />
+                      <span className="font-sans text-sm md:text-base font-light text-white/60 leading-[1.8] tracking-wide">{item}</span>
                     </motion.li>
                   ))}
                 </ul>
-                <p className="font-sans text-base font-light text-foreground/70 leading-[1.9] tracking-wide">
+                <p className="font-sans text-base font-light text-white/60 leading-[1.9] tracking-wide">
                   Essa abordagem combina imobiliário, mídia e tecnologia, ampliando significativamente o alcance das propriedades representadas pela rede.
                 </p>
               </motion.div>
 
               <motion.div
-                className="overflow-hidden rounded-lg lg:rounded-none lg:-mr-12 xl:-mr-24"
+                className="overflow-hidden rounded-lg"
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false, margin: "-80px" }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               >
-                <img src={docImg1} alt="Forbes Global Properties editorial" className="w-full h-[400px] lg:h-[560px] object-cover" />
+                <img src={docImg1} alt="Forbes Global Properties editorial" className="w-full h-auto object-contain rounded-lg" />
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* ─── MEDIA REACH CHART (digitized) ─── */}
+        {/* ─── CHART IMAGE — White ─── */}
         <section className="py-28 lg:py-40 px-6 lg:px-12 bg-background">
           <div className="max-w-4xl mx-auto">
-            <motion.div {...fadeUp} className="text-center mb-16">
-              <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-8 font-medium">Alcance de Mídia</p>
-              <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-medium tracking-[-0.02em] text-foreground leading-[1.2]">
-                More earned media reach than any brand globally in the luxury real estate space
-              </h2>
-              <div className="w-12 h-px bg-primary mx-auto mt-8" />
+            <motion.div
+              className="overflow-hidden rounded-lg"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: "-80px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <img src={chartImg} alt="Forbes Global Properties media reach chart" className="w-full h-auto object-contain" />
             </motion.div>
-
-            {/* Animated chart bars */}
-            <div className="space-y-5 max-w-3xl mx-auto">
-              {brandReach.map((item, i) => (
-                <motion.div
-                  key={item.brand}
-                  className="group"
-                  {...stagger(i)}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className={`font-sans text-xs md:text-sm tracking-wide ${i === 0 ? 'font-medium text-foreground' : 'font-light text-foreground/60'}`}>
-                      {item.brand}
-                    </span>
-                    <AnimatedPercentage value={item.value} delay={0.3 + i * 0.1} highlight={i === 0} />
-                  </div>
-                  <div className="w-full h-3 rounded-full overflow-hidden" style={{ background: "rgba(0,63,52,0.06)" }}>
-                    <motion.div
-                      className="h-full rounded-full"
-                      style={{ background: i === 0 ? C.accent : "rgba(0,63,52,0.2)" }}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${item.value}%` }}
-                      viewport={{ once: false, margin: "-40px" }}
-                      transition={{ duration: 1.2, delay: 0.3 + i * 0.1, ease: "easeOut" }}
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </section>
 
-        {/* ─── J&A + FGP ─── */}
-        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-background">
+        {/* ─── NOSSA PARCERIA — Green ─── */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12 bg-primary">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-              <motion.div
-                className="order-2 lg:order-1 rounded-lg overflow-hidden"
-                initial={{ opacity: 0, x: -60 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
-                transition={{ duration: 0.9, ease: "easeOut" }}
-              >
-                <img src={parallax4} alt="Judice & Araujo propriedade" className="w-full h-auto object-cover rounded-lg" />
-              </motion.div>
-
-              <motion.div className="order-1 lg:order-2" {...fadeUp}>
-                <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-8 font-medium">Nossa Parceria</p>
-                <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
+              <motion.div {...fadeUp}>
+                <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-primary-foreground/50 mb-8 font-medium">Nossa Parceria</p>
+                <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-primary-foreground leading-[1.2] mb-8">
                   Judice & Araujo e Forbes Global Properties
                 </h2>
-                <div className="w-12 h-px bg-primary mb-8" />
-                <p className="font-sans text-base font-light text-foreground/70 leading-[1.9] tracking-wide mb-8">
+                <div className="w-12 h-px bg-primary-foreground/30 mb-8" />
+                <p className="font-sans text-base font-light text-primary-foreground/70 leading-[1.9] tracking-wide mb-8">
                   A Judice & Araujo se orgulha por ter sido escolhida para integrar a Forbes Global Properties, o que reforça o posicionamento único da empresa como uma referência no mercado imobiliário de alto padrão do Rio de Janeiro.
                 </p>
-                <p className="font-sans text-base font-light text-foreground/70 leading-[1.9] tracking-wide mb-8">
+                <p className="font-sans text-base font-light text-primary-foreground/70 leading-[1.9] tracking-wide mb-8">
                   Por meio dessa rede, os imóveis representados pela J&A passam a ter acesso a:
                 </p>
                 <ul className="space-y-4">
                   {jaAccess.map((item, i) => (
                     <motion.li key={i} className="flex items-start gap-3" {...stagger(i)}>
-                      <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: C.accent }} />
-                      <span className="font-sans text-sm md:text-base font-light text-foreground/70 leading-[1.8] tracking-wide">{item}</span>
+                      <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-primary-foreground/40" />
+                      <span className="font-sans text-sm md:text-base font-light text-primary-foreground/60 leading-[1.8] tracking-wide">{item}</span>
                     </motion.li>
                   ))}
                 </ul>
+              </motion.div>
+
+              <motion.div
+                className="rounded-lg overflow-hidden"
+                initial={{ opacity: 0, x: 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, margin: "-80px" }}
+                transition={{ duration: 0.9, ease: "easeOut" }}
+              >
+                <img src={property4} alt="Judice & Araujo propriedade" className="w-full h-[400px] lg:h-[520px] object-cover rounded-lg" />
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* ─── APRESENTE SUA PROPRIEDADE + CONTACT FORM ─── */}
+        {/* ─── APRESENTE SUA PROPRIEDADE + CONTACT FORM — White ─── */}
         <section className="py-28 lg:py-40 px-6 lg:px-12 bg-background">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
@@ -458,7 +492,7 @@ const ForbesPage = () => {
               <motion.form
                 onSubmit={handleSubmit}
                 className="bg-background rounded-lg p-8 md:p-10"
-                style={glassCard}
+                style={glassCardWhite}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: "-80px" }}
@@ -470,13 +504,12 @@ const ForbesPage = () => {
                       <label
                         className={`absolute left-0 transition-all duration-300 font-sans pointer-events-none ${
                           focused === field.key || form[field.key]
-                            ? "text-[10px] tracking-[0.15em] uppercase -top-1"
+                            ? "text-[10px] tracking-[0.15em] uppercase -top-1 text-primary"
                             : "text-sm text-muted-foreground top-3"
                         }`}
-                        style={focused === field.key || form[field.key] ? { color: C.accent } : {}}
                       >
                         {field.label}
-                        {field.required && <span className="ml-0.5" style={{ color: C.accent }}>*</span>}
+                        {field.required && <span className="ml-0.5 text-primary">*</span>}
                       </label>
                       <input
                         type={field.type}
@@ -485,21 +518,18 @@ const ForbesPage = () => {
                         onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
                         onFocus={() => setFocused(field.key)}
                         onBlur={() => setFocused(null)}
-                        className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none transition-colors duration-300"
-                        style={{ borderBottomColor: focused === field.key ? C.accent : undefined }}
+                        className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors duration-300"
                       />
                     </div>
                   ))}
 
-                  {/* Message */}
                   <div className="relative">
                     <label
                       className={`absolute left-0 transition-all duration-300 font-sans pointer-events-none ${
                         focused === "message" || form.message
-                          ? "text-[10px] tracking-[0.15em] uppercase -top-1"
+                          ? "text-[10px] tracking-[0.15em] uppercase -top-1 text-primary"
                           : "text-sm text-muted-foreground top-3"
                       }`}
-                      style={focused === "message" || form.message ? { color: C.accent } : {}}
                     >
                       Mensagem
                     </label>
@@ -509,8 +539,7 @@ const ForbesPage = () => {
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       onFocus={() => setFocused("message")}
                       onBlur={() => setFocused(null)}
-                      className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none transition-colors duration-300 resize-none"
-                      style={{ borderBottomColor: focused === "message" ? C.accent : undefined }}
+                      className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors duration-300 resize-none"
                     />
                   </div>
                 </div>
@@ -524,8 +553,7 @@ const ForbesPage = () => {
 
                 <motion.button
                   type="submit"
-                  className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase text-primary-foreground transition-all duration-300"
-                  style={{ background: C.accent }}
+                  className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase text-primary-foreground bg-primary transition-all duration-300"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -543,70 +571,77 @@ const ForbesPage = () => {
   );
 };
 
-/* ── Hero Logos Animation (like index) ── */
+/* ── Hero Logos Animation — JA + Forbes appear, then fade out, title appears ── */
 const ForbesHeroLogos = () => {
   const [barVisible, setBarVisible] = useState(false);
   const [logosVisible, setLogosVisible] = useState(false);
+  const [logosFadeOut, setLogosFadeOut] = useState(false);
+  const [showTitle, setShowTitle] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setBarVisible(true), 0.6 * 1000);
-    const t2 = setTimeout(() => setLogosVisible(true), 1.2 * 1000);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    const t1 = setTimeout(() => setBarVisible(true), 600);
+    const t2 = setTimeout(() => setLogosVisible(true), 1200);
+    const t3 = setTimeout(() => setLogosFadeOut(true), 3200);
+    const t4 = setTimeout(() => setShowTitle(true), 3600);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
   }, []);
 
   return (
-    <div className="flex items-center justify-center gap-0 mb-4">
-      <motion.img
-        src={jaLogoWhite}
-        alt="Judice & Araujo"
-        className="h-[28px] lg:h-[34px] w-auto"
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : 40 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-      />
-      <motion.div
-        className="mx-4"
-        style={{ width: "1.5px", height: "34px", background: "rgba(255,255,255,0.6)" }}
-        initial={{ opacity: 0, scaleY: 0 }}
-        animate={{ opacity: barVisible ? 1 : 0, scaleY: barVisible ? 1 : 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      />
-      <motion.img
-        src={forbesLogoWhite}
-        alt="Forbes Global Properties"
-        className="h-[28px] lg:h-[35px] w-auto"
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : -40 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-      />
+    <div className="relative">
+      {/* Logos — appear then fade out */}
+      <AnimatePresence>
+        {!logosFadeOut && (
+          <motion.div
+            className="flex items-center justify-center gap-0"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.img
+              src={jaLogoWhite}
+              alt="Judice & Araujo"
+              className="h-[36px] lg:h-[46px] w-auto"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : 40 }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
+            />
+            <motion.div
+              className="mx-5"
+              style={{ width: "1.5px", height: "46px", background: "rgba(255,255,255,0.6)" }}
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: barVisible ? 1 : 0, scaleY: barVisible ? 1 : 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            />
+            <motion.img
+              src={forbesLogoWhite}
+              alt="Forbes Global Properties"
+              className="h-[36px] lg:h-[47px] w-auto"
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: logosVisible ? 1 : 0, x: logosVisible ? 0 : -40 }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Title & subtitle — appear after logos fade */}
+      <AnimatePresence>
+        {showTitle && (
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-white tracking-[-0.02em] leading-[1.2] mb-6">
+              Forbes Global Properties
+            </h1>
+            <p className="font-sans text-base md:text-lg lg:text-xl font-light text-white/80 leading-[1.6] tracking-wide max-w-3xl mx-auto">
+              Conectando o mercado imobiliário de alto padrão do Rio de Janeiro a uma audiência global.
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-  );
-};
-
-/* ── Animated Percentage Label ── */
-const AnimatedPercentage = ({ value, delay, highlight }: { value: number; delay: number; highlight: boolean }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-40px" });
-  const [displayed, setDisplayed] = useState("0%");
-
-  useEffect(() => {
-    if (!isInView) { setDisplayed("0%"); return; }
-    const controls = animate(0, value, {
-      duration: 1.2,
-      delay,
-      ease: "easeOut",
-      onUpdate: (v) => setDisplayed(v.toFixed(1).replace(".", ",") + "%"),
-    });
-    return () => controls.stop();
-  }, [isInView, value, delay]);
-
-  return (
-    <span
-      ref={ref}
-      className={`font-display text-sm md:text-base min-w-[55px] text-right ${highlight ? 'font-medium text-foreground' : 'font-light text-foreground/50'}`}
-    >
-      {displayed}
-    </span>
   );
 };
 
