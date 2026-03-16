@@ -31,6 +31,7 @@ import interiorImg from "@/assets/gestao-interior.jpg";
 import aerialImg from "@/assets/gestao-aerial.jpg";
 import terraceImg from "@/assets/gestao-terrace.jpg";
 import parceriasImg from "@/assets/parcerias-hero.jpg";
+import relacionamentoImg from "@/assets/relacionamento-hero.jpg";
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
 import property3 from "@/assets/property-3.jpg";
