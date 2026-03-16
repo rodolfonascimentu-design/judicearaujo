@@ -292,8 +292,8 @@ const GestaoAtivos = () => {
               transition={{ duration: 0.9, ease: "easeOut" }}>
               
               <img
-                src={interiorImg}
-                alt="Interior de imóvel de alto padrão"
+                src={aerialImg}
+                alt="Vista aérea do Rio de Janeiro"
                 className="w-full h-full object-cover"
                 loading="lazy" />
               
