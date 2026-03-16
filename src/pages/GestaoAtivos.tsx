@@ -439,48 +439,44 @@ const GestaoAtivos = () => {
             SEÇÃO 5 — ATENDIMENTO PERSONALIZADO (text flows continuously)
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-16 lg:gap-28 items-start">
+          <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
               <SectionLabel text="Relacionamento" />
-              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mt-8 mb-14" style={{ color: C.heading }}>
                 Atendimento personalizado
               </h2>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-left" style={{ color: C.body }}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-2 max-w-3xl mx-auto" style={{ color: C.body }}>
                 Cada imóvel sob gestão recebe um acompanhamento individualizado.
-              </p>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-left" style={{ color: C.body }}>
-                Nosso serviço foi estruturado para oferecer aos proprietários:
+                {" "}Nosso serviço foi estruturado para oferecer aos proprietários:
               </p>
             </motion.div>
-            <div className="space-y-4 lg:mt-20">
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 my-14 max-w-4xl mx-auto">
               {serviceCards.map((card, i) => (
                 <motion.div
                   key={card.label}
-                  className="flex items-center gap-5 py-6 px-7 rounded-2xl transition-all duration-500 cursor-default"
-                  style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
-                  {...cardHover}
+                  className="relative group rounded-xl p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
+                  style={{ background: C.accentLight, border: `1px solid ${C.cardBorder}` }}
+                  whileHover={{ y: -4, boxShadow: `0 12px 32px -8px ${C.accent}30` }}
                   {...stagger(i)}
                 >
                   <div
-                    className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
-                    style={{ background: C.accentLight }}
+                    className="mx-auto w-14 h-14 rounded-full flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-110"
+                    style={{ background: C.accent }}
                   >
-                    <card.icon className="w-[18px] h-[18px]" style={{ color: C.accent }} strokeWidth={1.5} />
+                    <card.icon className="w-6 h-6 text-white" strokeWidth={1.5} />
                   </div>
-                  <span className="font-sans text-sm tracking-wide leading-relaxed" style={{ color: C.heading }}>
+                  <span className="font-sans text-sm font-medium tracking-wide leading-relaxed block" style={{ color: C.heading }}>
                     {card.label}
                   </span>
+                  <div className="absolute bottom-0 left-0 right-0 h-[3px] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100" style={{ background: C.accent }} />
                 </motion.div>
               ))}
             </div>
-          </div>
-          {/* Continuation — flows naturally after cards */}
-          <div className="max-w-6xl mx-auto mt-16">
-            <motion.div {...fadeUp} className="max-w-3xl">
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide text-left" style={{ color: C.body }}>
-                Entendemos que cada cliente possui objetivos patrimoniais distintos, e por isso nosso trabalho é sempre conduzido de forma personalizada e estratégica.
-              </p>
-            </motion.div>
+
+            <motion.p {...fadeUp} className="font-sans text-base font-semibold leading-[2.1] tracking-wide max-w-3xl mx-auto" style={{ color: C.body }}>
+              Entendemos que cada cliente possui objetivos patrimoniais distintos, e por isso nosso trabalho é sempre conduzido de forma personalizada e estratégica.
+            </motion.p>
           </div>
         </section>
 
