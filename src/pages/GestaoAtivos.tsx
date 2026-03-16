@@ -539,45 +539,43 @@ const GestaoAtivos = () => {
             SEÇÃO 7 — ADMINISTRAÇÃO COMPLETA (closing text flows after list)
         ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-start">
+          <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
               <SectionLabel text="Serviço completo" />
-              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mt-8 mb-14" style={{ color: C.heading }}>
                 Administração completa da locação
               </h2>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-left" style={{ color: C.body }}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-2 max-w-3xl mx-auto" style={{ color: C.body }}>
                 A Judice & Araujo realiza toda a gestão operacional do imóvel, incluindo:
               </p>
             </motion.div>
-            <div className="space-y-4 lg:mt-10">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-14 max-w-4xl mx-auto">
               {adminSteps.map((step, i) => (
                 <motion.div
                   key={step.label}
-                  className="group flex items-center gap-5 py-5 px-7 rounded-2xl transition-all duration-500 cursor-default"
-                  style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
-                  {...cardHover}
+                  className="group relative rounded-xl p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
+                  style={{ background: C.accentLight, border: `1px solid ${C.cardBorder}` }}
+                  whileHover={{ y: -4, boxShadow: `0 12px 32px -8px ${C.accent}30` }}
                   {...stagger(i)}
                 >
                   <div
-                    className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: C.accentLight }}
+                    className="mx-auto w-14 h-14 rounded-full flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6"
+                    style={{ background: C.accent }}
                   >
-                    <step.icon className="w-[18px] h-[18px]" style={{ color: C.accent }} strokeWidth={1.5} />
+                    <step.icon className="w-6 h-6 text-white" strokeWidth={1.5} />
                   </div>
-                  <span className="font-sans text-sm tracking-wide" style={{ color: C.heading }}>
+                  <span className="font-sans text-sm font-medium tracking-wide leading-relaxed block" style={{ color: C.heading }}>
                     {step.label}
                   </span>
+                  <div className="absolute bottom-0 left-0 right-0 h-[3px] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100" style={{ background: C.accent }} />
                 </motion.div>
               ))}
             </div>
-          </div>
-          {/* Closing text — flows naturally after list */}
-          <div className="max-w-6xl mx-auto mt-16">
-            <motion.div {...fadeUp} className="max-w-3xl">
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide text-left" style={{ color: C.body }}>
-                Todo o processo é conduzido com foco na segurança, eficiência e preservação do patrimônio do cliente.
-              </p>
-            </motion.div>
+
+            <motion.p {...fadeUp} className="font-sans text-base font-semibold leading-[2.1] tracking-wide max-w-3xl mx-auto" style={{ color: C.body }}>
+              Todo o processo é conduzido com foco na segurança, eficiência e preservação do patrimônio do cliente.
+            </motion.p>
           </div>
         </section>
 
