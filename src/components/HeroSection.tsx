@@ -8,7 +8,7 @@ import jaLogoWhite from "@/assets/logo-ja-white.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import SearchAutocomplete from "@/components/SearchAutocomplete";
 
-const VIDEO_SRC = "/videos/fundo_ja.mp4";
+const VIDEO_SRC = "/videos/RJ.mp4";
 
 /* ══════════════════════════════════════════════════════════
    Search bar overlay – appears after full hero expansion

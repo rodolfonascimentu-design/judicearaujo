@@ -31,12 +31,12 @@ const Index = () => {
         <HeroSection />
         <div className="bg-background relative z-10">
           <ExclusiveGallery />
-          <ForbesPartnership />
+          <PropertyManagement />
           <FeaturedCarousel />
           <InstitutionalCTA />
           <Testimonials />
           <HighEndCarousel />
-          <PropertyManagement />
+          <ForbesPartnership />
           <BlogPreview />
           <Newsletter />
         </div>
