@@ -269,8 +269,9 @@ const ForbesPage = () => {
                 transition={{ duration: 1, ease: "easeOut" }}
               />
 
-          {/* Content below the parallax logo */}
-          <div className="max-w-5xl mx-auto px-6 lg:px-12 pb-28 lg:pb-40">
+            </motion.div>
+
+            <motion.div {...fadeUp} className="text-center mb-16">
             <motion.div {...fadeUp} className="text-center mb-20">
               <div className="w-12 h-px bg-primary-foreground/30 mx-auto mb-10" />
               <p className="font-sans text-base md:text-lg font-light text-primary-foreground/70 leading-[1.9] tracking-wide max-w-3xl mx-auto mb-6">
