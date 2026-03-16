@@ -20,58 +20,142 @@ import {
   Briefcase,
   Eye,
   Handshake,
+  MessageCircle,
+  Award,
+  Heart,
+  Star,
+  CheckCircle2,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroImg from "@/assets/gestao-hero.jpg";
+import interiorImg from "@/assets/gestao-interior.jpg";
+import aerialImg from "@/assets/gestao-aerial.jpg";
+import terraceImg from "@/assets/gestao-terrace.jpg";
 
 /* ── animation presets ── */
 const fadeUp = {
-  initial: { opacity: 0, y: 32 },
+  initial: { opacity: 0, y: 36 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, margin: "-80px" },
-  transition: { duration: 0.8, ease: "easeOut" as const },
+  viewport: { once: false, margin: "-60px" },
+  transition: { duration: 0.85, ease: "easeOut" as const },
 };
 
 const stagger = (i: number) => ({
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, margin: "-60px" },
-  transition: { duration: 0.6, delay: i * 0.12, ease: "easeOut" as const },
+  viewport: { once: false, margin: "-40px" },
+  transition: { duration: 0.65, delay: i * 0.1, ease: "easeOut" as const },
 });
 
+/* ── color constants ── */
+const C = {
+  dark: "hsl(0 0% 8%)",
+  heading: "hsl(0 0% 10%)",
+  body: "hsl(0 0% 38%)",
+  subtle: "hsl(0 0% 52%)",
+  line: "hsl(0 0% 85%)",
+  cardBg: "hsl(0 0% 97%)",
+  cardBorder: "hsl(0 0% 90%)",
+  sectionAlt: "hsl(0 0% 97.5%)",
+  accent: "hsl(171 100% 12%)",
+  accentLight: "hsl(171 100% 12% / 0.07)",
+  accentBorder: "hsl(171 100% 12% / 0.2)",
+  accentShadow: "0 8px 40px -12px hsl(171 100% 12% / 0.08)",
+};
+
 /* ── data ── */
-const highlights = [
-  { value: "1975", label: "Fundação da empresa" },
-  { value: "Mercado Premium", label: "Especialização em imóveis de alto padrão" },
-  { value: "Gestão Estratégica", label: "Imóveis tratados como ativos patrimoniais" },
-  { value: "Atendimento Personalizado", label: "Acompanhamento próximo do proprietário" },
+const assetCards = [
+  { icon: DollarSign, title: "Rentabilidade" },
+  { icon: ShieldCheck, title: "Preservação de valor" },
+  { icon: Scale, title: "Liquidez" },
+  { icon: Lock, title: "Segurança jurídica" },
 ];
 
-const assetCards = [
-  { icon: DollarSign, title: "Rentabilidade", desc: "Maximização do retorno sobre o ativo imobiliário" },
-  { icon: ShieldCheck, title: "Preservação de valor", desc: "Manutenção e valorização contínua do patrimônio" },
-  { icon: Scale, title: "Liquidez", desc: "Posicionamento estratégico para negociação ágil" },
-  { icon: Lock, title: "Segurança jurídica", desc: "Gestão contratual com rigor e transparência" },
+const expertiseCards = [
+  { icon: Search, label: "Profundo conhecimento de mercado" },
+  { icon: Heart, label: "Relacionamento de longo prazo com clientes" },
+  { icon: Eye, label: "Discrição e profissionalismo" },
+  { icon: Star, label: "Alto padrão de atendimento" },
 ];
 
 const bairros = ["Leblon", "Ipanema", "Lagoa", "Gávea", "Jardim Botânico", "Barra da Tijuca"];
 
+const serviceCards = [
+  { icon: MessageCircle, label: "Comunicação clara e constante" },
+  { icon: HeadphonesIcon, label: "Suporte dedicado" },
+  { icon: Users, label: "Acompanhamento próximo das decisões relacionadas ao imóvel" },
+];
+
 const marketCards = [
   { icon: LineChart, title: "Evolução do mercado de locação" },
-  { icon: BarChart3, title: "Preço por metro quadrado" },
-  { icon: Search, title: "Comparação com imóveis similares" },
-  { icon: TrendingUp, title: "Análise de tendências imobiliárias" },
+  { icon: BarChart3, title: "Preço por metro quadrado em diferentes regiões" },
+  { icon: TrendingUp, title: "Posicionamento do ativo frente a imóveis comparáveis" },
+  { icon: Search, title: "Tendências do mercado imobiliário" },
 ];
 
 const adminSteps = [
-  { icon: Building2, label: "Avaliação estratégica do imóvel" },
+  { icon: Building2, label: "Avaliação estratégica do ativo" },
   { icon: DollarSign, label: "Definição de preço e posicionamento" },
   { icon: Users, label: "Seleção criteriosa de inquilinos" },
   { icon: FileText, label: "Gestão contratual" },
   { icon: Wallet, label: "Acompanhamento financeiro" },
-  { icon: HeadphonesIcon, label: "Suporte contínuo ao proprietário" },
+  { icon: HeadphonesIcon, label: "Suporte contínuo ao proprietário e ao locatário" },
 ];
+
+const investorCards = [
+  { icon: Briefcase, label: "Expertise local" },
+  { icon: Eye, label: "Acompanhamento constante" },
+  { icon: ShieldCheck, label: "Governança" },
+  { icon: Handshake, label: "Transparência" },
+];
+
+const valuesCards = [
+  { icon: Award, label: "Confiança" },
+  { icon: ShieldCheck, label: "Seriedade" },
+  { icon: Eye, label: "Discrição" },
+  { icon: Star, label: "Excelência no atendimento" },
+];
+
+/* ── Elegant divider ── */
+const Divider = () => (
+  <div className="flex items-center justify-center py-4">
+    <div className="w-20 h-px" style={{ background: C.line }} />
+  </div>
+);
+
+/* ── Full-width image break ── */
+const ImageBreak = ({ src, alt, height = "h-[45vh]" }: { src: string; alt: string; height?: string }) => (
+  <motion.div
+    className={`relative w-full ${height} overflow-hidden`}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: false, margin: "-40px" }}
+    transition={{ duration: 1 }}
+  >
+    <img src={src} alt={alt} className="w-full h-full object-cover" loading="lazy" />
+    <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.08) 100%)" }} />
+  </motion.div>
+);
+
+/* ── Section label ── */
+const SectionLabel = ({ text }: { text: string }) => (
+  <p className="font-sans text-[10px] tracking-[0.35em] uppercase mb-6 font-medium" style={{ color: C.accent }}>
+    {text}
+  </p>
+);
+
+/* ── Card hover helper ── */
+const cardHover = {
+  onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => {
+    (e.currentTarget as HTMLElement).style.borderColor = C.accentBorder;
+    (e.currentTarget as HTMLElement).style.boxShadow = C.accentShadow;
+  },
+  onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => {
+    (e.currentTarget as HTMLElement).style.borderColor = C.cardBorder;
+    (e.currentTarget as HTMLElement).style.boxShadow = "none";
+  },
+};
 
 const GestaoAtivos = () => {
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
@@ -101,65 +185,61 @@ const GestaoAtivos = () => {
     { key: "email" as const, type: "email", label: "Seu melhor e-mail", required: true },
   ];
 
-  /* elegant thin divider */
-  const Divider = () => (
-    <div className="flex items-center justify-center py-2">
-      <div className="w-16 h-px" style={{ background: "hsl(0 0% 78%)" }} />
-    </div>
-  );
-
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: "#ffffff" }}>
       <Navbar />
       <main>
-        {/* ═══════════════ HERO ═══════════════ */}
-        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+
+        {/* ═══════════════════════════════════════════════════════════
+            HERO
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
           <img
             src={heroImg}
-            alt="Interior de apartamento de alto padrão no Rio de Janeiro"
+            alt="Arquitetura de alto padrão"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(18,18,18,0.55) 0%, rgba(18,18,18,0.7) 100%)" }} />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(180deg, rgba(10,10,10,0.45) 0%, rgba(10,10,10,0.72) 100%)" }}
+          />
           <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-12 text-center">
             <motion.p
-              className="font-sans text-[10px] tracking-[0.45em] uppercase mb-8 font-medium"
-              style={{ color: "rgba(255,255,255,0.45)" }}
+              className="font-sans text-[10px] tracking-[0.5em] uppercase mb-10 font-medium"
+              style={{ color: "rgba(255,255,255,0.4)" }}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.7 }}
             >
-              Judice & Araujo
+              Judice & Araujo · Desde 1975
             </motion.p>
             <motion.h1
-              className="font-display text-4xl md:text-5xl lg:text-[3.5rem] font-light tracking-[-0.02em] leading-[1.08] mb-7"
+              className="font-display text-4xl md:text-5xl lg:text-[3.8rem] font-light tracking-[-0.02em] leading-[1.06] mb-8"
               style={{ color: "#ffffff" }}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              transition={{ duration: 0.9, delay: 0.12 }}
             >
               Gestão de Ativos Imobiliários
             </motion.h1>
             <motion.p
-              className="font-display text-lg md:text-xl font-light tracking-wide mb-12"
-              style={{ color: "rgba(255,255,255,0.6)" }}
+              className="font-display text-lg md:text-xl font-light tracking-wide mb-14"
+              style={{ color: "rgba(255,255,255,0.55)" }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
             >
               Administração estratégica de imóveis de alto padrão
             </motion.p>
             <motion.a
               href="#contato"
-              className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-sans text-[11px] font-semibold tracking-[0.15em] uppercase transition-all duration-300"
-              style={{
-                background: "#ffffff",
-                color: "#121212",
-              }}
-              whileHover={{ scale: 1.04, boxShadow: "0 8px 30px -8px rgba(255,255,255,0.25)" }}
+              className="inline-flex items-center gap-3 px-11 py-4 rounded-full font-sans text-[11px] font-medium tracking-[0.18em] uppercase transition-all duration-300"
+              style={{ background: "#ffffff", color: C.dark }}
+              whileHover={{ scale: 1.04, boxShadow: "0 8px 30px -8px rgba(255,255,255,0.3)" }}
               whileTap={{ scale: 0.97 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.35 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               Agendar uma conversa
               <ArrowRight className="w-4 h-4" />
@@ -167,270 +247,333 @@ const GestaoAtivos = () => {
           </div>
         </section>
 
-        {/* ═══════════════ HIGHLIGHTS ═══════════════ */}
-        <section className="py-24 lg:py-32 px-6 lg:px-12" style={{ background: "#fafafa" }}>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {highlights.map((h, i) => (
-              <motion.div
-                key={h.value}
-                className="group relative rounded-xl p-8 text-center transition-all duration-500"
-                style={{
-                  background: "#ffffff",
-                  border: "1px solid hsl(0 0% 90%)",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.25)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 40px -12px hsl(171 100% 12% / 0.08)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 90%)";
-                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                }}
-                {...stagger(i)}
-              >
-                <p className="font-display text-2xl md:text-3xl mb-3 tracking-tight" style={{ color: "hsl(171 100% 12%)" }}>
-                  {h.value}
-                </p>
-                <p className="font-sans text-xs tracking-wide leading-relaxed" style={{ color: "hsl(0 0% 45%)" }}>
-                  {h.label}
-                </p>
-              </motion.div>
-            ))}
+        {/* ═══════════════════════════════════════════════════════════
+            INTRO TEXT
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.div {...fadeUp}>
+              <SectionLabel text="Sobre o serviço" />
+              <p className="font-sans text-[15px] md:text-base font-light leading-[2.1] tracking-wide mb-8" style={{ color: C.body }}>
+                A Judice & Araujo oferece um serviço exclusivo de Gestão de Ativos Imobiliários, desenvolvido para proprietários que desejam tratar seus imóveis como parte relevante de seu patrimônio.
+              </p>
+              <p className="font-sans text-[15px] md:text-base font-light leading-[2.1] tracking-wide mb-8" style={{ color: C.body }}>
+                Mais do que uma simples administração de locação, nossa atuação envolve visão estratégica, inteligência de mercado e acompanhamento contínuo do ativo, sempre com o padrão de confiança, seriedade e atendimento personalizado que caracteriza a empresa desde 1975.
+              </p>
+              <p className="font-sans text-[15px] md:text-base font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+                Nosso objetivo é garantir que cada imóvel sob gestão esteja corretamente posicionado no mercado, preservando seu valor e capturando o melhor potencial de rentabilidade.
+              </p>
+            </motion.div>
           </div>
         </section>
 
         <Divider />
 
-        {/* ═══════════════ O QUE É GESTÃO ═══════════════ */}
-        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "#ffffff" }}>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        {/* ═══════════════════════════════════════════════════════════
+            O QUE É GESTÃO DE ATIVOS
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.sectionAlt }}>
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-start">
             <motion.div {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium" style={{ color: "hsl(171 100% 12%)" }}>
-                Nosso serviço
-              </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-8" style={{ color: "hsl(0 0% 10%)" }}>
-                O que é Gestão de Ativos Imobiliários
+              <SectionLabel text="Nosso serviço" />
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
+                O que é a Gestão de Ativos Imobiliários
               </h2>
-              <p className="font-sans text-sm md:text-[15px] font-light leading-[2] tracking-wide mb-5" style={{ color: "hsl(0 0% 40%)" }}>
-                A gestão de ativos imobiliários é uma abordagem profissional em que o imóvel é tratado como um ativo patrimonial, acompanhado continuamente para maximizar seu potencial.
-              </p>
-              <p className="font-sans text-sm md:text-[15px] font-light leading-[2] tracking-wide" style={{ color: "hsl(0 0% 40%)" }}>
-                Na Judice & Araujo, cada imóvel é analisado dentro de seu contexto de mercado, considerando localização, tipologia, demanda e benchmarks imobiliários.
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
+                A gestão de ativos imobiliários é uma abordagem profissional em que o imóvel é tratado como um ativo patrimonial, acompanhado de forma contínua para maximizar:
               </p>
             </motion.div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-2 gap-5">
               {assetCards.map((card, i) => (
                 <motion.div
                   key={card.title}
-                  className="group rounded-xl p-7 transition-all duration-500"
-                  style={{
-                    background: "#fafafa",
-                    border: "1px solid hsl(0 0% 91%)",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.2)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 40px -12px hsl(171 100% 12% / 0.07)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 91%)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                  }}
+                  className="rounded-2xl p-8 text-center transition-all duration-500 cursor-default"
+                  style={{ background: "#ffffff", border: `1px solid ${C.cardBorder}` }}
+                  {...cardHover}
                   {...stagger(i)}
                 >
-                  <card.icon className="w-6 h-6 mb-4" style={{ color: "hsl(171 100% 12%)" }} strokeWidth={1.5} />
-                  <h3 className="font-display text-sm font-medium mb-2 tracking-wide" style={{ color: "hsl(0 0% 10%)" }}>
+                  <div
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5"
+                    style={{ background: C.accentLight }}
+                  >
+                    <card.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="font-display text-sm font-medium tracking-wide" style={{ color: C.heading }}>
                     {card.title}
                   </h3>
-                  <p className="font-sans text-xs leading-relaxed" style={{ color: "hsl(0 0% 50%)" }}>
-                    {card.desc}
-                  </p>
                 </motion.div>
               ))}
             </div>
           </div>
-        </section>
-
-        <Divider />
-
-        {/* ═══════════════ BAIRROS ═══════════════ */}
-        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "#fafafa" }}>
-          <div className="max-w-6xl mx-auto">
-            <motion.div className="text-center mb-20" {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium" style={{ color: "hsl(171 100% 12%)" }}>
-                Áreas de atuação
+          {/* Continuation text */}
+          <div className="max-w-3xl mx-auto mt-20">
+            <motion.div {...fadeUp}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
+                Na Judice & Araujo, cada imóvel é analisado dentro de seu contexto de mercado, considerando fatores como localização, tipologia, demanda e benchmarks imobiliários.
               </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-5" style={{ color: "hsl(0 0% 10%)" }}>
-                Bairros de atuação
-              </h2>
-              <p className="font-sans text-sm font-light max-w-xl mx-auto leading-relaxed" style={{ color: "hsl(0 0% 45%)" }}>
-                Nossa equipe acompanha de perto a dinâmica dos bairros mais valorizados do Rio de Janeiro.
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+                Essa visão permite que decisões relacionadas à locação sejam tomadas de forma estratégica e informada, sempre alinhadas aos interesses do proprietário.
               </p>
             </motion.div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
+          </div>
+        </section>
+
+        {/* ── Image break ── */}
+        <ImageBreak src={interiorImg} alt="Interior de apartamento de alto padrão" height="h-[50vh]" />
+
+        {/* ═══════════════════════════════════════════════════════════
+            EXPERTISE
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
+          <div className="max-w-6xl mx-auto">
+            <motion.div className="max-w-3xl mb-20" {...fadeUp}>
+              <SectionLabel text="Tradição e expertise" />
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
+                Expertise no mercado de alto padrão
+              </h2>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
+                A Judice & Araujo é uma empresa familiar fundada em 1975, reconhecida por sua atuação no mercado imobiliário de alto padrão do Rio de Janeiro.
+              </p>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+                Ao longo de décadas, construímos uma reputação baseada em:
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-24">
+              {expertiseCards.map((card, i) => (
+                <motion.div
+                  key={card.label}
+                  className="rounded-2xl p-8 transition-all duration-500 cursor-default"
+                  style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
+                  {...cardHover}
+                  {...stagger(i)}
+                >
+                  <card.icon className="w-5 h-5 mb-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                  <p className="font-sans text-sm tracking-wide leading-relaxed" style={{ color: C.heading }}>
+                    {card.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Bairros */}
+            <motion.div className="max-w-3xl mb-14" {...fadeUp}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+                Nossa equipe acompanha de perto a dinâmica dos bairros mais valorizados da cidade, incluindo, mas não se limitando a:
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl mb-14">
               {bairros.map((b, i) => (
                 <motion.div
                   key={b}
-                  className="group flex flex-col items-center justify-center py-10 px-4 rounded-xl transition-all duration-500"
-                  style={{
-                    background: "#ffffff",
-                    border: "1px solid hsl(0 0% 90%)",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.25)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 40px -12px hsl(171 100% 12% / 0.08)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 90%)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                  }}
+                  className="flex items-center gap-4 py-6 px-7 rounded-2xl transition-all duration-500 cursor-default"
+                  style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
+                  {...cardHover}
                   {...stagger(i)}
                 >
-                  <MapPin className="w-5 h-5 mb-3 transition-colors duration-300" style={{ color: "hsl(171 100% 12% / 0.5)" }} strokeWidth={1.5} />
-                  <span className="font-display text-sm font-medium tracking-wide text-center" style={{ color: "hsl(0 0% 15%)" }}>
+                  <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: C.accent }} strokeWidth={1.5} />
+                  <span className="font-display text-sm font-medium tracking-wide" style={{ color: C.heading }}>
                     {b}
                   </span>
                 </motion.div>
               ))}
             </div>
+
+            <motion.div className="max-w-3xl" {...fadeUp}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+                Essa expertise permite posicionar cada imóvel de forma adequada dentro do mercado premium.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── Aerial image break ── */}
+        <ImageBreak src={aerialImg} alt="Vista aérea do Leblon e Ipanema" height="h-[45vh]" />
+
+        {/* ═══════════════════════════════════════════════════════════
+            ATENDIMENTO PERSONALIZADO
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-16 lg:gap-28 items-start">
+            <motion.div {...fadeUp}>
+              <SectionLabel text="Relacionamento" />
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
+                Atendimento personalizado
+              </h2>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
+                Cada imóvel sob gestão recebe um acompanhamento individualizado.
+              </p>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
+                Nosso serviço foi estruturado para oferecer aos proprietários:
+              </p>
+            </motion.div>
+            <div className="space-y-4 lg:mt-20">
+              {serviceCards.map((card, i) => (
+                <motion.div
+                  key={card.label}
+                  className="flex items-center gap-5 py-6 px-7 rounded-2xl transition-all duration-500 cursor-default"
+                  style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
+                  {...cardHover}
+                  {...stagger(i)}
+                >
+                  <div
+                    className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
+                    style={{ background: C.accentLight }}
+                  >
+                    <card.icon className="w-[18px] h-[18px]" style={{ color: C.accent }} strokeWidth={1.5} />
+                  </div>
+                  <span className="font-sans text-sm tracking-wide leading-relaxed" style={{ color: C.heading }}>
+                    {card.label}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          <div className="max-w-3xl mx-auto mt-20">
+            <motion.p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }} {...fadeUp}>
+              Entendemos que cada cliente possui objetivos patrimoniais distintos, e por isso nosso trabalho é sempre conduzido de forma personalizada e estratégica.
+            </motion.p>
           </div>
         </section>
 
         <Divider />
 
-        {/* ═══════════════ INTELIGÊNCIA DE MERCADO ═══════════════ */}
-        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "#ffffff" }}>
+        {/* ═══════════════════════════════════════════════════════════
+            INTELIGÊNCIA DE MERCADO
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.sectionAlt }}>
           <div className="max-w-6xl mx-auto">
-            <motion.div className="text-center mb-20" {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium" style={{ color: "hsl(171 100% 12%)" }}>
-                Dados e análise
-              </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-5" style={{ color: "hsl(0 0% 10%)" }}>
-                Inteligência de mercado
+            <motion.div className="text-center max-w-3xl mx-auto mb-20" {...fadeUp}>
+              <SectionLabel text="Dados e análise" />
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
+                Inteligência de mercado e análise de performance
               </h2>
-              <p className="font-sans text-sm font-light max-w-xl mx-auto leading-relaxed" style={{ color: "hsl(0 0% 45%)" }}>
-                Acompanhamento contínuo da performance do ativo com benchmarks e relatórios periódicos.
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+                Um dos diferenciais da Judice & Araujo é o acompanhamento contínuo da performance do ativo imobiliário.
+              </p>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mt-6" style={{ color: C.body }}>
+                Utilizamos benchmarks e dados de mercado para analisar:
               </p>
             </motion.div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-20">
               {marketCards.map((card, i) => (
                 <motion.div
                   key={card.title}
-                  className="group rounded-xl p-8 text-center transition-all duration-500"
-                  style={{
-                    background: "#fafafa",
-                    border: "1px solid hsl(0 0% 91%)",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.2)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 40px -12px hsl(171 100% 12% / 0.07)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 91%)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                  }}
+                  className="group rounded-2xl p-8 text-center transition-all duration-500 cursor-default"
+                  style={{ background: "#ffffff", border: `1px solid ${C.cardBorder}` }}
+                  {...cardHover}
                   {...stagger(i)}
                 >
                   <div
-                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6 transition-colors duration-300"
-                    style={{ background: "hsl(171 100% 12% / 0.06)" }}
+                    className="inline-flex items-center justify-center w-13 h-13 rounded-xl mb-6"
+                    style={{ background: C.accentLight, width: 52, height: 52 }}
                   >
-                    <card.icon className="w-5 h-5" style={{ color: "hsl(171 100% 12%)" }} strokeWidth={1.5} />
+                    <card.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display text-sm font-medium tracking-wide leading-snug" style={{ color: "hsl(0 0% 12%)" }}>
+                  <h3 className="font-display text-sm font-medium tracking-wide leading-snug" style={{ color: C.heading }}>
                     {card.title}
                   </h3>
                 </motion.div>
               ))}
             </div>
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.div {...fadeUp}>
+                <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
+                  Essas análises são apresentadas aos proprietários em relatórios periódicos que permitem acompanhar o desempenho do imóvel de forma clara e estruturada.
+                </p>
+                <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+                  Esse modelo aproxima a gestão imobiliária da lógica utilizada na gestão de ativos financeiros, trazendo maior transparência e previsibilidade.
+                </p>
+              </motion.div>
+            </div>
           </div>
         </section>
 
-        <Divider />
+        {/* ── Terrace image break ── */}
+        <ImageBreak src={terraceImg} alt="Terraço de cobertura com vista para o Rio" height="h-[50vh]" />
 
-        {/* ═══════════════ ADMINISTRAÇÃO COMPLETA ═══════════════ */}
-        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "#fafafa" }}>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        {/* ═══════════════════════════════════════════════════════════
+            ADMINISTRAÇÃO COMPLETA
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-start">
             <motion.div {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium" style={{ color: "hsl(171 100% 12%)" }}>
-                Serviço completo
-              </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-8" style={{ color: "hsl(0 0% 10%)" }}>
+              <SectionLabel text="Serviço completo" />
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
                 Administração completa da locação
               </h2>
-              <p className="font-sans text-sm md:text-[15px] font-light leading-[2] tracking-wide" style={{ color: "hsl(0 0% 40%)" }}>
-                A Judice & Araujo realiza toda a gestão operacional do imóvel, do posicionamento à manutenção do relacionamento com inquilinos.
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
+                A Judice & Araujo realiza toda a gestão operacional do imóvel, incluindo:
               </p>
             </motion.div>
-            <div className="space-y-4">
+            <div className="space-y-4 lg:mt-10">
               {adminSteps.map((step, i) => (
                 <motion.div
                   key={step.label}
-                  className="group flex items-center gap-5 py-5 px-6 rounded-xl transition-all duration-500"
-                  style={{
-                    background: "#ffffff",
-                    border: "1px solid hsl(0 0% 91%)",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(171 100% 12% / 0.2)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px -8px hsl(171 100% 12% / 0.06)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "hsl(0 0% 91%)";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                  }}
+                  className="group flex items-center gap-5 py-5 px-7 rounded-2xl transition-all duration-500 cursor-default"
+                  style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
+                  {...cardHover}
                   {...stagger(i)}
                 >
                   <div
-                    className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-300"
-                    style={{ background: "hsl(171 100% 12% / 0.06)" }}
+                    className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: C.accentLight }}
                   >
-                    <step.icon className="w-[18px] h-[18px]" style={{ color: "hsl(171 100% 12%)" }} strokeWidth={1.5} />
+                    <step.icon className="w-[18px] h-[18px]" style={{ color: C.accent }} strokeWidth={1.5} />
                   </div>
-                  <span className="font-sans text-sm tracking-wide" style={{ color: "hsl(0 0% 18%)" }}>
+                  <span className="font-sans text-sm tracking-wide" style={{ color: C.heading }}>
                     {step.label}
                   </span>
                 </motion.div>
               ))}
             </div>
           </div>
+          <div className="max-w-3xl mx-auto mt-20">
+            <motion.p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }} {...fadeUp}>
+              Todo o processo é conduzido com foco na segurança, eficiência e preservação do patrimônio do cliente.
+            </motion.p>
+          </div>
         </section>
 
         <Divider />
 
-        {/* ═══════════════ INVESTIDORES & FAMILY OFFICES ═══════════════ */}
-        <section className="py-28 lg:py-36 px-6 lg:px-12" style={{ background: "hsl(171 100% 12%)" }}>
+        {/* ═══════════════════════════════════════════════════════════
+            INVESTIDORES & FAMILY OFFICES
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.dark }}>
           <div className="max-w-5xl mx-auto text-center">
-            <motion.p
-              className="font-sans text-[10px] tracking-[0.3em] uppercase mb-5 font-medium"
-              style={{ color: "rgba(255,255,255,0.35)" }}
-              {...fadeUp}
-            >
-              Parcerias estratégicas
-            </motion.p>
-            <motion.h2
-              className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[-0.02em] leading-[1.2] mb-7"
-              style={{ color: "#ffffff" }}
-              {...fadeUp}
-            >
-              Gestão para investidores e family offices
-            </motion.h2>
-            <motion.p
-              className="font-sans text-sm md:text-[15px] font-light leading-[2] tracking-wide max-w-2xl mx-auto mb-14"
-              style={{ color: "rgba(255,255,255,0.5)" }}
-              {...fadeUp}
-            >
-              Atuamos em parceria com gestores de patrimônio, bancos e family offices, oferecendo suporte especializado na gestão de ativos imobiliários.
-            </motion.p>
+            <motion.div {...fadeUp}>
+              <p
+                className="font-sans text-[10px] tracking-[0.35em] uppercase mb-6 font-medium"
+                style={{ color: "rgba(255,255,255,0.35)" }}
+              >
+                Parcerias estratégicas
+              </p>
+              <h2
+                className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-8"
+                style={{ color: "#ffffff" }}
+              >
+                Gestão para investidores, Wealth Managers e Family Offices
+              </h2>
+              <p
+                className="font-sans text-[15px] font-light leading-[2.1] tracking-wide max-w-2xl mx-auto mb-8"
+                style={{ color: "rgba(255,255,255,0.5)" }}
+              >
+                A Judice & Araujo também atua em parceria com gestores de patrimônio, bancos e family offices, oferecendo suporte especializado na gestão de ativos imobiliários pertencentes a seus clientes.
+              </p>
+              <p
+                className="font-sans text-[15px] font-light leading-[2.1] tracking-wide max-w-2xl mx-auto mb-16"
+                style={{ color: "rgba(255,255,255,0.5)" }}
+              >
+                Nosso papel é complementar a estratégia patrimonial desses investidores, oferecendo uma gestão imobiliária profissional que combine:
+              </p>
+            </motion.div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-3xl mx-auto">
-              {[
-                { icon: Briefcase, label: "Expertise local" },
-                { icon: Eye, label: "Acompanhamento constante" },
-                { icon: ShieldCheck, label: "Governança" },
-                { icon: Handshake, label: "Transparência" },
-              ].map((item, i) => (
+              {investorCards.map((item, i) => (
                 <motion.div
                   key={item.label}
-                  className="flex flex-col items-center gap-4 py-8 px-4 rounded-xl transition-all duration-500"
+                  className="flex flex-col items-center gap-4 py-9 px-5 rounded-2xl transition-all duration-500"
                   style={{
                     border: "1px solid rgba(255,255,255,0.08)",
                     background: "rgba(255,255,255,0.04)",
@@ -443,7 +586,7 @@ const GestaoAtivos = () => {
                   }}
                   {...stagger(i)}
                 >
-                  <item.icon className="w-5 h-5" style={{ color: "rgba(255,255,255,0.55)" }} strokeWidth={1.5} />
+                  <item.icon className="w-5 h-5" style={{ color: "rgba(255,255,255,0.5)" }} strokeWidth={1.5} />
                   <span className="font-sans text-xs tracking-wide text-center" style={{ color: "rgba(255,255,255,0.65)" }}>
                     {item.label}
                   </span>
@@ -453,41 +596,83 @@ const GestaoAtivos = () => {
           </div>
         </section>
 
-        {/* ═══════════════ FORMULÁRIO DE CONTATO ═══════════════ */}
-        <section id="contato" className="py-28 md:py-36 px-6 md:px-16" style={{ background: "#ffffff" }}>
+        {/* ═══════════════════════════════════════════════════════════
+            CONFIANÇA E SERIEDADE
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
+          <div className="max-w-5xl mx-auto">
+            <motion.div className="text-center max-w-3xl mx-auto mb-20" {...fadeUp}>
+              <SectionLabel text="Nossos valores" />
+              <h2 className="font-display text-2xl md:text-3xl lg:text-[2.5rem] tracking-[-0.02em] leading-[1.18] mb-10" style={{ color: C.heading }}>
+                Confiança e seriedade
+              </h2>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6" style={{ color: C.body }}>
+                Ao confiar a gestão do seu imóvel à Judice & Araujo, o proprietário conta com uma empresa com quase cinco décadas de atuação no mercado imobiliário.
+              </p>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+                Nossa reputação foi construída com base em valores claros:
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-3xl mx-auto mb-20">
+              {valuesCards.map((v, i) => (
+                <motion.div
+                  key={v.label}
+                  className="flex flex-col items-center gap-4 py-10 px-5 rounded-2xl transition-all duration-500 cursor-default"
+                  style={{ background: C.cardBg, border: `1px solid ${C.cardBorder}` }}
+                  {...cardHover}
+                  {...stagger(i)}
+                >
+                  <v.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                  <span className="font-display text-sm font-medium tracking-wide text-center" style={{ color: C.heading }}>
+                    {v.label}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div className="text-center max-w-3xl mx-auto" {...fadeUp}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+                Esses princípios orientam todas as decisões relacionadas aos imóveis sob nossa gestão.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* ═══════════════════════════════════════════════════════════
+            FORMULÁRIO DE CONTATO
+        ═══════════════════════════════════════════════════════════ */}
+        <section id="contato" className="py-28 md:py-40 px-6 md:px-16" style={{ background: C.sectionAlt }}>
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
               {/* Left */}
-              <motion.div
-                {...fadeUp}
-                className="lg:sticky lg:top-32 self-start"
-              >
-                <p className="font-sans text-[10px] tracking-[0.25em] uppercase mb-5" style={{ color: "hsl(0 0% 50%)" }}>
-                  Contato
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl mb-7 leading-[1.15]" style={{ color: "hsl(0 0% 10%)" }}>
+              <motion.div {...fadeUp} className="lg:sticky lg:top-32 self-start">
+                <SectionLabel text="Contato" />
+                <h2 className="font-display text-3xl md:text-4xl mb-8 leading-[1.15]" style={{ color: C.heading }}>
                   Fale com nossa equipe
                 </h2>
-                <p className="font-sans text-sm leading-[1.9] mb-8" style={{ color: "hsl(0 0% 45%)" }}>
-                  Se você possui um imóvel de alto padrão e deseja uma gestão profissional, estratégica e confiável, entre em contato com a Judice & Araujo.
+                <p className="font-sans text-[15px] font-light leading-[2] mb-10" style={{ color: C.body }}>
+                  Se você possui um imóvel de alto padrão e deseja uma gestão profissional, estratégica e confiável, entre em contato com a Judice & Araujo para conhecer melhor nosso serviço de Gestão de Ativos Imobiliários.
                 </p>
                 <div className="hidden lg:block">
-                  <div className="w-16 h-px" style={{ background: "hsl(171 100% 12% / 0.25)" }} />
+                  <div className="w-16 h-px" style={{ background: C.accentBorder }} />
                 </div>
               </motion.div>
 
               {/* Right — form */}
               <motion.form
                 onSubmit={handleSubmit}
-                className="rounded-lg p-8 md:p-10"
+                className="rounded-2xl p-8 md:p-10"
                 style={{
                   background: "#ffffff",
                   boxShadow: "0 8px 40px -12px hsl(0 0% 7% / 0.06)",
-                  border: "1px solid hsl(0 0% 92%)",
+                  border: `1px solid ${C.cardBorder}`,
                 }}
                 {...fadeUp}
               >
-                <div className="space-y-7">
+                <div className="space-y-8">
                   {fields.map((field) => (
                     <div key={field.key} className="relative">
                       <label
@@ -497,13 +682,11 @@ const GestaoAtivos = () => {
                             : "text-sm top-3"
                         }`}
                         style={{
-                          color: focused === field.key || form[field.key]
-                            ? "hsl(171 100% 12%)"
-                            : "hsl(0 0% 50%)",
+                          color: focused === field.key || form[field.key] ? C.accent : C.subtle,
                         }}
                       >
                         {field.label}
-                        {field.required && <span style={{ color: "hsl(171 100% 12%)" }} className="ml-0.5">*</span>}
+                        {field.required && <span style={{ color: C.accent }} className="ml-0.5">*</span>}
                       </label>
                       <input
                         type={field.type}
@@ -514,21 +697,21 @@ const GestaoAtivos = () => {
                         onBlur={() => setFocused(null)}
                         className="w-full bg-transparent border-b-2 px-0 pt-5 pb-2 font-sans text-sm focus:outline-none transition-colors duration-300"
                         style={{
-                          color: "hsl(0 0% 10%)",
-                          borderColor: focused === field.key ? "hsl(171 100% 12%)" : "hsl(0 0% 88%)",
+                          color: C.heading,
+                          borderColor: focused === field.key ? C.accent : C.line,
                         }}
                       />
                     </div>
                   ))}
                 </div>
 
-                <p className="font-sans text-[10px] leading-relaxed mt-7 mb-7" style={{ color: "hsl(0 0% 55%)" }}>
+                <p className="font-sans text-[10px] leading-relaxed mt-8 mb-8" style={{ color: C.subtle }}>
                   Ao informar meus dados concordo com a{" "}
-                  <a href="#" className="underline transition-colors" style={{ color: "hsl(0 0% 40%)" }}>
+                  <a href="#" className="underline transition-colors" style={{ color: C.body }}>
                     Política de Privacidade
                   </a>{" "}
                   e{" "}
-                  <a href="#" className="underline transition-colors" style={{ color: "hsl(0 0% 40%)" }}>
+                  <a href="#" className="underline transition-colors" style={{ color: C.body }}>
                     Termos de Uso
                   </a>
                   .
@@ -536,16 +719,13 @@ const GestaoAtivos = () => {
 
                 <motion.button
                   type="submit"
-                  className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase transition-all duration-300"
-                  style={{
-                    background: "hsl(171 100% 12%)",
-                    color: "#ffffff",
-                  }}
+                  className="group inline-flex items-center gap-2.5 px-9 py-4 rounded-full text-xs font-sans font-medium tracking-[0.14em] uppercase transition-all duration-300"
+                  style={{ background: C.accent, color: "#ffffff" }}
                   whileHover={{ scale: 1.02, boxShadow: "0 4px 20px -4px hsl(171 100% 12% / 0.35)" }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Send className="w-4 h-4" />
-                  Falar com a equipe
+                  Agendar uma conversa
                   <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                 </motion.button>
               </motion.form>
