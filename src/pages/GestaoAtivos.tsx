@@ -433,8 +433,8 @@ const GestaoAtivos = () => {
           </div>
         </section>
 
-        {/* ── Terrace image break ── */}
-        <ImageBreak src={terraceImg} alt="Terraço de cobertura com vista para o Rio" height="h-[45vh]" />
+
+
 
         {/* ═══════════════════════════════════════════════════════════
              ATENDIMENTO PERSONALIZADO — split layout with image
