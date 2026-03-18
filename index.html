@@ -2,28 +2,28 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Judice & Araujo — Imóveis de Luxo no Rio de Janeiro</title>
     <meta name="description" content="Imóveis de luxo exclusivos nos endereços mais prestigiados do Rio de Janeiro. Leblon, Ipanema, Lagoa, Gávea e Jardim Botânico." />
     <meta name="author" content="Judice & Araujo" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://www.judicearaujo.com.br" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Judice & Araujo — Imóveis de Luxo" />
-    <meta property="og:description" content="Imóveis de luxo exclusivos no Rio de Janeiro" />
+    <meta property="og:title" content="Judice & Araujo — Imóveis de Luxo no Rio de Janeiro" />
+    <meta property="og:description" content="Imóveis de luxo exclusivos nos endereços mais prestigiados do Rio de Janeiro. Leblon, Ipanema, Lagoa, Gávea e Jardim Botânico." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.judicearaujo.com.br" />
     <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Judice & Araujo" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Judice & Araujo — Imóveis de Luxo" />
-    <meta name="twitter:description" content="Imóveis de luxo exclusivos no Rio de Janeiro" />
+    <meta name="twitter:title" content="Judice & Araujo — Imóveis de Luxo no Rio de Janeiro" />
+    <meta name="twitter:description" content="Imóveis de luxo exclusivos nos endereços mais prestigiados do Rio de Janeiro. Leblon, Ipanema, Lagoa, Gávea e Jardim Botânico." />
 
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#003F34" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Preconnect for fonts -->
@@ -37,6 +37,9 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" />
     </noscript>
 
+    <!-- Preload hero video -->
+    <link rel="preload" as="video" href="/videos/RJ.mp4" type="video/mp4" />
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -44,7 +47,8 @@
       "@type": "RealEstateAgent",
       "name": "Judice & Araujo",
       "url": "https://www.judicearaujo.com.br",
-      "description": "Imóveis de luxo exclusivos nos endereços mais prestigiados do Rio de Janeiro desde 1978.",
+      "logo": "https://www.judicearaujo.com.br/assets/logo-ja-black.png",
+      "description": "Imóveis de luxo exclusivos nos endereços mais prestigiados do Rio de Janeiro desde 1975. Membro exclusivo Forbes Global Properties.",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Rua Aníbal de Mendonça, 27 / 5º andar - Ipanema",
@@ -54,8 +58,19 @@
         "addressCountry": "BR"
       },
       "telephone": "+55-21-2540-9999",
-      "foundingDate": "1978",
-      "areaServed": ["Leblon", "Ipanema", "Lagoa", "Gávea", "Jardim Botânico", "São Conrado"]
+      "foundingDate": "1975",
+      "areaServed": [
+        {"@type": "City", "name": "Rio de Janeiro"},
+        {"@type": "City", "name": "Petrópolis"},
+        {"@type": "City", "name": "Teresópolis"},
+        {"@type": "City", "name": "Angra dos Reis"}
+      ],
+      "memberOf": {"@type": "Organization", "name": "Forbes Global Properties"},
+      "sameAs": [
+        "https://www.instagram.com/judicearaujo",
+        "https://www.linkedin.com/company/judicearaujo"
+      ],
+      "priceRange": "$$$$"
     }
     </script>
   </head>
