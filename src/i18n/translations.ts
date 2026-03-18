@@ -189,8 +189,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "unit.bedrooms": "bedrooms",
     "unit.parking": "parking",
 
-    "featured.title": "Featured Properties",
-    "featured.subtitle": "An exclusive selection of the most desired properties in Rio de Janeiro",
+    "featured.title": "Featured Launches",
+    "featured.subtitle": "A selection of the most desired launches in Rio de Janeiro.",
 
     "cta.owners": "Property Owners",
     "cta.ownersTitle": "Sell your property with security and maximum value",
