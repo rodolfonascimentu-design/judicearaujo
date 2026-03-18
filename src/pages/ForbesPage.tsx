@@ -264,7 +264,7 @@ const ForbesPage = () => {
                 A força da marca
               </p>
               <motion.img
-                src={forbesLogoWhite}
+                src={forbesLogoBW}
                 alt="Forbes Global Properties"
                 className="h-[60px] md:h-[80px] lg:h-[100px] w-auto mx-auto"
                 initial={{ opacity: 0, scale: 0.85 }}
