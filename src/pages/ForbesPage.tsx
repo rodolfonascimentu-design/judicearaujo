@@ -251,7 +251,7 @@ const ForbesPage = () => {
           </div>
           <ImmersiveScrollGallery
             images={galleryImages.map((src) => ({ src, scale: null }))}
-            className="h-[160vh]"
+            className="h-[120vh]"
           />
         </section>
 
