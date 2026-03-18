@@ -3,9 +3,10 @@ export type Lang = "PT" | "EN" | "ES";
 const translations: Record<Lang, Record<string, string>> = {
   PT: {
     // Hero
-    "hero.headline": "Para quem escolhe viver diferente",
-    "hero.sale": "Venda",
-    "hero.rental": "Locação",
+    "hero.headline": "Onde estão os imóveis mais especiais",
+    "hero.subheadline": "Propriedades de alto padrão nas melhores localizações do Rio de Janeiro e da região serrana.",
+    "hero.sale": "Comprar",
+    "hero.rental": "Alugar",
     "hero.seasonal": "Temporada",
     "hero.searchLabel": "Buscar imóvel",
     "hero.searchPlaceholder": "Bairro, cidade, condomínio ou código",
