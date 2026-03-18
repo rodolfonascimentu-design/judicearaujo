@@ -395,7 +395,7 @@ const QuemSomos = () => {
             ))}
           </div>
 
-          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl">
+          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto text-center">
             Essa abordagem aproxima a gestão imobiliária da lógica utilizada na gestão de investimentos, oferecendo mais transparência, inteligência de mercado e acompanhamento contínuo.
           </motion.p>
         </div>
