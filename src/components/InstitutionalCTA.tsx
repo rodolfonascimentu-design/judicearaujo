@@ -7,10 +7,10 @@ const InstitutionalCTA = () => {
   const { t } = useLanguage();
 
   const benefits = [
-    { text: t("cta.benefit1"), icon: BarChart3 },
-    { text: t("cta.benefit2"), icon: Megaphone },
-    { text: t("cta.benefit3"), icon: Globe },
-  ];
+  { text: t("cta.benefit1"), icon: BarChart3 },
+  { text: t("cta.benefit2"), icon: Megaphone },
+  { text: t("cta.benefit3"), icon: Globe }];
+
 
   return (
     <section className="py-32 lg:py-44 bg-primary">
@@ -24,15 +24,15 @@ const InstitutionalCTA = () => {
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-[#aed9d7] mb-8 font-medium">{t("cta.owners")}</p>
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal text-primary-foreground leading-[1.2] mb-10 tracking-[-0.02em]">{t("cta.ownersTitle")}</h2>
             <div className="w-10 h-px bg-primary-foreground/30 mb-10" />
-            <p className="font-sans text-sm text-primary-foreground/70 leading-[1.9] mb-12 font-light">{t("cta.ownersDesc")}</p>
+            <p className="font-sans text-sm leading-[1.9] mb-12 font-light text-secondary">{t("cta.ownersDesc")}</p>
 
             <ul className="space-y-5 mb-12">
-              {benefits.map((b) => (
-                <li key={b.text} className="flex items-center gap-4 text-sm text-primary-foreground/90 font-light tracking-wide">
+              {benefits.map((b) =>
+              <li key={b.text} className="flex items-center gap-4 text-sm text-primary-foreground/90 font-light tracking-wide">
                   <b.icon className="w-5 h-5 text-primary-foreground/60 flex-shrink-0" strokeWidth={1.5} />
                   {b.text}
                 </li>
-              ))}
+              )}
             </ul>
 
             <a href="#avaliar" className="inline-block px-10 py-4 bg-cream text-primary text-[11px] font-sans font-medium tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-primary-foreground hover:text-primary">{t("cta.evaluateBtn")}</a>
@@ -40,8 +40,8 @@ const InstitutionalCTA = () => {
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default InstitutionalCTA;
