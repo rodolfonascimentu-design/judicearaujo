@@ -16,7 +16,8 @@ import forbesGallery3 from "@/assets/forbes-gallery-3.jpg";
 import forbesGallery4 from "@/assets/forbes-gallery-4.jpg";
 import forbesGallery5 from "@/assets/forbes-gallery-5.jpg";
 import forbesGallery6 from "@/assets/forbes-gallery-6.jpg";
-import property4 from "@/assets/property-4.jpg";
+import partnershipBg from "@/assets/forbes-partnership-bg.jpg";
+import forbesLogoBW from "@/assets/forbes-logo-bw.png";
 
 /* ── Helpers ── */
 const fadeUp = {
@@ -250,6 +251,7 @@ const ForbesPage = () => {
           </div>
           <ImmersiveScrollGallery
             images={galleryImages.map((src) => ({ src, scale: null }))}
+            className="h-[160vh]"
           />
         </section>
 
@@ -262,7 +264,7 @@ const ForbesPage = () => {
                 A força da marca
               </p>
               <motion.img
-                src={forbesLogoWhite}
+                src={forbesLogoBW}
                 alt="Forbes Global Properties"
                 className="h-[60px] md:h-[80px] lg:h-[100px] w-auto mx-auto"
                 initial={{ opacity: 0, scale: 0.85 }}
@@ -438,7 +440,7 @@ const ForbesPage = () => {
                 viewport={{ once: false, margin: "-80px" }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               >
-                <img src={property4} alt="Judice & Araujo propriedade" className="w-full h-[400px] lg:h-[520px] object-cover rounded-lg" />
+                <img src={partnershipBg} alt="Judice & Araujo propriedade" className="w-full h-[400px] lg:h-[520px] object-cover rounded-lg" />
               </motion.div>
             </div>
           </div>
