@@ -45,7 +45,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
 
           {/* Modal */}
           <motion.div
-            className="relative bg-background rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-[0_20px_60px_-15px_hsl(var(--foreground)/0.15)] border border-border/30"
+            className="relative bg-white rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-[0_20px_60px_-15px_hsl(var(--foreground)/0.15)] border border-border/30"
             initial={{ opacity: 0, y: 30, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
