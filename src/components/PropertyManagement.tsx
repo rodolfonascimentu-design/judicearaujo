@@ -45,7 +45,7 @@ const PropertyManagement = () => {
             className="mb-12"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-80px" }}
+            viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, ease: "easeOut" }}>
             
             <img src={forbesLogo} alt="Forbes Global Properties" className="h-20 md:h-24 lg:h-28 object-contain mx-auto" loading="lazy" decoding="async" fetchPriority="low" />
@@ -56,7 +56,7 @@ const PropertyManagement = () => {
             className="font-display text-xl md:text-2xl lg:text-3xl font-medium tracking-[-0.02em] text-primary-foreground leading-[1.3] mb-10 max-w-3xl"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-80px" }}
+            viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, delay: 0.1 }}>
             
             {t("forbes.title")}
@@ -70,7 +70,7 @@ const PropertyManagement = () => {
               className="font-sans text-sm md:text-[15px] font-light tracking-wide leading-[1.85] text-secondary"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: "-60px" }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}>
               
                 {t(key)}
@@ -86,7 +86,7 @@ const PropertyManagement = () => {
             whileTap={{ scale: 0.97 }}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-40px" }}
+            viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.5, delay: 0.5 }}>
             
             {t("forbes.cta")}
@@ -104,7 +104,7 @@ const PropertyManagement = () => {
             className="relative flex-shrink-0 w-72 md:w-96 h-52 md:h-64 rounded-[4px] overflow-hidden group"
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: false, margin: "-40px" }}
+            viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}>
             
               <img src={img} alt={`Foto ${i + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async" fetchPriority="low" />

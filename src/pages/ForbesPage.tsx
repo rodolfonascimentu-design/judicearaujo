@@ -23,7 +23,7 @@ import forbesLogoBW from "@/assets/forbes-logo-bw.png";
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, margin: "-80px" } as any,
+  viewport: { once: true, margin: "-80px" } as any,
   transition: { duration: 0.7, ease: "easeOut" as const },
 };
 
@@ -49,7 +49,7 @@ const glassCardDark = {
 /* ── Counter Component ── */
 const AnimatedCounter = ({ value, suffix = "", delay = 0 }: { value: number; suffix?: string; delay?: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [displayed, setDisplayed] = useState("0");
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const AnimatedCounter = ({ value, suffix = "", delay = 0 }: { value: number; suf
 /* ── Decimal Counter ── */
 const DecimalCounter = ({ value, suffix = "", delay = 0 }: { value: number; suffix?: string; delay?: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [displayed, setDisplayed] = useState("0");
 
   useEffect(() => {
@@ -164,6 +164,25 @@ const ForbesPage = () => {
     document.title = "Forbes Global Properties — Judice & Araujo";
     document.querySelector('meta[name="description"]')?.setAttribute("content", "A Judice & Araujo integra a Forbes Global Properties, conectando o mercado imobiliário de alto padrão do Rio de Janeiro a uma audiência global.");
     window.scrollTo(0, 0);
+
+    // Canonical
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+    canonical.href = "https://www.judicearaujo.com.br/forbes";
+
+    // JSON-LD
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Forbes Global Properties — Judice & Araujo",
+      "description": "A Judice & Araujo integra a Forbes Global Properties, conectando o mercado imobiliário de alto padrão do Rio de Janeiro a uma audiência global.",
+      "url": "https://www.judicearaujo.com.br/forbes",
+      "isPartOf": { "@type": "WebSite", "name": "Judice & Araujo", "url": "https://www.judicearaujo.com.br" },
+    });
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); canonical.href = "https://www.judicearaujo.com.br"; };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -269,7 +288,7 @@ const ForbesPage = () => {
                 className="h-[60px] md:h-[80px] lg:h-[100px] w-auto mx-auto"
                 initial={{ opacity: 0, scale: 0.85 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 1, ease: "easeOut" }}
               />
 
@@ -326,16 +345,28 @@ const ForbesPage = () => {
               className="relative aspect-video rounded-[4px] overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: "-80px" }}
+              viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7 }}
             >
               <iframe
-                src="https://www.youtube.com/embed/rWJ-BwsgbhU?rel=0&modestbranding=1&showinfo=0"
+                src="about:blank"
+                data-src="https://www.youtube.com/embed/rWJ-BwsgbhU?rel=0&modestbranding=1&showinfo=0"
                 className="w-full h-full"
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
-                title="Forbes Global Properties"
+                title="Forbes Global Properties — Vídeo institucional"
                 frameBorder="0"
+                loading="lazy"
+                ref={(el) => {
+                  if (!el) return;
+                  const observer = new IntersectionObserver(([entry]) => {
+                    if (entry.isIntersecting && el.src === "about:blank") {
+                      el.src = el.dataset.src || "";
+                      observer.disconnect();
+                    }
+                  }, { rootMargin: "200px" });
+                  observer.observe(el);
+                }}
               />
             </motion.div>
           </div>
@@ -379,7 +410,7 @@ const ForbesPage = () => {
                 className="space-y-6"
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               >
                 {docImages.map((img, i) => (
@@ -437,7 +468,7 @@ const ForbesPage = () => {
                 className="rounded-lg overflow-hidden order-first lg:order-last"
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               >
                 <img src={partnershipBg} alt="Judice & Araujo propriedade" className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover object-center rounded-lg" />
@@ -454,7 +485,7 @@ const ForbesPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.7 }}
                 className="lg:sticky lg:top-32 self-start"
               >
@@ -479,7 +510,7 @@ const ForbesPage = () => {
                 style={glassCardWhite}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <div className="space-y-6">

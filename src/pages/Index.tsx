@@ -15,13 +15,11 @@ import Newsletter from "@/components/Newsletter";
 const Index = () => {
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title = "Judice & Araujo — Imóveis de Luxo no Rio de Janeiro";
     document.querySelector('meta[name="description"]')?.setAttribute("content", "Imóveis de luxo exclusivos nos endereços mais prestigiados do Rio de Janeiro. Leblon, Ipanema, Lagoa, Gávea e Jardim Botânico. Membro exclusivo Forbes Global Properties.");
-  }, []);
-
-  // On SPA return, ensure we start at top with search visible (animation already skipped)
-  useEffect(() => {
-    window.scrollTo(0, 0);
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (canonical) canonical.href = "https://www.judicearaujo.com.br";
   }, []);
 
   return (

@@ -186,6 +186,22 @@ const MapaDoSite = () => {
         "Navegue por toda a estrutura de imóveis da Judice & Araujo. Encontre casas, apartamentos, coberturas e terrenos para comprar, alugar ou temporada no Rio de Janeiro, Petrópolis, Teresópolis e região."
       );
     }
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+    canonical.href = "https://www.judicearaujo.com.br/mapa-do-site";
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Mapa do Site — Judice & Araujo",
+      "description": "Navegue por toda a estrutura de imóveis da Judice & Araujo.",
+      "url": "https://www.judicearaujo.com.br/mapa-do-site",
+      "isPartOf": { "@type": "WebSite", "name": "Judice & Araujo", "url": "https://www.judicearaujo.com.br" },
+    });
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); canonical.href = "https://www.judicearaujo.com.br"; };
   }, []);
 
   const comprar = sitemapData.find((c) => c.name === "Comprar")!;
