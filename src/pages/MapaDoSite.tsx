@@ -193,7 +193,7 @@ const MapaDoSite = () => {
   const temporada = sitemapData.find((c) => c.name === "Temporada")!;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
 
       {/* Hero / Header */}
@@ -205,34 +205,29 @@ const MapaDoSite = () => {
           <h1 className="font-serif text-4xl md:text-5xl font-light text-foreground tracking-wide mb-6">
             Mapa do Site
           </h1>
-          <p className="font-sans text-sm font-light text-muted-foreground max-w-xl mx-auto mb-10">
+          <p className="font-sans text-sm font-light text-muted-foreground max-w-none mx-auto mb-10 whitespace-nowrap">
             Explore toda a estrutura de imóveis disponíveis por categoria, cidade, bairro e tipo de imóvel.
           </p>
 
           {/* Search */}
-          <div className="max-w-md mx-auto relative">
+          <div className="max-w-2xl mx-auto relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar cidade, bairro ou tipo de imóvel..."
-              className="w-full pl-11 pr-4 py-3 bg-white border border-border rounded-lg font-sans text-sm font-light text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              className="w-full pl-11 pr-4 py-3.5 bg-white border border-border rounded-lg font-sans text-sm font-light text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
             />
           </div>
         </div>
       </section>
 
-      {/* Content */}
+      {/* Content – 3 columns */}
       <section className="pb-24 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
-          {/* Comprar – full width above */}
-          <div className="mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-12">
             <CategorySection category={comprar} searchQuery={searchQuery} />
-          </div>
-
-          {/* Alugar + Temporada side by side */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             <CategorySection category={alugar} searchQuery={searchQuery} />
             <CategorySection category={temporada} searchQuery={searchQuery} />
           </div>
