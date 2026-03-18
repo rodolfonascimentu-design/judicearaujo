@@ -310,9 +310,10 @@ const translations: Record<Lang, Record<string, string>> = {
   },
 
   ES: {
-    "hero.headline": "Para quienes eligen vivir diferente",
-    "hero.sale": "Venta",
-    "hero.rental": "Alquiler",
+    "hero.headline": "Donde están los inmuebles más especiales",
+    "hero.subheadline": "Propiedades de alto nivel en las mejores ubicaciones de Río de Janeiro y la región serrana.",
+    "hero.sale": "Comprar",
+    "hero.rental": "Alquilar",
     "hero.seasonal": "Temporada",
     "hero.searchLabel": "Buscar inmueble",
     "hero.searchPlaceholder": "Barrio, ciudad, condominio o código",

@@ -40,7 +40,7 @@ const HeroOverlayContent = () => {
     <div className="flex flex-col items-center justify-center h-full text-center w-full max-w-[700px] mx-auto px-4">
       {/* Headline */}
       <motion.h1
-        className="font-display text-xl md:text-[34px] lg:text-[40px] leading-[1.2] text-white font-light tracking-tight whitespace-nowrap mb-6"
+        className="font-display text-xl md:text-[34px] lg:text-[40px] leading-[1.2] text-white font-light tracking-tight whitespace-nowrap mb-2"
         style={{ textShadow: "0 2px 24px rgba(0,0,0,0.35)" }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -48,6 +48,15 @@ const HeroOverlayContent = () => {
       >
         {t("hero.headline")}
       </motion.h1>
+      <motion.p
+        className="font-sans text-[13px] md:text-[15px] lg:text-[16px] leading-relaxed text-white/75 font-normal max-w-[520px] mb-6"
+        style={{ textShadow: "0 1px 12px rgba(0,0,0,0.3)" }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.7 }}
+      >
+        {t("hero.subheadline")}
+      </motion.p>
 
       {/* Tabs */}
       <motion.div
