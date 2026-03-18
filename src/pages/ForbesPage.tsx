@@ -434,13 +434,13 @@ const ForbesPage = () => {
               </motion.div>
 
               <motion.div
-                className="rounded-lg overflow-hidden"
+                className="rounded-lg overflow-hidden order-first lg:order-last"
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false, margin: "-80px" }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               >
-                <img src={partnershipBg} alt="Judice & Araujo propriedade" className="w-full h-[400px] lg:h-[520px] object-cover rounded-lg" />
+                <img src={partnershipBg} alt="Judice & Araujo propriedade" className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover object-center rounded-lg" />
               </motion.div>
             </div>
           </div>
@@ -609,24 +609,23 @@ const ForbesHeroLogos = () => {
   const [barVisible, setBarVisible] = useState(false);
   const [logosVisible, setLogosVisible] = useState(false);
   const [logosFadeOut, setLogosFadeOut] = useState(false);
-  const [showTitle, setShowTitle] = useState(false);
 
   useEffect(() => {
     const t1 = setTimeout(() => setBarVisible(true), 600);
     const t2 = setTimeout(() => setLogosVisible(true), 1200);
     const t3 = setTimeout(() => setLogosFadeOut(true), 3200);
-    const t4 = setTimeout(() => setShowTitle(true), 3600);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
   return (
-    <div className="relative">
-      <AnimatePresence>
-        {!logosFadeOut && (
+    <div className="relative min-h-[80px]">
+      <AnimatePresence mode="wait">
+        {!logosFadeOut ? (
           <motion.div
+            key="logos"
             className="flex items-center justify-center gap-0"
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <motion.img
               src={jaLogoWhite}
@@ -652,12 +651,9 @@ const ForbesHeroLogos = () => {
               transition={{ duration: 0.9, ease: "easeOut" }}
             />
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {showTitle && (
+        ) : (
           <motion.div
+            key="title"
             className="text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
