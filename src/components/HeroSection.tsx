@@ -55,7 +55,9 @@ const HeroOverlayContent = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.7 }}
       >
-        {t("hero.subheadline")}
+        Propriedades de alto padrão nas melhores localizações do
+        <br className="hidden md:inline" />
+        {" "}Rio de Janeiro e da região serrana.
       </motion.p>
 
       {/* Tabs */}
