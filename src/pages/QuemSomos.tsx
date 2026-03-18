@@ -296,7 +296,7 @@ const QuemSomos = () => {
             ))}
           </div>
 
-          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl">
+          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto text-center">
             Ao longo dos anos, a empresa acompanhou a evolução do mercado imobiliário premium da cidade, mantendo sempre seu foco em atendimento diferenciado, conhecimento de mercado e relações de longo prazo com seus clientes.
           </motion.p>
         </div>
