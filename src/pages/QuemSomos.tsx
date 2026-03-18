@@ -216,24 +216,6 @@ const QuemSomos = () => {
             </p>
           </div>
         </motion.div>
-
-        {/* Scroll down indicator */}
-        <motion.div
-          className="absolute bottom-10 md:bottom-14 left-1/2 -translate-x-1/2 z-30 cursor-pointer"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          onClick={() => window.scrollTo({ top: window.innerHeight * 0.85, behavior: "smooth" })}
-        >
-          <div className="relative w-[26px] h-[42px] rounded-full border-2 border-white/60">
-            <motion.div
-              className="absolute left-0 right-0 mx-auto top-[8px] w-[3px] h-[8px] rounded-full bg-white/80"
-              animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-        </motion.div>
       </section>
 
       {/* ─── HISTÓRIA ─── */}
@@ -278,18 +260,18 @@ const QuemSomos = () => {
       {/* ─── HISTÓRIA COM CONFIANÇA ─── */}
       <section className="py-24 lg:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <motion.div {...fadeUp} className="max-w-3xl mb-16 lg:mb-20">
+          <motion.div {...fadeUp} className="mb-16 lg:mb-20 text-center">
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
               Trajetória
             </p>
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
               Uma história construída com confiança
             </h2>
-            <div className="w-10 h-px bg-primary mb-8" />
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
+            <div className="w-10 h-px bg-primary mx-auto mb-8" />
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light max-w-3xl mx-auto">
               A trajetória da Judice & Araujo começou na região serrana do Rio de Janeiro, especialmente em Petrópolis, Itaipava e arredores, onde a empresa rapidamente se tornou uma referência no mercado de propriedades de alto padrão.
             </p>
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light">
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto">
               Com o crescimento do segmento de luxo na capital fluminense, a empresa expandiu sua atuação para a cidade do Rio de Janeiro, consolidando presença nos bairros mais valorizados da Zona Sul, incluindo:
             </p>
           </motion.div>
@@ -314,7 +296,7 @@ const QuemSomos = () => {
             ))}
           </div>
 
-          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl">
+          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto text-center">
             Ao longo dos anos, a empresa acompanhou a evolução do mercado imobiliário premium da cidade, mantendo sempre seu foco em atendimento diferenciado, conhecimento de mercado e relações de longo prazo com seus clientes.
           </motion.p>
         </div>
@@ -328,10 +310,10 @@ const QuemSomos = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-[#c9a84c] mb-6 font-medium">
+              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary-foreground/40 mb-6 font-medium">
                 Alcance Internacional
               </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-[#c9a84c] leading-[1.2] mb-8">
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-primary-foreground leading-[1.2] mb-8">
                 Conectados a uma rede global
               </h2>
               <div className="w-10 h-px bg-primary-foreground/30 mb-8" />
@@ -371,23 +353,23 @@ const QuemSomos = () => {
       {/* ─── GESTÃO DE ATIVOS ─── */}
       <section className="py-24 lg:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <motion.div {...fadeUp} className="max-w-3xl mb-16 lg:mb-20">
+          <motion.div {...fadeUp} className="mb-16 lg:mb-20 text-center">
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
               Serviços
             </p>
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
               Gestão de Ativos Imobiliários
             </h2>
-            <div className="w-10 h-px bg-primary mb-8" />
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
+            <div className="w-10 h-px bg-primary mx-auto mb-8" />
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light max-w-3xl mx-auto">
               Além da intermediação de compra, venda e locação de imóveis, a Judice & Araujo oferece um serviço especializado de Gestão de Ativos Imobiliários.
             </p>
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light max-w-3xl mx-auto">
               Esse serviço foi desenvolvido para proprietários que desejam administrar seus imóveis com uma abordagem profissional e estratégica, tratando cada propriedade como parte relevante de seu patrimônio.
             </p>
           </motion.div>
 
-          <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-8 font-medium">
+          <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-8 font-medium text-center">
             A gestão inclui:
           </motion.p>
 
@@ -413,7 +395,7 @@ const QuemSomos = () => {
             ))}
           </div>
 
-          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl">
+          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto text-center">
             Essa abordagem aproxima a gestão imobiliária da lógica utilizada na gestão de investimentos, oferecendo mais transparência, inteligência de mercado e acompanhamento contínuo.
           </motion.p>
         </div>
@@ -438,7 +420,7 @@ const QuemSomos = () => {
               Nossos propósito e direcionadores estratégicos
             </h2>
             <div className="w-10 h-px bg-primary mx-auto mt-4 mb-5" />
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-2xl mx-auto">
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto">
               A atuação da Judice & Araujo é guiada por princípios que refletem a cultura e os valores da empresa.
             </p>
           </motion.div>
