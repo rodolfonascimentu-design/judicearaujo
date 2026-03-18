@@ -310,10 +310,10 @@ const QuemSomos = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-[#c9a84c] mb-6 font-medium">
+              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary-foreground/40 mb-6 font-medium">
                 Alcance Internacional
               </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-[#c9a84c] leading-[1.2] mb-8">
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-primary-foreground leading-[1.2] mb-8">
                 Conectados a uma rede global
               </h2>
               <div className="w-10 h-px bg-primary-foreground/30 mb-8" />
