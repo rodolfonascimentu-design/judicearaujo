@@ -225,13 +225,36 @@ const Navbar = () => {
                     </button>
                   </div>
 
-                  {/* Desktop hamburger menu button */}
+                  {/* Desktop hamburger menu button - animated like mobile */}
                   <button
                     onClick={() => setDesktopMenuOpen(!desktopMenuOpen)}
-                    className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-white/60 hover:text-white"}`}
+                    className={`relative w-8 h-8 flex flex-col items-center justify-center transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-white/60 hover:text-white"}`}
                     aria-label={desktopMenuOpen ? "Fechar menu" : "Abrir menu"}
                   >
-                    <Menu className="w-5 h-5" />
+                    <motion.span
+                      className="absolute block h-[2px] w-6 rounded-full"
+                      animate={desktopMenuOpen
+                        ? { rotate: 45, y: 0, backgroundColor: "#ffffff" }
+                        : { rotate: 0, y: -5, backgroundColor: showGreen ? "#1a1a1a" : "#ffffff" }
+                      }
+                      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                    />
+                    <motion.span
+                      className="absolute block h-[2px] w-6 rounded-full"
+                      animate={desktopMenuOpen
+                        ? { opacity: 0, scaleX: 0, backgroundColor: "#ffffff" }
+                        : { opacity: 1, scaleX: 1, backgroundColor: showGreen ? "#1a1a1a" : "#ffffff" }
+                      }
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    />
+                    <motion.span
+                      className="absolute block h-[2px] w-6 rounded-full"
+                      animate={desktopMenuOpen
+                        ? { rotate: -45, y: 0, backgroundColor: "#ffffff" }
+                        : { rotate: 0, y: 5, backgroundColor: showGreen ? "#1a1a1a" : "#ffffff" }
+                      }
+                      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                    />
                   </button>
             </div>
 
