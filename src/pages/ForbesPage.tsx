@@ -434,13 +434,13 @@ const ForbesPage = () => {
               </motion.div>
 
               <motion.div
-                className="rounded-lg overflow-hidden"
+                className="rounded-lg overflow-hidden order-first lg:order-last"
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false, margin: "-80px" }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               >
-                <img src={partnershipBg} alt="Judice & Araujo propriedade" className="w-full h-[400px] lg:h-[520px] object-cover rounded-lg" />
+                <img src={partnershipBg} alt="Judice & Araujo propriedade" className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover object-center rounded-lg" />
               </motion.div>
             </div>
           </div>
