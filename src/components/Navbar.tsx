@@ -385,7 +385,7 @@ const Navbar = () => {
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           >
             {/* Top bar with logos + close button */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+            <div className="px-12 lg:px-20 w-full">
               <div className="flex items-center justify-between h-20">
                 <a
                   href="/"
