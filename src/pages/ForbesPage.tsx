@@ -609,7 +609,6 @@ const ForbesHeroLogos = () => {
   const [barVisible, setBarVisible] = useState(false);
   const [logosVisible, setLogosVisible] = useState(false);
   const [logosFadeOut, setLogosFadeOut] = useState(false);
-  const [showTitle, setShowTitle] = useState(false);
 
   useEffect(() => {
     const t1 = setTimeout(() => setBarVisible(true), 600);
@@ -619,13 +618,14 @@ const ForbesHeroLogos = () => {
   }, []);
 
   return (
-    <div className="relative">
-      <AnimatePresence>
-        {!logosFadeOut && (
+    <div className="relative min-h-[80px]">
+      <AnimatePresence mode="wait">
+        {!logosFadeOut ? (
           <motion.div
+            key="logos"
             className="flex items-center justify-center gap-0"
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <motion.img
               src={jaLogoWhite}
@@ -651,12 +651,9 @@ const ForbesHeroLogos = () => {
               transition={{ duration: 0.9, ease: "easeOut" }}
             />
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {showTitle && (
+        ) : (
           <motion.div
+            key="title"
             className="text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
