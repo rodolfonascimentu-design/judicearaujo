@@ -32,12 +32,12 @@ import aerialImg from "@/assets/gestao-aerial.jpg";
 import terraceImg from "@/assets/gestao-terrace.jpg";
 import parceriasImg from "@/assets/parcerias-hero.jpg";
 import relacionamentoImg from "@/assets/relacionamento-hero.jpg";
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
-import property4 from "@/assets/property-4.jpg";
-import property5 from "@/assets/property-5.jpg";
-import property6 from "@/assets/property-6.jpg";
+import bairroLeblon from "@/assets/bairro-leblon.jpg";
+import bairroIpanema from "@/assets/bairro-ipanema.jpg";
+import bairroLagoa from "@/assets/bairro-lagoa.jpg";
+import bairroGavea from "@/assets/bairro-gavea.jpg";
+import bairroJardimBotanico from "@/assets/bairro-jardim-botanico.jpg";
+import bairroBarraDaTijuca from "@/assets/bairro-barra-da-tijuca.jpg";
 
 /* ── animation presets ── */
 const fadeUp = {
