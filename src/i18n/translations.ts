@@ -329,6 +329,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.blogPost": "Blog",
     "nav.about": "Quiénes Somos",
     "nav.contact": "Contacto",
+    "nav.forbes": "Forbes Global Properties",
 
     "exclusive.subtitle": "Selección Exclusiva",
     "exclusive.title": "Inmuebles Especiales",
