@@ -24,9 +24,9 @@ const OfficeLocations = () => {
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#FDFDFD]">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16 lg:mb-20">
-          <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-muted-foreground font-medium mb-4">{t("offices.subtitle")}</p>
-          <h2 className="font-display text-2xl md:text-4xl font-normal tracking-[-0.02em] text-foreground">{t("offices.title")}</h2>
+        <div className="mb-16 lg:mb-20 text-center">
+          <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-muted-foreground font-medium mb-4">Nossos Escritórios</p>
+          <h2 className="font-display text-2xl md:text-4xl font-normal tracking-[-0.02em] text-foreground">Visite um dos nossos escritórios</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-0 min-h-[500px]">
