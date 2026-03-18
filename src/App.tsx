@@ -31,6 +31,7 @@ const App = () => (
             <Route path="/gestao-de-ativos-imobiliarios" element={<GestaoAtivos />} />
             <Route path="/forbes" element={<ForbesPage />} />
             <Route path="/quem-somos" element={<QuemSomos />} />
+            <Route path="/mapa-do-site" element={<MapaDoSite />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
