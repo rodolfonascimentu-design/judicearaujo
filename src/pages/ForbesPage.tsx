@@ -16,7 +16,8 @@ import forbesGallery3 from "@/assets/forbes-gallery-3.jpg";
 import forbesGallery4 from "@/assets/forbes-gallery-4.jpg";
 import forbesGallery5 from "@/assets/forbes-gallery-5.jpg";
 import forbesGallery6 from "@/assets/forbes-gallery-6.jpg";
-import property4 from "@/assets/property-4.jpg";
+import partnershipBg from "@/assets/forbes-partnership-bg.jpg";
+import forbesLogoBW from "@/assets/forbes-logo-bw.png";
 
 /* ── Helpers ── */
 const fadeUp = {
