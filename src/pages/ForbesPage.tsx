@@ -615,8 +615,7 @@ const ForbesHeroLogos = () => {
     const t1 = setTimeout(() => setBarVisible(true), 600);
     const t2 = setTimeout(() => setLogosVisible(true), 1200);
     const t3 = setTimeout(() => setLogosFadeOut(true), 3200);
-    const t4 = setTimeout(() => setShowTitle(true), 3600);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
   return (
