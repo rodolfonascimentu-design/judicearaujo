@@ -216,24 +216,6 @@ const QuemSomos = () => {
             </p>
           </div>
         </motion.div>
-
-        {/* Scroll down indicator */}
-        <motion.div
-          className="absolute bottom-10 md:bottom-14 left-1/2 -translate-x-1/2 z-30 cursor-pointer"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          onClick={() => window.scrollTo({ top: window.innerHeight * 0.85, behavior: "smooth" })}
-        >
-          <div className="relative w-[26px] h-[42px] rounded-full border-2 border-white/60">
-            <motion.div
-              className="absolute left-0 right-0 mx-auto top-[8px] w-[3px] h-[8px] rounded-full bg-white/80"
-              animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-        </motion.div>
       </section>
 
       {/* ─── HISTÓRIA ─── */}
