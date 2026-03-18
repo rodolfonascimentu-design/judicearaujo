@@ -353,23 +353,23 @@ const QuemSomos = () => {
       {/* ─── GESTÃO DE ATIVOS ─── */}
       <section className="py-24 lg:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <motion.div {...fadeUp} className="max-w-3xl mb-16 lg:mb-20">
+          <motion.div {...fadeUp} className="mb-16 lg:mb-20 text-center">
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
               Serviços
             </p>
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
               Gestão de Ativos Imobiliários
             </h2>
-            <div className="w-10 h-px bg-primary mb-8" />
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
+            <div className="w-10 h-px bg-primary mx-auto mb-8" />
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light max-w-3xl mx-auto">
               Além da intermediação de compra, venda e locação de imóveis, a Judice & Araujo oferece um serviço especializado de Gestão de Ativos Imobiliários.
             </p>
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light max-w-3xl mx-auto">
               Esse serviço foi desenvolvido para proprietários que desejam administrar seus imóveis com uma abordagem profissional e estratégica, tratando cada propriedade como parte relevante de seu patrimônio.
             </p>
           </motion.div>
 
-          <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-8 font-medium">
+          <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-8 font-medium text-center">
             A gestão inclui:
           </motion.p>
 
