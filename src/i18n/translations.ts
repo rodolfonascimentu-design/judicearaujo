@@ -329,7 +329,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.contact": "Contacto",
 
     "exclusive.subtitle": "Selección Exclusiva",
-    "exclusive.title": "Inmuebles Exclusivos",
+    "exclusive.title": "Inmuebles Especiales",
     "exclusive.details": "Ver detalles",
     "unit.bedrooms": "habitaciones",
     "unit.parking": "plazas",
