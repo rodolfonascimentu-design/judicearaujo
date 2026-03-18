@@ -440,7 +440,7 @@ const ForbesPage = () => {
                 viewport={{ once: false, margin: "-80px" }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               >
-                <img src={property4} alt="Judice & Araujo propriedade" className="w-full h-[400px] lg:h-[520px] object-cover rounded-lg" />
+                <img src={partnershipBg} alt="Judice & Araujo propriedade" className="w-full h-[400px] lg:h-[520px] object-cover rounded-lg" />
               </motion.div>
             </div>
           </div>
