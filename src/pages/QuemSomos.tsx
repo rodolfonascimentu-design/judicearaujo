@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
@@ -16,6 +16,7 @@ import {
   GraduationCap,
   ArrowRight,
   MapPin,
+  Send,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -48,6 +49,23 @@ const stagger = (i: number) => ({
   viewport: { once: false, margin: "-40px" } as const,
   transition: { duration: 0.65, delay: i * 0.1, ease: "easeOut" as const },
 });
+
+/* ── color / glass helpers (matching GestaoAtivos) ── */
+const C = {
+  heading: "hsl(0 0% 10%)",
+  body: "hsl(0 0% 38%)",
+  accent: "hsl(171 100% 12%)",
+  accentLight: "hsl(171 100% 12% / 0.07)",
+  accentShadow: "0 8px 40px -12px hsl(171 100% 12% / 0.08)",
+  sectionAlt: "hsl(0 0% 97.5%)",
+};
+
+const glassLight = {
+  background: "linear-gradient(135deg, rgba(0,63,52,0.06) 0%, rgba(0,63,52,0.02) 100%)",
+  backdropFilter: "blur(16px)",
+  WebkitBackdropFilter: "blur(16px)",
+  boxShadow: "0 4px 24px -4px rgba(0,63,52,0.08), inset 0 1px 0 rgba(255,255,255,0.8)",
+};
 
 /* ── data ── */
 const bairros = [
@@ -123,6 +141,20 @@ const ImageBreak = ({ src, alt }: { src: string; alt: string }) => (
 
 const QuemSomos = () => {
   const navigate = useNavigate();
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [focused, setFocused] = useState<string | null>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Mensagem enviada com sucesso!");
+    setForm({ name: "", email: "", phone: "", message: "" });
+  };
+
+  const fields = [
+    { key: "name", type: "text", label: "Nome completo", required: true },
+    { key: "email", type: "email", label: "Seu melhor e-mail", required: true },
+    { key: "phone", type: "tel", label: "Telefone com DDD", required: false },
+  ] as const;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -136,7 +168,6 @@ const QuemSomos = () => {
     }
   }, []);
 
-  // JSON-LD Organization schema
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
@@ -148,19 +179,11 @@ const QuemSomos = () => {
         "Imobiliária de alto padrão no Rio de Janeiro, membro da Forbes Global Properties. Mais de quatro décadas de atuação no mercado imobiliário de luxo.",
       foundingDate: "1975",
       url: "https://judicearaujo.com.br",
-      areaServed: {
-        "@type": "City",
-        name: "Rio de Janeiro",
-      },
-      memberOf: {
-        "@type": "Organization",
-        name: "Forbes Global Properties",
-      },
+      areaServed: { "@type": "City", name: "Rio de Janeiro" },
+      memberOf: { "@type": "Organization", name: "Forbes Global Properties" },
     });
     document.head.appendChild(script);
-    return () => {
-      document.head.removeChild(script);
-    };
+    return () => { document.head.removeChild(script); };
   }, []);
 
   return (
@@ -191,6 +214,24 @@ const QuemSomos = () => {
             <p className="font-sans text-base md:text-lg text-white/70 font-light max-w-2xl leading-relaxed">
               Tradição, confiança e excelência no mercado imobiliário de alto padrão
             </p>
+          </div>
+        </motion.div>
+
+        {/* Scroll down indicator */}
+        <motion.div
+          className="absolute bottom-10 md:bottom-14 left-1/2 -translate-x-1/2 z-30 cursor-pointer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.6 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          onClick={() => window.scrollTo({ top: window.innerHeight * 0.85, behavior: "smooth" })}
+        >
+          <div className="relative w-[26px] h-[42px] rounded-full border-2 border-white/60">
+            <motion.div
+              className="absolute left-0 right-0 mx-auto top-[8px] w-[3px] h-[8px] rounded-full bg-white/80"
+              animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
           </div>
         </motion.div>
       </section>
@@ -225,12 +266,7 @@ const QuemSomos = () => {
               viewport={{ once: false, margin: "-80px" }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              <img
-                src={editorialImg}
-                alt="Rio de Janeiro - vista de alto padrão"
-                className="w-full h-full object-cover rounded-[4px]"
-                loading="lazy"
-              />
+              <img src={editorialImg} alt="Rio de Janeiro - vista de alto padrão" className="w-full h-full object-cover rounded-[4px]" loading="lazy" />
             </motion.div>
           </div>
         </div>
@@ -266,29 +302,19 @@ const QuemSomos = () => {
                 {...stagger(i)}
                 className="group relative overflow-hidden rounded-[4px] aspect-[3/4] cursor-pointer"
               >
-                <img
-                  src={b.img}
-                  alt={b.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
+                <img src={b.img} alt={b.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <div className="flex items-center gap-1.5">
                     <MapPin className="w-3 h-3 text-white/70" />
-                    <span className="font-sans text-xs tracking-[0.15em] uppercase text-white font-medium">
-                      {b.name}
-                    </span>
+                    <span className="font-sans text-xs tracking-[0.15em] uppercase text-white font-medium">{b.name}</span>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          <motion.p
-            {...fadeUp}
-            className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl"
-          >
+          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl">
             Ao longo dos anos, a empresa acompanhou a evolução do mercado imobiliário premium da cidade, mantendo sempre seu foco em atendimento diferenciado, conhecimento de mercado e relações de longo prazo com seus clientes.
           </motion.p>
         </div>
@@ -297,30 +323,25 @@ const QuemSomos = () => {
       {/* ─── REDE GLOBAL (Forbes) ─── */}
       <section className="relative py-24 lg:py-36 bg-primary overflow-hidden">
         <div className="absolute inset-0">
-          <img
-            src={forbesPartnershipBg}
-            alt=""
-            className="w-full h-full object-cover opacity-15"
-            loading="lazy"
-          />
+          <img src={forbesPartnershipBg} alt="" className="w-full h-full object-cover opacity-15" loading="lazy" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary-foreground/40 mb-6 font-medium">
+              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-[#c9a84c] mb-6 font-medium">
                 Alcance Internacional
               </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-primary-foreground leading-[1.2] mb-8">
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-[#c9a84c] leading-[1.2] mb-8">
                 Conectados a uma rede global
               </h2>
               <div className="w-10 h-px bg-primary-foreground/30 mb-8" />
-              <p className="font-sans text-sm text-primary-foreground/70 leading-[1.9] mb-6 font-light">
+              <p className="font-sans text-sm text-white leading-[1.9] mb-6 font-light">
                 A Judice & Araujo integra a Forbes Global Properties, uma rede internacional formada por algumas das mais prestigiadas imobiliárias de alto padrão do mundo.
               </p>
-              <p className="font-sans text-sm text-primary-foreground/70 leading-[1.9] mb-6 font-light">
+              <p className="font-sans text-sm text-white leading-[1.9] mb-6 font-light">
                 Criada em parceria com a Forbes, uma das marcas de mídia mais respeitadas globalmente, a rede conecta propriedades excepcionais a compradores e investidores de alto poder aquisitivo.
               </p>
-              <p className="font-sans text-sm text-primary-foreground/70 leading-[1.9] mb-8 font-light">
+              <p className="font-sans text-sm text-white leading-[1.9] mb-8 font-light">
                 Como membro da Forbes Global Properties, a Judice & Araujo conecta o mercado imobiliário de alto padrão do Rio de Janeiro a uma audiência internacional qualificada, ampliando significativamente a visibilidade global das propriedades representadas pela empresa.
               </p>
               <button
@@ -339,13 +360,8 @@ const QuemSomos = () => {
               viewport={{ once: false, margin: "-80px" }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="w-full max-w-sm p-12 rounded-[4px] border border-primary-foreground/10 bg-primary-foreground/5 backdrop-blur-sm flex items-center justify-center">
-                <img
-                  src={forbesGlobalWhite}
-                  alt="Forbes Global Properties"
-                  className="w-full max-w-[280px] opacity-80"
-                  loading="lazy"
-                />
+              <div className="w-full max-w-md p-16 rounded-[4px] border border-primary-foreground/10 bg-primary-foreground/5 backdrop-blur-sm flex items-center justify-center">
+                <img src={forbesGlobalWhite} alt="Forbes Global Properties" className="w-full max-w-[320px] opacity-80" loading="lazy" />
               </div>
             </motion.div>
           </div>
@@ -371,38 +387,33 @@ const QuemSomos = () => {
             </p>
           </motion.div>
 
-          <motion.p
-            {...fadeUp}
-            className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-8 font-medium"
-          >
+          <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-8 font-medium">
             A gestão inclui:
           </motion.p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
             {gestaoServices.map((s, i) => (
               <motion.div
                 key={s.title}
+                className="group rounded-2xl p-8 text-center transition-all duration-500 cursor-default"
+                style={glassLight}
+                whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
                 {...stagger(i)}
-                className="group p-8 rounded-[4px] border border-border/50 bg-card transition-all duration-500 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(0,63,52,0.04) 0%, rgba(0,63,52,0.01) 100%)",
-                  boxShadow:
-                    "0 4px 24px -4px rgba(0,63,52,0.06), inset 0 1px 0 rgba(255,255,255,0.8)",
-                }}
               >
-                <s.icon className="w-6 h-6 text-primary mb-5" strokeWidth={1.5} />
-                <h3 className="font-display text-sm font-medium text-foreground tracking-[-0.01em]">
+                <div
+                  className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+                  style={{ background: C.accentLight }}
+                >
+                  <s.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                </div>
+                <h3 className="font-display text-sm font-medium tracking-wide" style={{ color: C.heading }}>
                   {s.title}
                 </h3>
               </motion.div>
             ))}
           </div>
 
-          <motion.p
-            {...fadeUp}
-            className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl"
-          >
+          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl">
             Essa abordagem aproxima a gestão imobiliária da lógica utilizada na gestão de investimentos, oferecendo mais transparência, inteligência de mercado e acompanhamento contínuo.
           </motion.p>
         </div>
@@ -411,22 +422,8 @@ const QuemSomos = () => {
       {/* ─── FULL WIDTH IMAGE BREAK ─── */}
       <ImageBreak src={parallax2} alt="Arquitetura de luxo" />
 
-      {/* ─── UNIDADES DE NEGÓCIO (reuse OfficeLocations) ─── */}
+      {/* ─── NOSSOS ESCRITÓRIOS (OfficeLocations) ─── */}
       <section className="bg-[#FDFDFD]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-24 lg:pt-36">
-          <motion.div {...fadeUp} className="mb-4">
-            <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
-              Onde Estamos
-            </p>
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-4">
-              Nossas unidades de negócio
-            </h2>
-            <div className="w-10 h-px bg-primary mb-8" />
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl">
-              Para atender diferentes perfis de clientes e mercados, a Judice & Araujo organiza sua atuação em unidades especializadas.
-            </p>
-          </motion.div>
-        </div>
         <OfficeLocations />
       </section>
 
@@ -446,28 +443,25 @@ const QuemSomos = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {proposito.map((item, i) => (
               <motion.div
                 key={item.title}
+                className="group rounded-2xl p-10 text-center transition-all duration-500 cursor-default"
+                style={glassLight}
+                whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
                 {...stagger(i)}
-                className="group text-center p-10 rounded-[4px] border border-border/50 transition-all duration-500 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(0,63,52,0.04) 0%, rgba(0,63,52,0.01) 100%)",
-                  boxShadow:
-                    "0 4px 24px -4px rgba(0,63,52,0.06), inset 0 1px 0 rgba(255,255,255,0.8)",
-                }}
               >
-                <div className="w-14 h-14 rounded-full bg-primary/5 flex items-center justify-center mx-auto mb-6 transition-colors duration-500 group-hover:bg-primary/10">
-                  <item.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
-                </div>
-                <h3 className="font-display text-lg font-medium text-foreground mb-4">
-                  {item.title}
-                </h3>
-                <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">
-                  {item.text}
-                </p>
+                <motion.div
+                  className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors duration-500 group-hover:scale-110"
+                  style={{ background: C.accentLight }}
+                  whileHover={{ rotate: 6 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                >
+                  <item.icon className="w-6 h-6" style={{ color: C.accent }} strokeWidth={1.5} />
+                </motion.div>
+                <h3 className="font-display text-lg font-medium text-foreground mb-4">{item.title}</h3>
+                <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">{item.text}</p>
               </motion.div>
             ))}
           </div>
@@ -475,7 +469,7 @@ const QuemSomos = () => {
       </section>
 
       {/* ─── VALORES ─── */}
-      <section className="py-24 lg:py-36 bg-[#FAFAFA]">
+      <section className="py-24 lg:py-36" style={{ background: C.sectionAlt }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <motion.div {...fadeUp} className="text-center mb-16 lg:mb-20">
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
@@ -490,22 +484,25 @@ const QuemSomos = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {valores.map((v, i) => (
               <motion.div
                 key={v.title}
+                className="group rounded-2xl p-8 bg-white transition-all duration-500 cursor-default"
+                style={glassLight}
+                whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
                 {...stagger(i)}
-                className="group p-8 rounded-[4px] border border-border/50 bg-white transition-all duration-500 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1"
               >
-                <div className="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-primary/10">
-                  <v.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
-                </div>
-                <h3 className="font-display text-base font-medium text-foreground mb-3">
-                  {v.title}
-                </h3>
-                <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">
-                  {v.text}
-                </p>
+                <motion.div
+                  className="w-12 h-12 rounded-full flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110"
+                  style={{ background: C.accentLight }}
+                  whileHover={{ rotate: 6 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                >
+                  <v.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                </motion.div>
+                <h3 className="font-display text-base font-medium text-foreground mb-3">{v.title}</h3>
+                <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">{v.text}</p>
               </motion.div>
             ))}
           </div>
@@ -513,7 +510,7 @@ const QuemSomos = () => {
       </section>
 
       {/* ─── EQUIPE ─── */}
-      <section className="py-24 lg:py-36 bg-white">
+      <section className="py-32 lg:py-44 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div
@@ -523,12 +520,7 @@ const QuemSomos = () => {
               viewport={{ once: false, margin: "-80px" }}
               transition={{ duration: 0.8 }}
             >
-              <img
-                src={equipeImg}
-                alt="Equipe Judice & Araujo"
-                className="w-full h-full object-cover rounded-[4px]"
-                loading="lazy"
-              />
+              <img src={equipeImg} alt="Equipe Judice & Araujo" className="w-full h-full object-cover rounded-[4px]" loading="lazy" />
             </motion.div>
 
             <motion.div {...fadeUp}>
@@ -550,30 +542,101 @@ const QuemSomos = () => {
         </div>
       </section>
 
-      {/* ─── CTA FINAL ─── */}
+      {/* ─── CTA FINAL com formulário ─── */}
       <section className="py-24 lg:py-36 bg-primary">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
-          <motion.div {...fadeUp}>
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-primary-foreground leading-[1.2] mb-6">
-              Fale com a Judice & Araujo
-            </h2>
-            <div className="w-10 h-px bg-primary-foreground/30 mx-auto mb-8" />
-            <p className="font-sans text-sm text-primary-foreground/70 leading-[1.9] font-light max-w-2xl mx-auto mb-6">
-              Se você deseja comprar, vender, alugar ou administrar um imóvel de alto padrão, nossa equipe está pronta para ajudar.
-            </p>
-            <p className="font-sans text-sm text-primary-foreground/70 leading-[1.9] font-light max-w-2xl mx-auto mb-10">
-              Entre em contato e descubra como podemos contribuir para a realização de seus planos no mercado imobiliário.
-            </p>
-            <motion.a
-              href="#contato"
-              className="inline-flex items-center gap-2 px-10 py-4 bg-primary-foreground text-primary text-[11px] font-sans font-medium tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-primary-foreground/90 hover:gap-3 hover:shadow-lg"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
+            {/* Left — editorial intro */}
+            <motion.div {...fadeUp} className="lg:sticky lg:top-32 self-start">
+              <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-primary-foreground/40 mb-4">
+                Contato
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl text-primary-foreground leading-[1.15] mb-6 text-left">
+                Fale com a Judice & Araujo
+              </h2>
+              <div className="w-10 h-px bg-primary-foreground/30 mb-8" />
+              <p className="font-sans text-sm text-primary-foreground/70 leading-[1.9] font-light mb-6 text-left">
+                Se você deseja comprar, vender, alugar ou administrar um imóvel de alto padrão, nossa equipe está pronta para ajudar.
+              </p>
+              <p className="font-sans text-sm text-primary-foreground/70 leading-[1.9] font-light text-left">
+                Entre em contato e descubra como podemos contribuir para a realização de seus planos no mercado imobiliário.
+              </p>
+            </motion.div>
+
+            {/* Right — form */}
+            <motion.form
+              onSubmit={handleSubmit}
+              className="bg-white rounded-lg p-8 md:p-10 shadow-[0_8px_40px_-12px_hsl(var(--foreground)/0.06)] border border-border/30"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Entre em contato
-              <ArrowRight className="w-3.5 h-3.5" />
-            </motion.a>
-          </motion.div>
+              <div className="space-y-6">
+                {fields.map((field) => (
+                  <div key={field.key} className="relative">
+                    <label
+                      className={`absolute left-0 transition-all duration-300 font-sans pointer-events-none ${
+                        focused === field.key || form[field.key]
+                          ? "text-[10px] tracking-[0.15em] uppercase text-primary -top-1"
+                          : "text-sm text-muted-foreground top-3"
+                      }`}
+                    >
+                      {field.label}
+                      {field.required && <span className="text-primary ml-0.5">*</span>}
+                    </label>
+                    <input
+                      type={field.type}
+                      required={field.required}
+                      value={form[field.key]}
+                      onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                      onFocus={() => setFocused(field.key)}
+                      onBlur={() => setFocused(null)}
+                      className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors duration-300"
+                    />
+                  </div>
+                ))}
+
+                <div className="relative">
+                  <label
+                    className={`absolute left-0 transition-all duration-300 font-sans pointer-events-none ${
+                      focused === "message" || form.message
+                        ? "text-[10px] tracking-[0.15em] uppercase text-primary -top-1"
+                        : "text-sm text-muted-foreground top-3"
+                    }`}
+                  >
+                    Mensagem
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    onFocus={() => setFocused("message")}
+                    onBlur={() => setFocused(null)}
+                    className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors duration-300 resize-none"
+                  />
+                </div>
+              </div>
+
+              <p className="font-sans text-[10px] text-muted-foreground leading-relaxed mt-6 mb-6">
+                Ao informar meus dados concordo com a{" "}
+                <a href="#" className="underline hover:text-primary transition-colors">Política de Privacidade</a>{" "}
+                e{" "}
+                <a href="#" className="underline hover:text-primary transition-colors">Termos de Uso</a>.
+              </p>
+
+              <motion.button
+                type="submit"
+                className="group inline-flex items-center gap-2.5 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.4)]"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Send className="w-4 h-4" />
+                Enviar Mensagem
+                <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+              </motion.button>
+            </motion.form>
+          </div>
         </div>
       </section>
 
