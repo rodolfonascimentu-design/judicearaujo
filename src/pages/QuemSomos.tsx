@@ -39,14 +39,14 @@ import bairroJardimBotanico from "@/assets/bairro-jardim-botanico.jpg";
 const fadeUp = {
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, margin: "-80px" } as const,
+  viewport: { once: true, margin: "-80px" } as const,
   transition: { duration: 0.8, ease: "easeOut" as const },
 };
 
 const stagger = (i: number) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, margin: "-40px" } as const,
+  viewport: { once: true, margin: "-40px" } as const,
   transition: { duration: 0.65, delay: i * 0.1, ease: "easeOut" as const },
 });
 
@@ -130,7 +130,7 @@ const ImageBreak = ({ src, alt }: { src: string; alt: string }) => (
     className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden"
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
-    viewport={{ once: false, margin: "-40px" }}
+    viewport={{ once: true, margin: "-40px" }}
     transition={{ duration: 1 }}
   >
     <img src={src} alt={alt} className="w-full h-full object-cover" loading="lazy" />
@@ -245,7 +245,7 @@ const QuemSomos = () => {
               className="relative overflow-hidden rounded-[4px] aspect-[3/4] lg:aspect-auto lg:h-[600px]"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, margin: "-80px" }}
+              viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
               <img src={editorialImg} alt="Rio de Janeiro - vista de alto padrão" className="w-full h-full object-cover rounded-[4px]" loading="lazy" />
@@ -336,7 +336,7 @@ const QuemSomos = () => {
               className="flex items-center justify-center"
               initial={{ opacity: 0, scale: 0.85 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: false, margin: "-80px" }}
+              viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 1, ease: "easeOut" }}
             >
               <img src={forbesGlobalWhite} alt="Forbes Global Properties" className="w-full max-w-[320px] opacity-80" loading="lazy" />
@@ -494,7 +494,7 @@ const QuemSomos = () => {
               className="relative overflow-hidden rounded-[4px] aspect-[16/10]"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, margin: "-80px" }}
+              viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8 }}
             >
               <img src={equipeImg} alt="Equipe Judice & Araujo" className="w-full h-full object-cover rounded-[4px]" loading="lazy" />
@@ -546,7 +546,7 @@ const QuemSomos = () => {
               className="bg-white rounded-lg p-8 md:p-10 shadow-[0_8px_40px_-12px_hsl(var(--foreground)/0.06)] border border-border/30"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: "-80px" }}
+              viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="space-y-6">

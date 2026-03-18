@@ -16,11 +16,11 @@ const InstitutionalCTA = () => {
     <section className="py-32 lg:py-44 bg-primary">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          <motion.div className="relative overflow-hidden rounded-[4px] aspect-[3/4] lg:aspect-auto lg:h-[700px]" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: false, margin: "-80px" }} transition={{ duration: 0.8 }}>
+          <motion.div className="relative overflow-hidden rounded-[4px] aspect-[3/4] lg:aspect-auto lg:h-[700px]" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.8 }}>
             <img src={ctaImage} alt="Interior luxuoso com vista privilegiada" className="w-full h-full object-cover rounded-[4px]" loading="lazy" />
           </motion.div>
 
-          <motion.div className="lg:py-16" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: false, margin: "-80px" }} transition={{ duration: 0.8, delay: 0.1 }}>
+          <motion.div className="lg:py-16" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.8, delay: 0.1 }}>
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-[#aed9d7] mb-8 font-medium">{t("cta.owners")}</p>
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal text-primary-foreground leading-[1.2] mb-10 tracking-[-0.02em]">{t("cta.ownersTitle")}</h2>
             <div className="w-10 h-px bg-primary-foreground/30 mb-10" />

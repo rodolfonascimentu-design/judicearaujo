@@ -43,14 +43,14 @@ import bairroBarraDaTijuca from "@/assets/bairro-barra-da-tijuca.jpg";
 const fadeUp = {
   initial: { opacity: 0, y: 36 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, margin: "-60px" },
+  viewport: { once: true, margin: "-60px" },
   transition: { duration: 0.85, ease: "easeOut" as const }
 };
 
 const stagger = (i: number) => ({
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, margin: "-40px" },
+  viewport: { once: true, margin: "-40px" },
   transition: { duration: 0.65, delay: i * 0.1, ease: "easeOut" as const }
 });
 
@@ -160,7 +160,7 @@ const ImageBreak = ({ src, alt, height = "h-[45vh]" }: {src: string;alt: string;
   className={`relative w-full ${height} overflow-hidden`}
   initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }}
-  viewport={{ once: false, margin: "-40px" }}
+  viewport={{ once: true, margin: "-40px" }}
   transition={{ duration: 1 }}>
   
     <img src={src} alt={alt} className="w-full h-full object-cover" loading="lazy" />
@@ -288,7 +288,7 @@ const GestaoAtivos = () => {
               className="relative rounded-2xl overflow-hidden aspect-[4/5] lg:aspect-[3/4]"
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, margin: "-60px" }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.9, ease: "easeOut" }}>
               
               <img
@@ -487,7 +487,7 @@ const GestaoAtivos = () => {
               className="relative min-h-[50vh] lg:min-h-full"
               initial={{ opacity: 0, x: 60 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, margin: "-60px" }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 1, ease: "easeOut" }}>
               
               <img
@@ -656,7 +656,7 @@ const GestaoAtivos = () => {
               className="relative min-h-[50vh] lg:min-h-full"
               initial={{ opacity: 0, x: 60 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, margin: "-60px" }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 1, ease: "easeOut" }}>
               
               <img
@@ -748,7 +748,7 @@ const GestaoAtivos = () => {
                 }}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-60px" }}
+                viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.85, ease: "easeOut" }}>
                 
                 <div className="space-y-8">

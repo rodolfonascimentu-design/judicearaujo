@@ -23,7 +23,7 @@ import forbesLogoBW from "@/assets/forbes-logo-bw.png";
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, margin: "-80px" } as any,
+  viewport: { once: true, margin: "-80px" } as any,
   transition: { duration: 0.7, ease: "easeOut" as const },
 };
 
@@ -49,7 +49,7 @@ const glassCardDark = {
 /* ── Counter Component ── */
 const AnimatedCounter = ({ value, suffix = "", delay = 0 }: { value: number; suffix?: string; delay?: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [displayed, setDisplayed] = useState("0");
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const AnimatedCounter = ({ value, suffix = "", delay = 0 }: { value: number; suf
 /* ── Decimal Counter ── */
 const DecimalCounter = ({ value, suffix = "", delay = 0 }: { value: number; suffix?: string; delay?: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [displayed, setDisplayed] = useState("0");
 
   useEffect(() => {
@@ -269,7 +269,7 @@ const ForbesPage = () => {
                 className="h-[60px] md:h-[80px] lg:h-[100px] w-auto mx-auto"
                 initial={{ opacity: 0, scale: 0.85 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 1, ease: "easeOut" }}
               />
 
@@ -326,7 +326,7 @@ const ForbesPage = () => {
               className="relative aspect-video rounded-[4px] overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: "-80px" }}
+              viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7 }}
             >
               <iframe
@@ -379,7 +379,7 @@ const ForbesPage = () => {
                 className="space-y-6"
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               >
                 {docImages.map((img, i) => (
@@ -437,7 +437,7 @@ const ForbesPage = () => {
                 className="rounded-lg overflow-hidden order-first lg:order-last"
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
               >
                 <img src={partnershipBg} alt="Judice & Araujo propriedade" className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover object-center rounded-lg" />
@@ -454,7 +454,7 @@ const ForbesPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.7 }}
                 className="lg:sticky lg:top-32 self-start"
               >
@@ -479,7 +479,7 @@ const ForbesPage = () => {
                 style={glassCardWhite}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <div className="space-y-6">

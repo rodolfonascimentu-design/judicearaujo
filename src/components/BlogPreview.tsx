@@ -20,7 +20,7 @@ const BlogPreview = () => {
         <SectionHeader title={t("blog.title")} subtitle={t("blog.subtitle")} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
           {articles.map((article, i) => (
-            <motion.article key={i} className="group cursor-pointer" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, margin: "-80px" }} transition={{ duration: 0.6, delay: i * 0.1 }}>
+            <motion.article key={i} className="group cursor-pointer" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.6, delay: i * 0.1 }}>
               <div className="relative overflow-hidden rounded-[4px] aspect-[3/2] mb-6">
                 <img src={article.image} alt={article.title} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" loading="lazy" />
                 <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/10 transition-all duration-500 rounded-[4px]" />

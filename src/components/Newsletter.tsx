@@ -18,7 +18,7 @@ const Newsletter = () => {
   return (
     <section className="bg-primary py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, margin: "-80px" }} transition={{ duration: 0.6 }} className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.6 }} className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
           <div className="lg:max-w-sm">
             <h3 className="font-display text-xl lg:text-2xl text-primary-foreground tracking-tight">{t("newsletter.title")}</h3>
             <p className="font-sans text-sm text-primary-foreground/60 font-light mt-2 leading-relaxed">{t("newsletter.desc")}</p>
