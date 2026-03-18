@@ -11,6 +11,7 @@ import PropertyDetail from "./pages/PropertyDetail";
 import GestaoAtivos from "./pages/GestaoAtivos";
 import ForbesPage from "./pages/ForbesPage";
 import QuemSomos from "./pages/QuemSomos";
+import MapaDoSite from "./pages/MapaDoSite";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
