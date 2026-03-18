@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Instagram, Phone, Linkedin } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import logoJaBlack from "@/assets/logo-ja-black.png";
 import logoForbesBlack from "@/assets/forbes-global-black.png";
+import ContactModal from "./ContactModal";
 
 const Footer = () => {
   const { t } = useLanguage();
+  const [contactOpen, setContactOpen] = useState(false);
 
   const navigationLinks = [
     "Avaliar Imóvel",
