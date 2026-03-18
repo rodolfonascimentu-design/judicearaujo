@@ -334,8 +334,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "unit.bedrooms": "habitaciones",
     "unit.parking": "plazas",
 
-    "featured.title": "Inmuebles Destacados",
-    "featured.subtitle": "Una selección exclusiva de los inmuebles más deseados de Río de Janeiro",
+    "featured.title": "Lanzamientos Destacados",
+    "featured.subtitle": "Una selección de los lanzamientos más deseados de Río de Janeiro.",
 
     "cta.owners": "Propietarios",
     "cta.ownersTitle": "Venda su inmueble con seguridad y máxima valorización",
