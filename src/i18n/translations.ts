@@ -165,9 +165,10 @@ const translations: Record<Lang, Record<string, string>> = {
   },
 
   EN: {
-    "hero.headline": "For those who choose to live differently",
-    "hero.sale": "Sale",
-    "hero.rental": "Rental",
+    "hero.headline": "Where the most special properties are",
+    "hero.subheadline": "Luxury properties in the best locations of Rio de Janeiro and the mountain region.",
+    "hero.sale": "Buy",
+    "hero.rental": "Rent",
     "hero.seasonal": "Seasonal",
     "hero.searchLabel": "Search property",
     "hero.searchPlaceholder": "Neighborhood, city, condominium or code",
