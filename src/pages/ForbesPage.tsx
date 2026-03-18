@@ -164,6 +164,25 @@ const ForbesPage = () => {
     document.title = "Forbes Global Properties — Judice & Araujo";
     document.querySelector('meta[name="description"]')?.setAttribute("content", "A Judice & Araujo integra a Forbes Global Properties, conectando o mercado imobiliário de alto padrão do Rio de Janeiro a uma audiência global.");
     window.scrollTo(0, 0);
+
+    // Canonical
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+    canonical.href = "https://www.judicearaujo.com.br/forbes";
+
+    // JSON-LD
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Forbes Global Properties — Judice & Araujo",
+      "description": "A Judice & Araujo integra a Forbes Global Properties, conectando o mercado imobiliário de alto padrão do Rio de Janeiro a uma audiência global.",
+      "url": "https://www.judicearaujo.com.br/forbes",
+      "isPartOf": { "@type": "WebSite", "name": "Judice & Araujo", "url": "https://www.judicearaujo.com.br" },
+    });
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); canonical.href = "https://www.judicearaujo.com.br"; };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
