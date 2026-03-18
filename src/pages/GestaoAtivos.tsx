@@ -392,17 +392,17 @@ const GestaoAtivos = () => {
             </div>
 
             {/* Bairros */}
-            <motion.div className="max-w-4xl mx-auto mb-10" {...fadeUp}>
-              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide" style={{ color: C.body }}>
+            <motion.div className="max-w-5xl mx-auto mb-10" {...fadeUp}>
+              <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide whitespace-nowrap" style={{ color: C.body }}>
                 Nossa equipe acompanha de perto a dinâmica dos bairros mais valorizados da cidade, incluindo, mas não se limitando a:
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 max-w-4xl mx-auto mb-10">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 max-w-5xl mx-auto mb-10">
               {bairros.map((b, i) =>
               <motion.div
                 key={b.name}
-                className="group relative rounded-xl overflow-hidden cursor-default aspect-square transition-all duration-500"
+                className="group relative rounded-xl overflow-hidden cursor-default aspect-[3/4] transition-all duration-500"
                 whileHover={{ y: -4, boxShadow: "0 12px 30px -8px rgba(0,0,0,0.2)" }}
                 {...stagger(i)}>
                 
@@ -416,8 +416,8 @@ const GestaoAtivos = () => {
                   className="absolute inset-0 transition-opacity duration-500"
                   style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.05) 50%)" }} />
                 
-                  <div className="absolute bottom-0 left-0 right-0 p-2 flex items-center justify-center">
-                    <span className="font-display text-[11px] font-medium tracking-wide text-white">
+                  <div className="absolute bottom-0 left-0 right-0 p-3 flex items-center justify-center">
+                    <span className="font-display text-xs font-medium tracking-wide text-white">
                       {b.name}
                     </span>
                   </div>
