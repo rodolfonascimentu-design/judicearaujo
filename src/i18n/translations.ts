@@ -69,8 +69,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "farms.title": "Fazendas Exclusivas",
 
     // High End Carousel
-    "highend.title": "Os melhores imóveis de alto padrão do Rio de Janeiro",
-    "highend.subtitle": "Uma curadoria dos imóveis mais extraordinários disponíveis na cidade",
+    "highend.title": "Imóveis em Destaque",
+    "highend.subtitle": "Uma curadoria dos melhores imóveis do Rio de Janeiro.",
 
     // Property Management / Gestão de Ativos
     "pm.title": "Gestão de Ativos Imobiliários",
