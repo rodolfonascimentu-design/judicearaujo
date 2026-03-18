@@ -11,6 +11,7 @@ import PropertyDetail from "./pages/PropertyDetail";
 import GestaoAtivos from "./pages/GestaoAtivos";
 import ForbesPage from "./pages/ForbesPage";
 import QuemSomos from "./pages/QuemSomos";
+import MapaDoSite from "./pages/MapaDoSite";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/gestao-de-ativos-imobiliarios" element={<GestaoAtivos />} />
             <Route path="/forbes" element={<ForbesPage />} />
             <Route path="/quem-somos" element={<QuemSomos />} />
+            <Route path="/mapa-do-site" element={<MapaDoSite />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
