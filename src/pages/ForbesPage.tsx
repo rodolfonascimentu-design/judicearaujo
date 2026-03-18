@@ -620,11 +620,12 @@ const ForbesHeroLogos = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative min-h-[120px]">
+      {/* Logos — absolute so they don't shift layout */}
       <AnimatePresence>
         {!logosFadeOut && (
           <motion.div
-            className="flex items-center justify-center gap-0"
+            className="absolute inset-0 flex items-center justify-center gap-0"
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
@@ -655,20 +656,23 @@ const ForbesHeroLogos = () => {
         )}
       </AnimatePresence>
 
+      {/* Title — absolute, same position, no layout shift */}
       <AnimatePresence>
         {showTitle && (
           <motion.div
-            className="text-center"
+            className="absolute inset-0 flex items-center justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-white tracking-[-0.02em] leading-[1.2] mb-6">
-              Forbes Global Properties
-            </h1>
-            <p className="font-sans text-base md:text-lg lg:text-xl font-light text-white/80 leading-[1.6] tracking-wide max-w-3xl mx-auto">
-              Conectando o mercado imobiliário de alto padrão do Rio de Janeiro a uma audiência global.
-            </p>
+            <div className="text-center">
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-white tracking-[-0.02em] leading-[1.2] mb-6">
+                Forbes Global Properties
+              </h1>
+              <p className="font-sans text-base md:text-lg lg:text-xl font-light text-white/80 leading-[1.6] tracking-wide max-w-3xl mx-auto">
+                Conectando o mercado imobiliário de alto padrão do Rio de Janeiro a uma audiência global.
+              </p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -46,7 +46,7 @@ const ImmersiveScrollGallery: React.FC<iImmersiveScrollGalleryProps> = ({
   }));
 
   return (
-    <div ref={container} className={`h-[200vh] relative overflow-hidden ${className}`}>
+    <div ref={container} className={`relative overflow-hidden ${className || "h-[200vh]"}`}>
       <div className="sticky top-0 h-screen overflow-hidden">
         {pictures.map(({ src, scale }, index) => (
           <motion.div
