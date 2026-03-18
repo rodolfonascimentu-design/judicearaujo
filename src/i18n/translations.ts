@@ -21,6 +21,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.blogPost": "Blog",
     "nav.about": "Quem Somos",
     "nav.contact": "Contato",
+    "nav.forbes": "Forbes Global Properties",
 
     // Exclusive Gallery
     "exclusive.subtitle": "Seleção Exclusiva",
