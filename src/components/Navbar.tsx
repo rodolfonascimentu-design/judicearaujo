@@ -6,6 +6,7 @@ import logoJaBlack from "@/assets/logo-ja-black.png";
 import logoForbesBlack from "@/assets/forbes-global-black.png";
 import jaLogoWhite from "@/assets/logo-ja-white.png";
 import forbesLogoWhite from "@/assets/forbes-global-white.png";
+import menuLandscape from "@/assets/menu-landscape.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { Lang } from "@/i18n/translations";
 
