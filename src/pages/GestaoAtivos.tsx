@@ -103,12 +103,12 @@ const expertiseCards = [
 
 
 const bairros = [
-{ name: "Leblon", img: property1 },
-{ name: "Ipanema", img: property2 },
-{ name: "Lagoa", img: property3 },
-{ name: "Gávea", img: property4 },
-{ name: "Jardim Botânico", img: property5 },
-{ name: "Barra da Tijuca", img: property6 }];
+{ name: "Leblon", img: bairroLeblon },
+{ name: "Ipanema", img: bairroIpanema },
+{ name: "Lagoa", img: bairroLagoa },
+{ name: "Gávea", img: bairroGavea },
+{ name: "Jardim Botânico", img: bairroJardimBotanico },
+{ name: "Barra da Tijuca", img: bairroBarraDaTijuca }];
 
 
 const serviceCards = [
