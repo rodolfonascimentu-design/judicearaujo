@@ -3,9 +3,10 @@ export type Lang = "PT" | "EN" | "ES";
 const translations: Record<Lang, Record<string, string>> = {
   PT: {
     // Hero
-    "hero.headline": "Para quem escolhe viver diferente",
-    "hero.sale": "Venda",
-    "hero.rental": "Locação",
+    "hero.headline": "Onde estão os imóveis mais especiais",
+    "hero.subheadline": "Propriedades de alto padrão nas melhores localizações do Rio de Janeiro e da região serrana.",
+    "hero.sale": "Comprar",
+    "hero.rental": "Alugar",
     "hero.seasonal": "Temporada",
     "hero.searchLabel": "Buscar imóvel",
     "hero.searchPlaceholder": "Bairro, cidade, condomínio ou código",
@@ -23,14 +24,14 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Exclusive Gallery
     "exclusive.subtitle": "Seleção Exclusiva",
-    "exclusive.title": "Imóveis Exclusivos",
+    "exclusive.title": "Imóveis Especiais",
     "exclusive.details": "Ver detalhes",
     "unit.bedrooms": "quartos",
     "unit.parking": "vagas",
 
     // Featured Carousel
-    "featured.title": "Imóveis em Destaque",
-    "featured.subtitle": "Uma seleção exclusiva dos imóveis mais desejados do Rio de Janeiro",
+    "featured.title": "Lançamentos em Destaque",
+    "featured.subtitle": "Uma seleção dos lançamentos mais desejados do Rio de Janeiro.",
 
     // Institutional CTA
     "cta.owners": "Proprietários",
@@ -68,8 +69,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "farms.title": "Fazendas Exclusivas",
 
     // High End Carousel
-    "highend.title": "Os melhores imóveis de alto padrão do Rio de Janeiro",
-    "highend.subtitle": "Uma curadoria dos imóveis mais extraordinários disponíveis na cidade",
+    "highend.title": "Imóveis em Destaque",
+    "highend.subtitle": "Uma curadoria dos melhores imóveis do Rio de Janeiro.",
 
     // Property Management / Gestão de Ativos
     "pm.title": "Gestão de Ativos Imobiliários",
@@ -164,9 +165,10 @@ const translations: Record<Lang, Record<string, string>> = {
   },
 
   EN: {
-    "hero.headline": "For those who choose to live differently",
-    "hero.sale": "Sale",
-    "hero.rental": "Rental",
+    "hero.headline": "Where the most special properties are",
+    "hero.subheadline": "Luxury properties in the best locations of Rio de Janeiro and the mountain region.",
+    "hero.sale": "Buy",
+    "hero.rental": "Rent",
     "hero.seasonal": "Seasonal",
     "hero.searchLabel": "Search property",
     "hero.searchPlaceholder": "Neighborhood, city, condominium or code",
@@ -182,13 +184,13 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.contact": "Contact",
 
     "exclusive.subtitle": "Exclusive Selection",
-    "exclusive.title": "Exclusive Properties",
+    "exclusive.title": "Special Properties",
     "exclusive.details": "View details",
     "unit.bedrooms": "bedrooms",
     "unit.parking": "parking",
 
-    "featured.title": "Featured Properties",
-    "featured.subtitle": "An exclusive selection of the most desired properties in Rio de Janeiro",
+    "featured.title": "Featured Launches",
+    "featured.subtitle": "A selection of the most desired launches in Rio de Janeiro.",
 
     "cta.owners": "Property Owners",
     "cta.ownersTitle": "Sell your property with security and maximum value",
@@ -221,8 +223,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "farms.subtitle": "Exclusive Selection",
     "farms.title": "Exclusive Farms",
 
-    "highend.title": "The finest luxury properties in Rio de Janeiro",
-    "highend.subtitle": "A curated selection of the most extraordinary properties available in the city",
+    "highend.title": "Featured Properties",
+    "highend.subtitle": "A curated selection of the finest properties in Rio de Janeiro.",
 
     "pm.title": "Real Estate Asset Management",
     "pm.subtitle": "Strategic management for owners who treat their properties as heritage.",
@@ -308,9 +310,10 @@ const translations: Record<Lang, Record<string, string>> = {
   },
 
   ES: {
-    "hero.headline": "Para quienes eligen vivir diferente",
-    "hero.sale": "Venta",
-    "hero.rental": "Alquiler",
+    "hero.headline": "Donde están los inmuebles más especiales",
+    "hero.subheadline": "Propiedades de alto nivel en las mejores ubicaciones de Río de Janeiro y la región serrana.",
+    "hero.sale": "Comprar",
+    "hero.rental": "Alquilar",
     "hero.seasonal": "Temporada",
     "hero.searchLabel": "Buscar inmueble",
     "hero.searchPlaceholder": "Barrio, ciudad, condominio o código",
@@ -326,13 +329,13 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.contact": "Contacto",
 
     "exclusive.subtitle": "Selección Exclusiva",
-    "exclusive.title": "Inmuebles Exclusivos",
+    "exclusive.title": "Inmuebles Especiales",
     "exclusive.details": "Ver detalles",
     "unit.bedrooms": "habitaciones",
     "unit.parking": "plazas",
 
-    "featured.title": "Inmuebles Destacados",
-    "featured.subtitle": "Una selección exclusiva de los inmuebles más deseados de Río de Janeiro",
+    "featured.title": "Lanzamientos Destacados",
+    "featured.subtitle": "Una selección de los lanzamientos más deseados de Río de Janeiro.",
 
     "cta.owners": "Propietarios",
     "cta.ownersTitle": "Venda su inmueble con seguridad y máxima valorización",
@@ -365,8 +368,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "farms.subtitle": "Selección Exclusiva",
     "farms.title": "Haciendas Exclusivas",
 
-    "highend.title": "Los mejores inmuebles de alto nivel de Río de Janeiro",
-    "highend.subtitle": "Una selección curada de los inmuebles más extraordinarios disponibles en la ciudad",
+    "highend.title": "Inmuebles Destacados",
+    "highend.subtitle": "Una selección curada de los mejores inmuebles de Río de Janeiro.",
 
     "pm.title": "Gestión de Activos Inmobiliarios",
     "pm.subtitle": "Administración estratégica para propietarios que tratan sus inmuebles como patrimonio.",
