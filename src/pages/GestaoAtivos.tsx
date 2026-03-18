@@ -681,7 +681,7 @@ const GestaoAtivos = () => {
                 Confiança e seriedade
               </h2>
               <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 max-w-3xl mx-auto" style={{ color: C.body }}>
-                Ao confiar a gestão do seu imóvel à Judice & Araujo, o proprietário conta com uma empresa com quase cinco décadas de atuação no mercado imobiliário.
+                Ao confiar a gestão do seu imóvel à Judice & Araujo, o proprietário conta com uma empresa com mais de cinco décadas de atuação no mercado imobiliário.
               </p>
               <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-10 max-w-3xl mx-auto" style={{ color: C.body }}>
                 Nossa reputação foi construída com base em valores claros:
