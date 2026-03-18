@@ -171,7 +171,7 @@ const ImageBreak = ({ src, alt, height = "h-[45vh]" }: {src: string;alt: string;
 /* ── Section label ── */
 const SectionLabel = ({ text, light = false }: {text: string;light?: boolean;}) =>
 <p
-  className="font-sans text-[10px] tracking-[0.35em] uppercase mb-6 font-medium"
+  className="font-sans text-[10px] tracking-[0.35em] uppercase mb-6 font-medium text-primary-foreground"
   style={{ color: light ? "rgba(255,255,255,0.4)" : C.accent }}>
   
     {text}
@@ -212,8 +212,8 @@ const GestaoAtivos = () => {
       <main>
 
         {/* ═══════════════════════════════════════════════════════════
-             HERO
-          ═══════════════════════════════════════════════════════════ */}
+                  HERO
+               ═══════════════════════════════════════════════════════════ */}
         <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
           <img
             src={heroImg}
@@ -268,8 +268,8 @@ const GestaoAtivos = () => {
         </section>
 
         {/* ═══════════════════════════════════════════════════════════
-             SEÇÃO 2 — SOBRE O SERVIÇO
-          ═══════════════════════════════════════════════════════════ */}
+                  SEÇÃO 2 — SOBRE O SERVIÇO
+               ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div {...fadeUp}>
@@ -304,8 +304,8 @@ const GestaoAtivos = () => {
         <Divider />
 
         {/* ═══════════════════════════════════════════════════════════
-             SEÇÃO 3 — O QUE É GESTÃO DE ATIVOS — glass cards
-          ═══════════════════════════════════════════════════════════ */}
+                  SEÇÃO 3 — O QUE É GESTÃO DE ATIVOS — glass cards
+               ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.sectionAlt }}>
           <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
@@ -355,8 +355,8 @@ const GestaoAtivos = () => {
         <ImageBreak src={aerialImg} alt="Vista aérea do Leblon e Ipanema" height="h-[50vh]" />
 
         {/* ═══════════════════════════════════════════════════════════
-             EXPERTISE — glass cards + smaller bairro cards
-          ═══════════════════════════════════════════════════════════ */}
+                  EXPERTISE — glass cards + smaller bairro cards
+               ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
           <div className="max-w-6xl mx-auto text-center">
             <motion.div className="max-w-3xl mx-auto mb-10" {...fadeUp}>
@@ -437,8 +437,8 @@ const GestaoAtivos = () => {
 
 
         {/* ═══════════════════════════════════════════════════════════
-             ATENDIMENTO PERSONALIZADO — split layout with image
-          ═══════════════════════════════════════════════════════════ */}
+                  ATENDIMENTO PERSONALIZADO — split layout with image
+               ═══════════════════════════════════════════════════════════ */}
         <section className="relative overflow-hidden" style={{ background: "#ffffff" }}>
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left content */}
@@ -504,8 +504,8 @@ const GestaoAtivos = () => {
         <Divider />
 
         {/* ═══════════════════════════════════════════════════════════
-             INTELIGÊNCIA DE MERCADO — glass cards (no borders)
-          ═══════════════════════════════════════════════════════════ */}
+                  INTELIGÊNCIA DE MERCADO — glass cards (no borders)
+               ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: C.accent }}>
           <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
@@ -557,8 +557,8 @@ const GestaoAtivos = () => {
         <ImageBreak src={interiorImg} alt="Interior de apartamento de alto padrão" height="h-[50vh]" />
 
         {/* ═══════════════════════════════════════════════════════════
-             ADMINISTRAÇÃO COMPLETA — unchanged per user request
-          ═══════════════════════════════════════════════════════════ */}
+                  ADMINISTRAÇÃO COMPLETA — unchanged per user request
+               ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
           <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
@@ -603,13 +603,13 @@ const GestaoAtivos = () => {
         <Divider />
 
         {/* ═══════════════════════════════════════════════════════════
-             PARCERIAS ESTRATÉGICAS — left-aligned + image right
-          ═══════════════════════════════════════════════════════════ */}
+                  PARCERIAS ESTRATÉGICAS — left-aligned + image right
+               ═══════════════════════════════════════════════════════════ */}
         <section className="relative overflow-hidden" style={{ background: C.accent }}>
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left content */}
             <div className="py-28 lg:py-40 px-6 lg:px-12 xl:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]">
-              <motion.div {...fadeUp} className="max-w-xl">
+              <motion.div {...fadeUp} className="max-w-xl text-secondary">
                 <SectionLabel text="Parcerias estratégicas" light />
                 <h2
                   className="font-display text-2xl md:text-3xl lg:text-[2.3rem] tracking-[-0.02em] leading-[1.22] mb-14"
@@ -618,13 +618,13 @@ const GestaoAtivos = () => {
                   Gestão para investidores, Wealth Managers e Family Offices
                 </h2>
                 <p
-                  className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6"
+                  className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 text-secondary"
                   style={{ color: "rgba(255,255,255,0.6)" }}>
                   
                   A Judice & Araujo também atua em parceria com gestores de patrimônio, bancos e family offices, oferecendo suporte especializado na gestão de ativos imobiliários pertencentes a seus clientes.
                 </p>
                 <p
-                  className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-12"
+                  className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-12 text-secondary"
                   style={{ color: "rgba(255,255,255,0.6)" }}>
                   
                   Nosso papel é complementar a estratégia patrimonial desses investidores, oferecendo uma gestão imobiliária profissional que combine:
@@ -671,8 +671,8 @@ const GestaoAtivos = () => {
         </section>
 
         {/* ═══════════════════════════════════════════════════════════
-             VALORES — centralized, glass cards
-          ═══════════════════════════════════════════════════════════ */}
+                  VALORES — centralized, glass cards
+               ═══════════════════════════════════════════════════════════ */}
         <section className="py-28 lg:py-40 px-6 lg:px-12" style={{ background: "#ffffff" }}>
           <div className="max-w-5xl mx-auto text-center">
             <motion.div {...fadeUp}>
@@ -716,8 +716,8 @@ const GestaoAtivos = () => {
         <Divider />
 
         {/* ═══════════════════════════════════════════════════════════
-             CONTATO — white background, clean, animated
-          ═══════════════════════════════════════════════════════════ */}
+                  CONTATO — white background, clean, animated
+               ═══════════════════════════════════════════════════════════ */}
         <section id="contato" className="py-28 md:py-40 px-6 md:px-16" style={{ background: "#ffffff" }}>
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
