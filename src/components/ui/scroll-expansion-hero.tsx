@@ -54,12 +54,21 @@ const ScrollExpandMedia = ({
   }, [skipAnimation]);
 
   // Content fade on scroll (search bar fades after 150px deadzone)
+  // Skip fade when a keyboard is likely open (input focused) to avoid iOS visual bugs
   useEffect(() => {
     if (!mediaFullyExpanded) {
       setContentFadeOut(1);
       return;
     }
     const onScroll = () => {
+      // On iOS, the keyboard opening shifts scrollY — ignore fade when an input is focused
+      const activeEl = document.activeElement;
+      const isInputFocused = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA');
+      if (isInputFocused) {
+        setContentFadeOut(1);
+        return;
+      }
+
       const deadZone = 150;
       const fadeRange = 150;
       const scrollY = window.scrollY;
