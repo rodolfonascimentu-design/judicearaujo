@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Instagram, Phone, Linkedin } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import logoJaBlack from "@/assets/logo-ja-black.png";
 import logoForbesBlack from "@/assets/forbes-global-black.png";
+import ContactModal from "./ContactModal";
 
 const Footer = () => {
   const { t } = useLanguage();
+  const [contactOpen, setContactOpen] = useState(false);
 
   const navigationLinks = [
     "Avaliar Imóvel",
@@ -31,7 +34,20 @@ const Footer = () => {
               <h4 className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-foreground/40 mb-8">{t("footer.navigation")}</h4>
               <ul className="space-y-3.5">
                 {navigationLinks.map((link) => (
-                  <li key={link}><a href="#" className="group font-sans text-xs text-foreground/60 hover:text-primary transition-all duration-300 font-light tracking-wide inline-flex items-center gap-1"><span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">{link}</span></a></li>
+                  <li key={link}>
+                    {link === "Contato" ? (
+                      <button
+                        onClick={() => setContactOpen(true)}
+                        className="group font-sans text-xs text-foreground/60 hover:text-primary transition-all duration-300 font-light tracking-wide inline-flex items-center gap-1"
+                      >
+                        <span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">{link}</span>
+                      </button>
+                    ) : (
+                      <a href="#" className="group font-sans text-xs text-foreground/60 hover:text-primary transition-all duration-300 font-light tracking-wide inline-flex items-center gap-1">
+                        <span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">{link}</span>
+                      </a>
+                    )}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -69,6 +85,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </footer>
   );
 };
