@@ -16,7 +16,7 @@ import forbesGallery3 from "@/assets/forbes-gallery-3.jpg";
 import forbesGallery4 from "@/assets/forbes-gallery-4.jpg";
 import forbesGallery5 from "@/assets/forbes-gallery-5.jpg";
 import forbesGallery6 from "@/assets/forbes-gallery-6.jpg";
-import partnershipBg from "@/assets/forbes-partnership-bg.jpg";
+import partnershipBg from "@/assets/forbes-cobertura-2.png";
 import forbesLogoBW from "@/assets/forbes-logo-bw.png";
 
 /* ── Helpers ── */
