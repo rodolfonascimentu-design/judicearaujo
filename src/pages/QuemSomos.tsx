@@ -166,6 +166,10 @@ const QuemSomos = () => {
         "Fundada em 1975, a Judice & Araujo é referência no mercado imobiliário de alto padrão do Rio de Janeiro. Membro da Forbes Global Properties."
       );
     }
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+    canonical.href = "https://www.judicearaujo.com.br/quem-somos";
+    return () => { canonical.href = "https://www.judicearaujo.com.br"; };
   }, []);
 
   useEffect(() => {

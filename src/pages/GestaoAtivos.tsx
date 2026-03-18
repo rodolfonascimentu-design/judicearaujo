@@ -183,15 +183,30 @@ const GestaoAtivos = () => {
   const [focused, setFocused] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title =
-    "Gestão de Ativos Imobiliários | Administração Premium de Imóveis – Judice & Araujo";
-    document.
-    querySelector('meta[name="description"]')?.
-    setAttribute(
+    document.title = "Gestão de Ativos Imobiliários | Administração Premium de Imóveis – Judice & Araujo";
+    document.querySelector('meta[name="description"]')?.setAttribute(
       "content",
       "Serviço especializado de gestão de ativos imobiliários para proprietários e investidores de imóveis de alto padrão no Rio de Janeiro."
     );
     window.scrollTo(0, 0);
+
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+    canonical.href = "https://www.judicearaujo.com.br/gestao-de-ativos-imobiliarios";
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Gestão de Ativos Imobiliários",
+      "provider": { "@type": "RealEstateAgent", "name": "Judice & Araujo", "url": "https://www.judicearaujo.com.br" },
+      "description": "Serviço especializado de gestão de ativos imobiliários para proprietários e investidores de imóveis de alto padrão no Rio de Janeiro.",
+      "areaServed": { "@type": "City", "name": "Rio de Janeiro" },
+      "url": "https://www.judicearaujo.com.br/gestao-de-ativos-imobiliarios",
+    });
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); canonical.href = "https://www.judicearaujo.com.br"; };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
