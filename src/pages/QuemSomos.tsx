@@ -260,18 +260,18 @@ const QuemSomos = () => {
       {/* ─── HISTÓRIA COM CONFIANÇA ─── */}
       <section className="py-24 lg:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <motion.div {...fadeUp} className="max-w-3xl mb-16 lg:mb-20">
+          <motion.div {...fadeUp} className="mb-16 lg:mb-20 text-center">
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
               Trajetória
             </p>
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
               Uma história construída com confiança
             </h2>
-            <div className="w-10 h-px bg-primary mb-8" />
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
+            <div className="w-10 h-px bg-primary mx-auto mb-8" />
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light max-w-3xl mx-auto">
               A trajetória da Judice & Araujo começou na região serrana do Rio de Janeiro, especialmente em Petrópolis, Itaipava e arredores, onde a empresa rapidamente se tornou uma referência no mercado de propriedades de alto padrão.
             </p>
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light">
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto">
               Com o crescimento do segmento de luxo na capital fluminense, a empresa expandiu sua atuação para a cidade do Rio de Janeiro, consolidando presença nos bairros mais valorizados da Zona Sul, incluindo:
             </p>
           </motion.div>
