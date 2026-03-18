@@ -30,8 +30,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "unit.parking": "vagas",
 
     // Featured Carousel
-    "featured.title": "Imóveis em Destaque",
-    "featured.subtitle": "Uma seleção exclusiva dos imóveis mais desejados do Rio de Janeiro",
+    "featured.title": "Lançamentos em Destaque",
+    "featured.subtitle": "Uma seleção dos lançamentos mais desejados do Rio de Janeiro.",
 
     // Institutional CTA
     "cta.owners": "Proprietários",
