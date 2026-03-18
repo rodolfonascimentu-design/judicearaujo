@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Minus, Plus, ChevronDown } from "lucide-react";
+import { Minus, Plus, ChevronDown, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoJaBlack from "@/assets/logo-ja-black.png";
 import logoForbesBlack from "@/assets/forbes-global-black.png";
@@ -17,6 +17,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [fontSize, setFontSize] = useState(100);
   const [heroExpanded, setHeroExpanded] = useState(false);
@@ -29,7 +30,8 @@ const Navbar = () => {
     { label: t("nav.blog"), href: "/gestao-de-ativos-imobiliarios" },
   ];
 
-  const mobileNavLinks = [
+  const fullMenuLinks = [
+    { label: t("nav.forbes"), href: "/forbes" },
     { label: t("nav.launches"), href: "/lancamentos" },
     { label: t("nav.evaluate"), href: "#avaliar" },
     { label: t("nav.blog"), href: "/gestao-de-ativos-imobiliarios" },
@@ -57,15 +59,15 @@ const Navbar = () => {
     document.documentElement.style.fontSize = `${fontSize}%`;
   }, [fontSize]);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll when any menu is open
   useEffect(() => {
-    if (mobileOpen) {
+    if (mobileOpen || desktopMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
     return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
+  }, [mobileOpen, desktopMenuOpen]);
 
   const adjustFont = (delta: number) => {
     setFontSize((prev) => Math.min(130, Math.max(80, prev + delta)));
@@ -73,6 +75,14 @@ const Navbar = () => {
 
   const showGreen = !isHomePage || pastHero;
   const isExpanded = !isHomePage || heroExpanded;
+
+  const handleMenuLinkClick = (e: React.MouseEvent, href: string, closeMenu: () => void) => {
+    if (href.startsWith("/")) {
+      e.preventDefault();
+      navigate(href);
+    }
+    closeMenu();
+  };
 
   return (
     <>
@@ -101,6 +111,7 @@ const Navbar = () => {
                   navigate('/');
                 }
                 setMobileOpen(false);
+                setDesktopMenuOpen(false);
               }}
               className="flex-shrink-0 flex items-center gap-2 transition-all duration-500 cursor-pointer"
               style={{
@@ -212,6 +223,15 @@ const Navbar = () => {
                       <Plus className="w-3 h-3" />
                     </button>
                   </div>
+
+                  {/* Desktop hamburger menu button */}
+                  <button
+                    onClick={() => setDesktopMenuOpen(!desktopMenuOpen)}
+                    className={`p-1.5 transition-colors ${showGreen ? "text-foreground/50 hover:text-foreground" : "text-white/60 hover:text-white"}`}
+                    aria-label={desktopMenuOpen ? "Fechar menu" : "Abrir menu"}
+                  >
+                    <Menu className="w-5 h-5" />
+                  </button>
             </div>
 
             {/* Mobile hamburger / X button */}
@@ -266,18 +286,12 @@ const Navbar = () => {
             {/* Navigation links — left-aligned, centered vertically */}
             <div className="flex-1 flex flex-col justify-center px-10">
               <nav className="flex flex-col gap-6">
-                {mobileNavLinks.map((link, i) => (
+                {fullMenuLinks.map((link, i) => (
                   <motion.a
                     key={link.href + link.label}
                     href={link.href}
-                    onClick={(e) => {
-                      if (link.href.startsWith("/")) {
-                        e.preventDefault();
-                        navigate(link.href);
-                      }
-                      setMobileOpen(false);
-                    }}
-                    className="font-display text-[18px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase whitespace-nowrap"
+                    onClick={(e) => handleMenuLinkClick(e, link.href, () => setMobileOpen(false))}
+                    className="font-display text-[15px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase whitespace-nowrap"
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.06, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
@@ -329,6 +343,96 @@ const Navbar = () => {
                   aria-label="Aumentar fonte"
                 >
                   <Plus className="w-5 h-5" />
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop fullscreen overlay menu */}
+      <AnimatePresence>
+        {desktopMenuOpen && (
+          <motion.div
+            className="fixed inset-0 z-[100] bg-primary hidden lg:flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+          >
+            {/* Close button */}
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+              <div className="flex items-center justify-end h-20">
+                <button
+                  onClick={() => setDesktopMenuOpen(false)}
+                  className="relative w-8 h-8 flex flex-col items-center justify-center"
+                  aria-label="Fechar menu"
+                >
+                  <span className="absolute block h-[2px] w-6 rounded-full bg-white rotate-45" />
+                  <span className="absolute block h-[2px] w-6 rounded-full bg-white -rotate-45" />
+                </button>
+              </div>
+            </div>
+
+            {/* Navigation links */}
+            <div className="flex-1 flex flex-col justify-center px-12 lg:px-20">
+              <nav className="flex flex-col gap-8 max-w-2xl">
+                {fullMenuLinks.map((link, i) => (
+                  <motion.a
+                    key={link.href + link.label}
+                    href={link.href}
+                    onClick={(e) => handleMenuLinkClick(e, link.href, () => setDesktopMenuOpen(false))}
+                    className="font-display text-2xl lg:text-3xl font-light text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.1em] uppercase"
+                    initial={{ opacity: 0, x: -24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.08 + i * 0.06, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+              </nav>
+            </div>
+
+            {/* Bottom controls */}
+            <motion.div
+              className="pb-12 px-12 lg:px-20 flex items-center gap-10"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            >
+              {/* Language selector */}
+              <div className="flex items-center gap-6">
+                {languages.map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setLang(l)}
+                    className={`text-sm font-sans tracking-[0.2em] uppercase transition-colors ${
+                      l === lang ? "text-primary-foreground font-medium" : "text-primary-foreground/35 hover:text-primary-foreground/60"
+                    }`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+
+              <div className="w-px h-5 bg-primary-foreground/15" />
+
+              {/* Font size controls */}
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => adjustFont(-5)}
+                  className="text-primary-foreground/40 hover:text-primary-foreground transition-colors"
+                  aria-label="Diminuir fonte"
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+                <span className="text-sm font-sans text-primary-foreground/30 tracking-wider select-none">Aa</span>
+                <button
+                  onClick={() => adjustFont(5)}
+                  className="text-primary-foreground/40 hover:text-primary-foreground transition-colors"
+                  aria-label="Aumentar fonte"
+                >
+                  <Plus className="w-4 h-4" />
                 </button>
               </div>
             </motion.div>
