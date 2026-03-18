@@ -223,8 +223,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "farms.subtitle": "Exclusive Selection",
     "farms.title": "Exclusive Farms",
 
-    "highend.title": "The finest luxury properties in Rio de Janeiro",
-    "highend.subtitle": "A curated selection of the most extraordinary properties available in the city",
+    "highend.title": "Featured Properties",
+    "highend.subtitle": "A curated selection of the finest properties in Rio de Janeiro.",
 
     "pm.title": "Real Estate Asset Management",
     "pm.subtitle": "Strategic management for owners who treat their properties as heritage.",
