@@ -32,12 +32,12 @@ import aerialImg from "@/assets/gestao-aerial.jpg";
 import terraceImg from "@/assets/gestao-terrace.jpg";
 import parceriasImg from "@/assets/parcerias-hero.jpg";
 import relacionamentoImg from "@/assets/relacionamento-hero.jpg";
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
-import property4 from "@/assets/property-4.jpg";
-import property5 from "@/assets/property-5.jpg";
-import property6 from "@/assets/property-6.jpg";
+import bairroLeblon from "@/assets/bairro-leblon.jpg";
+import bairroIpanema from "@/assets/bairro-ipanema.jpg";
+import bairroLagoa from "@/assets/bairro-lagoa.jpg";
+import bairroGavea from "@/assets/bairro-gavea.jpg";
+import bairroJardimBotanico from "@/assets/bairro-jardim-botanico.jpg";
+import bairroBarraDaTijuca from "@/assets/bairro-barra-da-tijuca.jpg";
 
 /* ── animation presets ── */
 const fadeUp = {
@@ -103,12 +103,12 @@ const expertiseCards = [
 
 
 const bairros = [
-{ name: "Leblon", img: property1 },
-{ name: "Ipanema", img: property2 },
-{ name: "Lagoa", img: property3 },
-{ name: "Gávea", img: property4 },
-{ name: "Jardim Botânico", img: property5 },
-{ name: "Barra da Tijuca", img: property6 }];
+{ name: "Leblon", img: bairroLeblon },
+{ name: "Ipanema", img: bairroIpanema },
+{ name: "Lagoa", img: bairroLagoa },
+{ name: "Gávea", img: bairroGavea },
+{ name: "Jardim Botânico", img: bairroJardimBotanico },
+{ name: "Barra da Tijuca", img: bairroBarraDaTijuca }];
 
 
 const serviceCards = [
@@ -681,7 +681,7 @@ const GestaoAtivos = () => {
                 Confiança e seriedade
               </h2>
               <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-6 max-w-3xl mx-auto" style={{ color: C.body }}>
-                Ao confiar a gestão do seu imóvel à Judice & Araujo, o proprietário conta com uma empresa com quase cinco décadas de atuação no mercado imobiliário.
+                Ao confiar a gestão do seu imóvel à Judice & Araujo, o proprietário conta com uma empresa com mais de cinco décadas de atuação no mercado imobiliário.
               </p>
               <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide mb-10 max-w-3xl mx-auto" style={{ color: C.body }}>
                 Nossa reputação foi construída com base em valores claros:
