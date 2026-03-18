@@ -85,6 +85,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </footer>
   );
 };
