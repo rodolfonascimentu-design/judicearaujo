@@ -314,6 +314,7 @@ const Navbar = () => {
                   <motion.a
                     key={link.href + link.label}
                     href={link.href}
+                    {...('external' in link && link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     onClick={(e) => handleMenuLinkClick(e, link.href, () => setMobileOpen(false))}
                     className="font-display text-[15px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase whitespace-nowrap"
                     initial={{ opacity: 0, x: -16 }}
