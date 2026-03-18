@@ -176,6 +176,19 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
                     <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                   </a>
                 )}
+                <button
+                  onClick={() => {
+                    const contactSection = document.getElementById("property-contact");
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="group flex items-center justify-center gap-2.5 w-full border border-primary text-primary py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-primary/5 transition-all duration-300"
+                >
+                  <FileText className="w-4 h-4" />
+                  Solicitar informações
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                </button>
                 <button className="group flex items-center justify-center gap-2 w-full text-muted-foreground py-2.5 text-xs font-sans font-medium tracking-[0.1em] uppercase hover:text-foreground transition-colors duration-300">
                   <Share2 className="w-3.5 h-3.5" />
                   Compartilhar
