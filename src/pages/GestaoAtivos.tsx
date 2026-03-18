@@ -392,13 +392,13 @@ const GestaoAtivos = () => {
             </div>
 
             {/* Bairros */}
-            <motion.div className="max-w-5xl mx-auto mb-10" {...fadeUp}>
+            <motion.div className="mb-10" {...fadeUp}>
               <p className="font-sans text-[15px] font-light leading-[2.1] tracking-wide whitespace-nowrap" style={{ color: C.body }}>
                 Nossa equipe acompanha de perto a dinâmica dos bairros mais valorizados da cidade, incluindo, mas não se limitando a:
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 max-w-5xl mx-auto mb-10">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 mb-10">
               {bairros.map((b, i) =>
               <motion.div
                 key={b.name}
