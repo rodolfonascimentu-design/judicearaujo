@@ -36,6 +36,7 @@ const Navbar = () => {
     { label: t("nav.launches"), href: "/lancamentos" },
     { label: t("nav.evaluate"), href: "#avaliar" },
     { label: t("nav.blog"), href: "/gestao-de-ativos-imobiliarios" },
+    { label: t("nav.blogPost"), href: "https://blog.judicearaujo.com.br/?_gl=1%2A19ywxvx%2A_gcl_au%2AMTk1MTM2MjMxNS4xNzczNDI5OTU1", external: true },
     { label: t("nav.about"), href: "/quem-somos" },
     { label: t("nav.contact"), href: "#contato" },
   ];
