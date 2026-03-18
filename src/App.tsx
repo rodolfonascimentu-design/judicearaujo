@@ -10,6 +10,7 @@ import Launches from "./pages/Launches";
 import PropertyDetail from "./pages/PropertyDetail";
 import GestaoAtivos from "./pages/GestaoAtivos";
 import ForbesPage from "./pages/ForbesPage";
+import QuemSomos from "./pages/QuemSomos";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/imovel/:id" element={<PropertyDetail />} />
             <Route path="/gestao-de-ativos-imobiliarios" element={<GestaoAtivos />} />
             <Route path="/forbes" element={<ForbesPage />} />
+            <Route path="/quem-somos" element={<QuemSomos />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
