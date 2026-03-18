@@ -304,9 +304,6 @@ const QuemSomos = () => {
 
       {/* ─── REDE GLOBAL (Forbes) ─── */}
       <section className="relative py-24 lg:py-36 bg-primary overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={forbesPartnershipBg} alt="" className="w-full h-full object-cover opacity-15" loading="lazy" />
-        </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div {...fadeUp}>
@@ -337,14 +334,12 @@ const QuemSomos = () => {
 
             <motion.div
               className="flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.85 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: false, margin: "-80px" }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 1, ease: "easeOut" }}
             >
-              <div className="w-full max-w-md p-16 rounded-[4px] border border-primary-foreground/10 bg-primary-foreground/5 backdrop-blur-sm flex items-center justify-center">
-                <img src={forbesGlobalWhite} alt="Forbes Global Properties" className="w-full max-w-[320px] opacity-80" loading="lazy" />
-              </div>
+              <img src={forbesGlobalWhite} alt="Forbes Global Properties" className="w-full max-w-[320px] opacity-80" loading="lazy" />
             </motion.div>
           </div>
         </div>
