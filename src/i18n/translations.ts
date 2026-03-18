@@ -21,6 +21,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.blogPost": "Blog",
     "nav.about": "Quem Somos",
     "nav.contact": "Contato",
+    "nav.forbes": "Forbes Global Properties",
 
     // Exclusive Gallery
     "exclusive.subtitle": "Seleção Exclusiva",
@@ -182,6 +183,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.blogPost": "Blog",
     "nav.about": "About Us",
     "nav.contact": "Contact",
+    "nav.forbes": "Forbes Global Properties",
 
     "exclusive.subtitle": "Exclusive Selection",
     "exclusive.title": "Special Properties",
@@ -327,6 +329,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.blogPost": "Blog",
     "nav.about": "Quiénes Somos",
     "nav.contact": "Contacto",
+    "nav.forbes": "Forbes Global Properties",
 
     "exclusive.subtitle": "Selección Exclusiva",
     "exclusive.title": "Inmuebles Especiales",
