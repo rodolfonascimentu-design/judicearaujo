@@ -420,7 +420,7 @@ const QuemSomos = () => {
               Nossos propósito e direcionadores estratégicos
             </h2>
             <div className="w-10 h-px bg-primary mx-auto mt-4 mb-5" />
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-2xl mx-auto">
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto">
               A atuação da Judice & Araujo é guiada por princípios que refletem a cultura e os valores da empresa.
             </p>
           </motion.div>
