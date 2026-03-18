@@ -78,10 +78,7 @@ const Footer = () => {
       </div>
       <div className="border-t border-border/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex flex-col items-center md:items-start gap-1">
-            <p className="font-sans text-[10px] text-foreground/25 tracking-wide font-light">{t("footer.rights")}</p>
-            <p className="font-sans text-[10px] text-foreground/25 tracking-wide font-light">Slalon Corretagem e Administração de Imóveis Ltda. Creci J 5244</p>
-          </div>
+          <p className="font-sans text-[10px] text-foreground/25 tracking-wide font-light">{t("footer.rights")}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Slalon Corretagem e Administração de Imóveis Ltda. Creci J 5244</p>
           <div className="flex gap-8">
             <a href="#" className="font-sans text-[10px] text-foreground/25 hover:text-primary/60 transition-colors duration-300 tracking-wide font-light">{t("footer.privacy")}</a>
             <a href="#" className="font-sans text-[10px] text-foreground/25 hover:text-primary/60 transition-colors duration-300 tracking-wide font-light">{t("footer.terms")}</a>
