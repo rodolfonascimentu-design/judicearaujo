@@ -22,13 +22,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import OfficeLocations from "@/components/OfficeLocations";
 
-import heroImg from "@/assets/hero-luxury.jpg";
-import editorialImg from "@/assets/editorial.jpg";
+import heroImg from "@/assets/quem-somos-hero.jpg";
+import editorialImg from "@/assets/quem-somos-historia.jpg";
 import forbesGlobalWhite from "@/assets/forbes-global-white.png";
 import forbesPartnershipBg from "@/assets/forbes-partnership-bg.jpg";
 import equipeImg from "@/assets/quem-somos-equipe.jpg";
-import parallax1 from "@/assets/parallax-1.jpg";
-import parallax2 from "@/assets/parallax-3.jpg";
+import parallax1 from "@/assets/quem-somos-break1.jpg";
+import parallax2 from "@/assets/quem-somos-break2.jpg";
 import bairroLeblon from "@/assets/bairro-leblon.jpg";
 import bairroIpanema from "@/assets/bairro-ipanema.jpg";
 import bairroLagoa from "@/assets/bairro-lagoa.jpg";
