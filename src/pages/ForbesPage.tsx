@@ -349,12 +349,24 @@ const ForbesPage = () => {
               transition={{ duration: 0.7 }}
             >
               <iframe
-                src="https://www.youtube.com/embed/rWJ-BwsgbhU?rel=0&modestbranding=1&showinfo=0"
+                src="about:blank"
+                data-src="https://www.youtube.com/embed/rWJ-BwsgbhU?rel=0&modestbranding=1&showinfo=0"
                 className="w-full h-full"
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
-                title="Forbes Global Properties"
+                title="Forbes Global Properties — Vídeo institucional"
                 frameBorder="0"
+                loading="lazy"
+                ref={(el) => {
+                  if (!el) return;
+                  const observer = new IntersectionObserver(([entry]) => {
+                    if (entry.isIntersecting && el.src === "about:blank") {
+                      el.src = el.dataset.src || "";
+                      observer.disconnect();
+                    }
+                  }, { rootMargin: "200px" });
+                  observer.observe(el);
+                }}
               />
             </motion.div>
           </div>
