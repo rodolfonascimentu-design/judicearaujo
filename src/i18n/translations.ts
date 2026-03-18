@@ -184,7 +184,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.contact": "Contact",
 
     "exclusive.subtitle": "Exclusive Selection",
-    "exclusive.title": "Exclusive Properties",
+    "exclusive.title": "Special Properties",
     "exclusive.details": "View details",
     "unit.bedrooms": "bedrooms",
     "unit.parking": "parking",
