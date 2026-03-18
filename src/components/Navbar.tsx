@@ -384,8 +384,8 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           >
-            {/* Top bar with logos + close button */}
-            <div className="px-12 lg:px-20 w-full">
+            {/* Top bar — same container as main navbar for alignment */}
+            <div className="max-w-7xl mx-auto w-full px-6 lg:px-12">
               <div className="flex items-center justify-between h-20">
                 <a
                   href="/"
@@ -430,34 +430,55 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Navigation links */}
-            <div className="flex-1 flex flex-col justify-center px-12 lg:px-20">
-              <nav className="flex flex-col gap-8 max-w-2xl">
-                {fullMenuLinks.map((link, i) => (
-                  <motion.a
-                    key={link.href + link.label}
-                    href={link.href}
-                    onClick={(e) => handleMenuLinkClick(e, link.href, () => setDesktopMenuOpen(false))}
-                    className="group font-display text-2xl lg:text-3xl font-light text-primary-foreground/90 hover:text-primary-foreground transition-all duration-300 tracking-[0.1em] uppercase"
-                    initial={{ opacity: 0, x: -24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.08 + i * 0.06, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                    whileHover={{ x: 12 }}
-                  >
-                    <span className="inline-flex items-center gap-3">
-                      <motion.span
-                        className="inline-block w-0 h-[1px] bg-primary-foreground/60 group-hover:w-8 transition-all duration-300"
-                      />
-                      {link.label}
-                    </span>
-                  </motion.a>
-                ))}
-              </nav>
+            {/* Content area: links left + image right */}
+            <div className="flex-1 flex max-w-7xl mx-auto w-full px-6 lg:px-12">
+              {/* Navigation links */}
+              <div className="flex-1 flex flex-col justify-center">
+                <nav className="flex flex-col gap-7">
+                  {fullMenuLinks.map((link, i) => (
+                    <motion.a
+                      key={link.href + link.label}
+                      href={link.href}
+                      onClick={(e) => handleMenuLinkClick(e, link.href, () => setDesktopMenuOpen(false))}
+                      className="group font-display text-2xl lg:text-[28px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-all duration-300 tracking-[0.1em] uppercase"
+                      initial={{ opacity: 0, x: -24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.08 + i * 0.06, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                      whileHover={{ x: 12 }}
+                    >
+                      <span className="inline-flex items-center gap-3">
+                        <motion.span
+                          className="inline-block w-0 h-[1px] bg-primary-foreground/60 group-hover:w-8 transition-all duration-300"
+                        />
+                        {link.label}
+                      </span>
+                    </motion.a>
+                  ))}
+                </nav>
+              </div>
+
+              {/* Right side image */}
+              <div className="hidden lg:flex items-center justify-end w-[42%] pl-12">
+                <motion.div
+                  className="relative w-full h-[70%] rounded-lg overflow-hidden"
+                  initial={{ opacity: 0, scale: 1.05, x: 30 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{ opacity: 0, scale: 1.05, x: 30 }}
+                  transition={{ duration: 0.6, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  <img
+                    src={menuLandscape}
+                    alt="Interior de luxo"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                  />
+                </motion.div>
+              </div>
             </div>
 
             {/* Bottom controls */}
             <motion.div
-              className="pb-12 px-12 lg:px-20 flex items-center gap-10"
+              className="pb-12 max-w-7xl mx-auto w-full px-6 lg:px-12 flex items-center gap-10"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
