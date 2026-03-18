@@ -19,7 +19,7 @@ const PropertyContact = () => {
   ] as const;
 
   return (
-    <section className="py-24 md:py-32 px-6 md:px-16 bg-background">
+    <section id="property-contact" className="py-24 md:py-32 px-6 md:px-16 bg-background">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
           {/* Left — editorial intro */}
