@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 interface iImmersiveScrollGalleryProps {
   images?: { src: string; scale: null }[];
@@ -19,6 +19,8 @@ const IMAGE_STYLES = [
   "w-[15vw] h-[15vh] top-[22.5vh] left-[25vw]",
 ];
 
+const springConfig = { stiffness: 80, damping: 30, mass: 0.5 };
+
 const ImmersiveScrollGallery: React.FC<iImmersiveScrollGalleryProps> = ({
   images = [],
   className = "",
@@ -30,11 +32,13 @@ const ImmersiveScrollGallery: React.FC<iImmersiveScrollGalleryProps> = ({
     offset: ["start start", "end end"],
   });
 
-  const scale4 = useTransform(scrollYProgress, [0, 1], [1, 4]);
-  const scale5 = useTransform(scrollYProgress, [0, 1], [1, 5]);
-  const scale6 = useTransform(scrollYProgress, [0, 1], [1, 6]);
-  const scale8 = useTransform(scrollYProgress, [0, 1], [1, 8]);
-  const scale9 = useTransform(scrollYProgress, [0, 1], [1, 9]);
+  const smoothProgress = useSpring(scrollYProgress, springConfig);
+
+  const scale4 = useTransform(smoothProgress, [0, 1], [1, 4]);
+  const scale5 = useTransform(smoothProgress, [0, 1], [1, 5]);
+  const scale6 = useTransform(smoothProgress, [0, 1], [1, 6]);
+  const scale8 = useTransform(smoothProgress, [0, 1], [1, 8]);
+  const scale9 = useTransform(smoothProgress, [0, 1], [1, 9]);
 
   const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
 
@@ -46,13 +50,13 @@ const ImmersiveScrollGallery: React.FC<iImmersiveScrollGalleryProps> = ({
   }));
 
   return (
-    <div ref={container} className={`h-[200vh] relative overflow-hidden ${className}`}>
+    <div ref={container} className={`relative overflow-hidden ${className}`}>
       <div className="sticky top-0 h-screen overflow-hidden">
         {pictures.map(({ src, scale }, index) => (
           <motion.div
             key={index}
             style={{ scale }}
-            className="w-full h-full absolute top-0 flex items-center justify-center"
+            className="w-full h-full absolute top-0 flex items-center justify-center will-change-transform"
           >
             <div className={`relative ${IMAGE_STYLES[index % IMAGE_STYLES.length]}`}>
               <img
