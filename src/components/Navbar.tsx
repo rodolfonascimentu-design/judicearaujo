@@ -378,122 +378,113 @@ const Navbar = () => {
       <AnimatePresence>
         {desktopMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-[100] bg-primary hidden lg:flex"
+            className="fixed inset-0 z-[100] bg-primary hidden lg:flex flex-col"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           >
-            {/* Left content area */}
-            <div className="flex-1 flex flex-col h-full">
-              {/* Top bar with logos */}
-              <div className="max-w-7xl px-12 lg:px-20 w-full">
-                <div className="flex items-center h-20">
-                  <a
-                    href="/"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigate('/');
-                      setDesktopMenuOpen(false);
-                    }}
-                    className="flex items-center gap-2"
-                  >
-                    <img src={jaLogoWhite} alt="Judice & Araujo" className="h-[26px] lg:h-[30px] w-auto" />
-                    <div className="w-px h-8 bg-primary-foreground/30" />
-                    <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
-                  </a>
-                </div>
+            {/* Top bar with logos + close button */}
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+              <div className="flex items-center justify-between h-20">
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate('/');
+                    setDesktopMenuOpen(false);
+                  }}
+                  className="flex items-center gap-2"
+                >
+                  <img src={jaLogoWhite} alt="Judice & Araujo" className="h-[26px] lg:h-[30px] w-auto" />
+                  <div className="w-px h-8 bg-primary-foreground/30" />
+                  <img src={forbesLogoWhite} alt="Forbes Global Properties" className="h-[30px] lg:h-[35px] w-auto" />
+                </a>
+                <button
+                  onClick={() => setDesktopMenuOpen(false)}
+                  className="relative w-8 h-8 flex flex-col items-center justify-center"
+                  aria-label="Fechar menu"
+                >
+                  <motion.span
+                    className="absolute block h-[2px] w-6 rounded-full bg-white"
+                    initial={{ rotate: 0, y: -5 }}
+                    animate={{ rotate: 45, y: 0 }}
+                    exit={{ rotate: 0, y: -5 }}
+                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  />
+                  <motion.span
+                    className="absolute block h-[2px] w-6 rounded-full bg-white"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: 0, scaleX: 0 }}
+                    exit={{ opacity: 1, scaleX: 1 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  />
+                  <motion.span
+                    className="absolute block h-[2px] w-6 rounded-full bg-white"
+                    initial={{ rotate: 0, y: 5 }}
+                    animate={{ rotate: -45, y: 0 }}
+                    exit={{ rotate: 0, y: 5 }}
+                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  />
+                </button>
               </div>
-
-              {/* Navigation links */}
-              <div className="flex-1 flex flex-col justify-center px-12 lg:px-20">
-                <nav className="flex flex-col gap-8 max-w-2xl">
-                  {fullMenuLinks.map((link, i) => (
-                    <motion.a
-                      key={link.href + link.label}
-                      href={link.href}
-                      onClick={(e) => handleMenuLinkClick(e, link.href, () => setDesktopMenuOpen(false))}
-                      className="group font-display text-2xl lg:text-3xl font-light text-primary-foreground/90 hover:text-primary-foreground transition-all duration-300 tracking-[0.1em] uppercase"
-                      initial={{ opacity: 0, x: -24 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.08 + i * 0.06, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                      whileHover={{ x: 12 }}
-                    >
-                      <span className="inline-flex items-center gap-3">
-                        <motion.span
-                          className="inline-block w-0 h-[1px] bg-primary-foreground/60 group-hover:w-8 transition-all duration-300"
-                        />
-                        {link.label}
-                      </span>
-                    </motion.a>
-                  ))}
-                </nav>
-              </div>
-
-              {/* Bottom controls */}
-              <motion.div
-                className="pb-12 px-12 lg:px-20 flex items-center gap-10"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-              >
-                {/* Language selector */}
-                <div className="flex items-center gap-6">
-                  {languages.map((l) => (
-                    <button
-                      key={l}
-                      onClick={() => setLang(l)}
-                      className={`text-sm font-sans tracking-[0.2em] uppercase transition-colors ${
-                        l === lang ? "text-primary-foreground font-medium" : "text-primary-foreground/35 hover:text-primary-foreground/60"
-                      }`}
-                    >
-                      {l}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="w-px h-5 bg-primary-foreground/15" />
-
-                {/* Font size controls */}
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={() => adjustFont(-5)}
-                    className="text-primary-foreground/40 hover:text-primary-foreground transition-colors"
-                    aria-label="Diminuir fonte"
-                  >
-                    <Minus className="w-4 h-4" />
-                  </button>
-                  <span className="text-sm font-sans text-primary-foreground/30 tracking-wider select-none">Aa</span>
-                  <button
-                    onClick={() => adjustFont(5)}
-                    className="text-primary-foreground/40 hover:text-primary-foreground transition-colors"
-                    aria-label="Aumentar fonte"
-                  >
-                    <Plus className="w-4 h-4" />
-                  </button>
-                </div>
-              </motion.div>
             </div>
 
-            {/* Right image area */}
+            {/* Navigation links */}
+            <div className="flex-1 flex flex-col justify-center px-12 lg:px-20">
+              <nav className="flex flex-col gap-8 max-w-2xl">
+                {fullMenuLinks.map((link, i) => (
+                  <motion.a
+                    key={link.href + link.label}
+                    href={link.href}
+                    onClick={(e) => handleMenuLinkClick(e, link.href, () => setDesktopMenuOpen(false))}
+                    className="group font-display text-2xl lg:text-3xl font-light text-primary-foreground/90 hover:text-primary-foreground transition-all duration-300 tracking-[0.1em] uppercase"
+                    initial={{ opacity: 0, x: -24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.08 + i * 0.06, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                    whileHover={{ x: 12 }}
+                  >
+                    <span className="inline-flex items-center gap-3">
+                      <motion.span
+                        className="inline-block w-0 h-[1px] bg-primary-foreground/60 group-hover:w-8 transition-all duration-300"
+                      />
+                      {link.label}
+                    </span>
+                  </motion.a>
+                ))}
+              </nav>
+            </div>
+
+            {/* Bottom controls */}
             <motion.div
-              className="hidden lg:block w-[42%] h-full relative overflow-hidden"
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 40 }}
-              transition={{ delay: 0.15, duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+              className="pb-12 px-12 lg:px-20 flex items-center gap-10"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
             >
-              {/* Gradient mask overlay */}
-              <div className="absolute inset-0 z-10 bg-gradient-to-r from-primary via-primary/40 to-transparent" />
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-primary/30 via-transparent to-primary/20" />
-              <motion.img
-                src={menuLandscape}
-                alt="Luxury property"
-                className="w-full h-full object-cover"
-                initial={{ scale: 1.1 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-              />
+              <div className="flex items-center gap-6">
+                {languages.map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setLang(l)}
+                    className={`text-sm font-sans tracking-[0.2em] uppercase transition-colors ${
+                      l === lang ? "text-primary-foreground font-medium" : "text-primary-foreground/35 hover:text-primary-foreground/60"
+                    }`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+              <div className="w-px h-5 bg-primary-foreground/15" />
+              <div className="flex items-center gap-4">
+                <button onClick={() => adjustFont(-5)} className="text-primary-foreground/40 hover:text-primary-foreground transition-colors" aria-label="Diminuir fonte">
+                  <Minus className="w-4 h-4" />
+                </button>
+                <span className="text-sm font-sans text-primary-foreground/30 tracking-wider select-none">Aa</span>
+                <button onClick={() => adjustFont(5)} className="text-primary-foreground/40 hover:text-primary-foreground transition-colors" aria-label="Aumentar fonte">
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}
