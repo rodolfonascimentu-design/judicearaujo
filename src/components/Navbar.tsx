@@ -36,6 +36,7 @@ const Navbar = () => {
     { label: t("nav.launches"), href: "/lancamentos" },
     { label: t("nav.evaluate"), href: "#avaliar" },
     { label: t("nav.blog"), href: "/gestao-de-ativos-imobiliarios" },
+    { label: t("nav.blogPost"), href: "https://blog.judicearaujo.com.br/?_gl=1%2A19ywxvx%2A_gcl_au%2AMTk1MTM2MjMxNS4xNzczNDI5OTU1", external: true },
     { label: t("nav.about"), href: "/quem-somos" },
     { label: t("nav.contact"), href: "#contato" },
   ];
@@ -313,6 +314,7 @@ const Navbar = () => {
                   <motion.a
                     key={link.href + link.label}
                     href={link.href}
+                    {...('external' in link && link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     onClick={(e) => handleMenuLinkClick(e, link.href, () => setMobileOpen(false))}
                     className="font-display text-[15px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-colors tracking-[0.12em] uppercase whitespace-nowrap"
                     initial={{ opacity: 0, x: -16 }}
@@ -438,6 +440,7 @@ const Navbar = () => {
                     <motion.a
                       key={link.href + link.label}
                       href={link.href}
+                      {...('external' in link && link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       onClick={(e) => handleMenuLinkClick(e, link.href, () => setDesktopMenuOpen(false))}
                       className="group font-display text-2xl lg:text-[28px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-all duration-300 tracking-[0.1em] uppercase"
                       initial={{ opacity: 0, x: -24 }}
