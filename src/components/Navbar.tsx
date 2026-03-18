@@ -440,6 +440,7 @@ const Navbar = () => {
                     <motion.a
                       key={link.href + link.label}
                       href={link.href}
+                      {...('external' in link && link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       onClick={(e) => handleMenuLinkClick(e, link.href, () => setDesktopMenuOpen(false))}
                       className="group font-display text-2xl lg:text-[28px] font-light text-primary-foreground/90 hover:text-primary-foreground transition-all duration-300 tracking-[0.1em] uppercase"
                       initial={{ opacity: 0, x: -24 }}
