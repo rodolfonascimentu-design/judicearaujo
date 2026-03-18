@@ -24,7 +24,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Exclusive Gallery
     "exclusive.subtitle": "Seleção Exclusiva",
-    "exclusive.title": "Imóveis Exclusivos",
+    "exclusive.title": "Imóveis Especiais",
     "exclusive.details": "Ver detalhes",
     "unit.bedrooms": "quartos",
     "unit.parking": "vagas",
