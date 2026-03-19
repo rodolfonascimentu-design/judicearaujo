@@ -231,7 +231,7 @@ const QuemSomos = () => {
                 Nossa História
               </p>
               <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
-                Mais de quatro décadas de atuação no mercado imobiliário de alto padrão
+                Mais de cinco décadas de atuação no mercado imobiliário de alto padrão
               </h2>
               <div className="w-10 h-px bg-primary mb-8" />
               <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
