@@ -235,7 +235,7 @@ const QuemSomos = () => {
               </h2>
               <div className="w-10 h-px bg-primary mb-8" />
               <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
-                Fundada em 1975, a Judice & Araujo construiu ao longo de quase cinco décadas uma reputação sólida no mercado imobiliário de alto padrão do Rio de Janeiro.
+                Fundada em 1975, a Judice & Araujo construiu ao longo de cinco décadas uma reputação sólida no mercado imobiliário de alto padrão do Rio de Janeiro.
               </p>
               <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
                 Com uma atuação marcada por seriedade, discrição, expertise e atendimento personalizado, a empresa acompanha gerações de clientes em decisões importantes relacionadas ao seu patrimônio imobiliário.
