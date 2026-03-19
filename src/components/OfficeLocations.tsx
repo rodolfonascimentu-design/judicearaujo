@@ -7,10 +7,10 @@ import officeSerra from "@/assets/office-serra.jpg";
 import officeBarra from "@/assets/office-barra.jpg";
 
 const offices = [
-  { name: "Zona Sul - RJ", address: "Rua Aníbal de Mendonça, 27 / 5º andar - Ipanema", cep: "22.410-050", phones: [{ label: "Tel.", number: "+55 (21) 2540.9999", href: "tel:+552125409999" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "zonasul@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18:40h", "Sábado: 9:30h às 14:30h", "Domingo e feriados: Fechada com plantão remoto"], image: officeZonaSul },
-  { name: "Itaipava - Petrópolis", address: "Estrada União Indústria, 9.450 - Itaipava", cep: "25.730-735", phones: [{ label: "Tel.", number: "+55 (24) 2222.0382", href: "tel:+552422220382" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "itaipava@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"], image: officeSerra },
-  { name: "Barra & Lançamentos - RJ", address: "Av. das Américas, 500/Bl:2/209 - DownTown", cep: "22.640-100", phones: [{ label: "Barra", number: "+55 (21) 99967.3830", href: "tel:+5521999673830" }, { label: "Lançamentos", number: "+55 (21) 99511.3331", href: "tel:+5521995113331" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "lancamentos@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"], image: officeBarra },
-];
+{ name: "Zona Sul - RJ", address: "Rua Aníbal de Mendonça, 27 / 5º andar - Ipanema", cep: "22.410-050", phones: [{ label: "Tel.", number: "+55 (21) 2540.9999", href: "tel:+552125409999" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "zonasul@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18:40h", "Sábado: 9:30h às 14:30h", "Domingo e feriados: Fechada com plantão remoto"], image: officeZonaSul },
+{ name: "Itaipava - Petrópolis", address: "Estrada União Indústria, 9.450 - Itaipava", cep: "25.730-735", phones: [{ label: "Tel.", number: "+55 (24) 2222.0382", href: "tel:+552422220382" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "itaipava@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"], image: officeSerra },
+{ name: "Barra & Lançamentos - RJ", address: "Av. das Américas, 500/Bl:2/209 - DownTown", cep: "22.640-100", phones: [{ label: "Barra", number: "+55 (21) 99967.3830", href: "tel:+5521999673830" }, { label: "Lançamentos", number: "+55 (21) 99511.3331", href: "tel:+5521995113331" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "lancamentos@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"], image: officeBarra }];
+
 
 const OfficeLocations = () => {
   const { t } = useLanguage();
@@ -32,11 +32,11 @@ const OfficeLocations = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-0 min-h-[500px]">
           <div className="flex flex-col justify-between pr-0 lg:pr-12">
             <div className="flex flex-col gap-0 mb-8 lg:mb-0">
-              {offices.map((office, i) => (
-                <button key={i} onClick={() => setActiveIndex(i)} className={`group text-left py-4 border-b transition-all duration-500 ${i === activeIndex ? "border-foreground" : "border-border/30 hover:border-border/60"}`}>
+              {offices.map((office, i) =>
+              <button key={i} onClick={() => setActiveIndex(i)} className={`group text-left py-4 border-b transition-all duration-500 ${i === activeIndex ? "border-foreground" : "border-border/30 hover:border-border/60"}`}>
                   <span className={`font-display text-base lg:text-lg tracking-[-0.01em] transition-colors duration-300 ${i === activeIndex ? "text-foreground" : "text-muted-foreground"}`}>{office.name}</span>
                 </button>
-              ))}
+              )}
             </div>
 
             <AnimatePresence mode="wait">
@@ -48,22 +48,22 @@ const OfficeLocations = () => {
                     <p className="text-xs text-muted-foreground font-light mt-0.5">CEP: {active.cep}</p>
                   </div>
                 </div>
-                {active.phones.map((phone, j) => (
-                  <a key={j} href={phone.href} className="flex items-center gap-3 group/item">
-                    <Phone size={15} className="text-muted-foreground flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
-                    <span className="text-sm font-light text-foreground transition-colors duration-300 group-hover/item:text-primary">
-                      <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mr-2">{phone.label}</span>{phone.number}
-                    </span>
-                  </a>
-                ))}
-                {active.whatsapp && (
-                  <a href={active.whatsapp.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group/item">
+                {active.phones.map((phone, j) => {}
+
+
+
+
+
+
+                )}
+                {active.whatsapp &&
+                <a href={active.whatsapp.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group/item">
                     <MessageCircle size={15} className="text-muted-foreground flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
                     <span className="text-sm font-light text-foreground transition-colors duration-300 group-hover/item:text-primary">
                       <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mr-2">WhatsApp</span>{active.whatsapp.number}
                     </span>
                   </a>
-                )}
+                }
                 <a href={`mailto:${active.email}`} className="flex items-center gap-3 group/item">
                   <Mail size={15} className="text-muted-foreground flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
                   <span className="text-sm font-light text-primary hover:text-primary/80 transition-colors duration-300">{active.email}</span>
@@ -74,7 +74,7 @@ const OfficeLocations = () => {
                     <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">{t("offices.hours")}</span>
                   </div>
                   <div className="space-y-0.5">
-                    {active.hours.map((h, j) => (<p key={j} className="text-xs font-light text-muted-foreground leading-relaxed">{h}</p>))}
+                    {active.hours.map((h, j) => <p key={j} className="text-xs font-light text-muted-foreground leading-relaxed">{h}</p>)}
                   </div>
                 </div>
               </motion.div>
@@ -94,8 +94,8 @@ const OfficeLocations = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default OfficeLocations;
