@@ -180,7 +180,7 @@ const QuemSomos = () => {
       "@type": "RealEstateAgent",
       name: "Judice & Araujo",
       description:
-        "Imobiliária de alto padrão no Rio de Janeiro, membro da Forbes Global Properties. Mais de quatro décadas de atuação no mercado imobiliário de luxo.",
+        "Imobiliária de alto padrão no Rio de Janeiro, membro da Forbes Global Properties. Mais de cinco décadas de atuação no mercado imobiliário de luxo.",
       foundingDate: "1975",
       url: "https://judicearaujo.com.br",
       areaServed: { "@type": "City", name: "Rio de Janeiro" },
@@ -231,11 +231,11 @@ const QuemSomos = () => {
                 Nossa História
               </p>
               <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
-                Mais de quatro décadas de atuação no mercado imobiliário de alto padrão
+                Mais de cinco décadas de atuação no mercado imobiliário de alto padrão
               </h2>
               <div className="w-10 h-px bg-primary mb-8" />
               <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
-                Fundada em 1975, a Judice & Araujo construiu ao longo de quase cinco décadas uma reputação sólida no mercado imobiliário de alto padrão do Rio de Janeiro.
+                Fundada em 1975, a Judice & Araujo construiu ao longo de cinco décadas uma reputação sólida no mercado imobiliário de alto padrão do Rio de Janeiro.
               </p>
               <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
                 Com uma atuação marcada por seriedade, discrição, expertise e atendimento personalizado, a empresa acompanha gerações de clientes em decisões importantes relacionadas ao seu patrimônio imobiliário.
