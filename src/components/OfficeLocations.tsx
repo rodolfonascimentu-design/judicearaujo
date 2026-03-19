@@ -7,9 +7,9 @@ import officeSerra from "@/assets/office-serra.jpg";
 import officeBarra from "@/assets/office-barra.jpg";
 
 const offices = [
-  { name: "Zona Sul - RJ", address: "Rua Aníbal de Mendonça, 27 / 5º andar - Ipanema", cep: "22.410-050", phones: [{ label: "Tel.", number: "+55 (21) 2540.9999", href: "tel:+552125409999" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "zonasul@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18:40h", "Sábado: 9:30h às 14:30h", "Domingo e feriados: Fechada com plantão remoto"], image: officeZonaSul },
-  { name: "Itaipava - Petrópolis", address: "Estrada União Indústria, 9.450 - Itaipava", cep: "25.730-735", phones: [{ label: "Tel.", number: "+55 (24) 2222.0382", href: "tel:+552422220382" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "itaipava@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"], image: officeSerra },
-  { name: "Barra & Lançamentos - RJ", address: "Av. das Américas, 500/Bl:2/209 - DownTown", cep: "22.640-100", phones: [{ label: "Lançamentos", number: "+55 (21) 99511.3331", href: "tel:+5521995113331" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "lancamentos@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"], image: officeBarra },
+  { name: "J&A Zona Sul", description: "Unidade dedicada ao mercado imobiliário de alto padrão da Zona Sul do Rio de Janeiro.", address: "Rua Aníbal de Mendonça, 27 / 5º andar - Ipanema", cep: "22.410-050", phones: [{ label: "Tel.", number: "+55 (21) 2540.9999", href: "tel:+552125409999" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "zonasul@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18:40h", "Sábado: 9:30h às 14:30h", "Domingo e feriados: Fechada com plantão remoto"], image: officeZonaSul },
+  { name: "J&A Itaipava", description: "Especializada no mercado de casas de campo e propriedades de alto padrão na região serrana do estado.", address: "Estrada União Indústria, 9.450 - Itaipava", cep: "25.730-735", phones: [{ label: "Tel.", number: "+55 (24) 2222.0382", href: "tel:+552422220382" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "itaipava@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"], image: officeSerra },
+  { name: "J&A Barra/Lançamentos", description: "Área dedicada à comercialização de imóveis na Barra da Tijuca e de empreendimentos imobiliários de alto padrão, em parceria com as principais incorporadoras e construtoras do Rio de Janeiro.", address: "Av. das Américas, 500/Bl:2/209 - DownTown", cep: "22.640-100", phones: [{ label: "Lançamentos", number: "+55 (21) 99511.3331", href: "tel:+5521995113331" }], whatsapp: { number: "+55 (21) 99502-0861", href: "https://wa.me/5521995020861" }, email: "lancamentos@judicearaujo.com.br", hours: ["Segunda à Sexta: 9h às 18h", "Sábado: 9h às 13h", "Domingo e feriados: Fechada com plantão remoto"], image: officeBarra },
 ];
 
 const OfficeLocations = () => {
@@ -25,8 +25,9 @@ const OfficeLocations = () => {
     <section className="py-24 lg:py-32 px-6 lg:px-12 bg-[#FDFDFD]">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 lg:mb-20 text-center">
-          <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-muted-foreground font-medium mb-4">Nossos Escritórios</p>
-          <h2 className="font-display text-2xl md:text-4xl font-normal tracking-[-0.02em] text-foreground">Visite um dos nossos escritórios</h2>
+          <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-muted-foreground font-medium mb-4">Nossas Unidades de Negócio</p>
+          <h2 className="font-display text-2xl md:text-4xl font-normal tracking-[-0.02em] text-foreground mb-6">Visite um dos nossos escritórios</h2>
+          <p className="text-sm md:text-base font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed">Para atender diferentes perfis de clientes e mercados, a Judice & Araujo organiza sua atuação em unidades especializadas.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-0 min-h-[500px]">
@@ -41,6 +42,7 @@ const OfficeLocations = () => {
 
             <AnimatePresence mode="wait">
               <motion.div key={activeIndex} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }} className="space-y-4 pt-6 lg:pt-8">
+                <p className="text-sm font-light text-muted-foreground leading-relaxed italic mb-2">{active.description}</p>
                 <div className="flex items-start gap-3 group/item">
                   <MapPin size={15} className="text-muted-foreground mt-0.5 flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
                   <div>
