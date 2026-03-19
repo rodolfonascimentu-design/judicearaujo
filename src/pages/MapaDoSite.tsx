@@ -221,21 +221,6 @@ const MapaDoSite = () => {
           <h1 className="font-serif text-4xl md:text-5xl font-light text-foreground tracking-wide mb-6">
             Mapa do Site
           </h1>
-          <p className="font-sans text-sm font-light text-muted-foreground max-w-none mx-auto mb-10 whitespace-nowrap">
-            Explore toda a estrutura de imóveis disponíveis por categoria, cidade, bairro e tipo de imóvel.
-          </p>
-
-          {/* Search */}
-          <div className="max-w-2xl mx-auto relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar cidade, bairro ou tipo de imóvel..."
-              className="w-full pl-11 pr-4 py-3.5 bg-white border border-border rounded-lg font-sans text-sm font-light text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-            />
-          </div>
         </div>
       </section>
 
