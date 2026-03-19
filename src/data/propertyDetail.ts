@@ -126,7 +126,7 @@ export const mockProperty: PropertyDetailData = {
   neighborhood: "Gávea",
   city: "Rio de Janeiro",
   state: "RJ",
-  address: "Estrada do Joá, 3.200 – Joá, Rio de Janeiro – RJ",
+  address: "Avenida Bartolomeu Mitre, Leblon, Rio de Janeiro - RJ",
   price: "R$ 4.200.000",
   priceLabel: "A partir de",
   condoFee: "R$ 2.609",
