@@ -180,7 +180,7 @@ const QuemSomos = () => {
       "@type": "RealEstateAgent",
       name: "Judice & Araujo",
       description:
-        "Imobiliária de alto padrão no Rio de Janeiro, membro da Forbes Global Properties. Mais de quatro décadas de atuação no mercado imobiliário de luxo.",
+        "Imobiliária de alto padrão no Rio de Janeiro, membro da Forbes Global Properties. Mais de cinco décadas de atuação no mercado imobiliário de luxo.",
       foundingDate: "1975",
       url: "https://judicearaujo.com.br",
       areaServed: { "@type": "City", name: "Rio de Janeiro" },
