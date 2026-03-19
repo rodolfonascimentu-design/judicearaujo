@@ -34,53 +34,66 @@ const OfficeLocations = () => {
           <div className="flex flex-col justify-between pr-0 lg:pr-12">
             <div className="flex flex-col gap-0 mb-8 lg:mb-0">
               {offices.map((office, i) => (
-                <button key={i} onClick={() => setActiveIndex(i)} className={`group text-left py-4 border-b transition-all duration-500 ${i === activeIndex ? "border-foreground" : "border-border/30 hover:border-border/60"}`}>
-                  <span className={`font-display text-base lg:text-lg tracking-[-0.01em] transition-colors duration-300 ${i === activeIndex ? "text-foreground" : "text-muted-foreground"}`}>{office.name}</span>
-                </button>
+                <div key={i}>
+                  <button onClick={() => setActiveIndex(i)} className={`group text-left py-4 border-b transition-all duration-500 w-full ${i === activeIndex ? "border-foreground" : "border-border/30 hover:border-border/60"}`}>
+                    <span className={`font-display text-base lg:text-lg tracking-[-0.01em] transition-colors duration-300 ${i === activeIndex ? "text-foreground" : "text-muted-foreground"}`}>{office.name}</span>
+                  </button>
+
+                  <AnimatePresence mode="wait">
+                    {i === activeIndex && (
+                      <motion.div
+                        key={`details-${i}`}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="space-y-4 pt-6 pb-6">
+                          <p className="text-sm font-light text-muted-foreground leading-relaxed italic mb-2">{office.description}</p>
+                          <div className="flex items-start gap-3 group/item">
+                            <MapPin size={15} className="text-muted-foreground mt-0.5 flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
+                            <div>
+                              <p className="text-sm font-light text-foreground leading-relaxed">{office.address}</p>
+                              <p className="text-xs text-muted-foreground font-light mt-0.5">CEP: {office.cep}</p>
+                            </div>
+                          </div>
+                          {office.phones.map((phone, j) => (
+                            <a key={j} href={phone.href} className="flex items-center gap-3 group/item">
+                              <Phone size={15} className="text-muted-foreground flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
+                              <span className="text-sm font-light text-foreground transition-colors duration-300 group-hover/item:text-primary">
+                                <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mr-2">{phone.label}</span>{phone.number}
+                              </span>
+                            </a>
+                          ))}
+                          {office.whatsapp && (
+                            <a href={office.whatsapp.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group/item">
+                              <MessageCircle size={15} className="text-muted-foreground flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
+                              <span className="text-sm font-light text-foreground transition-colors duration-300 group-hover/item:text-primary">
+                                <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mr-2">WhatsApp</span>{office.whatsapp.number}
+                              </span>
+                            </a>
+                          )}
+                          <a href={`mailto:${office.email}`} className="flex items-center gap-3 group/item">
+                            <Mail size={15} className="text-muted-foreground flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
+                            <span className="text-sm font-light text-primary hover:text-primary/80 transition-colors duration-300">{office.email}</span>
+                          </a>
+                          <div className="pt-4 border-t border-border/40">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Clock size={13} className="text-muted-foreground" />
+                              <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">{t("offices.hours")}</span>
+                            </div>
+                            <div className="space-y-0.5">
+                              {office.hours.map((h, j) => (<p key={j} className="text-xs font-light text-muted-foreground leading-relaxed">{h}</p>))}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               ))}
             </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div key={activeIndex} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }} className="space-y-4 pt-6 lg:pt-8">
-                <p className="text-sm font-light text-muted-foreground leading-relaxed italic mb-2">{active.description}</p>
-                <div className="flex items-start gap-3 group/item">
-                  <MapPin size={15} className="text-muted-foreground mt-0.5 flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
-                  <div>
-                    <p className="text-sm font-light text-foreground leading-relaxed">{active.address}</p>
-                    <p className="text-xs text-muted-foreground font-light mt-0.5">CEP: {active.cep}</p>
-                  </div>
-                </div>
-                {active.phones.map((phone, j) => (
-                  <a key={j} href={phone.href} className="flex items-center gap-3 group/item">
-                    <Phone size={15} className="text-muted-foreground flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
-                    <span className="text-sm font-light text-foreground transition-colors duration-300 group-hover/item:text-primary">
-                      <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mr-2">{phone.label}</span>{phone.number}
-                    </span>
-                  </a>
-                ))}
-                {active.whatsapp && (
-                  <a href={active.whatsapp.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group/item">
-                    <MessageCircle size={15} className="text-muted-foreground flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
-                    <span className="text-sm font-light text-foreground transition-colors duration-300 group-hover/item:text-primary">
-                      <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mr-2">WhatsApp</span>{active.whatsapp.number}
-                    </span>
-                  </a>
-                )}
-                <a href={`mailto:${active.email}`} className="flex items-center gap-3 group/item">
-                  <Mail size={15} className="text-muted-foreground flex-shrink-0 transition-colors duration-300 group-hover/item:text-primary" />
-                  <span className="text-sm font-light text-primary hover:text-primary/80 transition-colors duration-300">{active.email}</span>
-                </a>
-                <div className="pt-4 border-t border-border/40">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Clock size={13} className="text-muted-foreground" />
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-medium">{t("offices.hours")}</span>
-                  </div>
-                  <div className="space-y-0.5">
-                    {active.hours.map((h, j) => (<p key={j} className="text-xs font-light text-muted-foreground leading-relaxed">{h}</p>))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
 
             <div className="flex items-center gap-4 pt-8">
               <button onClick={() => goTo("prev")} className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300" aria-label="Escritório anterior"><ChevronLeft size={18} /></button>
