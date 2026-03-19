@@ -19,7 +19,7 @@ const LaunchSearchBar = ({ count, location, onOpenFilters }: LaunchSearchBarProp
     <div>
       <div className="sticky top-20 z-40 bg-white border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-4 sm:py-5 flex items-center justify-end">
-          <button onClick={onOpenFilters} className="flex items-center gap-1.5 px-4 py-2.5 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase bg-foreground text-background hover:bg-foreground/90 transition-colors">
+          <button onClick={onOpenFilters} className="flex items-center gap-1.5 px-4 py-2.5 rounded-[4px] text-[10px] font-sans font-medium tracking-[0.15em] uppercase transition-colors text-secondary bg-primary">
             <SlidersHorizontal className="w-3.5 h-3.5" />
             <span>{t("search.filter")}</span>
           </button>
@@ -31,8 +31,8 @@ const LaunchSearchBar = ({ count, location, onOpenFilters }: LaunchSearchBarProp
           {seoText}
         </p>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default LaunchSearchBar;
