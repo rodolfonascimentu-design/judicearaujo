@@ -48,9 +48,11 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
             </h2>
           )}
 
-          <p className="font-sans text-xs md:text-sm text-muted-foreground mb-8">
-            {property.address}
-          </p>
+          {isNormal && (
+            <p className="font-sans text-xs md:text-sm text-muted-foreground mb-8">
+              {property.address}
+            </p>
+          )}
 
           <div className="space-y-6">
             {property.description.map((p, i) => (
