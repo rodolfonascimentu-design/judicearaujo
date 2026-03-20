@@ -376,7 +376,7 @@ const QuemSomos = () => {
             {gestaoServices.map((s, i) => (
               <motion.div
                 key={s.title}
-                className="group rounded-2xl p-8 text-center transition-all duration-500 cursor-default"
+                className="group rounded-2xl p-4 md:p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
                 style={glassLight}
                 whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
                 {...stagger(i)}
