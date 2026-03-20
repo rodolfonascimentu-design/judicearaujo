@@ -49,6 +49,7 @@ const ScrollExpandMedia = ({
       setMediaFullyExpanded(true);
       setShowContent(true);
       markHeroAnimationSeen();
+      window.dispatchEvent(new CustomEvent("heroAnimationDone"));
     }, 4800);
     return () => clearTimeout(timer);
   }, [skipAnimation]);
