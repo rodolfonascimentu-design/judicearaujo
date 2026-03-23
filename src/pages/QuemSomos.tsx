@@ -339,6 +339,47 @@ const QuemSomos = () => {
         </div>
       </section>
 
+      {/* ─── VALORES (Cultura Organizacional) ─── */}
+      <section className="py-24 lg:py-36 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <motion.div {...fadeUp} className="text-center mb-16 lg:mb-20">
+            <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
+              Cultura Organizacional
+            </p>
+            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-4">
+              Valores
+            </h2>
+            <div className="w-10 h-px bg-primary mx-auto mt-4 mb-5" />
+            <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-2xl mx-auto">
+              Os valores do Grupo J&A orientam nossas decisões e a forma como nos relacionamos com clientes, parceiros e colaboradores.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {valores.map((v, i) => (
+              <motion.div
+                key={v.title}
+                className="group rounded-2xl p-8 bg-white transition-all duration-500 cursor-default"
+                style={glassLight}
+                whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
+                {...stagger(i)}
+              >
+                <motion.div
+                  className="w-12 h-12 rounded-full flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110"
+                  style={{ background: C.accentLight }}
+                  whileHover={{ rotate: 6 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                >
+                  <v.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                </motion.div>
+                <h3 className="font-display text-base font-medium text-foreground mb-3">{v.title}</h3>
+                <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">{v.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── REDE GLOBAL (Forbes) ─── */}
       <section className="relative py-24 lg:py-36 bg-primary overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
