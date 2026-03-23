@@ -17,6 +17,10 @@ import {
   ArrowRight,
   MapPin,
   Send,
+  Home,
+  Scale,
+  Landmark,
+  Users,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -34,6 +38,7 @@ import bairroIpanema from "@/assets/bairro-ipanema.jpg";
 import bairroLagoa from "@/assets/bairro-lagoa.jpg";
 import bairroGavea from "@/assets/bairro-gavea.jpg";
 import bairroJardimBotanico from "@/assets/bairro-jardim-botanico.jpg";
+import servicesImg from "@/assets/services-quem-somos.jpg";
 
 /* ── animation presets ── */
 const fadeUp = {
@@ -427,36 +432,57 @@ const QuemSomos = () => {
       {/* ─── GESTÃO DE ATIVOS (Serviços) ─── */}
       <section className="py-24 lg:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <motion.div {...fadeUp} className="mb-16 lg:mb-20 text-center">
-            <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
-              Serviços
-            </p>
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
-              Nossos Serviços
-            </h2>
-            <div className="w-10 h-px bg-primary mx-auto" />
-          </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left – content */}
+            <motion.div {...fadeUp}>
+              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
+                Serviços
+              </p>
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-4">
+                Nossos Serviços
+              </h2>
+              <div className="w-10 h-px bg-primary mb-10" />
 
-          <motion.ul {...fadeUp} className="max-w-3xl mx-auto space-y-4">
-            {[
-              "Compra, venda e locação de imóveis de alto padrão no estado do Rio de Janeiro",
-              "Compra e venda de imóveis em outros estados e no exterior, através de parceiros credenciados",
-              "Avaliação de imóveis de alto padrão",
-              "Assessoria jurídica completa",
-              "Gestão de ativos imobiliários (inclui administração de locação)",
-              "Consultoria e venda de lançamentos, inclusive na prospecção e venda de áreas específicas",
-              "Consultoria geral de mercado imobiliário, inclusive para estrangeiros",
-            ].map((item, i) => (
-              <motion.li
-                key={i}
-                className="flex items-start gap-3 font-sans text-sm text-muted-foreground leading-[1.9] font-light"
-                {...stagger(i)}
-              >
-                <span className="mt-[10px] w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                {item}
-              </motion.li>
-            ))}
-          </motion.ul>
+              <ul className="space-y-5">
+                {([
+                  { icon: Home, text: "Compra, venda e locação de imóveis de alto padrão no estado do Rio de Janeiro" },
+                  { icon: Globe, text: "Compra e venda de imóveis em outros estados e no exterior, através de parceiros credenciados" },
+                  { icon: Search, text: "Avaliação de imóveis de alto padrão" },
+                  { icon: Scale, text: "Assessoria jurídica completa" },
+                  { icon: Building2, text: "Gestão de ativos imobiliários (inclui administração de locação)" },
+                  { icon: Landmark, text: "Consultoria e venda de lançamentos, inclusive na prospecção e venda de áreas específicas" },
+                  { icon: Users, text: "Consultoria geral de mercado imobiliário, inclusive para estrangeiros" },
+                ] as const).map((item, i) => (
+                  <motion.li
+                    key={i}
+                    className="flex items-start gap-4 font-sans text-sm text-muted-foreground leading-[1.8] font-light"
+                    {...stagger(i)}
+                  >
+                    <span
+                      className="mt-0.5 flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full"
+                      style={{ background: C.accentLight }}
+                    >
+                      <item.icon className="w-4 h-4" style={{ color: C.accent }} strokeWidth={1.5} />
+                    </span>
+                    {item.text}
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Right – image */}
+            <motion.div
+              {...fadeUp}
+              className="relative rounded-2xl overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-full min-h-[400px]"
+            >
+              <img
+                src={servicesImg}
+                alt="Equipe Judice & Araujo em reunião de negócios"
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
