@@ -306,6 +306,39 @@ const QuemSomos = () => {
         </div>
       </section>
 
+      {/* ─── EQUIPE ─── */}
+      <section className="py-32 lg:py-44 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            <motion.div
+              className="relative overflow-hidden rounded-[4px] aspect-[16/10]"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <img src={equipeImg} alt="Equipe Judice & Araujo" className="w-full h-full object-cover rounded-[4px]" loading="lazy" />
+            </motion.div>
+
+            <motion.div {...fadeUp}>
+              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
+                Nossa Equipe
+              </p>
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
+                As pessoas por trás da marca
+              </h2>
+              <div className="w-10 h-px bg-primary mb-8" />
+              <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
+                A Judice & Araujo é formada por profissionais apaixonados pelo mercado imobiliário e comprometidos com a excelência no atendimento. Cada membro da nossa equipe compartilha os mesmos valores que guiam a empresa há quase cinco décadas.
+              </p>
+              <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light">
+                Juntos, construímos relações de longo prazo baseadas em confiança, proximidade e respeito — valores que nos definem e nos movem.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── REDE GLOBAL (Forbes) ─── */}
       <section className="relative py-24 lg:py-36 bg-primary overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
@@ -349,7 +382,7 @@ const QuemSomos = () => {
         </div>
       </section>
 
-      {/* ─── GESTÃO DE ATIVOS ─── */}
+      {/* ─── GESTÃO DE ATIVOS (Serviços) ─── */}
       <section className="py-24 lg:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <motion.div {...fadeUp} className="mb-16 lg:mb-20 text-center">
@@ -403,12 +436,7 @@ const QuemSomos = () => {
       {/* ─── FULL WIDTH IMAGE BREAK ─── */}
       <ImageBreak src={parallax2} alt="Arquitetura de luxo" />
 
-      {/* ─── NOSSOS ESCRITÓRIOS (OfficeLocations) ─── */}
-      <section className="bg-[#FDFDFD]">
-        <OfficeLocations />
-      </section>
-
-      {/* ─── PROPÓSITO, MISSÃO, VISÃO ─── */}
+      {/* ─── PROPÓSITO, MISSÃO, VISÃO (Direcionadores Estratégicos) ─── */}
       <section className="py-24 lg:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <motion.div {...fadeUp} className="text-center mb-16 lg:mb-20">
@@ -490,44 +518,15 @@ const QuemSomos = () => {
         </div>
       </section>
 
-      {/* ─── EQUIPE ─── */}
-      <section className="py-32 lg:py-44 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <motion.div
-              className="relative overflow-hidden rounded-[4px] aspect-[16/10]"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8 }}
-            >
-              <img src={equipeImg} alt="Equipe Judice & Araujo" className="w-full h-full object-cover rounded-[4px]" loading="lazy" />
-            </motion.div>
-
-            <motion.div {...fadeUp}>
-              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
-                Nossa Equipe
-              </p>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
-                As pessoas por trás da marca
-              </h2>
-              <div className="w-10 h-px bg-primary mb-8" />
-              <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light">
-                A Judice & Araujo é formada por profissionais apaixonados pelo mercado imobiliário e comprometidos com a excelência no atendimento. Cada membro da nossa equipe compartilha os mesmos valores que guiam a empresa há quase cinco décadas.
-              </p>
-              <p className="font-sans text-sm text-muted-foreground leading-[1.9] font-light">
-                Juntos, construímos relações de longo prazo baseadas em confiança, proximidade e respeito — valores que nos definem e nos movem.
-              </p>
-            </motion.div>
-          </div>
-        </div>
+      {/* ─── NOSSOS ESCRITÓRIOS (OfficeLocations) ─── */}
+      <section className="bg-[#FDFDFD]">
+        <OfficeLocations />
       </section>
 
-      {/* ─── CTA FINAL com formulário ─── */}
+      {/* ─── CTA FINAL com formulário (Contato) ─── */}
       <section className="py-24 lg:py-36 bg-primary">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
-            {/* Left — editorial intro */}
             <motion.div {...fadeUp} className="lg:sticky lg:top-32 self-start">
               <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-primary-foreground/40 mb-4">
                 Contato
@@ -544,7 +543,6 @@ const QuemSomos = () => {
               </p>
             </motion.div>
 
-            {/* Right — form */}
             <motion.form
               onSubmit={handleSubmit}
               className="bg-white rounded-lg p-8 md:p-10 shadow-[0_8px_40px_-12px_hsl(var(--foreground)/0.06)] border border-border/30"
