@@ -38,6 +38,7 @@ import bairroIpanema from "@/assets/bairro-ipanema.jpg";
 import bairroLagoa from "@/assets/bairro-lagoa.jpg";
 import bairroGavea from "@/assets/bairro-gavea.jpg";
 import bairroJardimBotanico from "@/assets/bairro-jardim-botanico.jpg";
+import servicesImg from "@/assets/services-quem-somos.jpg";
 
 /* ── animation presets ── */
 const fadeUp = {
