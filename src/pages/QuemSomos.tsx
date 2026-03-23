@@ -262,7 +262,7 @@ const QuemSomos = () => {
       <ImageBreak src={parallax1} alt="Vista panorâmica do Rio de Janeiro" />
 
       {/* ─── HISTÓRIA COM CONFIANÇA ─── */}
-      <section className="py-24 lg:py-36 bg-white">
+      <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <motion.div {...fadeUp} className="mb-16 lg:mb-20 text-center">
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
@@ -307,7 +307,7 @@ const QuemSomos = () => {
       </section>
 
       {/* ─── EQUIPE ─── */}
-      <section className="py-32 lg:py-44 bg-white">
+      <section className="py-16 lg:py-24 bg-muted/50">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div
@@ -340,7 +340,7 @@ const QuemSomos = () => {
       </section>
 
       {/* ─── VALORES (Cultura Organizacional) ─── */}
-      <section className="py-24 lg:py-36 bg-white">
+      <section className="py-16 lg:py-24 bg-muted/50">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <motion.div {...fadeUp} className="text-center mb-16 lg:mb-20">
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
