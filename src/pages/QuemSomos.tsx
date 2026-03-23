@@ -262,7 +262,7 @@ const QuemSomos = () => {
       <ImageBreak src={parallax1} alt="Vista panorâmica do Rio de Janeiro" />
 
       {/* ─── HISTÓRIA COM CONFIANÇA ─── */}
-      <section className="py-24 lg:py-36 bg-white">
+      <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <motion.div {...fadeUp} className="mb-16 lg:mb-20 text-center">
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
