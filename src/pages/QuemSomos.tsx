@@ -473,10 +473,9 @@ const QuemSomos = () => {
             {/* Right – image */}
             <motion.div
               {...fadeUp}
-              className="relative rounded-2xl overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-full min-h-[400px]">
+              className="hidden lg:block relative rounded-2xl overflow-hidden lg:aspect-auto lg:h-full min-h-[400px]">
               
               <img
-
                 alt="Equipe Judice & Araujo em reunião de negócios"
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover" src="/lovable-uploads/712009fa-2193-45e9-960b-8b7f76f2a459.jpg" />
