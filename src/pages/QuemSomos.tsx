@@ -340,7 +340,7 @@ const QuemSomos = () => {
       </section>
 
       {/* ─── VALORES (Cultura Organizacional) ─── */}
-      <section className="py-24 lg:py-36 bg-white">
+      <section className="py-16 lg:py-24 bg-muted/50">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <motion.div {...fadeUp} className="text-center mb-16 lg:mb-20">
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-6 font-medium">
