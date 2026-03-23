@@ -364,16 +364,17 @@ const QuemSomos = () => {
                 whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
                 {...stagger(i)}
               >
-                <motion.div
-                  className="w-12 h-12 rounded-full flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110"
-                  style={{ background: C.accentLight }}
-                  whileHover={{ rotate: 6 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                >
-                  <v.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
-                </motion.div>
-                <h3 className="font-display text-base font-medium text-foreground mb-3">{v.title}</h3>
-                <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">{v.text}</p>
+                <div className="flex flex-col items-center text-center">
+                  <motion.div
+                    className="w-12 h-12 rounded-full flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110"
+                    style={{ background: C.accentLight }}
+                    whileHover={{ rotate: 6 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  >
+                    <v.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
+                  </motion.div>
+                  <h3 className="font-display text-base font-medium text-foreground">{v.title}</h3>
+                </div>
               </motion.div>
             ))}
           </div>
