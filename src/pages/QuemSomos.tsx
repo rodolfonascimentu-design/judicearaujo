@@ -432,46 +432,31 @@ const QuemSomos = () => {
               Serviços
             </p>
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-normal tracking-[-0.02em] text-foreground leading-[1.2] mb-8">
-              Gestão de Ativos Imobiliários
+              Nossos Serviços
             </h2>
-            <div className="w-10 h-px bg-primary mx-auto mb-8" />
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light max-w-3xl mx-auto">
-              Além da intermediação de compra, venda e locação de imóveis, a Judice & Araujo oferece um serviço especializado de Gestão de Ativos Imobiliários.
-            </p>
-            <p className="font-sans text-sm text-muted-foreground leading-[1.9] mb-6 font-light max-w-3xl mx-auto">
-              Esse serviço foi desenvolvido para proprietários que desejam administrar seus imóveis com uma abordagem profissional e estratégica, tratando cada propriedade como parte relevante de seu patrimônio.
-            </p>
+            <div className="w-10 h-px bg-primary mx-auto" />
           </motion.div>
 
-          <motion.p {...fadeUp} className="font-sans text-[10px] tracking-[0.35em] uppercase text-primary mb-8 font-medium text-center">
-            A gestão inclui:
-          </motion.p>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
-            {gestaoServices.map((s, i) => (
-              <motion.div
-                key={s.title}
-                className="group rounded-2xl p-4 md:p-8 text-center transition-all duration-500 cursor-default overflow-hidden"
-                style={glassLight}
-                whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
+          <motion.ul {...fadeUp} className="max-w-3xl mx-auto space-y-4">
+            {[
+              "Compra, venda e locação de imóveis de alto padrão no estado do Rio de Janeiro",
+              "Compra e venda de imóveis em outros estados e no exterior, através de parceiros credenciados",
+              "Avaliação de imóveis de alto padrão",
+              "Assessoria jurídica completa",
+              "Gestão de ativos imobiliários (inclui administração de locação)",
+              "Consultoria e venda de lançamentos, inclusive na prospecção e venda de áreas específicas",
+              "Consultoria geral de mercado imobiliário, inclusive para estrangeiros",
+            ].map((item, i) => (
+              <motion.li
+                key={i}
+                className="flex items-start gap-3 font-sans text-sm text-muted-foreground leading-[1.9] font-light"
                 {...stagger(i)}
               >
-                <div
-                  className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
-                  style={{ background: C.accentLight }}
-                >
-                  <s.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
-                </div>
-                <h3 className="font-display text-sm font-medium tracking-wide" style={{ color: C.heading }}>
-                  {s.title}
-                </h3>
-              </motion.div>
+                <span className="mt-[10px] w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                {item}
+              </motion.li>
             ))}
-          </div>
-
-          <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto text-center">
-            Essa abordagem aproxima a gestão imobiliária da lógica utilizada na gestão de investimentos, oferecendo mais transparência, inteligência de mercado e acompanhamento contínuo.
-          </motion.p>
+          </motion.ul>
         </div>
       </section>
 
