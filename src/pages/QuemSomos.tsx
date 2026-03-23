@@ -20,8 +20,8 @@ import {
   Home,
   Scale,
   Landmark,
-  Users,
-} from "lucide-react";
+  Users } from
+"lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import OfficeLocations from "@/components/OfficeLocations";
@@ -45,14 +45,14 @@ const fadeUp = {
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-80px" } as const,
-  transition: { duration: 0.8, ease: "easeOut" as const },
+  transition: { duration: 0.8, ease: "easeOut" as const }
 };
 
 const stagger = (i: number) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-40px" } as const,
-  transition: { duration: 0.65, delay: i * 0.1, ease: "easeOut" as const },
+  transition: { duration: 0.65, delay: i * 0.1, ease: "easeOut" as const }
 });
 
 /* ── color / glass helpers (matching GestaoAtivos) ── */
@@ -62,85 +62,85 @@ const C = {
   accent: "hsl(171 100% 12%)",
   accentLight: "hsl(171 100% 12% / 0.07)",
   accentShadow: "0 8px 40px -12px hsl(171 100% 12% / 0.08)",
-  sectionAlt: "hsl(0 0% 97.5%)",
+  sectionAlt: "hsl(0 0% 97.5%)"
 };
 
 const glassLight = {
   background: "linear-gradient(135deg, rgba(0,63,52,0.06) 0%, rgba(0,63,52,0.02) 100%)",
   backdropFilter: "blur(16px)",
   WebkitBackdropFilter: "blur(16px)",
-  boxShadow: "0 4px 24px -4px rgba(0,63,52,0.08), inset 0 1px 0 rgba(255,255,255,0.8)",
+  boxShadow: "0 4px 24px -4px rgba(0,63,52,0.08), inset 0 1px 0 rgba(255,255,255,0.8)"
 };
 
 /* ── data ── */
 const bairros = [
-  { name: "Leblon", img: bairroLeblon },
-  { name: "Ipanema", img: bairroIpanema },
-  { name: "Lagoa", img: bairroLagoa },
-  { name: "Gávea", img: bairroGavea },
-  { name: "Jardim Botânico", img: bairroJardimBotanico },
-];
+{ name: "Leblon", img: bairroLeblon },
+{ name: "Ipanema", img: bairroIpanema },
+{ name: "Lagoa", img: bairroLagoa },
+{ name: "Gávea", img: bairroGavea },
+{ name: "Jardim Botânico", img: bairroJardimBotanico }];
+
 
 const gestaoServices = [
-  { icon: Building2, title: "Gestão completa da locação" },
-  { icon: BarChart3, title: "Acompanhamento de mercado" },
-  { icon: Search, title: "Análise de posicionamento do imóvel" },
-  { icon: FileText, title: "Relatórios periódicos de performance do ativo" },
-];
+{ icon: Building2, title: "Gestão completa da locação" },
+{ icon: BarChart3, title: "Acompanhamento de mercado" },
+{ icon: Search, title: "Análise de posicionamento do imóvel" },
+{ icon: FileText, title: "Relatórios periódicos de performance do ativo" }];
+
 
 const proposito = [
-  {
-    icon: Target,
-    title: "Propósito",
-    text: "Transformar o mercado imobiliário gerando impacto positivo e duradouro na vida das pessoas.",
-  },
-  {
-    icon: Compass,
-    title: "Missão",
-    text: "Oferecer consultoria imobiliária de alto padrão com foco em relacionamentos duradouros, soluções personalizadas e excelência em cada etapa da jornada do cliente.",
-  },
-  {
-    icon: Eye,
-    title: "Visão",
-    text: "Ser referência em excelência e atendimento personalizado no mercado imobiliário de alto padrão no Rio de Janeiro.",
-  },
-];
+{
+  icon: Target,
+  title: "Propósito",
+  text: "Transformar o mercado imobiliário gerando impacto positivo e duradouro na vida das pessoas."
+},
+{
+  icon: Compass,
+  title: "Missão",
+  text: "Oferecer consultoria imobiliária de alto padrão com foco em relacionamentos duradouros, soluções personalizadas e excelência em cada etapa da jornada do cliente."
+},
+{
+  icon: Eye,
+  title: "Visão",
+  text: "Ser referência em excelência e atendimento personalizado no mercado imobiliário de alto padrão no Rio de Janeiro."
+}];
+
 
 const valores = [
-  {
-    icon: Award,
-    title: "Excelência",
-    text: "Buscar sempre o melhor resultado possível, com dedicação, determinação e comprometimento.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Inovação",
-    text: "Inovar com consistência, visão de futuro e melhoria contínua.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Integridade",
-    text: "Agir com transparência, ética, respeito e espírito de cooperação.",
-  },
-  {
-    icon: GraduationCap,
-    title: "Desenvolvimento",
-    text: "Promover educação contínua e valorização das pessoas.",
-  },
-];
+{
+  icon: Award,
+  title: "Excelência",
+  text: "Buscar sempre o melhor resultado possível, com dedicação, determinação e comprometimento."
+},
+{
+  icon: Lightbulb,
+  title: "Inovação",
+  text: "Inovar com consistência, visão de futuro e melhoria contínua."
+},
+{
+  icon: ShieldCheck,
+  title: "Integridade",
+  text: "Agir com transparência, ética, respeito e espírito de cooperação."
+},
+{
+  icon: GraduationCap,
+  title: "Desenvolvimento",
+  text: "Promover educação contínua e valorização das pessoas."
+}];
+
 
 /* ── Full-width image break ── */
-const ImageBreak = ({ src, alt }: { src: string; alt: string }) => (
-  <motion.div
-    className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true, margin: "-40px" }}
-    transition={{ duration: 1 }}
-  >
+const ImageBreak = ({ src, alt }: {src: string;alt: string;}) =>
+<motion.div
+  className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true, margin: "-40px" }}
+  transition={{ duration: 1 }}>
+  
     <img src={src} alt={alt} className="w-full h-full object-cover" loading="lazy" />
-  </motion.div>
-);
+  </motion.div>;
+
 
 /* ══════════════════════════════════════════════ */
 
@@ -156,10 +156,10 @@ const QuemSomos = () => {
   };
 
   const fields = [
-    { key: "name", type: "text", label: "Nome completo", required: true },
-    { key: "email", type: "email", label: "Seu melhor e-mail", required: true },
-    { key: "phone", type: "tel", label: "Telefone com DDD", required: false },
-  ] as const;
+  { key: "name", type: "text", label: "Nome completo", required: true },
+  { key: "email", type: "email", label: "Seu melhor e-mail", required: true },
+  { key: "phone", type: "tel", label: "Telefone com DDD", required: false }] as
+  const;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -172,9 +172,9 @@ const QuemSomos = () => {
       );
     }
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+    if (!canonical) {canonical = document.createElement("link");canonical.rel = "canonical";document.head.appendChild(canonical);}
     canonical.href = "https://www.judicearaujo.com.br/quem-somos";
-    return () => { canonical.href = "https://www.judicearaujo.com.br"; };
+    return () => {canonical.href = "https://www.judicearaujo.com.br";};
   }, []);
 
   useEffect(() => {
@@ -185,14 +185,14 @@ const QuemSomos = () => {
       "@type": "RealEstateAgent",
       name: "Judice & Araujo",
       description:
-        "Imobiliária de alto padrão no Rio de Janeiro, membro da Forbes Global Properties. Mais de cinco décadas de atuação no mercado imobiliário de luxo.",
+      "Imobiliária de alto padrão no Rio de Janeiro, membro da Forbes Global Properties. Mais de cinco décadas de atuação no mercado imobiliário de luxo.",
       foundingDate: "1975",
       url: "https://judicearaujo.com.br",
       areaServed: { "@type": "City", name: "Rio de Janeiro" },
-      memberOf: { "@type": "Organization", name: "Forbes Global Properties" },
+      memberOf: { "@type": "Organization", name: "Forbes Global Properties" }
     });
     document.head.appendChild(script);
-    return () => { document.head.removeChild(script); };
+    return () => {document.head.removeChild(script);};
   }, []);
 
   return (
@@ -204,15 +204,15 @@ const QuemSomos = () => {
         <img
           src={heroImg}
           alt="Arquitetura de luxo no Rio de Janeiro"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+          className="absolute inset-0 w-full h-full object-cover" />
+        
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
         <motion.div
           className="absolute bottom-0 left-0 right-0 z-10 px-6 md:px-16 pb-16 md:pb-24"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-        >
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
+          
           <div className="max-w-7xl mx-auto">
             <p className="font-sans text-[10px] md:text-xs tracking-[0.3em] uppercase text-white/60 mb-4">
               Quem Somos
@@ -255,8 +255,8 @@ const QuemSomos = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-            >
+              transition={{ duration: 0.8, delay: 0.1 }}>
+              
               <img src={editorialImg} alt="Rio de Janeiro - vista de alto padrão" className="w-full h-full object-cover rounded-[4px]" loading="lazy" />
             </motion.div>
           </div>
@@ -287,12 +287,12 @@ const QuemSomos = () => {
 
           {/* Bairros */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
-            {bairros.map((b, i) => (
-              <motion.div
-                key={b.name}
-                {...stagger(i)}
-                className="group relative overflow-hidden rounded-[4px] aspect-[3/4] cursor-pointer"
-              >
+            {bairros.map((b, i) =>
+            <motion.div
+              key={b.name}
+              {...stagger(i)}
+              className="group relative overflow-hidden rounded-[4px] aspect-[3/4] cursor-pointer">
+              
                 <img src={b.img} alt={b.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -302,7 +302,7 @@ const QuemSomos = () => {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            )}
           </div>
 
           <motion.p {...fadeUp} className="font-sans text-sm text-muted-foreground leading-[1.9] font-light max-w-3xl mx-auto text-center">
@@ -320,8 +320,8 @@ const QuemSomos = () => {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8 }}
-            >
+              transition={{ duration: 0.8 }}>
+              
               <img src={equipeImg} alt="Equipe Judice & Araujo" className="w-full h-full object-cover rounded-[4px]" loading="lazy" />
             </motion.div>
 
@@ -361,27 +361,27 @@ const QuemSomos = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {valores.map((v, i) => (
-              <motion.div
-                key={v.title}
-                className="group rounded-2xl p-8 bg-white transition-all duration-500 cursor-default"
-                style={glassLight}
-                whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
-                {...stagger(i)}
-              >
+            {valores.map((v, i) =>
+            <motion.div
+              key={v.title}
+              className="group rounded-2xl p-8 bg-white transition-all duration-500 cursor-default"
+              style={glassLight}
+              whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
+              {...stagger(i)}>
+              
                 <div className="flex flex-col items-center text-center">
                   <motion.div
-                    className="w-12 h-12 rounded-full flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110"
-                    style={{ background: C.accentLight }}
-                    whileHover={{ rotate: 6 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                  >
+                  className="w-12 h-12 rounded-full flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110"
+                  style={{ background: C.accentLight }}
+                  whileHover={{ rotate: 6 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}>
+                  
                     <v.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
                   </motion.div>
                   <h3 className="font-display text-base font-medium text-foreground">{v.title}</h3>
                 </div>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -409,8 +409,8 @@ const QuemSomos = () => {
               </p>
               <button
                 onClick={() => navigate("/forbes")}
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary-foreground text-primary text-[11px] font-sans font-medium tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-primary-foreground/90 hover:gap-3"
-              >
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary-foreground text-primary text-[11px] font-sans font-medium tracking-[0.2em] uppercase rounded-full transition-all duration-300 hover:bg-primary-foreground/90 hover:gap-3">
+                
                 Conheça a parceria
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
@@ -421,8 +421,8 @@ const QuemSomos = () => {
               initial={{ opacity: 0, scale: 0.85 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 1, ease: "easeOut" }}
-            >
+              transition={{ duration: 1, ease: "easeOut" }}>
+              
               <img src={forbesGlobalWhite} alt="Forbes Global Properties" className="w-full max-w-[320px] opacity-80" loading="lazy" />
             </motion.div>
           </div>
@@ -445,42 +445,42 @@ const QuemSomos = () => {
 
               <ul className="space-y-5">
                 {([
-                  { icon: Home, text: "Compra, venda e locação de imóveis de alto padrão no estado do Rio de Janeiro" },
-                  { icon: Globe, text: "Compra e venda de imóveis em outros estados e no exterior, através de parceiros credenciados" },
-                  { icon: Search, text: "Avaliação de imóveis de alto padrão" },
-                  { icon: Scale, text: "Assessoria jurídica completa" },
-                  { icon: Building2, text: "Gestão de ativos imobiliários (inclui administração de locação)" },
-                  { icon: Landmark, text: "Consultoria e venda de lançamentos, inclusive na prospecção e venda de áreas específicas" },
-                  { icon: Users, text: "Consultoria geral de mercado imobiliário, inclusive para estrangeiros" },
-                ] as const).map((item, i) => (
-                  <motion.li
-                    key={i}
-                    className="flex items-start gap-4 font-sans text-sm text-muted-foreground leading-[1.8] font-light"
-                    {...stagger(i)}
-                  >
+                { icon: Home, text: "Compra, venda e locação de imóveis de alto padrão no estado do Rio de Janeiro" },
+                { icon: Globe, text: "Compra e venda de imóveis em outros estados e no exterior, através de parceiros credenciados" },
+                { icon: Search, text: "Avaliação de imóveis de alto padrão" },
+                { icon: Scale, text: "Assessoria jurídica completa" },
+                { icon: Building2, text: "Gestão de ativos imobiliários (inclui administração de locação)" },
+                { icon: Landmark, text: "Consultoria e venda de lançamentos, inclusive na prospecção e venda de áreas específicas" },
+                { icon: Users, text: "Consultoria geral de mercado imobiliário, inclusive para estrangeiros" }] as
+                const).map((item, i) =>
+                <motion.li
+                  key={i}
+                  className="flex items-start gap-4 font-sans text-sm text-muted-foreground leading-[1.8] font-light"
+                  {...stagger(i)}>
+                  
                     <span
-                      className="mt-0.5 flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full"
-                      style={{ background: C.accentLight }}
-                    >
+                    className="mt-0.5 flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full"
+                    style={{ background: C.accentLight }}>
+                    
                       <item.icon className="w-4 h-4" style={{ color: C.accent }} strokeWidth={1.5} />
                     </span>
                     {item.text}
                   </motion.li>
-                ))}
+                )}
               </ul>
             </motion.div>
 
             {/* Right – image */}
             <motion.div
               {...fadeUp}
-              className="relative rounded-2xl overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-full min-h-[400px]"
-            >
+              className="relative rounded-2xl overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-full min-h-[400px]">
+              
               <img
-                src={servicesImg}
+
                 alt="Equipe Judice & Araujo em reunião de negócios"
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
+                className="absolute inset-0 w-full h-full object-cover" src="/lovable-uploads/712009fa-2193-45e9-960b-8b7f76f2a459.jpg" />
+              
             </motion.div>
           </div>
         </div>
@@ -506,26 +506,26 @@ const QuemSomos = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {proposito.map((item, i) => (
-              <motion.div
-                key={item.title}
-                className="group rounded-2xl p-10 text-center transition-all duration-500 cursor-default"
-                style={glassLight}
-                whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
-                {...stagger(i)}
-              >
+            {proposito.map((item, i) =>
+            <motion.div
+              key={item.title}
+              className="group rounded-2xl p-10 text-center transition-all duration-500 cursor-default"
+              style={glassLight}
+              whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
+              {...stagger(i)}>
+              
                 <motion.div
-                  className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors duration-500 group-hover:scale-110"
-                  style={{ background: C.accentLight }}
-                  whileHover={{ rotate: 6 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                >
+                className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors duration-500 group-hover:scale-110"
+                style={{ background: C.accentLight }}
+                whileHover={{ rotate: 6 }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}>
+                
                   <item.icon className="w-6 h-6" style={{ color: C.accent }} strokeWidth={1.5} />
                 </motion.div>
                 <h3 className="font-display text-lg font-medium text-foreground mb-4">{item.title}</h3>
                 <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">{item.text}</p>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -562,41 +562,41 @@ const QuemSomos = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
+              transition={{ duration: 0.6, delay: 0.2 }}>
+              
               <div className="space-y-6">
-                {fields.map((field) => (
-                  <div key={field.key} className="relative">
+                {fields.map((field) =>
+                <div key={field.key} className="relative">
                     <label
-                      className={`absolute left-0 transition-all duration-300 font-sans pointer-events-none ${
-                        focused === field.key || form[field.key]
-                          ? "text-[10px] tracking-[0.15em] uppercase text-primary -top-1"
-                          : "text-sm text-muted-foreground top-3"
-                      }`}
-                    >
+                    className={`absolute left-0 transition-all duration-300 font-sans pointer-events-none ${
+                    focused === field.key || form[field.key] ?
+                    "text-[10px] tracking-[0.15em] uppercase text-primary -top-1" :
+                    "text-sm text-muted-foreground top-3"}`
+                    }>
+                    
                       {field.label}
                       {field.required && <span className="text-primary ml-0.5">*</span>}
                     </label>
                     <input
-                      type={field.type}
-                      required={field.required}
-                      value={form[field.key]}
-                      onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                      onFocus={() => setFocused(field.key)}
-                      onBlur={() => setFocused(null)}
-                      className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors duration-300"
-                    />
+                    type={field.type}
+                    required={field.required}
+                    value={form[field.key]}
+                    onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                    onFocus={() => setFocused(field.key)}
+                    onBlur={() => setFocused(null)}
+                    className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors duration-300" />
+                  
                   </div>
-                ))}
+                )}
 
                 <div className="relative">
                   <label
                     className={`absolute left-0 transition-all duration-300 font-sans pointer-events-none ${
-                      focused === "message" || form.message
-                        ? "text-[10px] tracking-[0.15em] uppercase text-primary -top-1"
-                        : "text-sm text-muted-foreground top-3"
-                    }`}
-                  >
+                    focused === "message" || form.message ?
+                    "text-[10px] tracking-[0.15em] uppercase text-primary -top-1" :
+                    "text-sm text-muted-foreground top-3"}`
+                    }>
+                    
                     Mensagem
                   </label>
                   <textarea
@@ -605,8 +605,8 @@ const QuemSomos = () => {
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     onFocus={() => setFocused("message")}
                     onBlur={() => setFocused(null)}
-                    className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors duration-300 resize-none"
-                  />
+                    className="w-full bg-transparent border-b-2 border-border px-0 pt-5 pb-2 font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors duration-300 resize-none" />
+                  
                 </div>
               </div>
 
@@ -621,8 +621,8 @@ const QuemSomos = () => {
                 type="submit"
                 className="group inline-flex items-center gap-2.5 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-xs font-sans font-medium tracking-[0.12em] uppercase hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.4)]"
                 whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
+                whileTap={{ scale: 0.98 }}>
+                
                 <Send className="w-4 h-4" />
                 Enviar Mensagem
                 <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
@@ -633,8 +633,8 @@ const QuemSomos = () => {
       </section>
 
       <Footer />
-    </main>
-  );
+    </main>);
+
 };
 
 export default QuemSomos;
