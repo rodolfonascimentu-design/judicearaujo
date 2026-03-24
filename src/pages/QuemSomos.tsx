@@ -473,21 +473,21 @@ const QuemSomos = () => {
             {proposito.map((item, i) =>
             <motion.div
               key={item.title}
-              className="group rounded-2xl p-10 text-center transition-all duration-500 cursor-default"
+              className="group rounded-2xl px-8 py-8 text-center transition-all duration-500 cursor-default"
               style={glassLight}
               whileHover={{ y: -6, boxShadow: "0 20px 50px -15px rgba(0,62,52,0.12)" }}
               {...stagger(i)}>
               
                 <motion.div
-                className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors duration-500 group-hover:scale-110"
+                className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-5 transition-colors duration-500 group-hover:scale-110"
                 style={{ background: C.accentLight }}
                 whileHover={{ rotate: 6 }}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}>
                 
-                  <item.icon className="w-6 h-6" style={{ color: C.accent }} strokeWidth={1.5} />
+                  <item.icon className="w-5 h-5" style={{ color: C.accent }} strokeWidth={1.5} />
                 </motion.div>
-                <h3 className="font-display text-lg font-medium text-foreground mb-4">{item.title}</h3>
-                <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light">{item.text}</p>
+                <h3 className="font-display text-lg font-medium text-foreground mb-3">{item.title}</h3>
+                <p className="font-sans text-sm text-muted-foreground leading-[1.8] font-light whitespace-pre-line">{item.text}</p>
               </motion.div>
             )}
           </div>
