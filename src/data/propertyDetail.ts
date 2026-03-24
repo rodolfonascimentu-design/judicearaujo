@@ -124,7 +124,7 @@ export const mockProperty: PropertyDetailData = {
   status: "launch",
   transaction: "Venda",
   name: "Soho",
-  neighborhood: "Leblon",
+  neighborhood: "Ipanema",
   city: "Rio de Janeiro",
   state: "RJ",
   address: "Avenida Bartolomeu Mitre, Leblon, Rio de Janeiro - RJ",
