@@ -205,7 +205,7 @@ export const mockProperty: PropertyDetailData = {
     "Se você procura uma casa no Leblon, o Jardim Pernambuco (associação de moradores, com status de condomínio fechado com segurança) é o lugar certo. É lá que estão as casas mais valorizadas da cidade.",
     "O Leblon é dividido entre a parte baixa (onde é possível fazer praticamente tudo à pé) e o Alto Leblon, onde se encontram alguns condomínios fechados compostos por edifícios e o Clube Federal. Na parte baixa, estão os clubes Paissandu e AABB. A escola mais famosa do bairro é o tradicional Colégio Santo Agostinho.",
   ],
-  neighborhoodImage: exclusive3,
+  neighborhoodImage: leblon2,
   nearby: [
     { category: "Shoppings", icon: "ShoppingBag", places: ["Village Mall", "BarraShopping", "Fashion Mall"] },
     { category: "Restaurantes", icon: "UtensilsCrossed", places: ["Térèze", "Lasai", "Olympe", "Oteque"] },
