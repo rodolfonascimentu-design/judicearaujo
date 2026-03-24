@@ -11,7 +11,6 @@ import exclusive4 from "@/assets/exclusive-4.jpg";
 import highlightBeachfront from "@/assets/highlight-beachfront.jpg";
 import highlightPenthouse from "@/assets/highlight-penthouse.jpg";
 import leblon2 from "@/assets/leblon-2.jpg";
-import highlightPenthouse from "@/assets/highlight-penthouse.jpg";
 import test1 from "@/assets/test-1.jpg";
 import test2 from "@/assets/test-2.jpg";
 import test3 from "@/assets/test-3.jpg";
