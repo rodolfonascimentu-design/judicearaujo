@@ -468,7 +468,7 @@ const QuemSomos = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {proposito.map((item, i) =>
             <motion.div
               key={item.title}
