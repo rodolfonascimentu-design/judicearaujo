@@ -103,6 +103,11 @@ const proposito = [
   icon: Eye,
   title: "Visão",
   text: "Ser referência em excelência e atendimento personalizado no mercado imobiliário de alto padrão no Rio de Janeiro."
+},
+{
+  icon: Heart,
+  title: "Valores",
+  text: "Excelência · Inovação · Integridade · Desenvolvimento"
 }];
 
 
