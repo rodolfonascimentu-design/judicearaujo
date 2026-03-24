@@ -199,11 +199,11 @@ export const mockProperty: PropertyDetailData = {
   },
   mapQuery: "Estrada+do+Joá+3200+Rio+de+Janeiro+RJ",
   neighborhoodDescription: [
-    "Um dos bairros mais famosos do Rio de Janeiro, o Leblon tornou-se um objeto de desejo para se morar e, por essa razão, tornou-se o mais valorizado da cidade. O bairro conserva sua vocação residencial e ao mesmo tempo oferece as mais diversas opções de comércio, com destaques para o Shopping Leblon e o Rio Design Leblon, além do tradicional comércio de rua.",
-    "O Leblon tornou-se um pólo gastronômico, com excelentes restaurantes e bares, tendo a Rua Dias Ferreira como principal eixo.",
-    "Por que comprar um imóvel no Leblon? Comprar um apartamento no Leblon virou sinônimo de status, mas não à toa. O mercado do bairro está sempre aquecido e tem ótima liquidez, dado que sempre há procura por imóveis no Leblon. Na Avenida Delfim Moreira, de frente para a praia, estão os edifícios mais luxuosos do bairro, onde os apartamentos e coberturas figuram entre os imóveis mais desejados do País.",
-    "Se você procura uma casa no Leblon, o Jardim Pernambuco (associação de moradores, com status de condomínio fechado com segurança) é o lugar certo. É lá que estão as casas mais valorizadas da cidade.",
-    "O Leblon é dividido entre a parte baixa (onde é possível fazer praticamente tudo à pé) e o Alto Leblon, onde se encontram alguns condomínios fechados compostos por edifícios e o Clube Federal. Na parte baixa, estão os clubes Paissandu e AABB. A escola mais famosa do bairro é o tradicional Colégio Santo Agostinho.",
+    "Ipanema é um dos cartões postais do Rio. Também é um dos bairros mais requintados e de alto nível da cidade. Sua localização privilegiada, tem o contraste de prédios antigos e modernos, entre a praia e a Lagoa. É um bairro que atrai turistas de todo o mundo, não apenas pela beleza de sua praia, mas também pela sua história e clima de Bossa Nova que paira sobre o bairro.",
+    "Ipanema tem ruas arborizadas e residenciais e ao mesmo tempo conta com um comércio vasto, com destaque para suas lojas de grife, joalherias e excelentes restaurantes.",
+    "Por que comprar um imóvel em Ipanema? Uma das características mais valorizadas por seus moradores é o fato de se poder fazer \"tudo à pé\", seja para ir à praia, à Lagoa, para jantar fora ou fazer compras. O bairro ainda conta com duas estações de metrô.",
+    "Assim como acontece com seu vizinho Leblon, comprar um apartamento em Ipanema tornou-se objeto de desejo para pessoas de todos os cantos do mundo, fazendo com que o mercado imobiliário do bairro esteja sempre em movimento e garantindo boa liquidez para quem deseja vender. Não é à toa que os valores de m² dos imóveis localizados na Avenida Vieira Souto (à beira-mar) figurem entre os mais altos do país. As coberturas com vista mar são as mais cobiçadas entre os imóveis do bairro.",
+    "Ipanema também conta com boas escolas, uma faculdade (a Cândido Mendes), a Casa de Cultura Laura Alvim, galerias de Arte, a famosa Igreja Nossa Senhora da Paz, um clube super exclusivo (o Country Club) e dezenas de hotéis – com destaque para o Fasano e o Sofitel Ipanema, localizados na orla.",
   ],
   neighborhoodImage: leblon2,
   nearby: [
