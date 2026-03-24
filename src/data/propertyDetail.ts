@@ -198,8 +198,11 @@ export const mockProperty: PropertyDetailData = {
   },
   mapQuery: "Estrada+do+Joá+3200+Rio+de+Janeiro+RJ",
   neighborhoodDescription: [
-    "O Joá é um dos endereços mais exclusivos e preservados do Rio de Janeiro. Encravado entre a Pedra da Gávea e o mar, o bairro combina a exuberância da Mata Atlântica com a sofisticação de residências de altíssimo padrão. É o refúgio perfeito para quem busca privacidade absoluta sem abrir mão da proximidade com a Barra da Tijuca e São Conrado.",
-    "A gastronomia do entorno é um capítulo à parte: restaurantes como o Térèze, no Hotel Santa Teresa, e o Lasai, estrelado pelo Guia Michelin, estão a poucos minutos. Os amantes da natureza encontram trilhas deslumbrantes na Floresta da Tijuca e praias desertas acessíveis apenas por trilha.",
+    "Um dos bairros mais famosos do Rio de Janeiro, o Leblon tornou-se um objeto de desejo para se morar e, por essa razão, tornou-se o mais valorizado da cidade. O bairro conserva sua vocação residencial e ao mesmo tempo oferece as mais diversas opções de comércio, com destaques para o Shopping Leblon e o Rio Design Leblon, além do tradicional comércio de rua.",
+    "O Leblon tornou-se um pólo gastronômico, com excelentes restaurantes e bares, tendo a Rua Dias Ferreira como principal eixo.",
+    "Por que comprar um imóvel no Leblon? Comprar um apartamento no Leblon virou sinônimo de status, mas não à toa. O mercado do bairro está sempre aquecido e tem ótima liquidez, dado que sempre há procura por imóveis no Leblon. Na Avenida Delfim Moreira, de frente para a praia, estão os edifícios mais luxuosos do bairro, onde os apartamentos e coberturas figuram entre os imóveis mais desejados do País.",
+    "Se você procura uma casa no Leblon, o Jardim Pernambuco (associação de moradores, com status de condomínio fechado com segurança) é o lugar certo. É lá que estão as casas mais valorizadas da cidade.",
+    "O Leblon é dividido entre a parte baixa (onde é possível fazer praticamente tudo à pé) e o Alto Leblon, onde se encontram alguns condomínios fechados compostos por edifícios e o Clube Federal. Na parte baixa, estão os clubes Paissandu e AABB. A escola mais famosa do bairro é o tradicional Colégio Santo Agostinho.",
   ],
   neighborhoodImage: exclusive3,
   nearby: [
