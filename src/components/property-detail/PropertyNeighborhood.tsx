@@ -40,7 +40,7 @@ const PropertyNeighborhood = ({ property }: Props) => {
           <img
             src={property.neighborhoodImage}
             alt={property.neighborhood}
-            className="w-full h-[400px] md:h-[500px] object-cover"
+            className="w-full h-full min-h-[400px] md:min-h-[500px] object-cover"
             loading="lazy"
           />
         </motion.div>
