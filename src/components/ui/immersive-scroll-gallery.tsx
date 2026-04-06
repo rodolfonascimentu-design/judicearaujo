@@ -40,7 +40,7 @@ const ImmersiveScrollGallery: React.FC<iImmersiveScrollGalleryProps> = ({
   const scale8 = useTransform(smoothProgress, [0, 1], [1, 8]);
   const scale9 = useTransform(smoothProgress, [0, 1], [1, 9]);
 
-  const scales = [scale125, scale5, scale6, scale5, scale6, scale8, scale9];
+  const scales = [scale25, scale5, scale6, scale5, scale6, scale8, scale9];
 
   const resolvedImages = images.length > 0 ? images : [];
 
