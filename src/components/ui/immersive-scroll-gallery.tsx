@@ -34,7 +34,7 @@ const ImmersiveScrollGallery: React.FC<iImmersiveScrollGalleryProps> = ({
 
   const smoothProgress = useSpring(scrollYProgress, springConfig);
 
-  const scale125 = useTransform(smoothProgress, [0, 1], [1, 1.25]);
+  const scale25 = useTransform(smoothProgress, [0, 1], [1, 2.5]);
   const scale5 = useTransform(smoothProgress, [0, 1], [1, 5]);
   const scale6 = useTransform(smoothProgress, [0, 1], [1, 6]);
   const scale8 = useTransform(smoothProgress, [0, 1], [1, 8]);
