@@ -55,7 +55,7 @@ const ImmersiveScrollGallery: React.FC<iImmersiveScrollGalleryProps> = ({
         {pictures.map(({ src, scale }, index) => (
           <motion.div
             key={index}
-            style={{ scale }}
+            style={{ scale, backfaceVisibility: "hidden", transform: "translateZ(0)" }}
             className="w-full h-full absolute top-0 flex items-center justify-center will-change-transform"
           >
             <div className={`relative ${IMAGE_STYLES[index % IMAGE_STYLES.length]}`}>
@@ -63,7 +63,9 @@ const ImmersiveScrollGallery: React.FC<iImmersiveScrollGalleryProps> = ({
                 src={src}
                 alt={`Gallery ${index + 1}`}
                 className="w-full h-full object-cover rounded-[2px]"
+                style={{ imageRendering: "auto", WebkitBackfaceVisibility: "hidden" }}
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </motion.div>
