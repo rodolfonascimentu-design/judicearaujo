@@ -3,13 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft,
   ChevronRight,
+  X,
+  Eye,
+  Camera,
+  Video,
+  View,
   Maximize,
   BedDouble,
   Bath,
   Car,
-  Camera,
-  Eye,
-  X,
 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { PropertyDetailData } from "@/data/propertyDetail";
@@ -27,6 +29,8 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
   const [isReady, setIsReady] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const isLaunch = isFromLaunches && property.status === "launch";
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -48,29 +52,6 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
     const timer = setTimeout(() => setIsReady(true), 100);
     return () => clearTimeout(timer);
   }, []);
-
-  const isLaunch = isFromLaunches && property.status === "launch";
-
-  const specs = isLaunch
-    ? [
-        { icon: Maximize, value: `${property.areaRange || property.area} m²` },
-        { icon: BedDouble, value: `${property.bedroomsRange || property.suites} quartos` },
-        { icon: Bath, value: `${property.bathroomsRange || property.bathrooms} banheiros` },
-        { icon: Car, value: `${property.parkingRange || property.parking} vagas` },
-      ]
-    : [
-        { icon: Maximize, value: `${property.area} m²` },
-        { icon: BedDouble, value: `${property.suites} suítes` },
-        { icon: Bath, value: `${property.bathrooms} banheiros` },
-        { icon: Car, value: `${property.parking} vagas` },
-      ];
-
-  const topLine = isLaunch && property.launchTypes
-    ? property.launchTypes.join(" • ")
-    : `${property.type} à ${property.transaction.toLowerCase()}`;
-
-  // Thumbnails for desktop grid (images 1-4, or fewer if not enough)
-  const thumbnails = property.images.slice(1, 5);
 
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
@@ -102,7 +83,28 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
     return () => window.removeEventListener("keydown", handleKey);
   }, [lightboxOpen, closeLightbox, lightboxNext, lightboxPrev]);
 
-  /* ─── MOBILE: full-screen carousel with text overlay ─── */
+  // Property info for header
+  const topLine = isLaunch && property.launchTypes
+    ? property.launchTypes.join(" • ")
+    : `${property.type} à ${property.transaction.toLowerCase()}`;
+
+  const specs = isLaunch
+    ? [
+        { icon: Maximize, value: `${property.areaRange || property.area} m²` },
+        { icon: BedDouble, value: `${property.bedroomsRange || property.suites} quartos` },
+        { icon: Bath, value: `${property.bathroomsRange || property.bathrooms} banheiros` },
+        { icon: Car, value: `${property.parkingRange || property.parking} vagas` },
+      ]
+    : [
+        { icon: Maximize, value: `${property.area} m²` },
+        { icon: BedDouble, value: `${property.suites} suítes` },
+        { icon: Bath, value: `${property.bathrooms} banheiros` },
+        { icon: Car, value: `${property.parking} vagas` },
+      ];
+
+  const thumbnails = property.images.slice(1, 5);
+
+  /* ─── MOBILE: full-screen carousel ─── */
   if (isMobile) {
     return (
       <>
@@ -174,7 +176,6 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
           </div>
         </section>
 
-        {/* Lightbox */}
         <Lightbox
           open={lightboxOpen}
           images={property.images}
@@ -187,87 +188,97 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
     );
   }
 
-  /* ─── DESKTOP: split layout — main image left + 2×2 grid right ─── */
+  /* ─── DESKTOP: property info header + mosaic gallery ─── */
   return (
     <>
-      <section className="w-full bg-background pt-[72px]">
-        <div className="w-full grid grid-cols-2 gap-1.5 h-[75vh] min-h-[500px] max-h-[720px]">
-          {/* Main image — left half with carousel */}
-          <div className="relative overflow-hidden group cursor-pointer" onClick={() => openLightbox(0)}>
-            <div className="absolute inset-0" ref={emblaRef}>
-              <div className="flex h-full">
-                {property.images.map((img, i) => (
-                  <div key={i} className="relative flex-[0_0_100%] min-w-0 h-full">
-                    <img
-                      src={img}
-                      alt={`${property.name} - ${i + 1}`}
-                      className="w-full h-full object-cover"
-                      loading={i === 0 ? "eager" : "lazy"}
-                    />
-                  </div>
+      <section className="pt-[72px] bg-background overflow-hidden">
+        {/* Property info header */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-80px" }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          >
+            <div>
+              <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-3">
+                {topLine}
+              </p>
+              <h2 className="font-display text-2xl md:text-4xl text-foreground">
+                {isLaunch ? property.name : property.neighborhood}
+              </h2>
+              <p className="font-sans text-sm text-muted-foreground mt-2 tracking-wide">
+                {isLaunch
+                  ? `${property.neighborhood}, ${property.city}/${property.state}`
+                  : `${property.city}/${property.state}`}
+              </p>
+              <div className="flex flex-wrap items-center gap-4 mt-4">
+                {specs.map(({ icon: Icon, value }) => (
+                  <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans">
+                    <Icon className="w-4 h-4" />
+                    {value}
+                  </span>
                 ))}
               </div>
             </div>
 
-            {/* Carousel arrows on main image */}
-            <button
-              onClick={(e) => { e.stopPropagation(); emblaApi?.scrollPrev(); }}
-              className="flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm text-foreground hover:bg-white transition-colors shadow-sm"
-              aria-label="Previous"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              onClick={(e) => { e.stopPropagation(); emblaApi?.scrollNext(); }}
-              className="flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm text-foreground hover:bg-white transition-colors shadow-sm"
-              aria-label="Next"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
+            {/* Media type badges */}
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-sans font-medium tracking-wide">
+                <Camera className="w-3.5 h-3.5" />
+                {property.images.length} fotos
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-muted-foreground text-xs font-sans font-medium tracking-wide hover:bg-muted/50 transition-colors cursor-pointer">
+                <Video className="w-3.5 h-3.5" />
+                Vídeo
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-muted-foreground text-xs font-sans font-medium tracking-wide hover:bg-muted/50 transition-colors cursor-pointer">
+                <View className="w-3.5 h-3.5" />
+                Tour 360°
+              </span>
+            </div>
+          </motion.div>
+        </div>
 
-            {/* View Photos button */}
-            <button
-              onClick={(e) => { e.stopPropagation(); openLightbox(selectedIndex); }}
-              className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 backdrop-blur-sm text-foreground text-xs font-sans font-medium tracking-wide shadow-md hover:bg-white transition-colors"
-            >
-              <Camera className="w-3.5 h-3.5" />
-              Ver fotos
-            </button>
-          </div>
-
-          {/* Right half — 2×2 thumbnail grid */}
-          <div className="grid grid-cols-2 grid-rows-2 gap-1.5">
-            {thumbnails.map((img, i) => (
-              <div
+        {/* Mosaic gallery grid */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-8">
+          <div className="grid grid-cols-4 gap-2 md:gap-3">
+            {property.images.slice(0, 5).map((img, i) => (
+              <motion.button
                 key={i}
-                className="relative overflow-hidden group cursor-pointer"
-                onClick={() => openLightbox(i + 1)}
+                onClick={() => openLightbox(i)}
+                className={`relative rounded-[4px] overflow-hidden group ${
+                  i === 0 ? "col-span-2 row-span-2 aspect-[4/3]" : "aspect-[4/3]"
+                }`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ scale: 1.01 }}
               >
                 <img
                   src={img}
-                  alt={`${property.name} - ${i + 2}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
+                  alt={`Foto ${i + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading={i === 0 ? "eager" : "lazy"}
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 flex items-center justify-center">
                   <Eye className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-
-                {/* Show "+X fotos" on last thumbnail if more images */}
-                {i === 3 && property.images.length > 5 && (
+                {i === 4 && property.images.length > 5 && (
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                     <span className="text-white font-sans text-sm font-medium tracking-wide">
                       +{property.images.length - 5} fotos
                     </span>
                   </div>
                 )}
-              </div>
+              </motion.button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Lightbox */}
       <Lightbox
         open={lightboxOpen}
         images={property.images}
