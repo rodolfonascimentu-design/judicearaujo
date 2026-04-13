@@ -15,7 +15,7 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
   const isMobile = useIsMobile();
 
   return (
-    <section className="py-10 md:py-14 bg-background">
+    <section className="py-8 md:py-10 bg-background">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
         {/* Left — editorial description */}
         <motion.div

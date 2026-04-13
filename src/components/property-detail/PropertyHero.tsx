@@ -153,22 +153,24 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
             <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-white/70 mb-2">
               {topLine}
             </p>
-            <h2 className="font-display text-3xl text-white mb-2 leading-[1.1]">
-              {isLaunch ? property.name : property.neighborhood}
-            </h2>
-            <p className="font-sans text-sm text-white/70 mb-6 tracking-wide">
-              {isLaunch
-                ? `${property.neighborhood}, ${property.city}/${property.state}`
-                : `${property.city}/${property.state}`}
-            </p>
-            <div className="flex flex-wrap items-center gap-4 mb-6">
-              {specs.map(({ icon: Icon, value }) => (
-                <span key={value} className="flex items-center gap-2 text-white/80 text-xs font-sans">
-                  <Icon className="w-4 h-4" />
-                  {value}
-                </span>
-              ))}
-            </div>
+            {!isLaunch && (
+              <>
+                <h2 className="font-display text-3xl text-white mb-2 leading-[1.1]">
+                  {property.neighborhood}
+                </h2>
+                <p className="font-sans text-sm text-white/70 mb-6 tracking-wide">
+                  {`${property.city}/${property.state}`}
+                </p>
+                <div className="flex flex-wrap items-center gap-4 mb-6">
+                  {specs.map(({ icon: Icon, value }) => (
+                    <span key={value} className="flex items-center gap-2 text-white/80 text-xs font-sans">
+                      <Icon className="w-4 h-4" />
+                      {value}
+                    </span>
+                  ))}
+                </div>
+              </>
+            )}
           </motion.div>
 
           <div className="absolute bottom-6 right-6 z-10 font-sans text-xs text-white/50 tracking-widest">
@@ -193,7 +195,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
     <>
       <section className="pt-[72px] bg-background overflow-hidden">
         {/* Property info header */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -244,7 +246,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
         </div>
 
         {/* Mosaic gallery grid */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-4">
           <div className="grid grid-cols-4 gap-2 md:gap-3">
             {property.images.slice(0, 5).map((img, i) => (
               <motion.button
