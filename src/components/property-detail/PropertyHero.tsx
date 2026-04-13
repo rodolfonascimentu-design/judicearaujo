@@ -215,7 +215,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
               <motion.button
                 key={i}
                 onClick={() => openLightbox(i)}
-                className={`relative rounded-[4px] overflow-hidden group ${
+                className={`relative overflow-hidden group ${
                   i === 0 ? "col-span-2 row-span-2 aspect-[4/3]" : "aspect-[4/3]"
                 }`}
                 initial={{ opacity: 0, y: 20 }}
