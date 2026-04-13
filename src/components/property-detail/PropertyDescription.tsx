@@ -34,7 +34,7 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
               {h1Text}
             </h1>
           ) : (
-            <h2 className="font-display text-2xl md:text-4xl text-foreground mb-8 leading-[1.2]">
+            <h2 className="font-display text-2xl md:text-4xl text-foreground mb-4 leading-[1.2]">
               {property.status === "launch" ? (
                 <>
                   {property.name}<br />
@@ -46,6 +46,23 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
                 "Uma residência que redefine o conceito de exclusividade."
               )}
             </h2>
+          )}
+
+          {/* Specs for launches — moved from hero */}
+          {isLaunch && (
+            <div className="flex flex-wrap items-center gap-4 mb-8">
+              {[
+                { icon: Maximize, value: `${property.areaRange || property.area} m²` },
+                { icon: BedDouble, value: `${property.bedroomsRange || property.suites} quartos` },
+                { icon: Bath, value: `${property.bathroomsRange || property.bathrooms} banheiros` },
+                { icon: Car, value: `${property.parkingRange || property.parking} vagas` },
+              ].map(({ icon: Icon, value }) => (
+                <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans">
+                  <Icon className="w-4 h-4" />
+                  {value}
+                </span>
+              ))}
+            </div>
           )}
 
           {isNormal && (
