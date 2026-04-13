@@ -173,6 +173,10 @@ html {
   border-radius: 2px;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Force white inputs inside the property filters panel */
 [data-filters-panel] input,
 [data-filters-panel] .flex input {
