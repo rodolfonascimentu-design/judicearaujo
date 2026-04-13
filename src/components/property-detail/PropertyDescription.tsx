@@ -50,7 +50,7 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
           {/* Specs for launches — moved from hero */}
           {isLaunch && (
-            <div className="flex items-center gap-3 md:gap-4 mb-8 flex-nowrap overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}>
+            <div className="flex items-center gap-3 md:gap-4 mb-8 flex-nowrap overflow-x-auto hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
               {[
                 { icon: Maximize, value: `${property.areaRange || property.area} m²` },
                 { icon: BedDouble, value: `${property.bedroomsRange || property.suites} quartos` },
@@ -73,7 +73,7 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
           {/* Specs for normal properties — moved from hero */}
           {isNormal && (
-            <div className="flex items-center gap-3 md:gap-4 mb-8 flex-nowrap overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}>
+            <div className="flex items-center gap-3 md:gap-4 mb-8 flex-nowrap overflow-x-auto hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
               {[
                 { icon: Maximize, value: `${property.area} m²` },
                 { icon: BedDouble, value: `${property.suites} suítes` },
