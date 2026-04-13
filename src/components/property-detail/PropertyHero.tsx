@@ -157,7 +157,6 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
               {selectedIndex + 1} / {property.images.length}
             </span>
           </motion.div>
-          </div>
         </section>
 
         <Lightbox

@@ -87,8 +87,6 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
               ))}
             </div>
           )}
-            </p>
-          )}
 
           <div className="space-y-6">
             {property.description.map((p, i) => (
