@@ -108,7 +108,7 @@ const PropertyDetail = () => {
 
         {/* Breadcrumb — below gallery, above description */}
         {!isLaunch && (
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-8 pb-6 [&_ol]:pl-0">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-4 pb-2 [&_ol]:pl-0">
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
