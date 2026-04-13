@@ -146,7 +146,6 @@ const PropertyDetail = () => {
         )}
 
         <PropertyDescription property={property} isLaunch={isLaunch} h1Text={h1Text} />
-        <PropertyGallery property={property} isFromLaunches={isFromLaunches} />
         <PropertyFeatures property={property} />
         {isLaunch && (
           <>
