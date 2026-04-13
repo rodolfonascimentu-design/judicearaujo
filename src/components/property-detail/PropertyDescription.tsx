@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Share2, Calculator, ArrowRight, TrendingUp, FileText } from "lucide-react";
+import { MessageCircle, Share2, Calculator, ArrowRight, TrendingUp, FileText, Maximize, BedDouble, Bath, Car } from "lucide-react";
 // cache-bust
 import { PropertyDetailData } from "@/data/propertyDetail";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -15,8 +15,8 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
   const isMobile = useIsMobile();
 
   return (
-    <section className="py-10 md:py-14 px-6 lg:px-12 bg-background">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
+    <section className="py-10 md:py-14 bg-background">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
         {/* Left — editorial description */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -34,7 +34,7 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
               {h1Text}
             </h1>
           ) : (
-            <h2 className="font-display text-2xl md:text-4xl text-foreground mb-8 leading-[1.2]">
+            <h2 className="font-display text-2xl md:text-4xl text-foreground mb-4 leading-[1.2]">
               {property.status === "launch" ? (
                 <>
                   {property.name}<br />
@@ -46,6 +46,23 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
                 "Uma residência que redefine o conceito de exclusividade."
               )}
             </h2>
+          )}
+
+          {/* Specs for launches — moved from hero */}
+          {isLaunch && (
+            <div className="flex flex-wrap items-center gap-4 mb-8">
+              {[
+                { icon: Maximize, value: `${property.areaRange || property.area} m²` },
+                { icon: BedDouble, value: `${property.bedroomsRange || property.suites} quartos` },
+                { icon: Bath, value: `${property.bathroomsRange || property.bathrooms} banheiros` },
+                { icon: Car, value: `${property.parkingRange || property.parking} vagas` },
+              ].map(({ icon: Icon, value }) => (
+                <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans">
+                  <Icon className="w-4 h-4" />
+                  {value}
+                </span>
+              ))}
+            </div>
           )}
 
           {isNormal && (

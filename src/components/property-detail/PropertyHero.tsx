@@ -208,19 +208,21 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
               <h2 className="font-display text-2xl md:text-4xl text-foreground">
                 {isLaunch ? property.name : property.neighborhood}
               </h2>
-              <p className="font-sans text-sm text-muted-foreground mt-2 tracking-wide">
-                {isLaunch
-                  ? `${property.neighborhood}, ${property.city}/${property.state}`
-                  : `${property.city}/${property.state}`}
-              </p>
-              <div className="flex flex-wrap items-center gap-4 mt-4">
-                {specs.map(({ icon: Icon, value }) => (
-                  <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans">
-                    <Icon className="w-4 h-4" />
-                    {value}
-                  </span>
-                ))}
-              </div>
+              {!isLaunch && (
+                <>
+                  <p className="font-sans text-sm text-muted-foreground mt-2 tracking-wide">
+                    {`${property.city}/${property.state}`}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-4 mt-4">
+                    {specs.map(({ icon: Icon, value }) => (
+                      <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans">
+                        <Icon className="w-4 h-4" />
+                        {value}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Media type badges */}
