@@ -175,41 +175,8 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
   return (
     <>
       <section className="pt-[72px] bg-background overflow-hidden">
-        {/* Property info header */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-80px" }}
-            transition={{ duration: 0.7 }}
-            className="flex flex-row items-center justify-between gap-4"
-          >
-            <div>
-              <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground">
-                {topLine}
-              </p>
-            </div>
-
-            {/* Media type badges */}
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-sans font-medium tracking-wide">
-                <Camera className="w-3.5 h-3.5" />
-                {property.images.length} fotos
-              </span>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-muted-foreground text-xs font-sans font-medium tracking-wide hover:bg-muted/50 transition-colors cursor-pointer">
-                <Video className="w-3.5 h-3.5" />
-                Vídeo
-              </span>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-muted-foreground text-xs font-sans font-medium tracking-wide hover:bg-muted/50 transition-colors cursor-pointer">
-                <View className="w-3.5 h-3.5" />
-                Tour 360°
-              </span>
-            </div>
-          </motion.div>
-        </div>
-
         {/* Mosaic gallery grid */}
-        <div className="w-full pb-4">
+        <div className="w-full">
           <div className="grid grid-cols-4 gap-1.5">
             {property.images.slice(0, 5).map((img, i) => (
               <motion.button
@@ -243,6 +210,39 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
               </motion.button>
             ))}
           </div>
+        </div>
+
+        {/* Property info header — below gallery */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-80px" }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-row items-center justify-between gap-4"
+          >
+            <div>
+              <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground">
+                {topLine}
+              </p>
+            </div>
+
+            {/* Media type badges */}
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-sans font-medium tracking-wide">
+                <Camera className="w-3.5 h-3.5" />
+                {property.images.length} fotos
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-muted-foreground text-xs font-sans font-medium tracking-wide hover:bg-muted/50 transition-colors cursor-pointer">
+                <Video className="w-3.5 h-3.5" />
+                Vídeo
+              </span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-muted-foreground text-xs font-sans font-medium tracking-wide hover:bg-muted/50 transition-colors cursor-pointer">
+                <View className="w-3.5 h-3.5" />
+                Tour 360°
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
