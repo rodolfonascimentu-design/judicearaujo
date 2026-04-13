@@ -50,14 +50,14 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
           {/* Specs for launches — moved from hero */}
           {isLaunch && (
-            <div className="flex flex-wrap items-center gap-4 mb-8">
+            <div className="flex items-center gap-3 md:gap-4 mb-8 flex-nowrap overflow-x-auto">
               {[
                 { icon: Maximize, value: `${property.areaRange || property.area} m²` },
                 { icon: BedDouble, value: `${property.bedroomsRange || property.suites} quartos` },
                 { icon: Bath, value: `${property.bathroomsRange || property.bathrooms} banheiros` },
                 { icon: Car, value: `${property.parkingRange || property.parking} vagas` },
               ].map(({ icon: Icon, value }) => (
-                <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans group/spec cursor-default transition-colors duration-300 hover:text-foreground">
+                <span key={value} className="flex items-center gap-1.5 md:gap-2 text-muted-foreground text-[11px] md:text-xs font-sans group/spec cursor-default transition-colors duration-300 hover:text-foreground whitespace-nowrap">
                   <Icon className="w-4 h-4 text-primary transition-transform duration-300 group-hover/spec:scale-110" />
                   {value}
                 </span>
@@ -73,14 +73,14 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
           {/* Specs for normal properties — moved from hero */}
           {isNormal && (
-            <div className="flex flex-wrap items-center gap-4 mb-8">
+            <div className="flex items-center gap-3 md:gap-4 mb-8 flex-nowrap overflow-x-auto">
               {[
                 { icon: Maximize, value: `${property.area} m²` },
                 { icon: BedDouble, value: `${property.suites} suítes` },
                 { icon: Bath, value: `${property.bathrooms} banheiros` },
                 { icon: Car, value: `${property.parking} vagas` },
               ].map(({ icon: Icon, value }) => (
-                <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans group/spec cursor-default transition-colors duration-300 hover:text-foreground">
+                <span key={value} className="flex items-center gap-1.5 md:gap-2 text-muted-foreground text-[11px] md:text-xs font-sans group/spec cursor-default transition-colors duration-300 hover:text-foreground whitespace-nowrap">
                   <Icon className="w-4 h-4 text-primary transition-transform duration-300 group-hover/spec:scale-110" />
                   {value}
                 </span>
