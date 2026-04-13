@@ -126,8 +126,8 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
             viewport={{ once: false, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            {/* Top accent bar */}
-            <div className="h-1 w-full bg-primary" />
+            {/* Top accent bar — hidden on mobile */}
+            <div className="h-1 w-full bg-primary hidden lg:block" />
 
             <div className="p-8 space-y-6">
               {/* Status badge — launches only */}
