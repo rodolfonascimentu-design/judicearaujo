@@ -145,36 +145,18 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
           </button>
 
           <motion.div
-            className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-12"
+            className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-12 flex items-end justify-between"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: isReady ? 1 : 0, y: isReady ? 0 : 40 }}
             transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-white/70 mb-2">
+            <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-white/70">
               {topLine}
             </p>
-            {!isLaunch && (
-              <>
-                <h2 className="font-display text-3xl text-white mb-2 leading-[1.1]">
-                  {property.neighborhood}
-                </h2>
-                <p className="font-sans text-sm text-white/70 mb-6 tracking-wide">
-                  {`${property.city}/${property.state}`}
-                </p>
-                <div className="flex flex-wrap items-center gap-4 mb-6">
-                  {specs.map(({ icon: Icon, value }) => (
-                    <span key={value} className="flex items-center gap-2 text-white/80 text-xs font-sans">
-                      <Icon className="w-4 h-4" />
-                      {value}
-                    </span>
-                  ))}
-                </div>
-              </>
-            )}
+            <span className="font-sans text-xs text-white/50 tracking-widest">
+              {selectedIndex + 1} / {property.images.length}
+            </span>
           </motion.div>
-
-          <div className="absolute bottom-6 right-6 z-10 font-sans text-xs text-white/50 tracking-widest">
-            {selectedIndex + 1} / {property.images.length}
           </div>
         </section>
 
@@ -207,24 +189,6 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
               <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground">
                 {topLine}
               </p>
-              {!isLaunch && (
-                <>
-                  <h2 className="font-display text-2xl md:text-4xl text-foreground mt-3">
-                    {property.neighborhood}
-                  </h2>
-                  <p className="font-sans text-sm text-muted-foreground mt-2 tracking-wide">
-                    {`${property.city}/${property.state}`}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-4 mt-4">
-                    {specs.map(({ icon: Icon, value }) => (
-                      <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans">
-                        <Icon className="w-4 h-4" />
-                        {value}
-                      </span>
-                    ))}
-                  </div>
-                </>
-              )}
             </div>
 
             {/* Media type badges */}

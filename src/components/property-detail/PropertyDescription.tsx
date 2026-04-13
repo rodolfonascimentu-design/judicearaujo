@@ -66,8 +66,27 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
           )}
 
           {isNormal && (
-            <p className="font-sans text-xs md:text-sm text-muted-foreground mb-8">
+            <p className="font-sans text-xs md:text-sm text-muted-foreground mb-4">
               {property.address}
+            </p>
+          )}
+
+          {/* Specs for normal properties — moved from hero */}
+          {isNormal && (
+            <div className="flex flex-wrap items-center gap-4 mb-8">
+              {[
+                { icon: Maximize, value: `${property.area} m²` },
+                { icon: BedDouble, value: `${property.suites} suítes` },
+                { icon: Bath, value: `${property.bathrooms} banheiros` },
+                { icon: Car, value: `${property.parking} vagas` },
+              ].map(({ icon: Icon, value }) => (
+                <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans">
+                  <Icon className="w-4 h-4" />
+                  {value}
+                </span>
+              ))}
+            </div>
+          )}
             </p>
           )}
 
