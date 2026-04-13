@@ -153,7 +153,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
             <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-white/70">
               {topLine}
             </p>
-            <span className="font-sans text-xs text-white/50 tracking-widest ml-6">
+            <span className="font-sans text-xs text-white/50 tracking-widest ml-6 whitespace-nowrap">
               {selectedIndex + 1} / {property.images.length}
             </span>
           </motion.div>
