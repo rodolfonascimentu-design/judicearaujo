@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Share2, Calculator, ArrowRight, TrendingUp, FileText } from "lucide-react";
+import { MessageCircle, Share2, Calculator, ArrowRight, TrendingUp, FileText, Maximize, BedDouble, Bath, Car } from "lucide-react";
 // cache-bust
 import { PropertyDetailData } from "@/data/propertyDetail";
 import { useIsMobile } from "@/hooks/use-mobile";
