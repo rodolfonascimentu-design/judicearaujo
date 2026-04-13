@@ -209,13 +209,13 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
         </div>
 
         {/* Mosaic gallery grid */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-4">
-          <div className="grid grid-cols-4 gap-2 md:gap-3">
+        <div className="w-full pb-4">
+          <div className="grid grid-cols-4 gap-1.5">
             {property.images.slice(0, 5).map((img, i) => (
               <motion.button
                 key={i}
                 onClick={() => openLightbox(i)}
-                className={`relative rounded-[4px] overflow-hidden group ${
+                className={`relative overflow-hidden group ${
                   i === 0 ? "col-span-2 row-span-2 aspect-[4/3]" : "aspect-[4/3]"
                 }`}
                 initial={{ opacity: 0, y: 20 }}
