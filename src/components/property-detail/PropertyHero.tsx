@@ -224,10 +224,6 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
                 </>
               )}
             </div>
-                  </span>
-                ))}
-              </div>
-            </div>
 
             {/* Media type badges */}
             <div className="flex items-center gap-3">
