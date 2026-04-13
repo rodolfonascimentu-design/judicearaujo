@@ -57,8 +57,8 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
                 { icon: Bath, value: `${property.bathroomsRange || property.bathrooms} banheiros` },
                 { icon: Car, value: `${property.parkingRange || property.parking} vagas` },
               ].map(({ icon: Icon, value }) => (
-                <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans">
-                  <Icon className="w-4 h-4" />
+                <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans group/spec cursor-default transition-colors duration-300 hover:text-foreground">
+                  <Icon className="w-4 h-4 text-primary transition-transform duration-300 group-hover/spec:scale-110" />
                   {value}
                 </span>
               ))}
@@ -80,8 +80,8 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
                 { icon: Bath, value: `${property.bathrooms} banheiros` },
                 { icon: Car, value: `${property.parking} vagas` },
               ].map(({ icon: Icon, value }) => (
-                <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans">
-                  <Icon className="w-4 h-4" />
+                <span key={value} className="flex items-center gap-2 text-muted-foreground text-xs font-sans group/spec cursor-default transition-colors duration-300 hover:text-foreground">
+                  <Icon className="w-4 h-4 text-primary transition-transform duration-300 group-hover/spec:scale-110" />
                   {value}
                 </span>
               ))}
