@@ -73,7 +73,7 @@ const PropertyDescription = ({ property, isLaunch = false, h1Text }: Props) => {
 
           {/* Specs for normal properties — moved from hero */}
           {isNormal && (
-            <div className="flex items-center gap-3 md:gap-4 mb-8 flex-nowrap overflow-x-auto">
+            <div className="flex items-center gap-3 md:gap-4 mb-8 flex-nowrap overflow-x-auto scrollbar-none">
               {[
                 { icon: Maximize, value: `${property.area} m²` },
                 { icon: BedDouble, value: `${property.suites} suítes` },
