@@ -246,7 +246,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
         </div>
 
         {/* Mosaic gallery grid */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-4">
           <div className="grid grid-cols-4 gap-2 md:gap-3">
             {property.images.slice(0, 5).map((img, i) => (
               <motion.button
