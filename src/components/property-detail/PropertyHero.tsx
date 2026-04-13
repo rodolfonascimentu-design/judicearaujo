@@ -199,17 +199,17 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, margin: "-80px" }}
             transition={{ duration: 0.7 }}
-            className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+            className="flex flex-row items-center justify-between gap-4"
           >
             <div>
-              <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground mb-3">
+              <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-muted-foreground">
                 {topLine}
               </p>
-              <h2 className="font-display text-2xl md:text-4xl text-foreground">
-                {isLaunch ? property.name : property.neighborhood}
-              </h2>
               {!isLaunch && (
                 <>
+                  <h2 className="font-display text-2xl md:text-4xl text-foreground mt-3">
+                    {property.neighborhood}
+                  </h2>
                   <p className="font-sans text-sm text-muted-foreground mt-2 tracking-wide">
                     {`${property.city}/${property.state}`}
                   </p>
