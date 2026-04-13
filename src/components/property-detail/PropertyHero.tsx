@@ -145,7 +145,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
           </button>
 
           <motion.div
-            className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-12 flex items-end justify-between"
+            className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-4 flex items-end justify-between"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: isReady ? 1 : 0, y: isReady ? 0 : 40 }}
             transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
