@@ -108,7 +108,7 @@ const PropertyHero = ({ property, isFromLaunches = false }: Props) => {
   if (isMobile) {
     return (
       <>
-        <section className="relative h-[85vh] w-full overflow-hidden">
+        <section className="relative h-[55vh] w-full overflow-hidden">
           <div className="absolute inset-0" ref={emblaRef}>
             <div className="flex h-full">
               {property.images.map((img, i) => (
